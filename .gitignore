@@ -1,0 +1,3 @@
+*.pyc
+*.bak
+puppet/media/rrd
