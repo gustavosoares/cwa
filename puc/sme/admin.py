@@ -4,8 +4,8 @@ from puc.sme.models import Monitor, Monitorhelp, Alarme, Produto
 
 class MonitorAdmin(admin.ModelAdmin):
 	list_display = ('mon_id', 'mon_nome', 'mon_tabela', 'mon_status', 'alm_id', 'mon_alarmar')
-	list_filter = ('mon_nome',)
-	ordering = ('-mon_nome',)
+	list_filter = ('alm_id', 'mon_nome',)
+	ordering = ('-alm_id',)
 
 class MonitorhelpAdmin(admin.ModelAdmin):
 	list_display = ('mem_id', 'mon_id')
@@ -14,7 +14,7 @@ class MonitorhelpAdmin(admin.ModelAdmin):
 
 class AlarmeAdmin(admin.ModelAdmin):
 	list_display = ('alm_id', 'alm_nome', 'prd_id', 'alm_status', 'alm_alarmar')
-	list_filter = ('alm_nome', 'prd_id', 'alm_status')
+	list_filter = ('prd_id', 'alm_nome', 'alm_status')
 	ordering = ('-alm_nome',)
 
 class ProdutoAdmin(admin.ModelAdmin):
