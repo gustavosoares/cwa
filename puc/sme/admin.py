@@ -1,6 +1,6 @@
 from django.contrib import admin
 #from django.contrib.auth.models import User
-from puc.sme.models import Monitor, Monitorhelp, Alarme, Produto
+from puc.sme.models import Monitor, Monitorhelp, Alarme, Produto, Sme
 
 class MonitorAdmin(admin.ModelAdmin):
 	list_display = ('mon_id', 'mon_nome', 'mon_tabela', 'mon_status', 'alm_id', 'mon_alarmar')
@@ -30,4 +30,4 @@ admin.site.register(Monitor, MonitorAdmin)
 admin.site.register(Monitorhelp, MonitorhelpAdmin)
 admin.site.register(Alarme, AlarmeAdmin)
 admin.site.register(Produto, ProdutoAdmin)
-#admin.site.register(ResourceMonitor)
+admin.site.register(Sme)
