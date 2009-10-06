@@ -11,4 +11,11 @@ from django.template.loader import render_to_string
 
 
 def index(request):
-	return HttpResponse('teste')
+	return HttpResponse('<h1>index</h1>')
+
+	
+def widget(request):
+	return render_to_response('teste.html')
+
+def chart(request):
+	return render_to_response('sample.html')

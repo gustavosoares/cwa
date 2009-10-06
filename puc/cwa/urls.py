@@ -14,6 +14,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^/?$', views.index),
+    (r'^widget/?$', views.widget),
+    (r'^chart/?$', views.chart),
 )
 
 import os

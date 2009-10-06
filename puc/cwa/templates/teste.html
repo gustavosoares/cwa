@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Dissertation test page</title>
+  <link rel="stylesheet" href="/media/css/page.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="/media/css/portal_widget_theme.css" type="text/css" media="screen" charset="utf-8" />
+
+  <script type="text/javascript" src="/media/js/prototype.js"></script> 
+  <script type="text/javascript" src="/media/js/effects.js"></script> 
+  <script type="text/javascript" src="/media/js/builder.js"></script> 
+  <script type="text/javascript" src="/media/js/dragdrop.js"></script> 
+  <script type="text/javascript" src="/media/js/portal.js"></script>
+  <script type="text/javascript">
+	function alerta() {
+		//console.log("alerta chamado")
+		console.log("--------------")
+		wid = Element.childElements('page')
+		console.log(wid)
+		var i=0;
+		var widLen=wid.length;
+		for (i=0;i <= widLen;i++)
+		{
+			console.log(Element.childElements(wid[i]))
+		}		
+		//alert("aaaaa");
+	}
+  </script>
+</head>
+<body>      
+  <h1>Dissertation test page</h1>
+  <div id="page">
+      <div id="widget_col_0"></div>
+      <div id="widget_col_1"></div>
+      <div id="widget_col_2"></div>
+      <div id="widget_bottom"></div>
+ </div>    
+ <div id="control_buttons" style="display:none">
+   <a href="#" id="edit_button"></a>
+   <a href="#" onclick="removeWidget(this); return false;" id="delete_button"></a>
+ </div>
+
+  <script type="text/javascript">
+     var portal;     
+     var content_col_0 = "<h2>Relatório</h2>";
+     var content_col_1 = "<h2>Visão geral</h2>";
+     var content_col_2 = "<h3>Visão tabular</h3> ";
+      
+     function onOverWidget(portal, widget) {
+       widget.getElement().insertBefore($('control_buttons'), widget.getElement().firstChild);
+       $('control_buttons').show(); 
+     } 
+   
+     function onOutWidget(portal, widget) {
+       $('control_buttons').hide();      
+     } 
+   
+     function removeWidget(element) {
+       var widget = $(element).up(".widget").widget;
+     
+       if (confirm('Are sure to remove this widget?')) { 
+         document.body.appendChild($('control_buttons').hide())
+         portal.remove(widget);
+       }
+     }                                
+                                                                                                                                                           
+    function onChange() {
+      
+    }
+     function init() {             
+       portal = new Xilinus.Portal("#page div", {onOverWidget: onOverWidget, onOutWidget: onOutWidget, onChange: onChange}); 
+       // Fake widgets
+       portal.add(new Xilinus.Widget().setTitle("Widget Relatório").setContent(content_col_0), 0);
+       portal.add(new Xilinus.Widget().setTitle("Widget Visão Geral").setContent(content_col_1), 1);
+       portal.add(new Xilinus.Widget().setTitle("Widget Visão Tabulars").setContent(content_col_2), 2);
+           
+       // Add controls buttons
+       portal.addWidgetControls("control_buttons");
+     }
+     Event.observe(window, "load", init);
+  </script>
+  </br>
+  <center><a href="#" onclick="alerta();">Logging</a></center>
+</body>
+</html>
