@@ -43,8 +43,25 @@
  </div>
 
   <script type="text/javascript">
+	function StringBuffer() { 
+		this.buffer = []; 
+	}; 
+	
+	StringBuffer.prototype.append = function append(string) { 
+		this.buffer.push(string); return this; 
+	}; 
+	
+	StringBuffer.prototype.toString = function toString() { 
+		return this.buffer.join(""); 
+	};
+
+	var buffer = new StringBuffer();
+	buffer.append("Hello"); 
+	buffer.append("adadadada\n "); 
+	buffer.append("world");
+
      var portal;     
-     var content_col_0 = "<h2>Relatório</h2>";
+     var content_col_0 = buffer.join();
      var content_col_1 = "<h2>Visão geral</h2>";
      var content_col_2 = "<h3>Visão tabular</h3> ";
       
@@ -72,8 +89,9 @@
      function init() {             
        portal = new Xilinus.Portal("#page div", {onOverWidget: onOverWidget, onOutWidget: onOutWidget, onChange: onChange}); 
        // Fake widgets
-       portal.add(new Xilinus.Widget().setTitle("Widget Relatório").setContent(content_col_0), 0);
-       portal.add(new Xilinus.Widget().setTitle("Widget Visão Geral").setContent(content_col_1), 1);
+       
+       portal.add(new Xilinus.Widget().setTitle("Widget Visão Geral").setContent(content_col_1), 0);
+       portal.add(new Xilinus.Widget().setTitle("Widget Relatório").setContent(content_col_0), 1);
        portal.add(new Xilinus.Widget().setTitle("Widget Visão Tabulars").setContent(content_col_2), 2);
            
        // Add controls buttons
