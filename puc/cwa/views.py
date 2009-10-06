@@ -15,7 +15,7 @@ def index(request):
 
 	
 def widget(request):
-	return render_to_response('teste.html')
+	return render_to_response('teste_widget.html')
 
 def chart(request):
-	return render_to_response('sample.html')
+	return render_to_response('teste_chart.html')
