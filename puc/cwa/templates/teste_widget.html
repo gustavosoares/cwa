@@ -8,6 +8,36 @@
   <link rel="stylesheet" href="/media/css/page.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="/media/css/portal_widget_theme.css" type="text/css" media="screen" charset="utf-8" />
 
+<style type="text/css">
+	#page {
+	  margin: 5px auto;
+	  position: relative;
+	  width:1000px;
+	}
+
+	#widget_col_0 { 
+	  float:left;
+	  width: 30%;  
+	  background:#E6E6E6;
+	}
+
+	#widget_col_1 {
+	  width: 50%;
+	  float:left;
+	  background:#CCC;
+	}   
+
+	#widget_col_2 { 
+	  float:left;
+	  width: 20%;  
+	  background:#B3B3B3;
+	}
+
+	#widget_bottom { 
+	  background:cornsilk;
+	  clear:both;
+	}
+</style>
   <script type="text/javascript" src="/media/js/prototype.js"></script> 
   <script type="text/javascript" src="/media/js/effects.js"></script> 
   <script type="text/javascript" src="/media/js/builder.js"></script> 
@@ -72,7 +102,7 @@
 	buffer.append("adadadada <br /> "); 
 	buffer.append("world");
 	*/
-	buffer.append('<EMBED src="/media/swf/charts.swf" FlashVars="library_path=/media/swf/charts_library&xml_source=/media/xml/sample.xml" quality="high" bgcolor="#666666" WIDTH="400" HEIGHT="250" NAME="charts" allowScriptAccess="sameDomain" swLiveConnect="true" loop="false" scale="noscale" salign="TL" align="middle" wmode="opaque" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>')
+	buffer.append('<center><EMBED src="/media/swf/charts.swf" FlashVars="library_path=/media/swf/charts_library&xml_source=/media/xml/sample.xml" quality="high" bgcolor="#666666" WIDTH="400" HEIGHT="250" NAME="charts" allowScriptAccess="sameDomain" swLiveConnect="true" loop="false" scale="noscale" salign="TL" align="middle" wmode="opaque" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/></center>')
 	//alert(buffer.toString());
      var portal;  
      var content_col_0 = buffer.toString();

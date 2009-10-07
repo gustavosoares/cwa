@@ -22,3 +22,6 @@ def chart(request):
 
 def chart2(request):
 	return render_to_response('teste_chart2.html')	
+
+def resize(request):
+	return render_to_response('teste_resize.html')

@@ -1,0 +1,188 @@
+<html>
+<head><title>Teste resize</title>
+<style type="text/css">
+	.workspace{
+		border:2px black solid; 
+		width:800px; 
+		height:600px;
+	}
+
+	.txt_area_start{
+		width:160px;
+		height:160px;
+		background:transparent;
+		margin: 20px 20px 20px 20px;
+		border:0;
+		overflow: hidden;
+	}
+
+	.img_img_start{
+		margin: 0;
+		border:0;
+	}
+
+	.img_start{
+		border:5px black dotted;
+		position: absolute;
+		top: 30;
+		left: 15;
+	}
+
+	.txt_start{
+	  border:5px black dotted;
+		width:200px;
+		height:200px;
+		position: absolute;
+		top: 30;
+		left: 15;
+	}
+
+	.dragger{
+		background: url(/media/images/checkbox_disabled.gif);
+		width:10px; 
+		height:10px;
+		position: absolute;
+		bottom: -15;
+		left: -15;
+	
+	}
+
+	.delete{
+		background: url(/media/images/delete.png);
+		width:16px; 
+		height:16px;
+		position: absolute;
+		top: -15;
+		right: -15	;
+	}
+</style>
+<script src="/media/js/prototype.js" type="text/javascript"></script> 
+<script src="/media/js/scriptaculous.js" type="text/javascript"></script>
+<script src="/media/js/resize.js" type="text/javascript"></script> 
+<script>
+
+var elCount = 0;
+function byId(id){ return document.getElementById(id); }
+
+function child(p, ch){
+	var c = typeof p == 'string' ? byId(p).childNodes : p.childNodes;
+	var type = ch.charAt(0);
+	var ch = ch.slice(1, ch.length);
+	for(i = 0; i < c.length; i++){
+		if(type == '#'){
+			if(c[i].id == ch) return c[i];
+		}else if(type == '.'){
+			if(c[i].className == ch) return c[i];
+		}
+	}
+	return false;
+}
+
+function stayInBox(box, el){
+	var thisPos 	= $(el).viewportOffset();
+	var boxPos 		= $(box).viewportOffset();
+	var diff_right 	= (thisPos.left + $(el).getWidth()) 	- (boxPos.left + $(box).getWidth());
+	var diff_bottom = (thisPos.top 	+ $(el).getHeight()) 	- (boxPos.top + $(box).getHeight());
+	var diff_left 	= boxPos.left 	- thisPos.left;
+	var diff_top 	= boxPos.top 		- thisPos.top;
+	
+	if(diff_right > 0)
+		$(el).setStyle({width: $(el).getWidth() - diff_right});
+		
+	if(diff_bottom > 0)
+		$(el).setStyle({height: $(el).getHeight() - diff_bottom});
+	
+	if(diff_left > 0)
+		$(el).setStyle({left: thisPos.left + diff_left});
+		
+	if(diff_top > 0)
+		$(el).setStyle({top: thisPos.top + diff_top});
+}
+
+function newCommon(tpl_id, sub_class){
+	var newEl = $(tpl_id).cloneNode(true);
+	$(newEl).setStyle({zindex: elCount + 100}).writeAttribute({id: tpl_id + elCount})
+	$('workarea').appendChild(newEl);
+	new Draggable(newEl, {handle: 'dragger', snap: function(x,y,draggable) {
+      function constrain(n, lower, upper) {
+        if (n > upper) return upper;
+        else if (n < lower) return lower;
+        else return n;
+      }
+     
+      element_dimensions = Element.getDimensions(draggable.element);
+      parent_dimensions = Element.getDimensions(draggable.element.parentNode);
+      return[
+        constrain(x, 0, parent_dimensions.width - element_dimensions.width),
+        constrain(y, 0, parent_dimensions.height - element_dimensions.height)];
+    }
+	});
+	Event.observe(child(newEl, '.delete'), 'click', function(event){
+		$(this.getOffsetParent()).remove();
+	});
+	elCount++;
+	return newEl;
+}
+
+Event.observe(window, 'load', function() {
+	$('templates').hide();
+	Event.observe('new_text', 'click', function(event){
+		var newEl = newCommon('Text', 'txt_area_start');
+		new Resizeable(newEl, 
+			{top: 0, 
+			left: 50, 
+			resize: function(el){
+				var txtArea = child(el, ".txt_area_start");
+				stayInBox($('workarea'), el);
+				$(txtArea).setStyle({
+					width: parseInt($(el).getWidth('width') - 40) + "px",
+					height: parseInt($(el).getHeight('height') - 40) + "px"
+				});
+			}
+		});
+	});
+	
+	Event.observe('new_image', 'click', function(event){
+		var newEl = newCommon('Bild', 'img_img_start');
+		new Resizeable(newEl, 
+			{top: 0, 
+			left: 50, 
+			resize: function(el){
+				stayInBox($('workarea'), el);
+				var txtArea = child(el, ".img_img_start");
+				$(txtArea).setStyle({
+					width: ($(el).getWidth('width') - 10) + "px",
+					height: ($(el).getHeight('height') - 10) + "px"
+				});
+			}
+		});
+	});
+});
+
+</script>
+</head>
+<body>
+<table>
+    <tr>
+
+        <td>
+			<button id="new_text">New Text Field</button><button id="new_image">New Image</button>
+			<div id="workarea" class="workspace"></div>
+        </td>
+    </tr>
+</table>
+
+<div id="templates">
+	<div id="Bild" class="img_start">
+		<img src="black_reuben.png" class="img_img_start">
+		<div class="delete">&nbsp;</div>
+		<div class="dragger">&nbsp;</div>
+	</div>
+	<div id="Text" class="txt_start">
+		<textarea class="txt_area_start">TESTE RESIZE</textarea>
+		<div id="delete" class="delete">&nbsp;</div>
+		<div id="dragger" class="dragger">&nbsp;</div>
+	</div>
+</div>
+</body>
+</html>
