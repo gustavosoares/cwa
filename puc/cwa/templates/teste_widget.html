@@ -44,6 +44,13 @@
 
   <script type="text/javascript">
 
+
+	function chart(widget_content) {
+		new Ajax.Updater(widget_content,'/cwa/', {asynchronous:true, method : 'get', parameters:{}}); return false;
+		alert(Ajax.Response.responseText);
+	}
+	
+	
 	function StringBuffer() { 
 		this.buffer = []; 
 	}; 
@@ -55,19 +62,21 @@
 	StringBuffer.prototype.toString = function toString() { 
 		return this.buffer.join(""); 
 	};
-
-	var buffer = new StringBuffer();
-	buffer.append("Hello"); 
-	buffer.append("adadadada\n "); 
-	buffer.append("world");
 	
-	alert(buffer.toString());
-     var portal;     
-     var content_col_0 = "<h2>grafico</h2>" +
-	"e ai mano?<br>" +
-	" na boa?<br>" +
-	"sim<br> " +
-	"concatenar sucks<br>";
+	//var chart = $$(new Ajax.Updater('widget_col_0','/cwa/chart', {asynchronous:true, method : 'get', parameters:{}}); return false);
+	//console.log(chart)
+	
+	var buffer = new StringBuffer();
+	/*
+	buffer.append("Hello"); 
+	buffer.append("adadadada <br /> "); 
+	buffer.append("world");
+	*/
+	buffer.append('<EMBED src="/media/swf/charts.swf" FlashVars="library_path=/media/swf/charts_library&xml_source=/media/xml/sample.xml" quality="high" bgcolor="#666666" WIDTH="400" HEIGHT="250" NAME="charts" allowScriptAccess="sameDomain" swLiveConnect="true" loop="false" scale="noscale" salign="TL" align="middle" wmode="opaque" TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>')
+	//alert(buffer.toString());
+     var portal;  
+     var content_col_0 = buffer.toString();
+     //var content_col_0 = "";
      var content_col_1 = "<h2>Visão geral</h2>";
      var content_col_2 = "<h3>Visão tabular</h3> ";
       
@@ -106,6 +115,8 @@
      Event.observe(window, "load", init);
   </script>
   </br>
-  <center><a href="#" onclick="alerta();">Logging</a></center>
+  <center><a href="#" onclick="alerta();">Logging</a></center><br />
+  <center><a href="#" onclick="chart('content_widget_1');">Chart - widget 1</a></center><br />
+
 </body>
 </html>

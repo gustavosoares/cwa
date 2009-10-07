@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^/?$', views.index),
     (r'^widget/?$', views.widget),
     (r'^chart/?$', views.chart),
+    (r'^chart2/?$', views.chart2),
 )
 
 import os

@@ -19,3 +19,6 @@ def widget(request):
 
 def chart(request):
 	return render_to_response('teste_chart.html')
+
+def chart2(request):
+	return render_to_response('teste_chart2.html')	
