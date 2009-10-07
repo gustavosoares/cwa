@@ -3,7 +3,7 @@
 <style type="text/css">
 	.workspace{
 		border:2px black solid; 
-		width:800px; 
+		width:1000px; 
 		height:600px;
 	}
 
@@ -29,7 +29,7 @@
 	}
 
 	.txt_start{
-	  border:5px black dotted;
+		border:5px black dotted;
 		width:200px;
 		height:200px;
 		position: absolute;
@@ -61,7 +61,8 @@
 <script src="/media/js/resize.js" type="text/javascript"></script> 
 <script>
 
-var elCount = 0;
+
+var elCount = 0; //element count
 function byId(id){ return document.getElementById(id); }
 
 function child(p, ch){
@@ -85,7 +86,6 @@ function stayInBox(box, el){
 	var diff_bottom = (thisPos.top 	+ $(el).getHeight()) 	- (boxPos.top + $(box).getHeight());
 	var diff_left 	= boxPos.left 	- thisPos.left;
 	var diff_top 	= boxPos.top 		- thisPos.top;
-	
 	if(diff_right > 0)
 		$(el).setStyle({width: $(el).getWidth() - diff_right});
 		
@@ -101,9 +101,10 @@ function stayInBox(box, el){
 
 function newCommon(tpl_id, sub_class){
 	var newEl = $(tpl_id).cloneNode(true);
+	//console.log(newEl)
 	$(newEl).setStyle({zindex: elCount + 100}).writeAttribute({id: tpl_id + elCount})
 	$('workarea').appendChild(newEl);
-	new Draggable(newEl, {handle: 'dragger', snap: function(x,y,draggable) {
+	new Draggable(newEl, {handle: 'dragger', scroll: window, snap: function(x,y,draggable) {
       function constrain(n, lower, upper) {
         if (n > upper) return upper;
         else if (n < lower) return lower;
@@ -134,6 +135,7 @@ Event.observe(window, 'load', function() {
 			resize: function(el){
 				var txtArea = child(el, ".txt_area_start");
 				stayInBox($('workarea'), el);
+				console.log(el)
 				$(txtArea).setStyle({
 					width: parseInt($(el).getWidth('width') - 40) + "px",
 					height: parseInt($(el).getHeight('height') - 40) + "px"
