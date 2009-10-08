@@ -4,69 +4,67 @@ from chart_xml import chartXml
 # Chart
 #
 class Chart:
-	def __init__(self):
-		self.width = None
-		self.height = None
-		self.name = 'Chart'
-		self.type = type
-		self.bgcolor = '#666666'
-		self.library_path = '/media/swf/charts_library'
-		self.src = "/media/swf/charts.swf"
+	def __init__(self, type):
+		self._width = None
+		self._height = None
+		self._name = 'Chart'
+		self._type = type
+		self._bgcolor = '#666666'
+		self._library_path = '/media/swf/charts_library'
+		self._src = "/media/swf/charts.swf"
 		#TODO: gerar uma script com o xml
-		self.xml_source = '/media/xml/sample.xml'
-		self.scale = "noscale" 
-		self.align = "middle"
-		self.response_type = "application/x-shockwave-flash"
-		self.chart_xml = chartXml(self.type)
+		self._xml_source = '/media/xml/sample.xml'
+		self._scale = "noscale" 
+		self._align = "middle"
+		self._response_type = "application/x-shockwave-flash"
+		self._chart_xml = chartXml(self._type)
 		
 	def get_width(self):
-		return self.width
+		return self._width
 
 	def get_height(self):
-		return self.height
+		return self._height
 
 	def get_name(self):
-		return self.name
+		return self._name
 
 	def get_type(self):
-		return self.type
+		return self._type
 
 	def get_bgcolor(self):
-		return self.bgcolor
+		return self._bgcolor
 
 	def get_library_path(self):
-		return self.library_path
+		return self._library_path
 
 	def get_src(self):
-		return self.src
+		return self._src
 
 	def get_xml_source(self):
-		return self.xml_source
+		return self._xml_source
 
 	def get_scale(self):
-		return self.scale
+		return self._scale
 
 	def get_align(self):
-		return self.align
+		return self._align
 
 	def get_response_type(self):
-		return self.response_type
+		return self._response_type
 
 	def get_chart_xml(self):
-		return self.chart_xml
+		return self._chart_xml
 
  
 class LineChart(Chart):
 	def __init__(self):
-		Chart.__init__(self)
-		self.type = 'line'
-		self.chart_xml = chartXml(self.type)
+		Chart.__init__(self, 'line')
+
  
 class BarChart(Chart):
 	def __init__(self):
-		Chart.__init__(self)
-		self.type = 'bar'
-		self.chart_xml = chartXml(self.type)
+		Chart.__init__(self, 'bar')
+
 
 #
 # ChartFactory
