@@ -32,10 +32,12 @@ class Chart:
  
 class LineChart(Chart):
     def __init__(self):
+    	super(LineChart, self).__init__()
         self._type = 'line'
  
 class BarChart(Chart):
     def __init__(self):
+    	super(BarChart, self).__init__()
         self._type = 'bar'
  
  
