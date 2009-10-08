@@ -101,9 +101,10 @@ function stayInBox(box, el){
 
 function newCommon(tpl_id, sub_class){
 	var newEl = $(tpl_id).cloneNode(true);
-	//console.log(newEl)
+	console.log(newEl)
 	$(newEl).setStyle({zindex: elCount + 100}).writeAttribute({id: tpl_id + elCount})
 	$('workarea').appendChild(newEl);
+	console.log('criando o draggable')
 	new Draggable(newEl, {handle: 'dragger', scroll: window, snap: function(x,y,draggable) {
       function constrain(n, lower, upper) {
         if (n > upper) return upper;
@@ -121,11 +122,12 @@ function newCommon(tpl_id, sub_class){
 	Event.observe(child(newEl, '.delete'), 'click', function(event){
 		$(this.getOffsetParent()).remove();
 	});
+	console.log('draggable criado')
 	elCount++;
 	return newEl;
 }
 
-Event.observe(window, 'load', function() {
+window.onload = function() {
 	$('templates').hide();
 	Event.observe('new_text', 'click', function(event){
 		var newEl = newCommon('Text', 'txt_area_start');
@@ -159,20 +161,15 @@ Event.observe(window, 'load', function() {
 			}
 		});
 	});
-});
+}
 
 </script>
 </head>
 <body>
-<table>
-    <tr>
 
-        <td>
 			<button id="new_text">New Text Field</button><button id="new_image">New Image</button>
 			<div id="workarea" class="workspace"></div>
-        </td>
-    </tr>
-</table>
+
 
 <div id="templates">
 	<div id="Bild" class="img_start">
