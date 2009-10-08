@@ -4,7 +4,7 @@ from chart_xml import chartXml
 # Chart
 #
 class Chart:
-	def __init__(self, type):
+	def __init__(self):
 		self.width = None
 		self.height = None
 		self.name = 'Chart'
@@ -58,12 +58,15 @@ class Chart:
  
 class LineChart(Chart):
 	def __init__(self):
-		Chart.__init__(self, 'line')
-		#self.type = 'line'
+		Chart.__init__(self)
+		self.type = 'line'
+		self.chart_xml = chartXml(self.type)
  
 class BarChart(Chart):
 	def __init__(self):
+		Chart.__init__(self)
 		self.type = 'bar'
+		self.chart_xml = chartXml(self.type)
 
 #
 # ChartFactory
