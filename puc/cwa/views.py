@@ -11,7 +11,8 @@ from django.template.loader import render_to_string
 
 
 def index(request):
-	return HttpResponse('<h1>index</h1>')
+	#return HttpResponse('<h1>index</h1><br\> <center><a href="#" onclick="update_widget("content_widget_0");">Update widget</a></center><br />')
+	return HttpResponse('<h1>index</h1><br\> <center><a href="/cwa">reload</a></center><br />')
 
 	
 def widget(request):
