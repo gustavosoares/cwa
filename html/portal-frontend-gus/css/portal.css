@@ -84,12 +84,15 @@
   border: 1px dashed #f00;
 }
 
-#portal .block-list-handle, #portal .handle {
-  cursor: move;
-}
+
 * html body #portal .handle {
   width: 100%;
 }
+
+#portal .block-list-handle, #portal .handle {
+  cursor: move;
+}
+
 #portal #portal-column-block-list .block .block-toggle {
   display: none;
 }

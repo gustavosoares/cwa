@@ -13,7 +13,7 @@
 	  /*position: relative;*/
 	  width:95%;
 	  border: 2px solid;
-	  background: orange;
+	  background: PowderBlue;
 	  font-family: verdana, arial, sans-serif;
 	  font-size: 10px;
 	}
@@ -49,8 +49,6 @@
 
     /*lista das visoes */
 	#portal-column-block-list { 
-	  /*border: 1px solid;
-	  background:LightYellow;*/
 	  position: absolute;
 	  width: 200px;
 	  top: 5px;
@@ -97,19 +95,29 @@
 	  cursor: pointer;
 	}
 
+	/* Fim das visoes */
+
+	/* inicio */
+
 	#portal .block .block-toggle span {
 	  display: none;
 	}
-	
+
 	#portal .block-hover {
 	  border: 1px dashed #f00;
 	}
-	/* Fim das visoes */
-	
-	.block-list-handle, .handle {
+
+	#portal .block-list-handle, #portal .handle {
 	  cursor: move;
 	}
 
+	#portal #portal-column-block-list .block .block-toggle {
+	  display: none;
+	}
+
+	#portal #portal-column-block-list .block .content {
+	  display: none;
+	}
 
 </style>
 
@@ -145,8 +153,10 @@
 	      <div class="portal-column" id="portal-column-bottom">
 			<h2>Bottom</h2>
 		  </div>
+			<!--div class="portal-column" id="portal-column-block-list" style="display: none;"-->
 			<div class="portal-column" id="portal-column-block-list" style="display: none;">
 				<h2 class="block-list-handle">Visões</h2>
+				<p>Selecione uma visão e arraste para uma das áreas disponíveis</p>
 				<!-- Visoes vao aqui-->
 				<!-- Visao tabular-->
 				<div class="block">
