@@ -1,0 +1,9 @@
+<?php
+
+function portal_install() {
+  db_query("CREATE TABLE {portal_user_settings} (
+    user varchar(32) NOT NULL,
+    container varchar(128) NOT NULL,
+    blocks text NOT NULL
+  )");
+}

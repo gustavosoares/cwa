@@ -1,0 +1,232 @@
+<?php
+
+function portal_help($section) {
+  switch ($section) {
+    case 'admin/modules#description':
+      return t('Enables a drag-and-drop portal interface.');
+  }
+}
+
+function portal_perm() {
+  return array('access portal');
+}
+
+function portal_menu($may_cache) {
+  $items = array();
+  if (!$may_cache) {
+    $items[] = array(
+      'path' => 'portal',
+      'title' => t('Portal'),
+      'access' => user_access('access portal'),
+      'type' => MENU_NORMAL_ITEM,
+      'callback' => 'portal_page'
+    );
+    $items[] = array(
+      'path' => 'portal/blocklist',
+      'title' => t('Portal - Block List'),
+      'access' => user_access('access portal'),
+      'type' => MENU_CALLBACK,
+      'callback' => 'portal_block_list'
+    );
+    $items[] = array(
+      'path' => 'portal/save',
+      'title' => t('Portal - Save'),
+      'access' => user_access('access portal'),
+      'type' => MENU_CALLBACK,
+      'callback' => 'portal_save'
+    );
+  }
+
+  return $items;
+}
+
+function portal_page() {
+  _portal_include_files();
+
+  $col_count = variable_get('portal_column_count', 3);
+  $output = '';
+  $output .= l(
+    t('Add content'), 
+    'portal/blocklist', 
+    array('id' => 'portal-block-list-link')
+  );
+  $output .= '<br class="clear" />';
+  
+  for ($i = 0; $i < $col_count; $i++) {
+    $output .= theme('portal_column', $i, t('Column %s', array('%s' => $i)));
+  }
+  
+  $output .= theme('portal_block_list', t('Block List'), TRUE);
+
+  $output = theme('portal', $output);
+  return $output;
+}
+
+function portal_block_list() {
+  return '<p>' . (t('Not implemented')) . '</p>';
+}
+
+function portal_save() {
+  global $user;
+  $uid = _portal_uid($user);
+
+  $query = split(':', $_POST['value']);
+  $container = $query[0];
+  $blocks = array();
+  
+  if (!in_array($container, _portal_column_list())) {
+    return;
+  }
+
+  $available_blocks = _portal_block_list('list');
+  foreach (split(',', $query[1]) as $block) {
+    if (array_key_exists($block, $available_blocks)) {
+      $blocks[] = $block;
+    }
+  }
+  
+  db_query("DELETE from {portal_user_settings} WHERE user = '%s' AND container = '%s'", $uid, $container);
+
+  if ($blocks) {
+    db_query("INSERT INTO {portal_user_settings} (user, container, blocks) VALUES ('%s', '%s', '%s')", $uid, $container, join(',', $blocks));
+  }
+}
+
+function portal_settings() {
+  $form = array();
+  
+  $blocks = _portal_block_list('list');
+  $options = array();
+  foreach ($blocks as $block) {
+    $options[_portal_bid($block)] = $block->info;
+  }
+  
+  $form['portal_blocks'] = array(
+    '#type' => 'select',
+    '#multiple' => TRUE,
+    '#title' => t('Portlets'),
+    '#options' => $options,
+    '#default_value' => variable_get('portal_blocks', array())
+  );
+
+  return $form;
+}
+
+function _portal_include_files() {
+  theme('add_style', drupal_get_path('module', 'portal') . '/portal.css'); 
+  drupal_add_js(drupal_get_path('module', 'portal') . '/lib/prototype.js');
+  drupal_add_js(drupal_get_path('module', 'portal') . '/lib/scriptaculous.js');
+  drupal_add_js(drupal_get_path('module', 'portal') . '/portal.js');
+  drupal_set_html_head(_portal_js());
+}
+
+function _portal_js() {
+  global $user;
+  $uid = _portal_uid($user);
+
+  $saveurl = url('portal/save');
+  
+  $result = db_query("SELECT container, blocks FROM {portal_user_settings} WHERE user = '%s'", $uid);
+  $settings = array();
+  while ($row = db_fetch_object($result)) {
+    $blocks = array();
+    foreach (split(',', $row->blocks) as $block) {
+      $blocks[] = "\"$block\"";
+    }
+    $blocks = join(', ', $blocks);
+    $settings[] = "\"$row->container\": [$blocks]";
+  }
+  $settings = join(', ', $settings);
+
+  $output = '';
+  $output .= "\n<script type=\"text/javascript\"><!--\n";
+  $output .= "var settings = \{$settings};\n";
+  $output .= "var portal;\n";
+  $output .= "function init() {\n";
+  $output .= "  portal = new Portal({ saveurl: '$saveurl' });\n";
+  $output .= "  portal.applySettings(settings);\n";
+  $output .= "}\n";
+  $output .= "Event.observe(window, 'load', init, false);\n";
+  $output .= "--></script>\n";
+
+  return $output;
+}
+
+function _portal_block_list($hook) {
+  global $theme_key;
+  
+  init_theme();
+  
+  $blocks = array();
+  $result = db_query("SELECT * FROM {blocks} WHERE theme = '%s'", $theme_key);
+  while ($block = db_fetch_object($result)) {
+    $array = module_invoke($block->module, 'block', $hook, $block->delta);
+    if (isset($array) && is_array($array)) {
+      if (is_array($array[$block->delta])) {
+        $p = $array[$block->delta]; // $hook == 'list'
+      }
+      else {
+        $p = $array;  // $hook == 'view'
+      }
+      foreach ($p as $k => $v) {
+        $block->$k = $v;
+      }
+    }
+    
+    // refine?
+    if ($block->content || $block->info) {
+      $blocks[_portal_bid($block)] = $block;
+    }
+  }
+  return $blocks;
+}
+
+function theme_portal($content) {
+  return '<div id="portal">' . $content . '</div>';
+}
+
+function theme_portal_column(
+  $cid, $header = '', $content = '', 
+  $header_class = '', $hide = ''
+) {
+  $output = "<div class=\"portal-column\" id=\"portal-column-$cid\"";
+  $output .= ($hide ? ' style="display: none;"' : '') . ">\n";
+  $output .= '<h2' . ($header_class ? " class=\"$header_class\"" : '') .'>';
+  $output .= $header . "</h2>\n";
+  $output .= $content . "</div>\n\n";
+  return $output;
+}
+
+function theme_portal_block_list($header = '', $hide = '') {
+  $blocks = _portal_block_list('view');
+  $enabled_blocks = variable_get('portal_blocks', array());
+
+  $content = '';
+  foreach ($blocks as $block) {
+    if (in_array(_portal_bid($block), $enabled_blocks)) {
+      $content .= theme('block', $block);
+    }
+  }
+  
+  return theme(
+    'portal_column', 'block-list', 
+    $header, $content, 'block-list-handle', $hide
+  );
+}
+
+function _portal_bid($block) {
+  return 'block-' . $block->module . '-' . $block->delta;
+}
+
+function _portal_column_list() {
+  $col_count = variable_get('portal_column_count', 3);
+  $columns = array();
+  for ($i = 0; $i < $col_count; $i++) {
+    $columns[] = 'portal-column-' . $i;
+  }
+  return $columns;
+}
+
+function _portal_uid($user) {
+  return $user->uid != 0 ? $user->uid : $user->sid;
+}

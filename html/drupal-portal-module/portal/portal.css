@@ -1,0 +1,66 @@
+#portal .portal-column {
+  float: left;
+  width: 30%;
+  margin: 5px;
+  padding: 5px;
+  background: #F1F6FE;
+}
+#portal .portal-column h2 {
+  color: #bbb;
+  text-align: center;
+}
+
+#portal #portal-column-block-list {
+  position: absolute;
+  width: 200px;
+  top: 140px;
+  left: 0;
+  z-index: 10;
+  background-color: #FFEAB1;
+}
+#portal #portal-column-block-list .block {
+  margin: 2px;
+}
+#portal #portal-column-block-list .block .content {
+  display: none;
+}
+
+#portal .block {
+  margin: 15px;
+  padding: 5px;
+  border: 1px solid #0F3974;
+}
+#portal .block h3 {
+  margin: 0;
+  padding: 5px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #2153AA;
+}
+#portal .block .content {
+  padding: 5px;
+}
+#portal .block .block-toggle {
+  background-image: url(block-slide.png);
+  display: block;
+  float: right;
+  width: 7px;
+  height: 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+#portal .block .block-toggle span {
+  display: none;
+}
+
+#portal .block-hover {
+  border: 1px dashed #f00;
+}
+
+#portal .block-list-handle, #portal .handle {
+  cursor: move;
+}
+#portal #portal-column-block-list .block .block-toggle {
+  display: none;
+}
