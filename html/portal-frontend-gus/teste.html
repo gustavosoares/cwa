@@ -9,9 +9,9 @@
 <style type="text/css">
 	#portal {
 	  margin: 1px auto;
-	  padding: 5px;
+	  padding: 3px;
 	  /*position: relative;*/
-	  width:1000px;
+	  width:95%;
 	  border: 2px solid;
 	  background: orange;
 	  font-family: verdana, arial, sans-serif;
@@ -26,24 +26,24 @@
 	#portal-column-0 { 
 	  float:left;
 	  width: 30%;  
-	  background:DodgerBlue;
+	  background: WhiteSmoke;
 	}
 
 	#portal-column-1 {
-	  width: 50%;
+	  width: 48%;
 	  float:left;
-	  background:Coral;
+	  background: WhiteSmoke;
 	}   
 
 	#portal-column-2 { 
 	  float:left;
-	  width: 20%;  
-	  background:BlueViolet;
+	  width: 21%;  
+	  background: WhiteSmoke;
 	}
 
 	#portal-column-bottom { 
-	  border: 1px solid;
-	  background:Teal;
+	  width: 99%;
+	  background: WhiteSmoke;
 	  clear:both;
 	}
 
@@ -60,11 +60,14 @@
 	}
 		
 	.portal-column {
+		margin: 1px auto;
 		font-style: italic;
+		background-color: WhiteSmoke;
+		border: 1px solid;
 		color: black;
 	}
 
-	/* Definicoes da visoes */
+	/* Definicoes dos boxes das visoes */
 	#portal .block {
 	  margin: 5px;
 	  padding: 2px;
@@ -74,6 +77,7 @@
 	  margin: 0;
 	  padding: 5px;
 	  font-size: 14px;
+	  text-align: center;
 	  color: #fff;
 	  background-color: red;
 	}
@@ -97,6 +101,9 @@
 	  display: none;
 	}
 	
+	#portal .block-hover {
+	  border: 1px dashed #f00;
+	}
 	/* Fim das visoes */
 	
 	.block-list-handle, .handle {
@@ -124,7 +131,7 @@
 </head>
 <body>      
   <center><h1>PFP test page</h1></br></center>
-  <center><a href="#" onclick="alerta();">Adicionar visão</a></center><br />
+  <center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br />
 	<div id="portal">
 	      <div class="portal-column" id="portal-column-0">
 			<h2>Coluna 0</h2>
@@ -138,7 +145,7 @@
 	      <div class="portal-column" id="portal-column-bottom">
 			<h2>Bottom</h2>
 		  </div>
-			<div class="portal-column" id="portal-column-block-list">
+			<div class="portal-column" id="portal-column-block-list" style="display: none;">
 				<h2 class="block-list-handle">Visões</h2>
 				<!-- Visoes vao aqui-->
 				<!-- Visao tabular-->
@@ -149,6 +156,15 @@
 					</div>
 				</div>
 				<!-- fim visao tabular-->
+				
+				<!-- Visao hierarquica-->
+				<div class="block">
+					<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão hierárquica</h3>
+					<div class="content">
+						<h2>conteudo visao hierarquica</h2>
+					</div>
+				</div>
+				<!-- fim visao hierarquica-->				
 			</div>
 	
 	</div> <!-- fim do div portal -->  
