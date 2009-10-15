@@ -90,5 +90,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'puc.sme',
+    'puc.sme2',
     'puc.cwa',
 )
