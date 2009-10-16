@@ -21,7 +21,7 @@
 	{% for produto in produtos %}
 		<tr class="{% cycle 'row1' 'row2' %}">
 			<td>!!!</td>
-			<td><center>{{ produto.prd_nome }}</center></td>
+			<td><center><a href='/sme2/alarme/{{ produto.prd_id }}'>{{ produto.prd_nome }}</a></center></td>
 		</tr>
 	{% endfor %}
 </table>
