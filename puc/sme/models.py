@@ -62,6 +62,7 @@ class Alarme(models.Model):
 	alm_alarmar = models.CharField(max_length=3)
 	class Meta:
 		db_table = u'alarme'
+		ordering = ['alm_nome']
 
 	def __unicode__(self):
 		return self.alm_nome
@@ -36602,6 +36603,7 @@ class Monitor(models.Model):
 	mon_faq = models.CharField(max_length=765, blank=True)
 	class Meta:
 		db_table = u'monitor'
+		ordering = ['mon_nome']
 
 	def __unicode__(self):
 		return '%s - %s' % (self.mon_id, self.mon_nome)

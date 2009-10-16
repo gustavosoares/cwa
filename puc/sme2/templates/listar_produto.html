@@ -4,6 +4,13 @@
 
 {% block stylesheet %}
 
+<style type="text/css">
+	a:link {color: white;text-decoration: none}
+	a:visited {color: white;text-decoration: none}
+	a:active {color: white;text-decoration: none}
+	a:hover {text-decoration: underline; color: red;}
+</style>
+
 {% endblock %}
 	
 {% block javascript %}
@@ -15,13 +22,11 @@
 <center>
 <table border="2">
 	<tr>
-		<td>!</td>
-		<td><h1>Produto</h1></td>
+		<td><center><h1>Produto</h1></center></td>
 	</tr>
 	{% for produto in produtos %}
-		<tr class="{% cycle 'row1' 'row2' %}">
-			<td>!!!</td>
-			<td><center><a href='/sme2/alarme/{{ produto.prd_id }}'>{{ produto.prd_nome }}</a></center></td>
+		<tr>
+			<td class='sme2_produto' bgcolor='{{ colors.normal }}'><center><a href='/sme2/alarme/{{ produto.prd_id }}'>{{ produto.prd_nome }}</a></center></td>
 		</tr>
 	{% endfor %}
 </table>

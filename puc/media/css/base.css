@@ -8,7 +8,7 @@
 
 /* Import other styles */
 @import url('global.css');
-@import url('layout.css');
+/*@import url('layout.css');*/
 
 /* Import patch for IE 6 Windows */
 /*\*/ @import "patch-iewin.css"; /**/
