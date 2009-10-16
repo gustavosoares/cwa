@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+	Hyperbolic Tree - JavaScript Information Visualization Toolkit
+</title>
+<link type="text/css" href="css/style.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/infovis.css">
+<link type="text/css" rel="stylesheet" href="css/hypertree.css">
+
+<script type="text/javascript" src="js/mootools-1.js"></script>
+
+<!--[if IE]><script language="javascript" type="text/javascript" src="../extras/excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="js/Hypertree.js"></script>
+<script language="javascript" type="text/javascript" src="js/infovis.js"></script>
+<script language="javascript" type="text/javascript" src="js/static1-hypertree.js"></script>
+
+<style type="text/css" charset="utf-8">/* See license.txt for terms of usage */
+
+#firebugBody {
+    position: fixed;
+    top:0;
+    left:0;
+    margin:0;
+    padding:0;
+    width:1px;
+    height:1px;
+    overflow:visible;
+}
+
+.firebugCanvas {
+    position:fixed;
+    top: 0;
+    left: 0;
+    display:none;
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+.firebugHighlight {
+    z-index: 2147483647;
+    position: absolute;
+    background-color: #3875d7;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0 none;
+}
+
+.firebugLayoutBoxParent {
+    z-index: 2147483647;
+    position: absolute;
+    background-color: transparent;
+    border-top: 0 none;
+    border-right: 1px dashed #BBBBBB;
+    border-bottom: 1px dashed #BBBBBB;
+    border-left: 0 none;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+.firebugRuler {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0 none;
+}
+
+.firebugRulerH {
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 14px;
+    background: url(chrome://firebug/skin/rulerH.png) repeat-x;
+    border-top: 1px solid #BBBBBB;
+    border-right: 1px dashed #BBBBBB;
+    border-bottom: 1px solid #000000;
+}
+
+.firebugRulerV {
+    top: 0;
+    left: -15px;
+    width: 14px;
+    height: 100%;
+    background: url(chrome://firebug/skin/rulerV.png) repeat-y;
+    border-left: 1px solid #BBBBBB;
+    border-right: 1px solid #000000;
+    border-bottom: 1px dashed #BBBBBB;
+}
+
+.overflowRulerX > .firebugRulerV {
+    left: 0;
+}
+
+.overflowRulerY > .firebugRulerH {
+    top: 0;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.firebugLayoutBox {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    outline: 0;
+}
+
+.firebugLayoutBoxOffset {
+    z-index: 2147483647;
+    position: absolute;
+    opacity: 0.8;
+}
+
+.firebugLayoutBoxMargin {
+    background-color: #EDFF64;
+}
+
+.firebugLayoutBoxBorder {
+    background-color: #666666;
+}
+
+.firebugLayoutBoxPadding {
+    background-color: SlateBlue;
+}
+
+.firebugLayoutBoxContent {
+    background-color: SkyBlue;
+}
+
+/*.firebugHighlightGroup .firebugLayoutBox {
+    background-color: transparent;
+}
+
+.firebugHighlightBox {
+    background-color: Blue !important;
+}*/
+
+.firebugLayoutLine {
+    z-index: 2147483647;
+    background-color: #000000;
+    opacity: 0.4;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0 none;
+}
+
+.firebugLayoutLineLeft,
+.firebugLayoutLineRight {
+    position: fixed;
+    width: 1px;
+    height: 100%;
+}
+
+.firebugLayoutLineTop,
+.firebugLayoutLineBottom {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+}
+
+.firebugLayoutLineTop {
+    margin-top: -1px;
+    border-top: 1px solid #999999;
+}
+
+.firebugLayoutLineRight {
+    border-right: 1px solid #999999;
+}
+
+.firebugLayoutLineBottom {
+    border-bottom: 1px solid #999999;
+}
+
+.firebugLayoutLineLeft {
+    margin-left: -1px;
+    border-left: 1px solid #999999;
+}
+</style></head><body onload="init();">
+
+<div id="header">
+	
+
+
+</div>
+
+<div style="height: 976px;" id="left">
+	
+	<div id="details" class="toggler left-item">Details</div>
+<div class="element contained-item">
+	<div class="inner" id="inner-details"><h4>Chris Vrenna</h4><b>Connections:</b><ul><li>Stabbing Westward <div class="relation">(relation: member of band)</div></li><li>Pigface <div class="relation">(relation: member of band)</div></li><li>Jack Off Jill <div class="relation">(relation: member of band)</div></li><li>Die Warzau <div class="relation">(relation: member of band)</div></li><li>tweaker <div class="relation">(relation: is person)</div></li><li>Exotic Birds <div class="relation">(relation: member of band)</div></li></ul></div>
+</div>
+
+
+	
+</div>
+<div style="height: 976px; width: 1349px; position: absolute; top: 0px; left: 250px;" width="1349" height="976" id="infovis"><div style="position: relative;" id="mycanvas"><canvas style="position: absolute; top: 0pt; left: 0pt; width: 1349px; height: 976px;" height="976" width="1349" id="mycanvas-bkcanvas"></canvas><canvas style="position: absolute; top: 0pt; left: 0pt; width: 1349px; height: 976px;" height="976" width="1349" id="mycanvas-canvas"></canvas><div style="overflow: visible; position: absolute; top: 0pt; left: 0pt; width: 1349px; height: 0pt;" id="mycanvas-label"><div style="position: absolute; opacity: 0.8; left: 756px; top: 760px;" class="node" id="347_0">Nine Inch Nails</div><div style="position: absolute; opacity: 0.8; left: 840px; top: 871px; visibility: visible; display: none;" class="node" id="126510_1">Jerome Dillon</div><div style="position: absolute; opacity: 0.8; left: 879.5px; top: 908px; display: none;" class="node" id="52163_2">Howlin' Maggie</div><div style="position: absolute; opacity: 0.8; left: 867.5px; top: 925px; display: none;" class="node" id="324134_3">nearLY</div><div style="position: absolute; opacity: 0.8; left: 784px; top: 894px; display: none;" class="node" id="173871_4">Charlie Clouser</div><div style="position: absolute; opacity: 0.8; left: 724.5px; top: 903px; display: none;" class="node" id="235952_5">James Woolley</div><div style="position: absolute; opacity: 0.8; left: 666px; top: 891px; display: none;" class="node" id="235951_6">Jeff Ward</div><div style="position: absolute; opacity: 0.8; left: 694.5px; top: 971px; display: none;" class="node" id="2382_7">Ministry</div><div style="position: absolute; opacity: 0.8; left: 649px; top: 972px; display: none;" class="node" id="2415_8">Revolting Cocks</div><div style="position: absolute; opacity: 0.8; left: 642.5px; top: 972px; display: none;" class="node" id="3963_9">Pigface</div><div style="position: absolute; opacity: 0.8; left: 618px; top: 970px; display: none;" class="node" id="7848_10">Lard</div><div style="position: absolute; opacity: 0.8; left: 564px; top: 835px; display: none;" class="node" id="235950_11">Richard Patrick</div><div style="position: absolute; opacity: 0.8; left: 561.5px; top: 961px; display: none;" class="node" id="1007_12">Filter</div><div style="position: absolute; opacity: 0.8; left: 441px; top: 928px; display: none;" class="node" id="327924_13">Army of Anyone</div><div style="position: absolute; opacity: 0.8; left: 512px; top: 686px; visibility: visible; display: none;" class="node" id="2396_14">Trent Reznor</div><div style="position: absolute; opacity: 0.8; left: 371.5px; top: 873px; display: none;" class="node" id="3963_15">Pigface</div><div style="position: absolute; opacity: 0.8; left: 283.5px; top: 808px; display: none;" class="node" id="32247_16">1000 Homo DJs</div><div style="position: absolute; opacity: 0.8; left: 232.5px; top: 707px; display: none;" class="node" id="83761_17">Option 30</div><div style="position: absolute; opacity: 0.8; left: 183px; top: 556px; display: none;" class="node" id="133257_18">Exotic Birds</div><div style="position: absolute; opacity: 0.8; left: 637px; top: 489px;" class="node" id="36352_19">Chris Vrenna</div><div style="position: absolute; opacity: 0.8; left: 176px; top: 392px;" class="node" id="1013_20">Stabbing Westward</div><div style="position: absolute; opacity: 0.8; left: 265.5px; top: 250px;" class="node" id="3963_21">Pigface</div><div style="position: absolute; opacity: 0.8; left: 369.5px; top: 126px; visibility: visible;" class="node" id="5752_22">Jack Off Jill</div><div style="position: absolute; opacity: 0.8; left: 530.5px; top: 49px;" class="node" id="33602_23">Die Warzau</div><div style="position: absolute; opacity: 0.8; left: 709.5px; top: 36px;" class="node" id="40485_24">tweaker</div><div style="position: absolute; opacity: 0.8; left: 851px; top: 79px;" class="node" id="133257_25">Exotic Birds</div><div style="position: absolute; opacity: 0.8; left: 873px; top: 521px; display: none;" class="node" id="236021_26">Aaron North</div><div style="position: absolute; opacity: 0.8; left: 942.5px; top: 666px; display: none;" class="node" id="236024_27">Jeordie White</div><div style="position: absolute; opacity: 0.8; left: 1091.5px; top: 634px; display: none;" class="node" id="909_28">A Perfect Circle</div><div style="position: absolute; opacity: 0.8; left: 1052px; top: 728px; display: none;" class="node" id="237377_29">Twiggy Ramirez</div><div style="position: absolute; opacity: 0.8; left: 932px; top: 769px; display: none;" class="node" id="235953_30">Robin Finck</div><div style="position: absolute; opacity: 0.8; left: 996px; top: 813px; display: none;" class="node" id="1440_31">Guns N' Roses</div><div style="position: absolute; opacity: 0.8; left: 887px; top: 832px; display: none;" class="node" id="235955_32">Danny Lohner</div><div style="position: absolute; opacity: 0.8; left: 952.5px; top: 854px; display: none;" class="node" id="909_33">A Perfect Circle</div><div style="position: absolute; opacity: 0.8; left: 952px; top: 862px; display: none;" class="node" id="1695_34">Killing Joke</div><div style="position: absolute; opacity: 0.8; left: 923.5px; top: 870px; display: none;" class="node" id="1938_35">Methods of Mayhem</div><div style="position: absolute; opacity: 0.8; left: 947.5px; top: 877px; display: none;" class="node" id="5138_36">Skrew</div><div style="position: absolute; opacity: 0.8; left: 925px; top: 884px; display: none;" class="node" id="53549_37">Angkor Wat</div><div style="position: absolute; opacity: 0.8; left: 923.5px; top: 890px; display: none;" class="node" id="113510_38">Puscifer</div><div style="position: absolute; opacity: 0.8; left: 911px; top: 896px; display: none;" class="node" id="113512_39">Renholdër</div></div></div></div>
+<div id="log">done</div>
+</body></html>
