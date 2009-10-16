@@ -18,6 +18,7 @@ def listar_produto(request):
 	print produtos_alarmes
 	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO, 
 					{ 'produtos' : produtos,
+					'produtos_alarmes' : produtos_alarmes,
 	 				'colors' : util.colors})
 
 def listar_alarme(request):
