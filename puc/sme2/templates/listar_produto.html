@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Produtos{% endblock %}
+
+{% block stylesheet %}
+
+{% endblock %}
+	
+{% block javascript %}
+
+{% endblock %}
+
+{% block content %}
+
+<center>
+<table border="2">
+	<tr>
+		<td>!</td>
+		<td><h1>Produto</h1></td>
+	</tr>
+	{% for produto in produtos %}
+		<tr class="{% cycle 'row1' 'row2' %}">
+			<td>!!!</td>
+			<td><center>{{ produto.prd_nome }}</center></td>
+		</tr>
+	{% endfor %}
+</table>
+</center>
+{% endblock %}
+
+
+
+
+
