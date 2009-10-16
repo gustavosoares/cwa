@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Produtos{% endblock %}
+
+{% block stylesheet %}
+
+<style type="text/css">
+	a:link {color: white;text-decoration: none}
+	a:visited {color: white;text-decoration: none}
+	a:active {color: white;text-decoration: none}
+	a:hover {text-decoration: underline; color: red;}
+</style>
+
+{% endblock %}
+	
+{% block javascript %}
+
+{% endblock %}
+
+{% block content %}
+
+<center>
+<table border="2">
+	<tr>
+		<td colspan="2"><center><h1>Produto</h1></center></td>
+	</tr>
+	{% for produto_alarmes in produtos_alarmes %}
+		<tr>
+			{% ifequal produto_alarmes.produto.prd_status 'W' %}
+				<td bgcolor='{{ colors.warning }}'><center><a href='/sme2/alarme/{{ produto_alarmes.produto.prd_id }}'>{{ produto_alarmes.produto.prd_nome }}</a></center></td>
+			{% endifequal %}
+			{% ifequal produto_alarmes.produto.prd_status 'A' %}
+				<td bgcolor='{{ colors.alarm }}'><center><a href='/sme2/alarme/{{ produto_alarmes.produto.prd_id }}'>{{ produto_alarmes.produto.prd_nome }}</a></center></td>
+			{% endifequal %}
+
+			<td>
+				<table>
+				{% for alarme in produto_alarmes.alarmes %}
+					{% ifequal alarme.alm_status 'W' %}
+						<tr><td bgcolor='{{ colors.warning }}'>{{ alarme.alm_nome }}</td></tr>
+					{% endifequal %}
+					{% ifequal alarme.alm_status 'A' %}
+						<tr><td bgcolor='{{ colors.alarm }}'>{{ alarme.alm_nome }}</td></tr>
+					{% endifequal %}					
+				{% endfor %}
+				</table>	
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+</center>
+{% endblock %}
+
+
+
+
+

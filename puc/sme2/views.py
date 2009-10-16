@@ -12,11 +12,20 @@ from puc.sme2.core import util
 
 #retorna a listagem dos produtos no sme2
 def listar_produto(request):
-	#template com logica de apresentacao
 	produtos = produto_repository.get_produtos_alarmando()
 	produtos_alarmes = produto_repository.get_produtos_e_seus_alarmes()
 	print produtos_alarmes
 	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO, 
+					{ 'produtos' : produtos,
+					'produtos_alarmes' : produtos_alarmes,
+	 				'colors' : util.colors})
+
+#controller: listagem dos produtos e os alarmes
+def listar_produto_alarme(request):
+	produtos = produto_repository.get_produtos_alarmando()
+	produtos_alarmes = produto_repository.get_produtos_e_seus_alarmes()
+	print produtos_alarmes
+	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME, 
 					{ 'produtos' : produtos,
 					'produtos_alarmes' : produtos_alarmes,
 	 				'colors' : util.colors})
