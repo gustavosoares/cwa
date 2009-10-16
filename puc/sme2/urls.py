@@ -14,8 +14,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     #(r'^controller/?$', views.controller),
-    (r'^/?$', views.listar_projeto),
-    (r'^projeto/?$', views.listar_projeto),
+    (r'^/?$', views.listar_produto),
+    (r'^produto/?$', views.listar_produto),
     (r'^alarme/?$', views.listar_alarme),
     (r'^monitor/?$', views.listar_monitor),
 

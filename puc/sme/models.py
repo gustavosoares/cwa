@@ -41028,6 +41028,7 @@ class Produto(models.Model):
 	prd_alarmar = models.CharField(max_length=3)
 	class Meta:
 		db_table = u'produto'
+		ordering = ['prd_nome']
 
 	def __unicode__(self):
 		return self.prd_nome
