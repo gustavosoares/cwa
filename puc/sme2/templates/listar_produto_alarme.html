@@ -31,10 +31,10 @@
 				<!-- Lista de alarmes por produtos -->
 				{% for alarme in produto_alarmes.alarmes %}
 					{% ifequal alarme.alm_status 'W' %}
-						<tr><td class='sme2-alarme' bgcolor='{{ colors.warning }}'><a href='/sme2/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td></tr>
+						<tr><td class='sme2-alarme' bgcolor='{{ colors.warning }}'><a href='/sme2/monitor/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td></tr>
 					{% endifequal %}
 					{% ifequal alarme.alm_status 'A' %}
-						<tr><td class='sme2-alarme' bgcolor='{{ colors.alarm }}'><a href='/sme2/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td></tr>
+						<tr><td class='sme2-alarme' bgcolor='{{ colors.alarm }}'><a href='/sme2/monitor/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td></tr>
 					{% endifequal %}					
 				{% endfor %}
 

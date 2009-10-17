@@ -10,6 +10,7 @@ from puc.sme.models import Produto, Alarme, Monitor
 from puc.sme.core.repository import produto_repository
 from puc.sme.core.repository import monitor_repository
 from puc.sme.core.repository import alarme_repository
+from puc.sme.core import domain
 
 from puc.sme2.core import util
 
@@ -44,6 +45,21 @@ def listar_monitor_do_alarme(request, alm_id=None):
 					'alarme' : alarme,
 	 				'colors' : util.colors})
 
-#visualiza o monitor passado como parametro	
-def ver_monitor(request, mon_id=None):
-	return HttpResponse("<h1>ver monitor - %s</h1>" % mon_id)
+#visualiza os eventos do monitor passado como parametro	
+def ver_evento(request, mon_id=None):
+	rows, monitor, colunas_desc, colunas_nome = monitor_repository.get_eventos_por_monitor_id(mon_id)
+	
+	print 'colunas_desc - %s' % colunas_desc
+	print 'colunas_nome - %s' % colunas_nome
+	print 'total de eventos para o alarme %s: %s' % (monitor.mon_nome, len(rows))
+	#crio array de eventos
+	eventos = []
+	for row in rows:
+		eventos.append(domain.Evento(monitor, row))
+
+	return render_to_response(templates.TEMPLATE_VER_EVENTO, 
+					{ 'monitor' : monitor,
+					'colunas_desc' : colunas_desc
+					'eventos' : evento,
+	 				'colors' : util.colors})
+
