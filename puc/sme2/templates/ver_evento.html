@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Monitores do alarme {{ alarme.alm_nome }}{% endblock %}
+{% block title %}Eventos do monitor {{ monitor.mon_nome }}{% endblock %}
 
 {% block stylesheet %}
 
@@ -14,23 +14,33 @@
 <center>
 <table border="2">
 	<tr>
-		<td><center><h2>{{alarme.alm_nome}} - Monitor(es)</h2></br><h3><a href='/sme2'>Voltar</a></h3></center></td>
+		<td colspan="{{colunas_desc|length|add:'1'}}"><center><h2>{{alarme.alm_nome}}>{{monitor.mon_nome}}</h2></br><h3><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>Voltar</a></h3></center></td>
 	</tr>
-	{% for monitor in monitores %}
+	<tr>
+		<th><center>!</center></th>
+	{% for coluna in colunas_desc %}
+		<th><center>{{coluna}}</center></th>
+	{% endfor %}
+	</tr>
+	{% for evento in eventos %}
+		{% ifequal evento.tipo 'W' %}
+			<tr bgcolor='{{ colors.warning }}'>
+		{% endifequal %}
+		{% ifequal evento.tipo 'A' %}
+			<tr bgcolor='{{ colors.alarm }}'>
+		{% endifequal %}
+			<td bgcolor='white'><a href='#'><img src=/media/images/icon-yes.gif border=0></a></td>
+			<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
+			<td class="sme2-evento">{{evento.servidor}}</td>
+			{% for dado in evento.get_dados %}
+				<td class="sme2-evento">{{dado}}</td>
+			{% endfor %}
 		<tr>
-			{% ifequal monitor.mon_status 'W' %}
-				<th class='sme2-monitor' bgcolor='{{ colors.warning }}'><center><a href='/sme2/evento/{{ monitor.mon_id }}'>{{ monitor.mon_nome }}</a></center></th>
-			{% endifequal %}
-			{% ifequal monitor.mon_status 'A' %}
-				<th class='sme2-monitor' bgcolor='{{ colors.alarm }}'><center><a href='/sme2/evento/{{ monitor.mon_id }}'>{{ monitor.mon_nome }}</a></center></th>
-			{% endifequal %}
-		</tr>
 	{% endfor %}
 </table>
 </center>
 
 {% endblock %}
-
 
 
 
