@@ -1,17 +1,23 @@
 from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
+from puc.sme.core.repository import alarme_repository
+from puc.sme.core.repository import produto_repository
 
-#retorna todos os monitores de um determinado alarme id
-def get_monitor_por_alarme_id(id):
+def get_monitor_alarmando_por_alarme_id(id):
+	"""busca um monitor alarmando por alarme id"""
 	return Monitor.objects.exclude(mon_status='X').filter(alm_id=id)
 
-#retorna o monitor por id
 def get_monitor_por_id(id):
+	"""busca um monitor por id"""
 	return Monitor.objects.get(mon_id=id)
 
-#retorn duas lista de colunas (desc e nome) de um monitor id
+def limpa_monitor_por_id(id):
+	"""marca o monitor com nenhum alarme"""
+	Monitor.objects.filter(mond_id=id).update(mon_status='X')
+		
 def get_colunas_por_monitor_id(id):
+	"""retorna duas lista de colunas (desc e nome) de um monitor id"""
 	sql = """
 	select mon_id, col_cabecalho, col_nomefisico, col_tipo, col_ordem
 	from coluna 
@@ -57,3 +63,39 @@ def get_eventos_por_monitor_id(id):
 	db.execute(sql)
 	rows = db.rows_fetchall()
 	return rows, monitor, colunas_desc, colunas_nome
+	
+#marca um evento como verificado
+def fechar_evento(id, monitor, alarme, produto):
+	"""fecha um evento"""
+	sql = """
+	UPDATE %s
+	SET pad_verificado = 'S', pad_datahoraverificado = SYSDATE()
+	WHERE pad_id = %s
+	""" % (monitor.mon_tabela, id)
+	db = None
+	try:
+		db = Database()
+		db.execute(sql)
+		#algum mon_id alarmando na tabela do monitor?
+		sql = """
+		SELECT pad_id FROM %s
+		WHERE mon_id = %s AND pad_tipoalarme <> 'X' AND pad_verificado = 'N' LIMIT 1
+		""" % (monitor.mon_tabela, monitor.mon_id)
+		db.execute(sql)
+		if (db.rows_count() == 0):
+			#atualizo mon_status na tabela do monitor
+			limpa_monitor_por_id(monitor.mon_id)
+		
+		#algum alm_id alarmando na tabela monitor?
+		if (len(get_monitor_alarmando_por_alarme_id(alarme.alm_id)) == 0):
+			#atualizo alm_status na tabela do monitor
+			alarme_repository.limpa_alarme_por_id(alarme.alm_id)
+		
+		#algum prd_id alarmando na tabela alarme?
+		if (len(alarme_repository.get_alarmes_por_produto_id(produto.prd_id)) == 0):
+			produto_repository.limpa_produto_por_id(produto.prd_id)
+			
+	except Exception, e:
+		raise e
+	
+	

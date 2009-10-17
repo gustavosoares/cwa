@@ -6,10 +6,10 @@ class Evento():
 		self.monitor = monitor
 		self.alarme = alarme
 		self.row = row
-		self.id = row[0]
+		self.id = row[0] #coluna pad_id no banco de dados
 		self.tipo = row[1] #tipo do evento: alarme ou warning
-		self.data_hora = row[1]
-		self.servidor = row[2]
+		self.data_hora = row[2]
+		self.servidor = row[3]
 		self.dados = row[4:]
 		
 		
