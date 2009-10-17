@@ -68,7 +68,7 @@ def fechar_evento(request, mon_id=None, pad_id=None):
 	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 	produto = produto_repository.get_produto_por_id(alarme.prd_id)
 	try:
-		#monitor.fechar_evento(pad_id, monitor, alarme, produto)
+		monitor.fechar_evento(pad_id, monitor, alarme, produto)
 		msg = '''fechar evento %s do monitor %s</h1>''' % (pad_id, mon_id)
 		print msg
 		return HttpResponseRedirect('/sme2/evento/monitor/%s' % mon_id)
