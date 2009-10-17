@@ -16,8 +16,9 @@ urlpatterns = patterns('',
     #(r'^controller/?$', views.controller),
     (r'^/?$', views.listar_produto_alarme),
     (r'^produto/?$', views.listar_produto),
-    (r'^alarme/?$', views.listar_alarme),
-    (r'^monitor/?$', views.listar_monitor),
+    #retorna lista de monitores do alarme id
+    (r'^alarme/(?P<alm_id>\d+)/?$', views.listar_monitor_do_alarme),
+    (r'^monitor/(?P<mon_id>\d+)/?$', views.ver_monitor),
 
 )
 
