@@ -46,7 +46,7 @@ def get_eventos_por_monitor_id(id):
 		count = count + 1
 
 	sql = """
-	select pad_tipoalarme, %s
+	select pad_id, pad_tipoalarme, %s
 	from %s
 	where mon_id = %s
 	AND pad_verificado  = 'N'

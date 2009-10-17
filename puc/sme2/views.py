@@ -61,3 +61,14 @@ def ver_evento(request, mon_id=None):
 					'eventos' : eventos,
 	 				'colors' : util.colors})
 
+#fecha o evento do monitor passado como parametro	
+def fechar_evento(request, mon_id=None, pad_id=None):
+	monitor = monitor_repository.get_monitor_por_id(mon_id)
+	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
+	produto = produto_repository.get_produto_por_id(alarme.prd_id)
+	
+	html = '''
+	<h1>fechar evento do monitor %s</h1>
+	''' % mon_id
+	
+	return HttpResponse(html)

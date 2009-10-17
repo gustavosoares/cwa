@@ -10,6 +10,10 @@ def get_produtos():
 #retorna todos os produtos em alarme ou warning
 def get_produtos_alarmando():
 	return Produto.objects.exclude(prd_status='X')
+
+#retorna o produto pelo id passado
+def get_produto_por_id(id):
+	return Produto.objects.get(prd_id=id)
 	
 #retorna produtos alarmando e seus alarmes
 def get_produtos_e_seus_alarmes():

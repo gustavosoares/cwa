@@ -6,10 +6,11 @@ class Evento():
 		self.monitor = monitor
 		self.alarme = alarme
 		self.row = row
-		self.tipo = row[0]
+		self.id = row[0]
+		self.tipo = row[1] #tipo do evento: alarme ou warning
 		self.data_hora = row[1]
 		self.servidor = row[2]
-		self.dados = row[3:]
+		self.dados = row[4:]
 		
 		
 	#retorna string formatada
