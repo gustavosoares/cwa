@@ -5,15 +5,21 @@
 {% block stylesheet %}
 <style type="text/css">
 
+	#menu {
+		background: white;
+		text-align: left;
+	}
+	
 	#portal {
-	  margin: 1px auto;
-	  padding: 3px;
-	  /*position: relative;*/
-	  width:95%;
-	  border: 2px solid;
-	  background: PowderBlue;
-	  font-family: verdana, arial, sans-serif;
-	  font-size: 10px;
+		/*margin: 1px auto;*/
+		padding: 1px;
+		/*position: relative;*/
+		position: left;
+		width:100%;
+		border: 2px solid;
+		background: PowderBlue;
+		font-family: verdana, arial, sans-serif;
+		font-size: 10px;
 	}
 
 	#portal h2 {
@@ -133,9 +139,13 @@
 {% endblock %}
 
 {% block content %}
-
-<center><h1>CWA test page</h1></br></center>
+<center><h3>CWA test page</h3></br></center>
+<div id="menu">
+	<a href='#'>Console Monitoração</a> | 
+	<a href='#'>Relatório</a>
+</div>
 <!--center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br /-->
+
 <div id="portal">
       <div class="portal-column" id="portal-column-0">
 		<h2>Coluna 0</h2>
