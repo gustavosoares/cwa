@@ -44,3 +44,10 @@ def index(request):
 		'produtos': produtos,
 		'produtos_alarmes' : produtos_alarmes,
 		'alarmes_monitores' : alarmes_monitores})
+
+def configurar_relatorio():
+	"""configura relatorio"""
+	html = """
+	<h2>configura relatorio</h2>
+	"""
+	return HttpResponse(html)
