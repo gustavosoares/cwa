@@ -23,6 +23,26 @@
 		function hideLoading (){
 			Element.hide("loading");
 		}
+		
+		/*Atualiza o div passado como parametro*/
+		function update_div(div_name, url) {
+			new Ajax.Updater(div_name,url, {asynchronous:true, method : 'get', parameters:{}}); return false;
+		}
+
+		/*Metodo eficiente para concatenar strings*/
+		function StringBuffer() { 
+			this.buffer = []; 
+		}; 
+
+		StringBuffer.prototype.append = function append(string) { 
+			this.buffer.push(string); return this; 
+		}; 
+
+		StringBuffer.prototype.toString = function toString() { 
+			return this.buffer.join(""); 
+		};
+
+		var buffer = new StringBuffer();
 	</script>
 </head>
 <body>
