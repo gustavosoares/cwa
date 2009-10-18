@@ -14,10 +14,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^/?$', views.index),
-    (r'^widget/?$', views.widget),
-    (r'^chart/?$', views.chart),
-    (r'^chart2/?$', views.chart2),
-    (r'^resize/?$', views.resize),
+    (r'^teste/widget/?$', views.widget),
+    (r'^teste/chart/?$', views.chart),
+    (r'^teste/chart2/?$', views.chart2),
+    (r'^teste/resize/?$', views.resize),
 )
 
 import os

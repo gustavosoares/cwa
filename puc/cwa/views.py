@@ -2,17 +2,19 @@
 import datetime
 import os
 
-# Cproject.htmlreate your views here.
+# Create your views here.
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
+from puc import templates
+
 
 def index(request):
-	#return HttpResponse('<h1>index</h1><br\> <center><a href="#" onclick="update_widget("content_widget_0");">Update widget</a></center><br />')
-	return HttpResponse('<h1>index</h1><br\> <center><a href="/cwa">reload</a></center><br />')
+	"""Pagina princiap da aplicacao cwa"""
+	return render_to_response(templates.TEMPLATE_CWA_INDEX)
 
 	
 def widget(request):
