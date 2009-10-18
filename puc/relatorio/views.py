@@ -10,9 +10,14 @@ from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
 from puc import templates
+from puc.sme.models import Produto, Alarme, Monitor
+from puc.sme.core.repository import produto_repository
+from puc.sme.core.repository import monitor_repository
+from puc.sme.core.repository import alarme_repository
 
 
 def index(request):
 	"""Pagina princial da aplicacao por gerar relatorio"""
 	##return HttpResponse("relatorio")
+	
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX)
