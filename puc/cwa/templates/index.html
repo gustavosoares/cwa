@@ -23,13 +23,13 @@
 	
 	#portal-column-0 { 
 	  float:left;
-	  width: 30.4%;  
+	  width: 41%;  
 	  background: WhiteSmoke;
 	}
 
 	#portal-column-1 {
 	  float:left;
-	  width: 48%;
+	  width: 58%;
 	  background: WhiteSmoke;
 	}   
 
@@ -124,35 +124,31 @@
 	
 {% block javascript %}
 
-<script type="text/javascript" src="/media/js/portal.js"></script>
 <script type="text/javascript">
 
-  var settings = {};
-  var portal;
-  function init() {
-    portal = new Portal();
-    portal.applySettings(settings);
-  }
-  Event.observe(window, 'load', init, false);
 
 </script>
+
 
 {% endblock %}
 
 {% block content %}
 
 <center><h1>CWA test page</h1></br></center>
-<center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br />
+<!--center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br /-->
 <div id="portal">
       <div class="portal-column" id="portal-column-0">
 		<h2>Coluna 0</h2>
 	  </div>
       <div class="portal-column" id="portal-column-1">
 		<h2>Coluna 1</h2>
+		<CENTER>
+		<iframe src="/sme2/" frameborder="0" width="98%" height="400"></iframe>
+		</CENTER>
 	  </div>
-      <div class="portal-column" id="portal-column-2">
+      <!--div class="portal-column" id="portal-column-2">
 		<h2>Coluna 2</h2>
-	  </div>
+	  </div-->
       <div class="portal-column" id="portal-column-bottom">
 		<h2>Bottom</h2>
 	  </div>
