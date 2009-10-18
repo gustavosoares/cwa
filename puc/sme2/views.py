@@ -1,4 +1,6 @@
 # coding=utf-8
+from traceback import *
+import sys
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseServerError
@@ -68,12 +70,22 @@ def fechar_evento(request, mon_id=None, pad_id=None):
 	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 	produto = produto_repository.get_produto_por_id(alarme.prd_id)
 	try:
-		monitor.fechar_evento(pad_id, monitor, alarme, produto)
-		msg = '''fechar evento %s do monitor %s</h1>''' % (pad_id, mon_id)
+		msg = '''fechar evento %s do monitor %s''' % (pad_id, mon_id)
 		print msg
+		monitor_repository.fechar_evento(pad_id, monitor, alarme, produto)
 		return HttpResponseRedirect('/sme2/evento/monitor/%s' % mon_id)
 	except Exception, e:
+		print_exc(file=sys.stdout)
 		msg = 'Erro ao fechar o evento %s: %s' % (pad_id, e)
-		raise HttpResponseServerError(msg)
-		
+		print msg
+		html = '<h1>erro 500!!!</h1></br></br><h2>Erro ao fechar o evento %s</h2>' % (pad_id)
+		return HttpResponseServerError(html)
+
+def fechar_todos_eventos(request, mon_id=None):
+	"""fechar_todos_eventos do monitor id"""
+	monitor = monitor_repository.get_monitor_por_id(mon_id)
+	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
+	produto = produto_repository.get_produto_por_id(alarme.prd_id)
+	monitor_repository.fechar_todos_eventos(monitor, alarme, produto)
+	return HttpResponseRedirect('/sme2/evento/monitor/%s' % mon_id)
 

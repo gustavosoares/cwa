@@ -22,6 +22,8 @@ urlpatterns = patterns('',
     (r'^evento/monitor/(?P<mon_id>\d+)/?$', views.ver_evento),
     #fecha uma evento de um determinado monitor a partir do id do evento
     (r'^evento/fechar/(?P<mon_id>\d+)/(?P<pad_id>\d+)/?$', views.fechar_evento),
+    #fecha todos os eventos para o monitor id
+    (r'^evento/fechar/(?P<mon_id>\d+)/todos/?$', views.fechar_todos_eventos),
 
 )
 
