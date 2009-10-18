@@ -7,6 +7,11 @@ from puc.sme.core.repository.produto_repository import ProdutoRepository
 
 class MonitorRepository(Singleton):
 	@staticmethod
+	def get_monitores():
+		"""retorna todos os monitores"""
+		return Monitor.objects.all()
+	
+	@staticmethod
 	def get_monitor_alarmando_por_alarme_id(id):
 		"""busca um monitor alarmando por alarme id"""
 		return Monitor.objects.exclude(mon_status='X').filter(alm_id=id)

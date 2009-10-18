@@ -5,6 +5,11 @@ from puc.sme.models import Alarme
 
 class AlarmeRepository(Singleton):
 	@staticmethod
+	def get_alarmes():
+		"""retorna todos os alarmes"""
+		return Alarme.objects.all()
+	
+	@staticmethod
 	def get_alarmes_por_produto_id(id):
 		"""retorna todos os alarmes de um determinado produto"""
 		return Alarme.objects.exclude(alm_status='X').filter(prd_id=id)
