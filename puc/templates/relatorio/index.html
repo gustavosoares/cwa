@@ -5,7 +5,22 @@
 {% block stylesheet %}
 <style type="text/css">
 
+#conteudo {
+	margin: 1px auto;
+	padding: 3px;
+	/*position: relative;*/
+	width:95%;
+	border: 2px solid;
+	background: PowderBlue;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+}
 
+#relatorio {
+	margin: 1px auto;
+	border: 1px solid;
+	text-align: center;
+}
 </style>
 
 {% endblock %}
@@ -21,8 +36,29 @@
 {% endblock %}
 
 {% block content %}
+<div id="conteudo">
 <center><h3>Relatório</h3></br></center>
-
+<form name='frm' method=POST action='mon_relatorios.jsp'>
+	<span>Produto/Alarme/Monitor: </span><br>
+	<!-- produto -->
+	<select name=produto onChange=''>
+		<option value="0" selected>[Selecione um produto]</option>
+		{% for produto in produtos %}
+			<option id="prd_{{ produto.prd_id }}" value="{{ produto.prd_id }}">{{ produto.prd_nome }}</option>
+		{% endfor %}
+	</select>
+	<!-- alarme -->
+	<select name=alarme onChange=''>
+		<option value="0" selected>[Selecione um alarme]</option>
+	</select>
+	<!-- monitor -->
+	<select name=monitor onChange=''>
+		<option value="0" selected>[Selecione um monitor]</option>
+	</select>
+</form>
+</br>
+<div id="relatorio">relatorio div</div>
+</div>
 
 {% endblock %}
 
