@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
@@ -69,7 +70,7 @@ class MonitorRepository(Singleton):
 		where mon_id = %s
 		AND pad_verificado  = 'N'
 		AND pad_tipoalarme <> 'X'
-		ORDER BY pad_datahora DESC
+		ORDER BY pad_datahora DESC LIMIT 2000
 		""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		db = Database()
 		db.execute(sql)

@@ -1,4 +1,4 @@
-
+# coding=utf-8
 from django.conf import settings
 from puc.core.singleton import Singleton
 from puc.sme.models import Alarme
