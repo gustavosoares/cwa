@@ -14,7 +14,7 @@ from puc.sme.models import Produto, Alarme, Monitor
 from puc.sme.core.repository.produto_repository import ProdutoRepository
 from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
-from puc.core import util
+from puc.core import json
 
 
 def index(request):
@@ -37,8 +37,8 @@ def index(request):
 	
 	alarmes = None
 	monitores = None
-	produtos_alarmes = util.encode_json(produtos_alarmes)
-	alarmes_monitores = util.encode_json(alarmes_monitores)
+	produtos_alarmes = json.encode_json(produtos_alarmes)
+	alarmes_monitores = json.encode_json(alarmes_monitores)
 
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, { 
 		'produtos': produtos,
