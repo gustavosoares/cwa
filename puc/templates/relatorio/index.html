@@ -132,7 +132,7 @@
 {% block content %}
 <div id="conteudo">
 <center><h3>Relatório</h3></br></center>
-<form name='frm' method=POST action='mon_relatorios.jsp'>
+<form name='frm' method=GET action=''>
 	<span>Produto/Alarme/Monitor: </span><br>
 	<!-- produto -->
 	<select name=produto onChange='adicionaAlarmes(this.options[this.selectedIndex].value);'>
@@ -148,7 +148,7 @@
 	</select>
 	
 	<!-- monitor -->
-	<select name=monitor onChange=''>
+	<select name=monitor onChange='document.frm.submit();'>
 		<option value="0" selected>[Selecione um monitor]</option>
 	</select>
 </form>

@@ -27,6 +27,17 @@ def index(request):
 	produtos_alarmes = json.encode_json(produtos_alarmes)
 	alarmes_monitores = json.encode_json(alarmes_monitores)
 
+	#pego atributos do get
+	produto_id = request.GET.get('produto',None)
+	alarme_id = request.GET.get('alarme',None)
+	monitor_id = request.GET.get('monitor',None)
+	frm2 = False
+	if (produto_id and alarme_id and monitor_id):
+		frm2 = True
+		print 'Produto id: %s' % produto_id
+		print 'Alarme id: %s' % alarme_id
+		print 'Monitor id: %s' % monitor_id
+	
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, { 
 		'produtos': produtos,
 		'produtos_alarmes' : produtos_alarmes,
