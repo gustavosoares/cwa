@@ -34,3 +34,15 @@ class ProdutoRepository(Singleton):
 	def limpa_produto_por_id(id):
 		"""marca o produto com prd_status = X"""
 		Produto.objects.filter(prd_id=id).update(prd_status='X')
+	
+	@staticmethod
+	def get_produto_alarme_xref():
+		produtos = ProdutoRepository.get_produtos()
+		alarmes = AlarmeRepository.get_alarmes()
+		produtos_alarmes = {}
+		for alarme in alarmes:
+			l = produtos_alarmes.get(alarme.prd_id,[])
+			l.append({'alm_nome' : alarme.alm_nome, 'alm_id' : alarme.alm_id})
+			produtos_alarmes[alarme.prd_id] = l
+
+		return produtos_alarmes

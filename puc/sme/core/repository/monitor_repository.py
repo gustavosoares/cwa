@@ -3,8 +3,8 @@ from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
 from puc.core.singleton import Singleton
-from puc.sme.core.repository.alarme_repository import AlarmeRepository
-from puc.sme.core.repository.produto_repository import ProdutoRepository
+from puc.sme.core.repository.alarme_repository import *
+from puc.sme.core.repository.produto_repository import *
 
 class MonitorRepository(Singleton):
 	@staticmethod

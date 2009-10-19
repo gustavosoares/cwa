@@ -2,6 +2,7 @@
 from django.conf import settings
 from puc.core.singleton import Singleton
 from puc.sme.models import Alarme
+from puc.sme.core.repository.monitor_repository import *
 
 class AlarmeRepository(Singleton):
 	@staticmethod
@@ -23,4 +24,15 @@ class AlarmeRepository(Singleton):
 	def limpa_alarme_por_id(id):
 		"""marca o alarme com alm_status = X"""
 		Alarme.objects.filter(alm_id=id).update(alm_status='X')
-		
+
+	@staticmethod
+	def get_alarme_monitor_xref():
+		alarmes = AlarmeRepository.get_alarmes()
+		monitores = MonitorRepository.get_monitores()
+		alarmes_monitores = {}
+		for monitor in monitores:
+			l = alarmes_monitores.get(monitor.alm_id,[])
+			l.append({'mon_nome' : monitor.mon_nome, 'mon_id' : monitor.mon_id})
+			alarmes_monitores[monitor.alm_id] = l
+			
+		return alarmes_monitores

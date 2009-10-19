@@ -21,22 +21,9 @@ def index(request):
 	"""Pagina princial da aplicacao por gerar relatorio"""
 	##return HttpResponse("relatorio")
 	produtos = ProdutoRepository.get_produtos()
-	alarmes = AlarmeRepository.get_alarmes()
-	produtos_alarmes = {}
-	for alarme in alarmes:
-		l = produtos_alarmes.get(alarme.prd_id,[])
-		l.append({'alm_nome' : alarme.alm_nome, 'alm_id' : alarme.alm_id})
-		produtos_alarmes[alarme.prd_id] = l
-		
-	monitores = MonitorRepository.get_monitores()
-	alarmes_monitores = {}
-	for monitor in monitores:
-		l = alarmes_monitores.get(monitor.alm_id,[])
-		l.append({'mon_nome' : monitor.mon_nome, 'mon_id' : monitor.mon_id})
-		alarmes_monitores[monitor.alm_id] = l
-	
-	alarmes = None
-	monitores = None
+	produtos_alarmes = ProdutoRepository.get_produto_alarme_xref()
+	alarmes_monitores = AlarmeRepository.get_alarme_monitor_xref()
+
 	produtos_alarmes = json.encode_json(produtos_alarmes)
 	alarmes_monitores = json.encode_json(alarmes_monitores)
 
