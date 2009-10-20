@@ -60,9 +60,9 @@
 	<span>Produto/Alarme/Monitor: </span><br>
 	<!-- produto -->
 	<select name=produto onChange='adicionaAlarmes(this.options[this.selectedIndex].value);'>
-		<option value="0" selected>[Selecione um produto]</option>
+		<option value="0">[Selecione um produto]</option>
 		{% for produto in produtos %}
-			<option id="prd_{{ produto.prd_id }}" value="{{ produto.prd_id }}">{{ produto.prd_nome }}</option>
+			<option id="prd_{{ produto.prd_id }}" value="{{ produto.prd_id }}" {% ifequal produto.prd_id|safe request.POST.produto|safe %} selected{% endifequal %}>{{ produto.prd_nome }}</option>
 		{% endfor %}
 	</select>
 	
@@ -71,7 +71,7 @@
 		{% if alarmes %}
 			<option value="0">[Selecione um alarme]</option>
 			{% for alarme in alarmes %}
-					<option id="alm_{{ alarme.prd_id }}" value="{{ alarme.alm_id }}">{{ alarme.alm_nome }}</option>
+					<option id="alm_{{ alarme.prd_id }}" value="{{ alarme.alm_id }}" {% ifequal alarme.alm_id|safe request.POST.alarme|safe %} selected{% endifequal %}>{{ alarme.alm_nome }}</option>
 			{% endfor %}
 		{% else %}
 				<option value="0" selected>[Selecione um alarme]</option>
@@ -83,7 +83,7 @@
 		{% if monitores %}
 			<option value="0">[Selecione um monitor]</option>
 			{% for monitor in monitores %}
-				<option id="mon_{{ monitor.mon_id }}" value="{{ monitor.mon_id }}">{{ monitor.mon_nome }}</option>
+				<option id="mon_{{ monitor.mon_id }}" value="{{ monitor.mon_id }}" {% ifequal monitor.mon_id|safe request.POST.monitor|safe %} selected{% endifequal %}>{{ monitor.mon_nome }}</option>
 			{% endfor %}
 		{% else %}
 			<option value="0" selected>[Selecione um monitor]</option>
