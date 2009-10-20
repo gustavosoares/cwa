@@ -97,11 +97,11 @@
 	<table>
 	<tr>
 		<th><label for="id_begin_date">Início:</label></th>
-		<td><input id="id_data_inicio" type="text" class="vDateField" name="data_inicio" size="10" /></td>
+		<td><input id="id_data_inicio" type="text" class="vDateField" name="data_inicio" size="10" value="{{request.POST.data_inicio}}"/></td>
 	</tr>
 	<tr>
 		<th><label for="id_end_date">Término:</label></th>
-		<td><input id="id_data_fim" type="text" class="vDateField" name="data_fim" size="10" /></td>
+		<td><input id="id_data_fim" type="text" class="vDateField" name="data_fim" size="10" value="{{request.POST.data_fim}}"/></td>
 	</tr>
 	</table>
 	<input type="submit" value="gerar relatório">

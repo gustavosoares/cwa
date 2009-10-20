@@ -54,11 +54,8 @@ def index(request):
 			monitores = monitor_repository.get_monitor_por_alarme_id(alarme_id)
 
 		#se todos os campos preenchidos habilito a geracao do relatorio
-		if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0):
+		if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0 and len(data_inicio_str) > 0 and len(data_fim_str) > 0):
 			gerar_relatorio = True
-			print 'Produto id: %s' % produto_id
-			print 'Alarme id: %s' % alarme_id
-			print 'Monitor id: %s' % monitor_id
 			erro = False
 
 	
