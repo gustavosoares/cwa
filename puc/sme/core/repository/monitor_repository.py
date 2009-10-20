@@ -3,41 +3,30 @@ from puc.core.singleton import Singleton
 from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
-from puc.sme.core.repository.produto_repository import *
-from puc.sme.core.repository.alarme_repository import *
+
 
 class MonitorRepository(Singleton):
-	
-	def __init__(self):
-		self.x = 1
-		
-	@staticmethod
-	def get_monitores():
+	def get_monitores(self):
 		"""retorna todos os monitores"""
 		return Monitor.objects.all()
-	
-	@staticmethod
-	def get_monitor_alarmando_por_alarme_id(id):
+
+	def get_monitor_alarmando_por_alarme_id(self,id):
 		"""busca um monitor alarmando por alarme id"""
 		return Monitor.objects.exclude(mon_status='X').filter(alm_id=id)
 
-	@staticmethod
-	def get_monitor_por_alarme_id(id):
+	def get_monitor_por_alarme_id(self,id):
 		"""busca um monitores por alarme id"""
 		return Monitor.objects.filter(alm_id=id)
 
-	@staticmethod
-	def get_monitor_por_id(id):
+	def get_monitor_por_id(self,id):
 		"""busca um monitor por id"""
 		return Monitor.objects.get(mon_id=id)
 
-	@staticmethod
-	def limpa_monitor_por_id(id):
+	def limpa_monitor_por_id(self,id):
 		"""marca o monitor com nenhum alarme"""
 		Monitor.objects.filter(mon_id=id).update(mon_status='X')
 
-	@staticmethod		
-	def get_colunas_por_monitor_id(id):
+	def get_colunas_por_monitor_id(self,id):
 		"""retorna duas lista de colunas (desc e nome) de um monitor id"""
 		sql = """
 		select mon_id, col_cabecalho, col_nomefisico, col_tipo, col_ordem
@@ -56,12 +45,11 @@ class MonitorRepository(Singleton):
 
 		return colunas_desc, colunas_nome
 
-	@staticmethod
-	def get_eventos_por_monitor_id(id):
+	def get_eventos_por_monitor_id(self,id):
 		"""obtem lista eventos por monitor id"""
-		monitor = MonitorRepository.get_monitor_por_id(id)
-		colunas_desc, colunas_nome = MonitorRepository.get_colunas_por_monitor_id(id)
-	
+		monitor = self.get_monitor_por_id(id)
+		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
+
 		#monto a string para ser usado no select
 		aux = ''
 		aux_size = len(colunas_nome)
@@ -86,8 +74,7 @@ class MonitorRepository(Singleton):
 		rows = db.rows_fetchall()
 		return rows, monitor, colunas_desc, colunas_nome
 
-	@staticmethod
-	def fechar_evento(id, monitor, alarme, produto):
+	def fechar_evento(self, id, monitor, alarme, produto):
 		"""fecha um evento"""
 		sql = """
 		UPDATE %s
@@ -106,27 +93,27 @@ class MonitorRepository(Singleton):
 		""" % (monitor.mon_tabela, monitor.mon_id)
 		db.execute(sql)
 		db.rows_fetchall()
+		#Imports necessarios das classes
+		from puc.sme.core.repository.alarme_repository import AlarmeRepository
+		from puc.sme.core.repository.produto_repository import ProdutoRepository
 		if (db.rows_count() == 0):
 			#atualizo mon_status na tabela do monitor
 			print '###limpando monitor...'
-			limpa_monitor_por_id(monitor.mon_id)
-	
+			self.limpa_monitor_por_id(monitor.mon_id)
+
 		#algum alm_id alarmando na tabela monitor?
-		if (len(MonitorRepository.get_monitor_alarmando_por_alarme_id(alarme.alm_id)) == 0):
+		if (len(self.get_monitor_alarmando_por_alarme_id(alarme.alm_id)) == 0):
 			print '###limpando alarme...'
 			#atualizo alm_status na tabela do monitor
-			AlarmeRepository.limpa_alarme_por_id(alarme.alm_id)
-	
-		#algum prd_id alarmando na tabela alarme?
-		from puc.sme.core.repository.produto_repository import *
-		from puc.sme.core.repository.alarme_repository import *
-		if (len(AlarmeRepository.get_alarmes_alarmando_por_produto_id(produto.prd_id)) == 0):
-			print '###limpando produto...'
-			ProdutoRepository.limpa_produto_por_id(produto.prd_id)
+			AlarmeRepository().limpa_alarme_por_id(alarme.alm_id)
 
-	@staticmethod
-	def fechar_todos_eventos(monitor, alarme, produto):
+		#algum prd_id alarmando na tabela alarme?
+		if (len(AlarmeRepository().get_alarmes_alarmando_por_produto_id(produto.prd_id)) == 0):
+			print '###limpando produto...'
+			ProdutoRepository().limpa_produto_por_id(produto.prd_id)
+
+	def fechar_todos_eventos(self, monitor, alarme, produto):
 		"""docstring for fechar_todos_eventos"""
 		pass
-	
-	
+
+

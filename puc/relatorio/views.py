@@ -16,15 +16,18 @@ from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
 from puc.core import json
 
+produto_repository = ProdutoRepository()
+alarme_repository = AlarmeRepository()
 
 def index(request):
 	"""Pagina princial da aplicacao por gerar relatorio"""
 	##return HttpResponse("relatorio")
-	produtos = ProdutoRepository.get_produtos()
+
+	produtos = produto_repository.get_produtos()
 	alarmes = None
 	monitores = None
-	produtos_alarmes = ProdutoRepository.get_produto_alarme_xref()
-	alarmes_monitores = AlarmeRepository.get_alarme_monitor_xref()
+	produtos_alarmes = produto_repository.get_produto_alarme_xref()
+	alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
 
 	produtos_alarmes = json.encode_json(produtos_alarmes)
 	alarmes_monitores = json.encode_json(alarmes_monitores)
@@ -41,7 +44,7 @@ def index(request):
 	erro = False
 	frm2 = False
 	if (produto_id):
-		ProdutoRepository.get_produto_id(produto_id)
+		produto_repository.get_produto_id(produto_id)
 	if (alarme_id):
 		pass
 	if (monitor_id):
