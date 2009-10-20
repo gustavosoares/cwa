@@ -48,6 +48,8 @@ class MonitorRepository(Singleton):
 	def get_eventos_por_monitor_id(self,id):
 		"""obtem lista eventos por monitor id"""
 		monitor = self.get_monitor_por_id(id)
+		#colunas_desc: descricao do nome da coluna
+		#colunas_nome: nome fisico da coluna no banco de dados
 		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
 
 		#monto a string para ser usado no select
@@ -73,6 +75,37 @@ class MonitorRepository(Singleton):
 		db.execute(sql)
 		rows = db.rows_fetchall()
 		return rows, monitor, colunas_desc, colunas_nome
+		
+	def get_eventos_por_periodo_por_monitor_id(self,id,data_inicio_str,data_fim_str):
+		"""obtem lista eventos em um periodo por monitor id"""
+		monitor = self.get_monitor_por_id(id)
+		#colunas_desc: descricao do nome da coluna
+		#colunas_nome: nome fisico da coluna no banco de dados
+		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
+
+		#monto a string com os nomes das colunas para ser usado no select
+		aux = ''
+		aux_size = len(colunas_nome)
+		count = 1
+		for coluna in colunas_nome:
+			if (count == aux_size):
+				aux = aux + coluna
+			else:
+				aux = aux + coluna + ', '
+			count = count + 1
+
+		sql = """
+		select pad_id, pad_tipoalarme, %s
+		from %s
+		where mon_id = %s
+		AND pad_datahora  >= '%s 00:00:00'
+		AND pad_datahora <= '%s 23:59:59'
+		ORDER BY pad_datahora DESC LIMIT 2000
+		""" % (aux, monitor.mon_tabela, monitor.mon_id, data_inicio_str, data_fim_str)
+		db = Database()
+		db.execute(sql)
+		rows = db.rows_fetchall()
+		return rows, monitor, colunas_desc, colunas_nome		
 
 	def fechar_evento(self, id, monitor, alarme, produto):
 		"""fecha um evento"""
