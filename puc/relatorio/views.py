@@ -18,6 +18,7 @@ from puc.core import json
 
 produto_repository = ProdutoRepository()
 alarme_repository = AlarmeRepository()
+monitor_repository = MonitorRepository()
 
 def index(request):
 	"""Pagina princial da aplicacao por gerar relatorio"""
@@ -32,7 +33,6 @@ def index(request):
 	produtos_alarmes = json.encode_json(produtos_alarmes)
 	alarmes_monitores = json.encode_json(alarmes_monitores)
 
-
 	#pego atributos do get
 	produto_id = request.POST.get('produto',None)
 	alarme_id = request.POST.get('alarme',None)
@@ -44,11 +44,10 @@ def index(request):
 	erro = False
 	frm2 = False
 	if (produto_id):
-		produto_repository.get_produto_id(produto_id)
+		alarmes = alarme_repository.get_alarmes_por_produto_id(produto_id)
 	if (alarme_id):
-		pass
-	if (monitor_id):
-		pass
+		monitores = monitor_repository.get_monitor_por_alarme_id(alarme_id)
+
 		
 	if (produto_id and alarme_id and monitor_id):
 		frm2 = True
@@ -60,6 +59,11 @@ def index(request):
 	
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, { 
 		'produtos': produtos,
+		'alarmes' : alarmes,
+		'monitores' : monitores,
+		'erro' : erro,
+		'frm2' : frm2,
+		'request' : request,
 		'produtos_alarmes' : produtos_alarmes,
 		'alarmes_monitores' : alarmes_monitores})
 

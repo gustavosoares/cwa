@@ -68,13 +68,26 @@
 	
 	<!-- alarme -->
 	<select name=alarme onChange='adicionaMonitores(this.options[this.selectedIndex].value);'>
-		<option value="0" selected>[Selecione um alarme]</option>
+		{% if alarmes %}
+			<option value="0">[Selecione um alarme]</option>
+			{% for alarme in alarmes %}
+					<option id="alm_{{ alarme.prd_id }}" value="{{ alarme.alm_id }}">{{ alarme.alm_nome }}</option>
+			{% endfor %}
+		{% else %}
+				<option value="0" selected>[Selecione um alarme]</option>
+		{% endif %}
 	</select>
-	
 	<!-- monitor -->
 	<!--select name=monitor onChange='document.frm.submit();'-->
 	<select name=monitor onChange=''>
-		<option value="0" selected>[Selecione um monitor]</option>
+		{% if monitores %}
+			<option value="0">[Selecione um monitor]</option>
+			{% for monitor in monitores %}
+				<option id="mon_{{ monitor.mon_id }}" value="{{ monitor.mon_id }}">{{ monitor.mon_nome }}</option>
+			{% endfor %}
+		{% else %}
+			<option value="0" selected>[Selecione um monitor]</option>
+		{% endif %}
 	</select>
 	<!-- Periodo -->
 	<h3>Período</h3>
@@ -92,12 +105,24 @@
 </form>
 </br>
 <div id="colunas">div colunas</div>
+{% if frm2 %}
+<h1>frm2!!!!</h1>
+<h1>{{ request.POST.produto }}</h1>
+<h1>{{ request.POST.alarme }}</h1>
+<h1>{{ request.POST.monitor }}</h1>
+{% endif %}
 <div id="relatorio">relatorio div</div>
 </div>
 
 {% endblock %}
 
 
-
+./core/editarAtivo.jsp:                                                 <option value="1" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("1")) { %> selected <% } %> >Estoque</option>
+./core/editarAtivo.jsp:                                                 <option value="2" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("2")) { %> selected <% } %> >Manuten###</option>
+./core/editarAtivo.jsp:                                                 <option value="3" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("3")) { %> selected <% } %> >Produ###</option>
+./core/editarAtivo.jsp:                                                 <option value="1" <% if (String.valueOf(ativo.getTipo().intValue()).equals("1")) { %> selected <% } %> >Servidor</option>
+./core/editarAtivo.jsp:                                                 <option value="2" <% if (String.valueOf(ativo.getTipo().intValue()).equals("2")) { %> selected <% } %> >Aplica###</option>
+./core/editarAtivo.jsp:                                                 <option value="3" <% if (String.valueOf(ativo.getTipo().intValue()).equals("3")) { %> selected <% } %> >Roteador</option>
+./monitoracao/removerMonitoracao.jsp:                           <option value="<%= usuario.getId().intValue() %>" <% if (String.valueOf(usuario.getId().intValue()).equalsIgnoreCas
 
 
