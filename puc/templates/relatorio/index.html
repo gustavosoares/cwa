@@ -22,7 +22,7 @@
 
 #colunas {
 	margin: 1px auto;
-	border: 1px solid;
+	border: 0px solid;
 	text-align: center;
 }
 
@@ -30,6 +30,7 @@
 	margin: 1px auto;
 	border: 1px solid;
 	text-align: center;
+	background: WhiteSmoke;
 }
 </style>
 
@@ -107,14 +108,10 @@
 	<input type="submit" value="gerar relatório">
 </form>
 </br>
-<div id="colunas">div colunas
-</div>
-	<div id="relatorio">relatorio div
+<div id="colunas"></div>
+	<div id="relatorio">
 		{% if gerar_relatorio %}
-		<h1>gerar relatorio</h1>
-		<h1>{{ request.POST.produto }}</h1>
-		<h1>{{ request.POST.alarme }}</h1>
-		<h1>{{ request.POST.monitor }}</h1>
+			{{ html_relatorio|safe }}
 		{% endif %}
 	</div>
 </div>

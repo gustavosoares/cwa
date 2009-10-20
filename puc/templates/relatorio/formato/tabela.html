@@ -1,0 +1,32 @@
+
+<center>
+<table border="2">
+	<tr>
+		<td colspan="{{colunas_desc|length|add:'1'}}">
+			<center><h3>{{produto.prd_nome}}>{{alarme.alm_nome}}>{{monitor.mon_nome}}</h3></br>
+	</tr>
+	<tr>
+		<th><center>!</center></th>
+	{% for coluna in colunas_desc %}
+		<th><center>{{coluna}}</center></th>
+	{% endfor %}
+	</tr>
+	{% for evento in eventos %}
+		{% ifequal evento.tipo 'W' %}
+			<tr bgcolor='{{ colors.warning }}'>
+		{% endifequal %}
+		{% ifequal evento.tipo 'A' %}
+			<tr bgcolor='{{ colors.alarm }}'>
+		{% endifequal %}
+			<td bgcolor='white'></td>
+			<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
+			<td class="sme2-evento">{{evento.servidor}}</td>
+			{% for dado in evento.get_dados %}
+				<td class="sme2-evento">{{dado}}</td>
+			{% endfor %}
+		<tr>
+	{% endfor %}
+</table>
+</center>
+
+
