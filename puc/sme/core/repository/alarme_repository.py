@@ -1,6 +1,6 @@
 # coding=utf-8
-from django.conf import settings
 from puc.core.singleton import Singleton
+from django.conf import settings
 from puc.sme.models import Alarme
 from puc.sme.core.repository.monitor_repository import *
 
@@ -11,9 +11,14 @@ class AlarmeRepository(Singleton):
 		return Alarme.objects.all()
 	
 	@staticmethod
+	def get_alarmes_alarmando_por_produto_id(id):
+		"""retorna todos os alarmes alarmando de um determinado produto"""
+		return Alarme.objects.exclude(alm_status='X').filter(prd_id=id)
+
+	@staticmethod
 	def get_alarmes_por_produto_id(id):
 		"""retorna todos os alarmes de um determinado produto"""
-		return Alarme.objects.exclude(alm_status='X').filter(prd_id=id)
+		return Alarme.objects.filter(prd_id=id)
 
 	@staticmethod
 	def get_alarme_por_id(id):

@@ -1,12 +1,16 @@
 # coding=utf-8
+from puc.core.singleton import Singleton
 from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
-from puc.core.singleton import Singleton
-from puc.sme.core.repository.alarme_repository import *
 from puc.sme.core.repository.produto_repository import *
+from puc.sme.core.repository.alarme_repository import *
 
 class MonitorRepository(Singleton):
+	
+	def __init__(self):
+		self.x = 1
+		
 	@staticmethod
 	def get_monitores():
 		"""retorna todos os monitores"""
@@ -16,6 +20,11 @@ class MonitorRepository(Singleton):
 	def get_monitor_alarmando_por_alarme_id(id):
 		"""busca um monitor alarmando por alarme id"""
 		return Monitor.objects.exclude(mon_status='X').filter(alm_id=id)
+
+	@staticmethod
+	def get_monitor_por_alarme_id(id):
+		"""busca um monitores por alarme id"""
+		return Monitor.objects.filter(alm_id=id)
 
 	@staticmethod
 	def get_monitor_por_id(id):
@@ -109,7 +118,9 @@ class MonitorRepository(Singleton):
 			AlarmeRepository.limpa_alarme_por_id(alarme.alm_id)
 	
 		#algum prd_id alarmando na tabela alarme?
-		if (len(AlarmeRepository.get_alarmes_por_produto_id(produto.prd_id)) == 0):
+		from puc.sme.core.repository.produto_repository import *
+		from puc.sme.core.repository.alarme_repository import *
+		if (len(AlarmeRepository.get_alarmes_alarmando_por_produto_id(produto.prd_id)) == 0):
 			print '###limpando produto...'
 			ProdutoRepository.limpa_produto_por_id(produto.prd_id)
 

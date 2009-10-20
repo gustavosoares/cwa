@@ -1,6 +1,6 @@
 # coding=utf-8
-from django.conf import settings
 from puc.core.singleton import Singleton
+from django.conf import settings
 from puc.sme.models import Produto
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
 
@@ -22,11 +22,11 @@ class ProdutoRepository(Singleton):
 
 	@staticmethod	
 	def get_produtos_e_seus_alarmes():
-		"""etorna produtos alarmando e seus alarmes"""
+		"""retorna produtos alarmando e seus alarmes"""
 		produtos_alarmes = []
 		produtos = ProdutoRepository.get_produtos_alarmando()
 		for produto in produtos:
-			alarmes = AlarmeRepository.get_alarmes_por_produto_id(produto.prd_id)
+			alarmes = AlarmeRepository.get_alarmes_alarmando_por_produto_id(produto.prd_id)
 			produtos_alarmes.append({'produto' : produto, 'alarmes' : alarmes})
 		return produtos_alarmes
 

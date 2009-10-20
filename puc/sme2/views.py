@@ -17,6 +17,9 @@ from puc.sme.core import domain
 
 from puc.sme2.core import util
 
+def index(request):
+	return listar_produto_alarme(request)
+	
 def listar_produto(request):
 	"""retorna a listagem dos produtos no sme2"""
 	return HttpResponse("<h1>página velha</h1>")
@@ -24,6 +27,8 @@ def listar_produto(request):
 def listar_produto_alarme(request):
 	"""controller: listagem dos produtos e os alarmes"""
 	produtos = ProdutoRepository.get_produtos_alarmando()
+	print produtos
+	print '-' * 50
 	produtos_alarmes = ProdutoRepository.get_produtos_e_seus_alarmes()
 	print produtos_alarmes
 	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME, 
