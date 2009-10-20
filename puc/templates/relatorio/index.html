@@ -56,6 +56,9 @@
 {% block content %}
 <div id="conteudo">
 <center><h2>Relatório</h2></br></center>
+{% if erro %}
+<center><h3><font color=red>Por favor, preenche todos os campos</font></h3></center>
+{% endif %}
 <form name='frm' method=POST action=''>
 	<span>Produto/Alarme/Monitor: </span><br>
 	<!-- produto -->
@@ -107,8 +110,8 @@
 <div id="colunas">div colunas
 </div>
 	<div id="relatorio">relatorio div
-		{% if frm2 %}
-		<h1>frm2!!!!</h1>
+		{% if gerar_relatorio %}
+		<h1>gerar relatorio</h1>
 		<h1>{{ request.POST.produto }}</h1>
 		<h1>{{ request.POST.alarme }}</h1>
 		<h1>{{ request.POST.monitor }}</h1>
@@ -117,14 +120,4 @@
 </div>
 
 {% endblock %}
-
-
-./core/editarAtivo.jsp:                                                 <option value="1" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("1")) { %> selected <% } %> >Estoque</option>
-./core/editarAtivo.jsp:                                                 <option value="2" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("2")) { %> selected <% } %> >Manuten###</option>
-./core/editarAtivo.jsp:                                                 <option value="3" <% if (String.valueOf(ativo.getLocalizacaoId().intValue()).equals("3")) { %> selected <% } %> >Produ###</option>
-./core/editarAtivo.jsp:                                                 <option value="1" <% if (String.valueOf(ativo.getTipo().intValue()).equals("1")) { %> selected <% } %> >Servidor</option>
-./core/editarAtivo.jsp:                                                 <option value="2" <% if (String.valueOf(ativo.getTipo().intValue()).equals("2")) { %> selected <% } %> >Aplica###</option>
-./core/editarAtivo.jsp:                                                 <option value="3" <% if (String.valueOf(ativo.getTipo().intValue()).equals("3")) { %> selected <% } %> >Roteador</option>
-./monitoracao/removerMonitoracao.jsp:                           <option value="<%= usuario.getId().intValue() %>" <% if (String.valueOf(usuario.getId().intValue()).equalsIgnoreCas
-
 
