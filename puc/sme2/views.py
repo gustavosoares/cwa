@@ -57,13 +57,11 @@ def listar_monitor_do_alarme(request, alm_id=None):
 
 def ver_evento(request, mon_id=None):
 	"""visualiza os eventos do monitor passado como parametro	"""
-	rows, monitor, colunas_desc, colunas_nome = monitor_repository.get_eventos_por_monitor_id(mon_id)
+	eventos = monitor_repository.get_eventos_por_monitor_id(mon_id)
+	monitor = monitor_repository.get_monitor_por_id(mon_id)
 	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 	produto = produto_repository.get_produto_por_id(alarme.prd_id)
-	#crio array de eventos
-	eventos = []
-	for row in rows:
-		eventos.append(domain.Evento(monitor, alarme, row))
+	colunas_desc = eventos[0].colunas_desc
 
 	return render_to_response(templates.TEMPLATE_VER_EVENTO, 
 					{ 'monitor' : monitor,

@@ -65,14 +65,11 @@ def index(request):
 			erro = False
 
 			#obtenho os eventos para o monitor em questao no intervalo definido
-			#TODO: Alterar o metodo evento para ja retornar um array de evento
-			rows, monitor, colunas_desc, colunas_nome = monitor_repository.get_eventos_por_periodo_por_monitor_id(monitor_id, data_inicio_str, data_fim_str)
+			eventos = monitor_repository.get_eventos_por_periodo_por_monitor_id(monitor_id, data_inicio_str, data_fim_str)
+			monitor = monitor_repository.get_monitor_por_id(monitor_id)
 			alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 			produto = produto_repository.get_produto_por_id(alarme.prd_id)
-			#crio array de eventos
-			eventos = []
-			for row in rows:
-				eventos.append(domain.Evento(monitor, alarme, row))
+			colunas_desc = eventos[0].colunas_desc
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela

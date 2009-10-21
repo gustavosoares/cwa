@@ -3,7 +3,7 @@ from puc.core.singleton import Singleton
 from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
-
+from puc.sme.core import domain
 
 class MonitorRepository(Singleton):
 	def get_monitores(self):
@@ -48,6 +48,8 @@ class MonitorRepository(Singleton):
 	def get_eventos_por_monitor_id(self,id):
 		"""obtem lista eventos por monitor id"""
 		monitor = self.get_monitor_por_id(id)
+		from puc.sme.core.repository.alarme_repository import AlarmeRepository
+		alarme = AlarmeRepository().get_alarme_por_id(monitor.alm_id)
 		#colunas_desc: descricao do nome da coluna
 		#colunas_nome: nome fisico da coluna no banco de dados
 		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
@@ -74,11 +76,18 @@ class MonitorRepository(Singleton):
 		db = Database()
 		db.execute(sql)
 		rows = db.rows_fetchall()
-		return rows, monitor, colunas_desc, colunas_nome
+		
+		eventos = []
+		for row in rows:
+			eventos.append(domain.Evento(monitor, alarme, row, colunas_desc))
+			
+		return eventos
 		
 	def get_eventos_por_periodo_por_monitor_id(self,id,data_inicio_str,data_fim_str):
 		"""obtem lista eventos em um periodo por monitor id"""
 		monitor = self.get_monitor_por_id(id)
+		from puc.sme.core.repository.alarme_repository import AlarmeRepository
+		alarme = AlarmeRepository().get_alarme_por_id(monitor.alm_id)
 		#colunas_desc: descricao do nome da coluna
 		#colunas_nome: nome fisico da coluna no banco de dados
 		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
@@ -105,7 +114,13 @@ class MonitorRepository(Singleton):
 		db = Database()
 		db.execute(sql)
 		rows = db.rows_fetchall()
-		return rows, monitor, colunas_desc, colunas_nome		
+		
+		eventos = []
+		for row in rows:
+			eventos.append(domain.Evento(monitor, alarme, row, colunas_desc))
+			
+		return eventos
+
 
 	def fechar_evento(self, id, monitor, alarme, produto):
 		"""fecha um evento"""
