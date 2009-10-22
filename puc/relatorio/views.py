@@ -29,9 +29,9 @@ def index(request):
 	"""Pagina principal da aplicacao por gerar relatorio"""
 	#declaracao de variaveis passadas para o template
 	produtos = produto_repository.get_produtos()
-	html_relatorio = None
 	alarmes = None
 	monitores = None
+	relatorio = None
 	
 	produtos_alarmes = produto_repository.get_produto_alarme_xref()
 	alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
@@ -72,12 +72,12 @@ def index(request):
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela
-			rel = factory.RelatorioFactory().get_relatorio('tabular')
-			rel.produto = produto
-			rel.alarme = alarme
-			rel.monitor = monitor
-			rel.eventos = eventos
-			rel.descricao_colunas = colunas_desc
+			relatorio = factory.RelatorioFactory().get_relatorio('tabular')
+			relatorio.produto = produto
+			relatorio.alarme = alarme
+			relatorio.monitor = monitor
+			relatorio.eventos = eventos
+			relatorio.descricao_colunas = colunas_desc
 
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, {
 		'produtos_alarmes' : produtos_alarmes,
@@ -86,6 +86,6 @@ def index(request):
 		'alarmes' : alarmes,
 		'monitores' : monitores,
 		'erro' : erro,
-		'relatorio' : rel,
+		'relatorio' : relatorio,
 		'request' : request})
 
