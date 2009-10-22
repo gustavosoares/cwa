@@ -73,7 +73,7 @@ class Grafico(object):
 		self.width = '400'
 		self.height = '250'
 		self.name = None
-		self.type = type
+		self.type = None
 		self.bgcolor = '#666666'
 		self.library_path = '/media/swf/charts_library'
 		self.src = "/media/swf/charts.swf"
@@ -84,6 +84,13 @@ class Grafico(object):
 		self.pontos = [] #Ex.: pontos = [{'x' = '2','y' = '4'}]
 		self.xml = None
 
+	def add_ponto(self, ponto):
+		#TODO: assert para ver se ponto é um dict
+		x = ponto.get('x', None)
+		y = ponto.get('y', None)
+		assert x != None, "o formato do ponto passado é ponto = {'x' = '2','y' = '4'}"
+		assert y != None, "o formato do ponto passado é ponto = {'x' = '2','y' = '4'}"
+		self.pontos.append(ponto)
 	
 	def xml(self):
 		"""retorna o xml para o grafico"""
@@ -93,7 +100,7 @@ class Grafico(object):
 	def html(self):
 		"""retorna a tag html embed do grafico"""
 		
-		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s" 
+		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_data=%s" 
 		quality="high" bgcolor="%s" WIDTH="%s" HEIGHT="%s" NAME="%s" allowScriptAccess="sameDomain" 
 		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque" 
 		TYPE="%s" 
@@ -107,10 +114,11 @@ class GraficoLinha(Grafico):
 	"""grafico de linha"""
 	def __init__(self):
 		Grafico.__init__(self)
-		pass
+		self.type = 'line'
+
 		
 class GraficoBarra(Grafico):
 	"""grafico de linha"""
 	def __init__(self):
 		Grafico.__init__(self)
-		pass
+		self.type = 'bar'
