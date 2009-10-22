@@ -14,17 +14,17 @@
 <center>
 <table border="2">
 	<tr>
-		<td colspan="{{colunas_desc|length|add:'1'}}">
-			<center><h3>{{produto.prd_nome}}>{{alarme.alm_nome}}>{{monitor.mon_nome}}</h3></br>
-			<h3><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>Voltar</a></h3></center></td>
+		<td colspan="{{relatorio.descricao_colunas|length|add:'1'}}">
+			<center><h3>{{relatorio.produto.prd_nome}}>{{relatorio.alarme.alm_nome}}>{{relatorio.monitor.mon_nome}}</h3></br>
+			<h3><a href='/sme2/monitor/alarme/{{relatorio.alarme.alm_id}}'>Voltar</a></h3></center></td>
 	</tr>
 	<tr>
 		<th><center>!</center></th>
-	{% for coluna in colunas_desc %}
+	{% for coluna in relatorio.descricao_colunas %}
 		<th><center>{{coluna}}</center></th>
 	{% endfor %}
 	</tr>
-	{% for evento in eventos %}
+	{% for evento in relatorio.eventos %}
 		{% ifequal evento.tipo 'W' %}
 			<tr bgcolor='{{ colors.warning }}'>
 		{% endifequal %}

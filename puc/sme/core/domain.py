@@ -5,7 +5,7 @@ class Evento():
 	def __init__(self, monitor, alarme, row, colunas_desc):
 		self.monitor = monitor
 		self.alarme = alarme
-		self.colunas_desc = colunas_desc #array com a descriacao das colunas
+		self.descricao_colunas = colunas_desc #array com a descriacao das colunas
 		self.row = row
 		self.id = row[0] #coluna pad_id no banco de dados
 		self.tipo = row[1] #tipo do evento: alarme ou warning

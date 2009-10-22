@@ -110,8 +110,8 @@
 </br>
 <div id="colunas"></div>
 	<div id="relatorio">
-		{% if gerar_relatorio %}
-			{{ html_relatorio|safe }}
+		{% if relatorio %}
+			{{ relatorio.get_html|safe }}
 		{% endif %}
 	</div>
 </div>

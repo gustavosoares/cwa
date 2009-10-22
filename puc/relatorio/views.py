@@ -14,6 +14,8 @@ from puc.sme.models import Produto, Alarme, Monitor
 from puc.sme.core.repository.produto_repository import ProdutoRepository
 from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
+from puc.relatorio.core import domain
+from puc.relatorio.core import factory
 from puc.core import json
 from puc.sme.core import domain
 from puc.sme2.core import util
@@ -31,7 +33,6 @@ def index(request):
 	alarmes = None
 	monitores = None
 	
-	
 	produtos_alarmes = produto_repository.get_produto_alarme_xref()
 	alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
 	#gero objeto json para ser usado no carregamento da lista
@@ -46,7 +47,6 @@ def index(request):
 	data_fim_str = request.POST.get('data_fim',None)
 	print 'POST: %s' % request.POST
 	
-	gerar_relatorio = False
 	erro = True
 	#request GET
 	if request.method == 'GET':
@@ -59,44 +59,33 @@ def index(request):
 		if (alarme_id):
 			monitores = monitor_repository.get_monitor_por_alarme_id(alarme_id)
 
-		#se todos os campos preenchidos habilito a geracao do relatorio
+		#se todos os campos preenchidos gero o relatorio
 		if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0 and len(data_inicio_str) > 0 and len(data_fim_str) > 0):
-			gerar_relatorio = True
 			erro = False
 
 			#obtenho os eventos para o monitor em questao no intervalo definido
-			eventos = monitor_repository.get_eventos_por_periodo_por_monitor_id(monitor_id, data_inicio_str, data_fim_str)
 			monitor = monitor_repository.get_monitor_por_id(monitor_id)
 			alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 			produto = produto_repository.get_produto_por_id(alarme.prd_id)
-			colunas_desc = eventos[0].colunas_desc
+			eventos = monitor_repository.get_eventos_por_periodo_por_monitor_id(monitor_id, data_inicio_str, data_fim_str)
+			colunas_desc = eventos[0].descricao_colunas
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela
-			html_relatorio = render_to_string('relatorio/formato/tabela.html', {		
-			'produto' : produto,
-			'alarme' : alarme,
-			'monitor' : monitor,
-			'colunas_desc' : colunas_desc,
-			'eventos' : eventos,
-			'colors' : util.colors})
+			rel = factory.RelatorioFactory().get_relatorio('tabular')
+			rel.produto = produto
+			rel.alarme = alarme
+			rel.monitor = monitor
+			rel.eventos = eventos
+			rel.descricao_colunas = colunas_desc
 
-			
-	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, { 
+	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, {
+		'produtos_alarmes' : produtos_alarmes,
+		'alarmes_monitores' : alarmes_monitores,
 		'produtos': produtos,
 		'alarmes' : alarmes,
 		'monitores' : monitores,
 		'erro' : erro,
-		'gerar_relatorio' : gerar_relatorio,
-		'request' : request,
-		'produtos_alarmes' : produtos_alarmes,
-		'html_relatorio' : html_relatorio,
-		'alarmes_monitores' : alarmes_monitores})
+		'relatorio' : rel,
+		'request' : request})
 
-
-def configurar_relatorio():
-	"""configura relatorio"""
-	html = """
-	<h2>configura relatorio</h2>
-	"""
-	return HttpResponse(html)

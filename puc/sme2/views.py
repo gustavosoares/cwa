@@ -15,6 +15,7 @@ from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
 from puc.sme.core import domain
 from puc.sme2.core import util
+from puc.relatorio.core import factory as relatorio_factory
 
 produto_repository = ProdutoRepository()
 alarme_repository = AlarmeRepository()
@@ -61,14 +62,17 @@ def ver_evento(request, mon_id=None):
 	monitor = monitor_repository.get_monitor_por_id(mon_id)
 	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 	produto = produto_repository.get_produto_por_id(alarme.prd_id)
-	colunas_desc = eventos[0].colunas_desc
+	colunas_desc = eventos[0].descricao_colunas
 
+	rel = relatorio_factory.RelatorioFactory().get_relatorio('tabular')
+	rel.produto = produto
+	rel.alarme = alarme
+	rel.monitor = monitor
+	rel.eventos = eventos
+	rel.descricao_colunas = colunas_desc
+	
 	return render_to_response(templates.TEMPLATE_VER_EVENTO, 
-					{ 'monitor' : monitor,
-					'alarme' : alarme,
-					'produto' : produto,
-					'colunas_desc' : colunas_desc,
-					'eventos' : eventos,
+					{ 'relatorio' : rel,
 	 				'colors' : util.colors})
 	
 def fechar_evento(request, mon_id=None, pad_id=None):
