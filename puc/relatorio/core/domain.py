@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.template.loader import render_to_string
 from puc.sme2.core import util
 
@@ -49,3 +50,37 @@ class RelatorioTabular(Relatorio):
 		
 		return html_relatorio
 
+class RelatorioGraficoLinha(Relatorio):
+	"""relatorio grafico de linha"""
+	def __init__(self):
+		"""docstring for __init__"""
+		Relatorio.__init__(self)
+		self.formato = 'grafico_linha'
+		self.template_name = 'relatorio/formato/grafico_linha.html'
+
+class RelatorioGraficoBarra(Relatorio):
+	"""relatorio grafico de barra"""
+	def __init__(self):
+		"""docstring for __init__"""
+		Relatorio.__init__(self)
+		self.formato = 'grafico_barra'
+		self.template_name = 'relatorio/formato/grafico_barra.html'
+
+				
+class Grafico(object):
+	"""interface para o grafico"""
+	def __init__(self):
+		pass
+		
+
+class GraficoLinha(Grafico):
+	"""grafico de linha"""
+	def __init__(self):
+		Grafico.__init__(self)
+		pass
+		
+class GraficoBarra(Grafico):
+	"""grafico de linha"""
+	def __init__(self):
+		Grafico.__init__(self)
+		pass
