@@ -70,8 +70,38 @@ class RelatorioGraficoBarra(Relatorio):
 class Grafico(object):
 	"""interface para o grafico"""
 	def __init__(self):
-		pass
+		self.width = '400'
+		self.height = '250'
+		self.name = None
+		self.type = type
+		self.bgcolor = '#666666'
+		self.library_path = '/media/swf/charts_library'
+		self.src = "/media/swf/charts.swf"
+		#self.xml_source = '/media/xml/sample.xml'
+		self.scale = "noscale" 
+		self.align = "middle"
+		self.response_type = "application/x-shockwave-flash"
+		self.pontos = [] #Ex.: pontos = [{'x' = '2','y' = '4'}]
+		self.xml = None
+
+	
+	def xml(self):
+		"""retorna o xml para o grafico"""
+		assert 0, 'o metodo para obtencao do xml nao foi implementado'
+		#raise NotImplementedError
+	
+	def html(self):
+		"""retorna a tag html embed do grafico"""
 		
+		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s" 
+		quality="high" bgcolor="%s" WIDTH="%s" HEIGHT="%s" NAME="%s" allowScriptAccess="sameDomain" 
+		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque" 
+		TYPE="%s" 
+		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml, 
+		self.bgcolor, self.width, self.height, self.name, 
+		self.scale, self.response_type)
+		
+		return html
 
 class GraficoLinha(Grafico):
 	"""grafico de linha"""
