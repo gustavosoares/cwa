@@ -5,6 +5,7 @@
 	<axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
 	<chart_type>line</chart_type>
 	<chart_data>
+		<!-- eixo x -->
 		<row>
 			<null/>
 			<string>2005</string>
@@ -13,6 +14,7 @@
 			<string>2008</string>
 			<string>2009</string>
 		</row>
+		<!-- eixo y -->
 		<row>
 			<string>region 1</string>
 			<number shadow='medium' tooltip='$48 Million'>48</number>
