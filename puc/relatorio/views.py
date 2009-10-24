@@ -68,7 +68,10 @@ def index(request):
 			alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 			produto = produto_repository.get_produto_por_id(alarme.prd_id)
 			eventos = monitor_repository.get_eventos_por_periodo_por_monitor_id(monitor_id, data_inicio_str, data_fim_str)
-			colunas_desc = eventos[0].descricao_colunas
+			if len(eventos) > 0:
+				colunas_desc = eventos[0].descricao_colunas
+			else:
+				colunas_desc = []
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela
@@ -79,6 +82,7 @@ def index(request):
 			relatorio.eventos = eventos
 			relatorio.descricao_colunas = colunas_desc
 
+			'''
 			relatorio_linha = factory.RelatorioFactory().get_relatorio('grafico_linha')
 			relatorio_linha.produto = produto
 			relatorio_linha.alarme = alarme
@@ -93,7 +97,7 @@ def index(request):
 			xml = relatorio_linha.get_xml()
 			
 			print 'xml do relatorio: \n%s' % xml
-			
+			'''	
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, {
 		'produtos_alarmes' : produtos_alarmes,
 		'alarmes_monitores' : alarmes_monitores,
