@@ -37,7 +37,11 @@ class Relatorio(object):
 					descricao = metadado['descricao']
 					valor = metadado['valor']
 					#crio variaveis no xml (cria apenas se nao existe)
-					variavel = u'%s - %s' % (servidor, descricao)
+					#print '[Relatorio] servidor: %s ' % servidor
+					#print '[Relatorio] descricao: %s' % descricao.encode('utf-8')
+					variavel = '%s - %s' % (servidor, descricao)
+					variavel = variavel.encode('utf-8')
+					#print '[Relatorio] variavel: %s' % variavel
 					self._grafico.cria_variavel(variavel)
 					
 					#adiciono os pontos ao xml
@@ -161,7 +165,7 @@ class GraficoLinha(Grafico):
 		assert variavel != None, "por favor especificar o nome da variavel"
 		assert len(variavel) > 0, "por favor especificar o nome da variavel"
 		if not self.pontos.has_key(variavel):
-			print u'## [Grafico] criando variavel: %s' % variavel
+			print '## [Grafico] criando variavel: %s' % variavel
 			var = self.pontos.get(variavel,{})
 			x_aux = var.get('x',[])
 			y_aux = var.get('y',[])
@@ -179,7 +183,7 @@ class GraficoLinha(Grafico):
 		self.pontos[variavel]['y'] = y_aux
 	
 	def get_xml(self):
-		print '\n##[GraficoLinha] pontos: \n%s\n' % self.pontos
+		#print '\n##[GraficoLinha] pontos: \n%s\n' % self.pontos
 		assert len(self.pontos) > 0, 'nenhum ponto existe no grafico'
 		if self._xml:
 			return self._xml
@@ -202,7 +206,7 @@ class GraficoLinha(Grafico):
 			#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
 			for var, pontos in self.pontos.items():
 				x_axis = self.pontos[var]['x']
-				print 'x_axis: %s' % x_axis
+				#print 'x_axis: %s' % x_axis
 				for x in x_axis:
 					body.append('\t\t<string>%s</string>\n' % x)
 				break #break por que o x eh igual para todo mundo

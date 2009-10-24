@@ -1,4 +1,4 @@
-# coding=utf-8
+#-*- coding:utf-8 -*-
 from puc.core.singleton import Singleton
 from django.conf import settings
 from puc.core.db import Database
@@ -60,6 +60,7 @@ class MonitorRepository(Singleton):
 		#colunas_nome: nome fisico da coluna no banco de dados
 		#colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
 		colunas = self.get_colunas_por_monitor_id(id)
+		#print '[MonRepository] colunas: %s' % colunas
 		colunas_nome = []
 		for nome,metadado in colunas.items():
 			colunas_nome.append(nome)

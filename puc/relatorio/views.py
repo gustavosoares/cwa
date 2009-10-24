@@ -88,6 +88,7 @@ def index(request):
 			relatorio_linha.alarme = alarme
 			relatorio_linha.monitor = monitor
 			relatorio_linha.eventos = eventos
+			
 			relatorio_linha.descricao_colunas = colunas_desc
 			assert relatorio_linha != None, 'tipo de relatorio desconhecido'
 			print 'relatorio linha: %s' % relatorio_linha
