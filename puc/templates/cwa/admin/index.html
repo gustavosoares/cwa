@@ -1,0 +1,19 @@
+{% extends "admin/index.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<div class="module">
+    <table summary="CWA Admin interface">
+    <caption><a href="cwa/admin/" class="section">CWA Admin</a></caption>
+    <tr>
+        <th scope="row"><a href="cwa/admin/criar">Criar modelo</a></th>
+        <td></td>
+        <td></td>
+    </tr>
+
+    </table>
+</div>
+
+	{{ block.super }}
+{% endblock %}
