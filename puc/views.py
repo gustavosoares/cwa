@@ -14,5 +14,9 @@ from puc import templates
 
 def index(request):
 	"""Pagina princiap da aplicacao cwa"""
-	return HttpResponse("<h3>index do admin cwa</h3>")
+	return HttpResponseRedirect('/admin/')
 	#return render_to_response(templates.TEMPLATE_CWA_INDEX)
+
+def criar_modelo(request):
+	"""Pagina para criacacao do modelo"""
+	return render_to_response(templates.TEMPLATE_CWA_ADMIN_CRIAR_MODELO)

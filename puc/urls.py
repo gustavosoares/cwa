@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^cwa/?', include('puc.cwa.urls')),
     (r'^sme2/?', include('puc.sme2.urls')),
     (r'^relatorio/?', include('puc.relatorio.urls')),
+    (r'^modelo/?', include('puc.modelo.urls')),
 )
 
 import os

@@ -14,7 +14,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^/?$', views.index),
-    (r'^admin/?$', include('puc.cwa.admin_cwa.urls')),
     (r'^teste/widget/?$', views.widget),
     (r'^teste/chart/?$', views.chart),
     (r'^teste/chart2/?$', views.chart2),

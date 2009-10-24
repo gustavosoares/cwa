@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from puc.cwa.admin_cwa import views
+from puc.modelo import views
 
 
 
@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    (r'^criar/?$', views.criar_modelo),
     (r'^/?$', views.index),
 )
 

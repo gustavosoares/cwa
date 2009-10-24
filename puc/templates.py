@@ -13,4 +13,4 @@ TEMPLATE_RELATORIO_INDEX = 'relatorio/index.html'
 
 #CWA
 TEMPLATE_CWA_INDEX = 'cwa/index.html'
-
+TEMPLATE_CWA_ADMIN_CRIAR_MODELO = 'modelo/criar_modelo.html'
