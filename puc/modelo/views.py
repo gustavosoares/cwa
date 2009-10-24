@@ -19,4 +19,5 @@ def index(request):
 
 def criar_modelo(request):
 	"""Pagina para criacacao do modelo"""
+	print '[CRIAR MODELO] REQUEST: %s' % request
 	return render_to_response(templates.TEMPLATE_CWA_ADMIN_CRIAR_MODELO)
