@@ -63,7 +63,10 @@ def ver_evento(request, mon_id=None):
 	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 	produto = produto_repository.get_produto_por_id(alarme.prd_id)
 	colunas_desc = eventos[0].descricao_colunas
-
+	
+	print '\n\nmetadados: %s\n' % eventos[0].metadados
+	print '\ncolunas desc: %s\n' % eventos[0].descricao_colunas
+	
 	rel = relatorio_factory.RelatorioFactory().get_relatorio('tabular')
 	rel.produto = produto
 	rel.alarme = alarme

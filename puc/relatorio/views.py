@@ -45,7 +45,7 @@ def index(request):
 	monitor_id = request.POST.get('monitor',None)
 	data_inicio_str = request.POST.get('data_inicio',None)
 	data_fim_str = request.POST.get('data_fim',None)
-	print 'POST: %s' % request.POST
+	print '[RELATORIO] POST: %s' % request.POST
 	
 	erro = True
 	#request GET

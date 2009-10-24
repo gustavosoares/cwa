@@ -24,8 +24,8 @@
 			<td bgcolor='white'></td>
 			<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
 			<td class="sme2-evento">{{evento.servidor}}</td>
-			{% for dado in evento.get_dados %}
-				<td class="sme2-evento">{{dado}}</td>
+			{% for ordem, metadado in evento.metadados.items %}
+				<td class="sme2-evento">{{metadado.valor}}</td>
 			{% endfor %}
 		<tr>
 	{% endfor %}

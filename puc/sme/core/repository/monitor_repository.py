@@ -37,90 +37,92 @@ class MonitorRepository(Singleton):
 		db = Database()
 		db.execute(sql)
 		rows = db.rows_fetchall()
-		colunas_desc = []
-		colunas_nome = []
+		colunas = {}
+		#colunas_desc = []
+		#colunas_nome = []
 		for coluna in rows:
-			colunas_desc.append(coluna[1])
-			colunas_nome.append(coluna[2])
+			descricao = coluna[1]
+			nome = coluna[2]
+			tipo = coluna[3]
+			ordem = coluna[4]
+			#colunas_desc.append(descricao)
+			#colunas_nome.append(nome)
+			colunas[nome] = {'descricao' : descricao, 'tipo': tipo, 'ordem' : ordem}
 
-		return colunas_desc, colunas_nome
+		return colunas
 
-	def get_eventos_por_monitor_id(self,id):
+	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None):
 		"""obtem lista eventos por monitor id"""
 		monitor = self.get_monitor_por_id(id)
 		from puc.sme.core.repository.alarme_repository import AlarmeRepository
 		alarme = AlarmeRepository().get_alarme_por_id(monitor.alm_id)
 		#colunas_desc: descricao do nome da coluna
 		#colunas_nome: nome fisico da coluna no banco de dados
-		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
-
+		#colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
+		colunas = self.get_colunas_por_monitor_id(id)
+		colunas_nome = []
+		for nome,metadado in colunas.items():
+			colunas_nome.append(nome)
 		#monto a string para ser usado no select
 		aux = ''
 		aux_size = len(colunas_nome)
 		count = 1
+		clausula_select = [] #array com as colunas do campo do select
 		for coluna in colunas_nome:
+			clausula_select.append(coluna)
 			if (count == aux_size):
 				aux = aux + coluna
 			else:
 				aux = aux + coluna + ', '
 			count = count + 1
-
-		sql = """
-		select pad_id, pad_tipoalarme, %s
-		from %s
-		where mon_id = %s
-		AND pad_verificado  = 'N'
-		AND pad_tipoalarme <> 'X'
-		ORDER BY pad_datahora DESC LIMIT 2000
-		""" % (aux, monitor.mon_tabela, monitor.mon_id)
+		
+		sql = ""
+		if data_inicio_str and data_fim_str:
+			sql = """
+			select pad_id, pad_tipoalarme, %s
+			from %s
+			where mon_id = %s
+			AND pad_datahora  >= '%s 00:00:00'
+			AND pad_datahora <= '%s 23:59:59'
+			ORDER BY pad_datahora DESC LIMIT 2000
+			""" % (aux, monitor.mon_tabela, monitor.mon_id, data_inicio_str, data_fim_str)
+		else:
+			sql = """
+			select pad_id, pad_tipoalarme, %s
+			from %s
+			where mon_id = %s
+			AND pad_verificado  = 'N'
+			AND pad_tipoalarme <> 'X'
+			ORDER BY pad_datahora DESC LIMIT 2000
+			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		db = Database()
 		db.execute(sql)
 		rows = db.rows_fetchall()
 		
 		eventos = []
+		
+		#finalizo a construcao do metadado do evento
 		for row in rows:
-			eventos.append(domain.Evento(monitor, alarme, row, colunas_desc))
+			new_row = row[2:]
+			i = 0
+			metadados = {}
+			for coluna_nome in clausula_select:
+				var = colunas[coluna_nome]
+				ordem = var['ordem']
+				var['valor'] = new_row[i]
+				var['nome'] = coluna_nome
+				#severidade do evento: normal, warning, alarme
+				var['severidade'] = row[1]
+				metadados[ordem] = var
+				i = i + 1
+			
+			eventos.append(domain.Evento(monitor, alarme, metadados))
 			
 		return eventos
 		
 	def get_eventos_por_periodo_por_monitor_id(self,id,data_inicio_str,data_fim_str):
 		"""obtem lista eventos em um periodo por monitor id"""
-		monitor = self.get_monitor_por_id(id)
-		from puc.sme.core.repository.alarme_repository import AlarmeRepository
-		alarme = AlarmeRepository().get_alarme_por_id(monitor.alm_id)
-		#colunas_desc: descricao do nome da coluna
-		#colunas_nome: nome fisico da coluna no banco de dados
-		colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
-
-		#monto a string com os nomes das colunas para ser usado no select
-		aux = ''
-		aux_size = len(colunas_nome)
-		count = 1
-		for coluna in colunas_nome:
-			if (count == aux_size):
-				aux = aux + coluna
-			else:
-				aux = aux + coluna + ', '
-			count = count + 1
-
-		sql = """
-		select pad_id, pad_tipoalarme, %s
-		from %s
-		where mon_id = %s
-		AND pad_datahora  >= '%s 00:00:00'
-		AND pad_datahora <= '%s 23:59:59'
-		ORDER BY pad_datahora DESC LIMIT 2000
-		""" % (aux, monitor.mon_tabela, monitor.mon_id, data_inicio_str, data_fim_str)
-		db = Database()
-		db.execute(sql)
-		rows = db.rows_fetchall()
-		
-		eventos = []
-		for row in rows:
-			eventos.append(domain.Evento(monitor, alarme, row, colunas_desc))
-			
-		return eventos
-
+		return self.get_eventos_por_monitor_id(id,data_inicio_str,data_fim_str)
 
 	def fechar_evento(self, id, monitor, alarme, produto):
 		"""fecha um evento"""
