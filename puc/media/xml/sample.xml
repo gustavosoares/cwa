@@ -1,44 +1,59 @@
 <chart>
 
-	<axis_category size='16' alpha='85' shadow='medium' />
-	<axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
-	<axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
-	<chart_type>line</chart_type>
-	<chart_data>
-		<!-- eixo x -->
-		<row>
-			<null/>
-			<string>2005</string>
-			<string>2006</string>
-			<string>2007</string>
-			<string>2008</string>
-			<string>2009</string>
-		</row>
-		<!-- eixo y -->
-		<row>
-			<string>region 1</string>
-			<number shadow='medium' tooltip='$48 Million'>48</number>
-			<number tooltip='$55 Million'>55</number>
-			<number tooltip='$80 Million'>80</number>
-			<number tooltip='$100 Million'>100</number>
-			<number tooltip='$90 Million'>90</number>
-		</row>
-		<row>
-			<string>region 2</string>
-			<number shadow='low' tooltip='$-12 Million'>-12</number>
-			<number tooltip='$10 Million'>10</number>
-			<number tooltip='$55 Million'>55</number>
-			<number tooltip='$65 Million'>65</number>
-			<number tooltip='$90 Million'>90</number>
-		</row>
-		<row>
-			<string>region 3</string>
-			<number tooltip='$27 Million'>27</number>
-			<number tooltip='$-20 Million'>-20</number>
-			<number tooltip='$15 Million'>15</number>
-			<number tooltip='$80 Million'>80</number>
-			<number tooltip='$90 Million'>90</number>
-		</row>
-	</chart_data>
-</chart>
+        <axis_category size='16' alpha='85' shadow='medium' />
+        <axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
+        <axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
+        <chart_type>line</chart_type>
+        <chart_data>
 
+                        <row>
+                <null/>
+                <string>20/09/2009 20:00:01</string>
+                <string>20/09/2009 20:00:01</string>
+                <string>20/09/2009 19:00:01</string>
+                <string>20/09/2009 19:00:01</string>
+                <string>20/09/2009 15:00:01</string>
+                <string>20/09/2009 14:00:01</string>
+                <string>20/09/2009 14:00:01</string>
+                <string>20/09/2009 14:00:01</string>
+                <string>20/09/2009 14:00:01</string>
+        </row>
+        <row>
+                <string>riolf239 - Total</string>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+        </row>
+        <row>
+                <string>riolf238 - Total</string>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+                <number tooltip="4613.000">4613.000</number>
+        </row>
+        </chart_data>
+</chart>

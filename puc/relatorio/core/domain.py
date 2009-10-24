@@ -1,4 +1,4 @@
-# coding=utf-8
+#-*- coding:utf-8 -*-
 from django.template.loader import render_to_string
 from puc.sme2.core import util
 
@@ -28,20 +28,23 @@ class Relatorio(object):
 	
 	def get_xml(self):
 		self.test()
-		#crio variaveis no xml
-		for coluna in self.descricao_colunas:
-			self._grafico.cria_variavel(coluna)
-
-		print 'variaveis do grafico: %s' % self._grafico.pontos
-		#adiciono os pontos ao xml
+		
 		for evento in self.eventos:
 			data_hora = evento.get_data_hora_formatada()
 			servidor = evento.servidor
-			for dado in evento.dados:
-				print 'dado: %s' % dado
-				print 'colunas desc: %s' % evento.descricao_colunas
+			for ordem,metadado in evento.metadados.items():
+				if metadado['tipo'] == 'N':
+					descricao = metadado['descricao']
+					valor = metadado['valor']
+					#crio variaveis no xml (cria apenas se nao existe)
+					variavel = u'%s - %s' % (servidor, descricao)
+					self._grafico.cria_variavel(variavel)
+					
+					#adiciono os pontos ao xml
+					self._grafico.add_ponto(variavel, data_hora, int(valor))
+					
 		#retorno o xml do grafico
-		return 'self._grafico.xml'
+		return self._grafico.xml
 	
 	def test(self):
 		"""metodo de validacao"""
@@ -49,6 +52,7 @@ class Relatorio(object):
 		assert self.alarme != None, 'alarme nao foi definido'
 		assert self.monitor != None, 'monitor nao foi definido'
 		assert self.eventos != None, 'eventos nao foi definido'
+		#assert len(self.eventos) > 0, 'não há eventos para processar'
 		assert self.descricao_colunas != None, 'descricao da colunas nao foi definido'
 		assert self.template_name != None, 'nome do template nao foi definido'
 
@@ -112,7 +116,8 @@ class Grafico(object):
 		self.scale = "noscale" 
 		self.align = "middle"
 		self.response_type = "application/x-shockwave-flash"
-		self.pontos = {} #Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
+		self.pontos = {} 
+		#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
 		self._xml = None
 
 	def __str__(self):
@@ -138,8 +143,7 @@ class Grafico(object):
 		
 		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_data=%s" 
 		quality="high" bgcolor="%s" WIDTH="%s" HEIGHT="%s" NAME="%s" allowScriptAccess="sameDomain" 
-		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque" 
-		TYPE="%s" 
+		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"  TYPE="%s" 
 		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml, 
 		self.bgcolor, self.width, self.height, self.name, 
 		self.scale, self.response_type)
@@ -156,12 +160,14 @@ class GraficoLinha(Grafico):
 		"""cria uma variavel no grafico"""
 		assert variavel != None, "por favor especificar o nome da variavel"
 		assert len(variavel) > 0, "por favor especificar o nome da variavel"
-		var = self.pontos.get(variavel,{})
-		x_aux = var.get('x',[])
-		y_aux = var.get('y',[])
-		var['x'] = x_aux
-		var['y'] = y_aux
-		self.pontos[variavel] = var
+		if not self.pontos.has_key(variavel):
+			print u'## [Grafico] criando variavel: %s' % variavel
+			var = self.pontos.get(variavel,{})
+			x_aux = var.get('x',[])
+			y_aux = var.get('y',[])
+			var['x'] = x_aux
+			var['y'] = y_aux
+			self.pontos[variavel] = var
 		
 	def add_ponto(self, variavel, x, y):
 		"""adiciona um ponto no grafico"""
@@ -173,24 +179,24 @@ class GraficoLinha(Grafico):
 		self.pontos[variavel]['y'] = y_aux
 	
 	def get_xml(self):
-		print self.pontos
+		print '\n##[GraficoLinha] pontos: \n%s\n' % self.pontos
 		assert len(self.pontos) > 0, 'nenhum ponto existe no grafico'
 		if self._xml:
 			return self._xml
 		else:
 			header = '''
-			<chart>
+<chart>
 
-				<axis_category size='16' alpha='85' shadow='medium' />
-				<axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
-				<axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
-				<chart_type>%s</chart_type>
-				<chart_data>\n
+	<axis_category size='16' alpha='85' shadow='medium' />
+	<axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
+	<axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
+	<chart_type>%s</chart_type>
+	<chart_data>\n
 			''' % self.type
 		
 			body = []
 			#eixo x
-			body.append('\t<row>\n')
+			body.append('<row>\n')
 			body.append('\t\t<null/>\n')
 		
 			#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
@@ -220,6 +226,9 @@ class GraficoLinha(Grafico):
 
 			self._xml = header + body + footer
 			return self._xml
+	
+	xml = property(get_xml)
+	
 """
 	def cria_variavel(self, variavel):
 		x = ponto.get('x', None)
