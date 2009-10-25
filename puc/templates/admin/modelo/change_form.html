@@ -24,11 +24,13 @@
 		//console.log(Element.childElements(wid[i]))
 		aux = colunas[i];
 		aux_id = colunas[i].id;
-		console.log("------")
-		console.log(aux)
-		console.log('id: ' + aux_id)
-		var children = $(aux_id).getElementsByClassName('block');
-		console.log(children)
+		if (aux_id != 'portal-column-block-list') {
+			console.log("------")
+			console.log(aux)
+			console.log('id: ' + aux_id)
+			var children = $(aux_id).getElementsByClassName('block');
+			console.log(children)
+		}
 		
 	}
 	
