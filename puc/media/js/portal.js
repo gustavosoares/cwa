@@ -15,9 +15,9 @@ Portal.prototype = {
         handle: this.options.handle,
         hoverclass: this.options.hoverclass,
         onUpdate: function (container) {
-          if (!this.options.saveurl) {
+          /*if (!this.options.saveurl) {
             return;
-          }
+          }*/
           if (container.id == this.options.blocklist) {
             return;
           }
@@ -28,12 +28,12 @@ Portal.prototype = {
           );
           postBody += blocks.pluck('id').join(',');
           postBody = 'value=' + escape(postBody);
-          
-          new Ajax.Request(url, {
+          $('ordem-modelo').value = postBody;
+          /*new Ajax.Request(url, {
               method: 'post',
               postBody: postBody
             }
-          );
+          );*/
         }.bind(this)
       });
     }.bind(this));

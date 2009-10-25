@@ -13,6 +13,36 @@
 
   var settings = {};
   var portal;
+  function salva_ordem() {
+	//alert('salvando a ordem');
+	var colunas = $('portal').getElementsByClassName('portal-column');
+	console.log(colunas)
+	var i=0;
+	var colunasLen=colunas.length;
+	for (i=0;i <= colunasLen;i++)
+	{
+		//console.log(Element.childElements(wid[i]))
+		aux = colunas[i];
+		aux_id = colunas[i].id;
+		console.log("------")
+		console.log(aux)
+		console.log('id: ' + aux_id)
+		var children = $(aux_id).getElementsByClassName('block');
+		console.log(children)
+		
+	}
+	
+	
+	/*
+	var i=0;
+	var widLen=wid.length;
+	for (i=0;i <= widLen;i++)
+	{
+		console.log(Element.childElements(wid[i]))
+	}
+	*/
+  }
+
   function init() {
 	$('ordem-modelo').value = ""
     portal = new Portal();
