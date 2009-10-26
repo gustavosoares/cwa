@@ -50,6 +50,7 @@ class ModeloAdmin(admin.ModelAdmin):
 			form = ModelForm(request.POST, request.FILES)
 			if form.is_valid():
 				form_validated = True
+				print 'FORM: %s' % form
 				new_object = self.save_form(request, form, change=False)
 			else:
 				form_validated = False
