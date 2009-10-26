@@ -13,17 +13,15 @@
 
   var settings = {};
   var portal;
-  /*Funcao para salvar a ordem dos boxes*/
-  function salva_ordem() {
-	//alert('salvando a ordem');
+  /*Funcao para obter o estados do boxes*/
+  function obtem_estado() {
 	var colunas = $('portal').getElementsByClassName('portal-column');
-	console.log(colunas)
+	//console.log(colunas)
 	var i=0;
 	var colunasLen=colunas.length;
 	//armazena o estado dos containers
 	var ordem = "";
 	for (i=0;i <= colunasLen;i++) {
-		//console.log(Element.childElements(wid[i]))
 		aux = colunas[i];
 		if (aux != undefined) {
 			aux_id = aux.id;
@@ -33,37 +31,28 @@
 				} else{
 					ordem = ordem + '&' + aux_id;
 				}
-				console.log("------")
+				/*console.log("------")
 				console.log(aux)
-				console.log('id: ' + aux_id)
+				console.log('id: ' + aux_id)*/
 				var children = $(aux_id).getElementsByClassName('block');
 				if (children.length > 0) {
 					var j=0;
-					console.log(children)
+					//console.log(children)
 					for (j=0; j <= children.length; j++) {
 						if (children[j] != undefined) {
 							children_id = children[j].id
 							ordem = ordem + ':' + children_id
-							console.log(children_id)
+							//console.log(children_id)
 						}
 					}
 				}
 			}
 		}
 
-	}		
-
+	}
 
 	console.log('ordem: '+ ordem)
 	
-	/*
-	var i=0;
-	var widLen=wid.length;
-	for (i=0;i <= widLen;i++)
-	{
-		console.log(Element.childElements(wid[i]))
-	}
-	*/
   }
 
   function init() {
