@@ -1,5 +1,6 @@
 from django.contrib import admin
 from puc.modelo.models import Modelo
+from puc.modelo.forms import MyModeloAdminForm
 
 """Imports tirados do arquivo admin/options.py"""
 from django import forms, template
@@ -30,8 +31,10 @@ except NameError:
     from sets import Set as set     # Python 2.3 fallback
 
 
-
 class ModeloAdmin(admin.ModelAdmin):
+	
+	form = MyModeloAdminForm
+	#fields = ('nome', 'descricao',)
 	
 	def add_view(self, request, form_url='', extra_context=None):
 		print 'add vieww personalizada'
