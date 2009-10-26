@@ -4,7 +4,7 @@ from django.db import models
 class Modelo(models.Model):
 	nome = models.CharField(max_length=100)
 	descricao = models.CharField(max_length=500, blank=True, null=True)
-	ordem = models.CharField(max_length=800)
+	metadado = models.CharField(max_length=800)
 	
 	def __unicode__(self):
 		return u'%s' % self.nome

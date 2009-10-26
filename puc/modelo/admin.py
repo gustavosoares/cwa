@@ -1,6 +1,7 @@
 from django.contrib import admin
 from puc.modelo.models import Modelo
 
+"""Imports tirados do arquivo admin/options.py"""
 from django import forms, template
 from django.forms.formsets import all_valid
 from django.forms.models import modelform_factory, modelformset_factory, inlineformset_factory
@@ -31,8 +32,6 @@ except NameError:
 
 
 class ModeloAdmin(admin.ModelAdmin):
-	
-	exclude = ('ordem',)
 	
 	def add_view(self, request, form_url='', extra_context=None):
 		print 'add vieww personalizada'
