@@ -33,6 +33,7 @@ except NameError:
 
 class ModeloAdmin(admin.ModelAdmin):
 	
+	list_display = ('nome', 'descricao', 'metadado',)
 	form = MyModeloAdminForm
 	#fields = ('nome', 'descricao',)
 	
