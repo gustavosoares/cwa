@@ -90,7 +90,8 @@ Portal.prototype = {
     );
 
     new Draggable(this.options.blocklist, {
-        handle: this.options.blocklisthandle
+        handle: this.options.blocklisthandle,
+        scroll: true
       }
     );
     

@@ -235,7 +235,7 @@ Draggable.prototype = {
       },
       zindex: 1000,
       revert: false,
-      scroll: false,
+      scroll: true,
       scrollSensitivity: 20,
       scrollSpeed: 15,
       snap: false   // false, or xy or [x,y] or function(x,y){ return [x,y] }
