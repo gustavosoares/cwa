@@ -3,9 +3,8 @@ from django import forms
 from puc.modelo.models import Modelo
 
 class MyModeloAdminForm(forms.ModelForm):
-	metadado = forms.CharField(widget=forms.HiddenInput, label=u'', max_length=800)
-
-	#metadado = models.CharField(max_length=800, null=True, blank=True, help_text="metadado com a ordem das visoes")
+	metadado = forms.CharField(widget=forms.HiddenInput, label=u'Metadado', max_length=800)
+	#metadado = forms.CharField(label=u'Metadado', max_length=800)
 	
 	class Meta:
 		model = Modelo

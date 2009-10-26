@@ -52,7 +52,7 @@ Portal.prototype = {
 
 			}
 			//console.log('postBody: '+ postBody)
-          $('ordem-modelo').value = postBody;
+          $('id_metadado').value = postBody;
           /*new Ajax.Request(url, {
               method: 'post',
               postBody: postBody
