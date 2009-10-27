@@ -17,21 +17,7 @@ modelo_repository = ModeloRepository()
 
 def index(request):
 	"""Pagina princiap da aplicacao cwa"""
-	modelo_settings = {}
-	modelo = modelo_repository.get_modelo_por_nome(settings.MODELO)
-	assert modelo != None, 'Modelo configurado nao existe no sistema!'
-	metadado = modelo.metadado
-	#Ex.:portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio
-	colunas = metadado.split('&')
-	for coluna in colunas:
-		visoes = coluna.split(':')
-		if len(visoes) > 1:
-			container = visoes[0]
-			visoes_aux = visoes[1:]
-			print '%s ->> %s' % (container, visoes_aux)
-			modelo_settings[container] = visoes_aux
-
-	modelo_settings_json = json.encode_json(modelo_settings)
+	modelo_settings_json = modelo_repository.get_modelo_settings(settings.MODELO)
 	print 'modelo settings: %s' % modelo_settings_json
 	#pego as informacoes do modelo configurado
 	return render_to_response(templates.TEMPLATE_CWA_INDEX, { 'settings' : modelo_settings_json})
