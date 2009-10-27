@@ -62,21 +62,24 @@ def ver_evento(request, mon_id=None):
 	monitor = monitor_repository.get_monitor_por_id(mon_id)
 	alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 	produto = produto_repository.get_produto_por_id(alarme.prd_id)
-	colunas_desc = eventos[0].descricao_colunas
+	if len(eventos) > 0:
+		colunas_desc = eventos[0].descricao_colunas
+		print '\n\nmetadados: %s\n' % eventos[0].metadados
+		print '\ncolunas desc: %s\n' % eventos[0].descricao_colunas
 	
-	print '\n\nmetadados: %s\n' % eventos[0].metadados
-	print '\ncolunas desc: %s\n' % eventos[0].descricao_colunas
+		rel = relatorio_factory.RelatorioFactory().get_relatorio('tabular')
+		rel.produto = produto
+		rel.alarme = alarme
+		rel.monitor = monitor
+		rel.eventos = eventos
+		rel.descricao_colunas = colunas_desc
 	
-	rel = relatorio_factory.RelatorioFactory().get_relatorio('tabular')
-	rel.produto = produto
-	rel.alarme = alarme
-	rel.monitor = monitor
-	rel.eventos = eventos
-	rel.descricao_colunas = colunas_desc
-	
-	return render_to_response(templates.TEMPLATE_VER_EVENTO, 
-					{ 'relatorio' : rel,
-	 				'colors' : util.colors})
+		return render_to_response(templates.TEMPLATE_VER_EVENTO, 
+						{ 'relatorio' : rel,
+		 				'colors' : util.colors})
+	else:
+		#retorno para a pagina do alarme, pois nao tem mais nenhum evento
+		return HttpResponseRedirect('/sme2/monitor/alarme/%s' % alarme.alm_id)
 	
 def fechar_evento(request, mon_id=None, pad_id=None):
 	"""fecha o evento do monitor passado como parametro"""
@@ -87,6 +90,7 @@ def fechar_evento(request, mon_id=None, pad_id=None):
 		msg = '''fechar evento %s do monitor %s''' % (pad_id, mon_id)
 		print msg
 		monitor_repository.fechar_evento(pad_id, monitor, alarme, produto)
+		#eventos = monitor_repository.get_eventos_por_monitor_id(mon_id)
 		return HttpResponseRedirect('/sme2/evento/monitor/%s' % mon_id)
 	except Exception, e:
 		print_exc(file=sys.stdout)
