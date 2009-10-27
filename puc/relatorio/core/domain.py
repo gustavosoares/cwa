@@ -109,8 +109,8 @@ class RelatorioGraficoBarra(RelatorioGraficoLinha):
 class Grafico(object):
 	"""interface para o grafico"""
 	def __init__(self):
-		self.width = '400'
-		self.height = '250'
+		self.width = '800'
+		self.height = '500'
 		self.name = None
 		self.type = None
 		self.bgcolor = '#666666'
