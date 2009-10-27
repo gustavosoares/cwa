@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}CWA - Test Page{% endblock %}
+{% block title %}CWA{% endblock %}
 
 {% block stylesheet %}
 <style type="text/css">
@@ -8,6 +8,7 @@
 	#menu {
 		background: white;
 		text-align: left;
+		/*position: fixed;*/
 	}
 	
 	#portal {
@@ -156,10 +157,9 @@
 {% endblock %}
 
 {% block content %}
-<center><h3>CWA test page</h3></br></center>
 <div id="menu">
-	<a href='#'>Console Monitoração</a> | 
-	<a href='#'>Relatório</a>
+	<a href='#monitoracao'>Console Monitoração</a> | 
+	<a href='#relatorio'>Relatório</a>
 </div>
 <!--center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br /-->
 
@@ -180,7 +180,7 @@
 			<!-- Visoes vao aqui-->
 			<!-- Visao tabular-->
 			<div class="block" id="block-tabular">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão tabular</h3>
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="monitoracao">Visão tabular</a></h3>
 				<div class="content">
 					<CENTER>
 					<iframe name="iframe_sm2" src="/sme2/" frameborder="0" width="98%" height="400"></iframe>
@@ -200,7 +200,7 @@
 			
 			<!-- Visao relatorio-->
 			<div class="block" id="block-relatorio">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão relatório</h3>
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">Visão relatório</a></h3>
 				<div class="content">
 					<CENTER>
 					<iframe name="iframe_relatorio" src="/relatorio/" frameborder="0" width="98%" height="400"></iframe>
