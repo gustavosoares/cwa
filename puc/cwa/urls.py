@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^teste/widget/?$', views.widget),
     (r'^teste/chart/?$', views.chart),
     (r'^teste/chart2/?$', views.chart2),
+    (r'^teste/chart-scroll/?$', views.chart_scroll),
     (r'^teste/resize/?$', views.resize),
 )
 

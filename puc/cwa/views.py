@@ -24,13 +24,16 @@ def index(request):
 
 	
 def widget(request):
-	return render_to_response('cwa/teste_widget.html')
+	return render_to_response('cwa/_teste/teste_widget.html')
 
 def chart(request):
-	return render_to_response('cwa/teste_chart.html')
+	return render_to_response('cwa/_teste/teste_chart.html')
 
 def chart2(request):
-	return render_to_response('cwa/teste_chart2.html')	
+	return render_to_response('cwa/_teste/teste_chart2.html')	
 
 def resize(request):
-	return render_to_response('cwa/teste_resize.html')
+	return render_to_response('cwa/_teste/teste_resize.html')
+	
+def chart_scroll(request):
+	return render_to_response('cwa/_teste/teste_chart_scroll.html')
