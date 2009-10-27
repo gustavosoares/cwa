@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib import admin
 from puc.modelo.models import Modelo
 from puc.modelo.forms import MyModeloAdminForm
@@ -6,6 +7,9 @@ from puc.core import json
 
 
 class ModeloAdmin(admin.ModelAdmin):
+	"""Para o funcionamento desejado na interface administrativa do django, foi preciso reescrever
+	os metodos add_view e o change_view, para que fosse possivel adicionar a area onde o pesquisador
+	poderá criar os modelos"""
 	
 	list_display = ('nome', 'descricao', 'metadado',)
 	form = MyModeloAdminForm
