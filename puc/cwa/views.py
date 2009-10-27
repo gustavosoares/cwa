@@ -21,7 +21,6 @@ def index(request):
 	modelo = modelo_repository.get_modelo_por_nome(settings.MODELO)
 	assert modelo != None, 'Modelo configurado nao existe no sistema!'
 	metadado = modelo.metadado
-	print 'metadado: %s' % metadado
 	#Ex.:portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio
 	colunas = metadado.split('&')
 	for coluna in colunas:

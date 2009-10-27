@@ -113,6 +113,7 @@ class MonitorRepository(Singleton):
 				var['valor'] = new_row[i]
 				var['nome'] = coluna_nome
 				#severidade do evento: normal, warning, alarme
+				var['id'] = row[0]
 				var['severidade'] = row[1]
 				metadados[ordem] = var
 				i = i + 1

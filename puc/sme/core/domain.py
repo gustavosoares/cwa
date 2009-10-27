@@ -3,6 +3,7 @@ from time import gmtime, strftime
 class Evento():
 	"""Classe que representa um evento no sme"""
 	def __init__(self, monitor, alarme, metadados):
+		self.id = metadados[1]['id']
 		self.monitor = monitor
 		self.alarme = alarme
 		self.descricao_colunas = [] #array com a descriacao das colunas
