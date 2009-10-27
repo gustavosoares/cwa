@@ -9,6 +9,10 @@ class ModeloRepository(Singleton):
 	def get_modelo_por_nome(self, nome_modelo):
 		"""retorna o modelo por nome"""
 		return Modelo.objects.get(nome=nome_modelo)
+
+	def get_modelo_por_id(self, id_modelo):
+		"""retorna o modelo por id"""
+		return Modelo.objects.get(id=id_modelo)
 		
 	def get_modelo_settings(self, nome_modelo):
 		"""retorna um json das configuracoes do modelo"""
