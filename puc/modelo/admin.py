@@ -38,8 +38,9 @@ class ModeloAdmin(admin.ModelAdmin):
 	#fields = ('nome', 'descricao',)
 	
 	def add_view(self, request, form_url='', extra_context=None):
-		print 'add vieww personalizada'
-		"The 'add' admin view for this model."
+		"""The 'add' admin view for this model."""
+		print '##add view personalizada'
+		
 		model = self.model
 		opts = model._meta
 
@@ -53,7 +54,6 @@ class ModeloAdmin(admin.ModelAdmin):
 			form = ModelForm(request.POST, request.FILES)
 			if form.is_valid():
 				form_validated = True
-				print 'FORM: %s' % form
 				new_object = self.save_form(request, form, change=False)
 			else:
 				form_validated = False

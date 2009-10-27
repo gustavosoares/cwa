@@ -9,9 +9,9 @@ class RelatorioFactory(Singleton):
 		"""metodo estatico para retornar o relatorio"""
 		if formato == 'tabular':
 			return domain.RelatorioTabular()
-		elif formato == 'grafico_linha':
+		elif formato == 'grafico-linha':
 			return domain.RelatorioGraficoLinha()
-		elif formato == 'grafico_barra':
+		elif formato == 'grafico-barra':
 			return domain.RelatorioGraficoBarra()
 		else:
 			return None

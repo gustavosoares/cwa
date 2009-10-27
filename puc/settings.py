@@ -3,6 +3,10 @@ import logging
 
 LOG_FILENAME = '/tmp/django-cwa.log'
 
+#CONFIGURACOES:
+MODELO = "modelo-01"
+TIPO_RELATORIO = "tabular"
+
 logging.basicConfig(
     level = logging.DEBUG,
     format = '%(asctime)s %(levelname)s %(message)s',

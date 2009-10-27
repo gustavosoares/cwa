@@ -75,7 +75,8 @@ def index(request):
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela
-			relatorio = factory.RelatorioFactory().get_relatorio('tabular')
+			print '## Tipo de relatorio configurado: %s' % settings.TIPO_RELATORIO
+			relatorio = factory.RelatorioFactory().get_relatorio(settings.TIPO_RELATORIO)
 			relatorio.produto = produto
 			relatorio.alarme = alarme
 			relatorio.monitor = monitor
@@ -83,7 +84,7 @@ def index(request):
 			relatorio.descricao_colunas = colunas_desc
 
 
-			relatorio_linha = factory.RelatorioFactory().get_relatorio('grafico_linha')
+			relatorio_linha = factory.RelatorioFactory().get_relatorio('grafico-linha')
 			relatorio_linha.produto = produto
 			relatorio_linha.alarme = alarme
 			relatorio_linha.monitor = monitor
@@ -96,7 +97,7 @@ def index(request):
 			print 'grafico: %s(%s)' % (grafico, type(grafico))
 			xml = relatorio_linha.get_xml()
 			
-			print 'xml do relatorio: \n%s' % xml
+			print '####xml do relatorio: \n%s' % xml
 
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, {
 		'produtos_alarmes' : produtos_alarmes,

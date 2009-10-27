@@ -16,8 +16,8 @@
 		/*position: relative;*/
 		position: left;
 		width:100%;
-		border: 1px solid;
-		background: white;
+		border: 2px solid;
+		background: PowderBlue;
 		font-family: verdana, arial, sans-serif;
 		font-size: 10px;
 	}
@@ -81,17 +81,15 @@
 	  font-size: 14px;
 	  text-align: center;
 	  color: #fff;
-	  background-color: CornflowerBlue;
+	  background-color: red;
 	}
 
 	#portal .block .content {
 	  padding: 5px;
 	}
 
-/*
-	nao precisa na interface para o usuario
 	#portal .block .block-toggle {
-	  background-image: url(/media/images/block-slide.png);
+	  background-image: url(images/block-slide.png);
 	  display: block;
 	  float: right;
 	  width: 7px;
@@ -100,7 +98,7 @@
 	  background-position: center;
 	  cursor: pointer;
 	}
-*/
+
 	/* Fim das visoes */
 
 	/* inicio */
@@ -113,12 +111,10 @@
 	  border: 1px dashed #f00;
 	}
 
-/*
-	nao precisa na interface para o usuario
 	#portal .block-list-handle, #portal .handle {
 	  cursor: move;
 	}
-*/
+
 	#portal #portal-column-block-list .block .block-toggle {
 	  display: none;
 	}
@@ -134,22 +130,9 @@
 	
 {% block javascript %}
 
-<script type="text/javascript" src="/media/js/portal.js"></script>
-
 <script type="text/javascript">
-	var settings = {{ settings|safe }}
-	
-	function init() {
-		//console.log("body loaded")
-		for (var container in settings) {
-	      settings[container].each(function (block) {
-	        $(container).appendChild($(block));
-	      });
-	    }
-		//portal = new Portal();
-		//portal.applySettings(settings);
-	}
-  Event.observe(window, 'load', init, false);
+
+
 </script>
 
 
@@ -165,13 +148,19 @@
 
 <div id="portal">
       <div class="portal-column" id="portal-column-0">
+		<h2>Coluna 0</h2>
 	  </div>
       <div class="portal-column" id="portal-column-1">
+		<h2>Coluna 1</h2>
+		<CENTER>
+		<iframe name="iframe_sm2" src="/sme2/" frameborder="0" width="98%" height="400"></iframe>
+		</CENTER>
 	  </div>
       <!--div class="portal-column" id="portal-column-2">
 		<h2>Coluna 2</h2>
 	  </div-->
       <div class="portal-column" id="portal-column-bottom">
+		<h2>Bottom</h2>
 	  </div>
 		<!--div class="portal-column" id="portal-column-block-list" style="display: none;"-->
 		<div class="portal-column" id="portal-column-block-list" style="display: none;">
@@ -179,18 +168,16 @@
 			<p>Selecione uma visão e arraste para uma das áreas disponíveis</p>
 			<!-- Visoes vao aqui-->
 			<!-- Visao tabular-->
-			<div class="block" id="block-tabular">
+			<div class="block">
 				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão tabular</h3>
 				<div class="content">
-					<CENTER>
-					<iframe name="iframe_sm2" src="/sme2/" frameborder="0" width="98%" height="400"></iframe>
-					</CENTER>
+					<h2>conteudo visao tabular</h2>
 				</div>
 			</div>
 			<!-- fim visao tabular-->
 			
 			<!-- Visao hierarquica-->
-			<div class="block" id="block-hierarquica">
+			<div class="block">
 				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão hierárquica</h3>
 				<div class="content">
 					<h2>conteudo visao hierarquica</h2>
@@ -199,12 +186,10 @@
 			<!-- fim visao hierarquica-->
 			
 			<!-- Visao relatorio-->
-			<div class="block" id="block-relatorio">
+			<div class="block">
 				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão relatório</h3>
 				<div class="content">
-					<CENTER>
-					<iframe name="iframe_relatorio" src="/relatorio/" frameborder="0" width="98%" height="400"></iframe>
-					</CENTER>
+					<h2>conteudo visao relatorio</h2>
 				</div>
 			</div>
 			<!-- fim visao hierarquica-->
