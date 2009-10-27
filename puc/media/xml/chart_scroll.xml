@@ -1,5 +1,6 @@
 
 <chart>
+	<license>FT421-71A.E2AT5D8RJ4.B-4ZRMDVL</license> 
 <axis_value mode='stretch' />
           	<axis_category skip='23' size='10' alpha='50' />
 <axis_ticks minor_thickness='1' 
@@ -23,10 +24,10 @@
 <chart_type>line</chart_type> 
    
       <chart_rect x='50' y='50' width='600' height='400' />
-<draw>     
-      <rect layer='background'  x='50' y='170' width='600' height='25' fill_alpha='20' />   
-      <rect layer='background' x='48' y='194' width='604' height='22' fill_alpha='40' />   
-   </draw> 
+<!--draw>     
+      <rect layer='background'  x='50' y='490' width='600' height='25' fill_alpha='20' />   
+      <rect layer='background' x='48' y='494' width='604' height='22' fill_alpha='40' />   
+   </draw--> 
    
      	<chart_pref line_thickness='1' point_shape='none' fill_shape='false' />
 
