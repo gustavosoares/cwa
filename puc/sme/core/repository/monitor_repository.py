@@ -51,6 +51,8 @@ class MonitorRepository(Singleton):
 		for coluna in rows:
 			descricao = coluna[1]
 			nome = coluna[2]
+			if nome == 'pad_datahora':
+				nome = 'pad_datahoraalarme'
 			tipo = coluna[3]
 			ordem = coluna[4]
 			#colunas_desc.append(descricao)
