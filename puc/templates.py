@@ -10,6 +10,7 @@ TEMPLATE_VER_EVENTO = 'sme2/ver_evento.html'
 
 #VISAO RELATORIO
 TEMPLATE_RELATORIO_INDEX = 'relatorio/index.html'
+TEMPLATE_RELATORIO_INDEX_GRAFICO = 'relatorio/index-grafico.html'
 
 #CWA
 TEMPLATE_CWA_INDEX = 'cwa/index.html'

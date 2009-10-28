@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Relatorio{% endblock %}
+
+{% block stylesheet %}
+
+<link rel="stylesheet" type="text/css" href="/media/css/forms.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/widgets.css" />
+
+<style type="text/css">
+
+#conteudo {
+	margin: 0px auto;
+	padding: 1px;
+	/*position: relative;*/
+	width:100%;
+	border: 0px solid;
+	background: PowderBlue;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+}
+
+#colunas {
+	margin: 1px auto;
+	border: 0px solid;
+	text-align: center;
+}
+
+#relatorio {
+	margin: 1px auto;
+	border: 0px solid;
+	text-align: center;
+	background: WhiteSmoke;
+}
+</style>
+
+{% endblock %}
+	
+{% block javascript %}
+<script src="/media/js/jsi18n.js" type="text/javascript"></script>
+<script src="/media/js/core.js"></script>
+<script src="/media/js/application.js" type="text/javascript"></script>
+<script src="/media/js/dateparse.js"></script>
+<script src="/media/js/timeparse.js"></script>
+<script src="/media/js/calendar.js"></script>
+<script src="/media/js/admin/DateTimeShortcuts.js" type="text/javascript"></script>
+<script src="/media/js/sme2_relatorio.js"></script>
+
+<script type="text/javascript">
+	var produtos_alarmes_json = {{ produtos_alarmes|safe }}
+	var alarmes_monitores_json = {{ alarmes_monitores|safe }}
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+<div id="conteudo">
+<center><h2>Relatório</h2></br></center>
+{% if erro %}
+<center><h3><font color=red>Por favor, preenche todos os campos</font></h3></center>
+{% endif %}
+<form name='frm' method=POST action=''>
+	<span>Produto/Alarme/Monitor: </span><br>
+	<!-- produto -->
+	<select name=produto onChange='adicionaAlarmes(this.options[this.selectedIndex].value);'>
+		<option value="0">[Selecione um produto]</option>
+		{% for produto in produtos %}
+			<option id="prd_{{ produto.prd_id }}" value="{{ produto.prd_id }}" {% ifequal produto.prd_id|safe request.POST.produto|safe %} selected{% endifequal %}>{{ produto.prd_nome }}</option>
+		{% endfor %}
+	</select>
+	
+	<!-- alarme -->
+	<select name=alarme onChange='adicionaMonitores(this.options[this.selectedIndex].value);'>
+		{% if alarmes %}
+			<option value="0">[Selecione um alarme]</option>
+			{% for alarme in alarmes %}
+					<option id="alm_{{ alarme.prd_id }}" value="{{ alarme.alm_id }}" {% ifequal alarme.alm_id|safe request.POST.alarme|safe %} selected{% endifequal %}>{{ alarme.alm_nome }}</option>
+			{% endfor %}
+		{% else %}
+				<option value="0" selected>[Selecione um alarme]</option>
+		{% endif %}
+	</select>
+	<!-- monitor -->
+	<!--select name=monitor onChange='document.frm.submit();'-->
+	<select name=monitor onChange=''>
+		{% if monitores %}
+			<option value="0">[Selecione um monitor]</option>
+			{% for monitor in monitores %}
+				<option id="mon_{{ monitor.mon_id }}" value="{{ monitor.mon_id }}" {% ifequal monitor.mon_id|safe request.POST.monitor|safe %} selected{% endifequal %}>{{ monitor.mon_nome }}</option>
+			{% endfor %}
+		{% else %}
+			<option value="0" selected>[Selecione um monitor]</option>
+		{% endif %}
+	</select>
+	<!-- Periodo -->
+	<h3>Período</h3>
+	<table>
+	<tr>
+		<th><label for="id_begin_date">Início:</label></th>
+		<td><input id="id_data_inicio" type="text" class="vDateField" name="data_inicio" size="10" value="{{request.POST.data_inicio}}"/></td>
+	</tr>
+	<tr>
+		<th><label for="id_end_date">Término:</label></th>
+		<td><input id="id_data_fim" type="text" class="vDateField" name="data_fim" size="10" value="{{request.POST.data_fim}}"/></td>
+	</tr>
+	</table>
+	<center><input type="submit" value="gerar relatório"></center>
+</form>
+</br>
+<div id="colunas"></div>
+	<div id="relatorio">
+		{% if relatorio %}
+			{{ relatorio.get_html|safe }}
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}
+

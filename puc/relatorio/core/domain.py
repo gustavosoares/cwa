@@ -70,11 +70,10 @@ class RelatorioTabular(Relatorio):
 		Relatorio.__init__(self)
 		self.formato = 'tabular'
 		self.template_name = 'relatorio/formato/tabela.html'
-		#Relatorio.__init__(self)
 	
 	def get_html(self):
 		self.test()
-		html_relatorio = render_to_string('relatorio/formato/tabela.html', {
+		html_relatorio = render_to_string(self.template_name, {
 		'produto' : self.produto,
 		'alarme' : self.alarme,
 		'monitor' : self.monitor,
@@ -94,6 +93,13 @@ class RelatorioGraficoLinha(Relatorio):
 		self.template_name = 'relatorio/formato/grafico_linha.html'
 		self._grafico = factory.GraficoFactory.get_grafico('linha')
 
+	def get_html(self):
+		"""retorna o html do relatorio"""
+		self.test()
+		html_grafico = self._grafico.html()
+		html_relatorio = render_to_string(self.template_name, {'html_grafico' : html_grafico})
+		
+		return html_relatorio
 
 class RelatorioGraficoBarra(RelatorioGraficoLinha):
 	"""relatorio grafico de barra"""
@@ -105,6 +111,9 @@ class RelatorioGraficoBarra(RelatorioGraficoLinha):
 		self.template_name = 'relatorio/formato/grafico_barra.html'
 		self._grafico = factory.GraficoFactory.get_grafico('barra')
 
+	def get_html(self):
+		"""retorna o html do relatorio"""
+		return self._grafico.html()
 				
 class Grafico(object):
 	"""interface para o grafico"""
@@ -112,7 +121,7 @@ class Grafico(object):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
 		self.width = '800'
 		self.height = '500'
-		self.name = None
+		self.name = 'grafico-relatorio'
 		self.type = None
 		self.bgcolor = '#666666'
 		self.library_path = '/media/swf/charts_library'
@@ -124,10 +133,29 @@ class Grafico(object):
 		self.pontos = {} 
 		#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
 		self._xml = None
+		self.xml_source = "/relatorio/xml"
+		
+		#atributos usados para montar a url para dar get
+		self.produto_id = None
+		self.alarme_id = None
+		self.monitor_id = None
+		self.data_inicio = None
+		self.data_fim = None
 
 	def __str__(self):
 		return u'grafico: %s' % self.type
+	
+	def xml_http_get(self):
+		"""retorna os parametros do get para gerar o xml de geracao do grafico"""
+		s = 'produto=%s&alarme=%s&monitor=%s&data_inicio=%s&data_fim=%s' % (self.produto_id, 
+		self.alarme_id, self.monitor_id, self.data_inicio, self.data_fim)
 		
+		s_encoded = s.replace('&','%26')
+		print 'xml http get: %s' % s
+		print 'xml http get encoded: %s' % s_encoded
+		
+		return s_encoded
+	
 	def cria_variavel(self, variavel):
 		"""cria uma variavel no grafico"""
 		assert 0, 'o metodo para criacao de uma variavel no grafico precisa ser implementado'
@@ -146,11 +174,11 @@ class Grafico(object):
 	def html(self):
 		"""retorna a tag html embed do grafico"""
 		
-		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_data=%s" 
-		quality="high" bgcolor="%s" WIDTH="%s" HEIGHT="%s" NAME="%s" allowScriptAccess="sameDomain" 
-		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"  TYPE="%s" 
-		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml, 
-		self.bgcolor, self.width, self.height, self.name, 
+		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s%%3F%s" 
+		quality="high" bgcolor="%s" width="%s" height="%s" NAME="%s" id="%s "allowScriptAccess="sameDomain" 
+		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"  TYPE="%s" allowFullScreen="true" 
+		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml_source, self.xml_http_get(),
+		self.bgcolor, self.width, self.height, self.name, self.name, 
 		self.scale, self.response_type)
 		
 		return html
