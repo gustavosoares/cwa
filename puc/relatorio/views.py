@@ -193,7 +193,10 @@ def index_grafico(request):
 		'request' : request})
 
 def get_xml(request):
-	"""retorna o xml para ser gerado pelo framework em flash de geracao de graficos"""
+	"""
+	retorna o xml para ser gerado pelo framework em flash de geracao de graficos
+	Exemplo de request: http://localhost:10000/relatorio/xml?produto=35&alarme=125&monitor=396&data_inicio=2009-08-01&data_fim=2009-10-28
+	"""
 	print '[XML] GET: %s' % request.GET
 	
 	relatorio = None
