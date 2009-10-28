@@ -109,6 +109,7 @@ class RelatorioGraficoBarra(RelatorioGraficoLinha):
 class Grafico(object):
 	"""interface para o grafico"""
 	def __init__(self):
+		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
 		self.width = '800'
 		self.height = '500'
 		self.name = None
@@ -190,13 +191,13 @@ class GraficoLinha(Grafico):
 		else:
 			header = '''
 <chart>
-
+	<license>%s</license>
 	<axis_category size='16' alpha='85' shadow='medium' />
 	<axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
 	<axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
 	<chart_type>%s</chart_type>
 	<chart_data>\n
-			''' % self.type
+			''' % (self.license, self.type)
 		
 			body = []
 			#eixo x
@@ -232,15 +233,7 @@ class GraficoLinha(Grafico):
 			return self._xml
 	
 	xml = property(get_xml)
-	
-"""
-	def cria_variavel(self, variavel):
-		x = ponto.get('x', None)
-		y = ponto.get('y', None)
-		assert x != None, "o formato do ponto passado é ponto = {'x' = '2','y' = '4'}"
-		assert y != None, "o formato do ponto passado é ponto = {'x' = '2','y' = '4'}"
-		self.pontos.append(ponto)
-"""
+
 		
 class GraficoBarra(GraficoLinha):
 	"""grafico de linha"""

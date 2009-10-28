@@ -1,6 +1,6 @@
 from time import gmtime, strftime
 
-class Evento():
+class Evento(object):
 	"""Classe que representa um evento no sme"""
 	def __init__(self, monitor, alarme, metadados):
 		self.id = metadados[1]['id']
@@ -35,4 +35,14 @@ class Evento():
 #		return self.dados
 		
 	def __str__(self):
-		return u'Evento do monitor id %s' % self.monitor.mon_id
+		return self.__repr__()
+		
+	def __repr__(self):
+		meta = []
+		for ordem, values in self.metadados.items():
+			meta.append('#####\n')
+			for k,v in values.items():
+				meta.append('\t%s -> %s\n' % (k,v))
+		
+		meta = ''.join(meta)
+		return u'########%s:\n %s' % (self.id, meta)

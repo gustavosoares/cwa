@@ -1,4 +1,5 @@
 #-*- coding:utf-8 -*-
+import copy
 from puc.core.singleton import Singleton
 from django.conf import settings
 from puc.core.db import Database
@@ -27,7 +28,14 @@ class MonitorRepository(Singleton):
 		Monitor.objects.filter(mon_id=id).update(mon_status='X')
 
 	def get_colunas_por_monitor_id(self,id):
-		"""retorna duas lista de colunas (desc e nome) de um monitor id"""
+		"""
+		retorna dicionario com os metadados das colunas para o monitor id
+		Ex.: {u'rad_resposta': {'ordem': 3L, 'tipo': u'T', 'descricao': u'Timeout'}, 
+		u'pad_datahora': {'ordem': 1L, 'tipo': u'D', 'descricao': u'Data / Hora'}, 
+		u'rad_total': {'ordem': 4L, 'tipo': u'N', 'descricao': u'Total'}, 
+		u'pad_erro': {'ordem': 5L, 'tipo': u'T', 'descricao': u'Erro'}, 
+		u'pad_nomemaquina': {'ordem': 2L, 'tipo': u'T', 'descricao': u'Servidor'}}
+		"""
 		sql = """
 		select mon_id, col_cabecalho, col_nomefisico, col_tipo, col_ordem
 		from coluna 
@@ -77,14 +85,16 @@ class MonitorRepository(Singleton):
 				aux = aux + coluna + ', '
 			count = count + 1
 		
+		#alterado em 28/10/2009
+		#de pad_datahora para pad_datahoraalarme
 		sql = ""
 		if data_inicio_str and data_fim_str:
 			sql = """
 			select pad_id, pad_tipoalarme, %s
 			from %s
 			where mon_id = %s
-			AND pad_datahora  >= '%s 00:00:00'
-			AND pad_datahora <= '%s 23:59:59'
+			AND pad_datahoraalarme  >= '%s 00:00:00'
+			AND pad_datahoraalarme <= '%s 23:59:59'
 			ORDER BY pad_datahora DESC LIMIT 2000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id, data_inicio_str, data_fim_str)
 		else:
@@ -94,14 +104,19 @@ class MonitorRepository(Singleton):
 			where mon_id = %s
 			AND pad_verificado  = 'N'
 			AND pad_tipoalarme <> 'X'
-			ORDER BY pad_datahora DESC LIMIT 2000
+			ORDER BY pad_datahoraalarme DESC LIMIT 2000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		db = Database()
 		db.execute(sql)
 		rows = db.rows_fetchall()
 		
 		eventos = []
-		
+		"""
+		O dicionario controla_duplicados armazena o nome do host e a hora do evento.
+		Ela é usada para evitar que se tenha dado duplicado no relatorio,
+		garantido que sempre esteja o maior valor.
+		"""
+		controla_duplicados = {}
 		#finalizo a construcao do metadado do evento
 		for row in rows:
 			new_row = row[2:]
@@ -117,8 +132,10 @@ class MonitorRepository(Singleton):
 				var['severidade'] = row[1]
 				metadados[ordem] = var
 				i = i + 1
+				
+			evento = domain.Evento(monitor, alarme, metadados)
 			
-			eventos.append(domain.Evento(monitor, alarme, metadados))
+			eventos.append(copy.deepcopy(evento))
 			
 		return eventos
 		
