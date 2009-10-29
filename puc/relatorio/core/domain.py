@@ -120,7 +120,7 @@ class Grafico(object):
 	def __init__(self):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
 		self.width = '800'
-		self.height = '500'
+		self.height = '650'
 		self.name = 'grafico-relatorio'
 		self.type = None
 		self.bgcolor = '#666666'
@@ -220,9 +220,24 @@ class GraficoLinha(Grafico):
 			header = '''
 <chart>
 	<license>%s</license>
-	<axis_category size='16' alpha='85' shadow='medium' />
-	<axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
-	<axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
+	<axis_category size='12' 
+		alpha='85' 
+		shadow='medium' 
+		orientation='diagonal_up'/>
+	<axis_ticks value_ticks='false' 
+		category_ticks='true' 
+		major_thickness='2' 
+		minor_thickness='1' 
+		minor_count='1' 
+		minor_color='222222' 
+		position='inside' />
+	<axis_value shadow='medium' 
+		min='-40' 
+		size='10' 
+		color='ffffff' 
+		alpha='65' 
+		steps='6' 
+		show_min='false' />
 	<chart_type>%s</chart_type>
 	<chart_data>\n
 			''' % (self.license, self.type)
@@ -231,14 +246,14 @@ class GraficoLinha(Grafico):
 			#eixo x
 			body.append('<row>\n')
 			body.append('\t\t<null/>\n')
-		
+			print 'pontos no grafico: %s ' % self.pontos
 			#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
 			for var, pontos in self.pontos.items():
 				x_axis = self.pontos[var]['x']
 				#print 'x_axis: %s' % x_axis
 				for x in x_axis:
 					body.append('\t\t<string>%s</string>\n' % x)
-				break #break por que o x eh igual para todo mundo
+				break #break para gerar o grafico da primeira variavel
 		
 			body.append('\t</row>\n')
 		
@@ -252,6 +267,7 @@ class GraficoLinha(Grafico):
 				for y in y_axis:
 					body.append('\t\t<number tooltip="%s">%s</number>\n' % (y, y))
 				body.append('\t</row>\n')
+				break #break para gerar grafico da primeira variavel
 			
 			body = ''.join(body)
 			#fim
