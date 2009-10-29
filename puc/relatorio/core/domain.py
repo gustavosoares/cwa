@@ -28,24 +28,76 @@ class Relatorio(object):
 	
 	def get_xml(self):
 		self.test()
+		tabela, servidores, variaveis = self.converter_para_tabela()
+		self._grafico.tabela = tabela
+		self._grafico.servidores = servidores
+		self._grafico.variaveis = variaveis
+		#retorno o xml do grafico
+		return self._grafico.xml
+
+	def converter_para_tabela(self):
+		"""
+		metodo para converter os eventos para o formato em tabela utilizado pela
+		api flash de geração de gráficos.
 		
+		Exemplo para dar sort no dicionario:
+		langs = author.keys()
+		langs.sort()
+
+		for language in langs:
+		        print language,"is the child of",author[language]
+		"""
+		self.test()
+		
+		"""
+		tabela com os eventos normalizados
+		ex: { data_hora: 
+			{'a': {'VARIAVEL' : VALOR }}, 
+			{'b': {'VARIAVEL' : VALOR }}
+			}
+		"""
+		tabela = {}
+		servidores = {}
+		variaveis = {}
+		#primeira passada para pegar os servidores
+		for evento in self.eventos:
+			servidor = evento.servidor
+			servidores[servidor] = None
+		
+		servidores = servidores.keys()
+		servidores.sort()
+		
+		#segunda passada para criar a tabela vazia
+		for evento in self.eventos:
+			data_hora = evento.get_data_hora_formatada()
+			servidor = evento.servidor
+			if not tabela.has_key(data_hora):
+				s = tabela.get(data_hora,{})
+				for servidor_aux in servidores:
+					s[servidor_aux] = {}
+					for ordem,metadado in evento.metadados.items():
+						if metadado['tipo'] == 'N':
+							descricao = metadado['descricao']
+							variaveis[descricao] = None
+							#valor = int(metadado['valor'])
+							s[servidor_aux][descricao] = None
+				tabela[data_hora] = s		
+
+		variaveis = variaveis.keys()
+		variaveis.sort()
+				
+		#terceira passada para popular a tabela
 		for evento in self.eventos:
 			data_hora = evento.get_data_hora_formatada()
 			servidor = evento.servidor
 			for ordem,metadado in evento.metadados.items():
 				if metadado['tipo'] == 'N':
 					descricao = metadado['descricao']
-					valor = metadado['valor']
-					variavel = '%s - %s' % (servidor, descricao)
-					variavel = variavel.encode('utf-8')
-					#print '[Relatorio] variavel: %s' % variavel
-					self._grafico.cria_variavel(variavel)
-					
-					#adiciono os pontos ao xml
-					self._grafico.add_ponto(variavel, data_hora, int(valor))
-					
-		#retorno o xml do grafico
-		return self._grafico.xml
+					valor = int(metadado['valor'])
+					tabela[data_hora][servidor][descricao] = valor
+		
+		return tabela, servidores, variaveis
+
 	
 	def test(self):
 		"""metodo de validacao"""
@@ -127,7 +179,9 @@ class Grafico(object):
 		self.scale = "noscale" 
 		self.align = "middle"
 		self.response_type = "application/x-shockwave-flash"
-		self.pontos = {} 
+		self.tabela = {} 
+		self.servidores = []
+		self.variaveis = []
 		#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
 		self._xml = None
 		self.xml_source = "/relatorio/xml"
@@ -152,65 +206,13 @@ class Grafico(object):
 		print 'xml http get encoded: %s' % s_encoded
 		
 		return s_encoded
-	
-	def cria_variavel(self, variavel):
-		"""cria uma variavel no grafico"""
-		assert 0, 'o metodo para criacao de uma variavel no grafico precisa ser implementado'
-	
-	def add_ponto(self, variavel, *args):
-		"""adiciona um ponto no grafico"""
-		assert 0, 'o metodo para criacao de uma variavel no grafico precisa ser implementado'
 		
+
 	def get_xml(self):
 		"""retorna o xml para o grafico"""
-		assert 0, 'o metodo para obtencao do xml nao foi implementado'
-		#raise NotImplementedError
-	
-	xml = property(get_xml)
-	
-	def html(self):
-		"""retorna a tag html embed do grafico"""
+		assert len(self.servidores) > 0, 'nenhum servidor para geracao do grafico está vazia'
+		assert len(self.variaveis) > 0, 'nenhuma variavel para geracao do grafico está vazia'
 		
-		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s%%3F%s" 
-		quality="high" bgcolor="%s" width="%s" height="%s" NAME="%s" id="%s "allowScriptAccess="sameDomain" 
-		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"  TYPE="%s" allowFullScreen="true" 
-		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml_source, self.xml_http_get(),
-		self.bgcolor, self.width, self.height, self.name, self.name, 
-		self.scale, self.response_type)
-		
-		return html
-
-class GraficoLinha(Grafico):
-	"""grafico de linha"""
-	def __init__(self):
-		Grafico.__init__(self)
-		self.type = 'line'
-
-	def cria_variavel(self, variavel):
-		"""cria uma variavel no grafico"""
-		assert variavel != None, "por favor especificar o nome da variavel"
-		assert len(variavel) > 0, "por favor especificar o nome da variavel"
-		if not self.pontos.has_key(variavel):
-			print '## [Grafico] criando variavel: %s' % variavel
-			var = self.pontos.get(variavel,{})
-			x_aux = var.get('x',[])
-			y_aux = var.get('y',[])
-			var['x'] = x_aux
-			var['y'] = y_aux
-			self.pontos[variavel] = var
-		
-	def add_ponto(self, variavel, x, y):
-		"""adiciona um ponto no grafico"""
-		x_aux = self.pontos[variavel]['x']
-		y_aux = self.pontos[variavel]['y']
-		x_aux.append(x)
-		y_aux.append(y)
-		self.pontos[variavel]['x'] = x_aux
-		self.pontos[variavel]['y'] = y_aux
-	
-	def get_xml(self):
-		#print '\n##[GraficoLinha] pontos: \n%s\n' % self.pontos
-		assert len(self.pontos) > 0, 'nenhum ponto existe no grafico'
 		if self._xml:
 			return self._xml
 		else:
@@ -238,34 +240,37 @@ class GraficoLinha(Grafico):
 	<chart_type>%s</chart_type>
 	<chart_data>\n
 			''' % (self.license, self.type)
-		
+
 			body = []
-			#eixo x
+			
+			#primeira linha da tabela
 			body.append('<row>\n')
 			body.append('\t\t<null/>\n')
-			print 'pontos no grafico: %s ' % self.pontos
-			#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
-			for var, pontos in self.pontos.items():
-				x_axis = self.pontos[var]['x']
-				#print 'x_axis: %s' % x_axis
-				for x in x_axis:
-					body.append('\t\t<string>%s</string>\n' % x)
-				break #break para gerar o grafico da primeira variavel
-		
-			body.append('\t</row>\n')
-		
-			#eixo y
-			for var, pontos in self.pontos.items():
-				if var == 'null':
-					continue
-				body.append('\t<row>\n')
-				body.append('\t\t<string>%s</string>\n' % var)
-				y_axis = self.pontos[var]['y']
-				for y in y_axis:
-					body.append('\t\t<number tooltip="%s">%s</number>\n' % (y, y))
-				body.append('\t</row>\n')
-				break #break para gerar grafico da primeira variavel
 			
+			horas = self.tabela.keys()
+			horas.sort()
+			
+			for data_hora in horas:
+				body.append('\t\t<string>%s</string>\n' % data_hora)
+
+			body.append('</row>\n')
+			
+			#demais linhas
+			
+			for servidor in self.servidores:
+				for variavel in self.variaveis:
+					chart_label = '%s - %s' % (servidor, variavel)
+					chart_label = chart_label.encode('utf-8')
+					body.append('\t<row>\n')
+					body.append('\t\t<string>%s</string>\n' % chart_label)
+					for data_hora in horas:
+						y = self.tabela[data_hora][servidor][variavel]
+						if y:
+							body.append('\t\t<number tooltip="%s">%s</number>\n' % (y, y))
+						else:
+							body.append('\t\t<null/>\n')
+					body.append('\t</row>\n')
+
 			body = ''.join(body)
 			#fim
 			footer = '\t</chart_data>\n</chart>\n'
@@ -274,6 +279,24 @@ class GraficoLinha(Grafico):
 			return self._xml
 	
 	xml = property(get_xml)
+	
+	def html(self):
+		"""retorna a tag html embed do grafico"""
+		
+		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s%%3F%s" 
+		quality="high" bgcolor="%s" width="%s" height="%s" NAME="%s" id="%s "allowScriptAccess="sameDomain" 
+		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"  TYPE="%s" allowFullScreen="true" 
+		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml_source, self.xml_http_get(),
+		self.bgcolor, self.width, self.height, self.name, self.name, 
+		self.scale, self.response_type)
+		
+		return html
+
+class GraficoLinha(Grafico):
+	"""grafico de linha"""
+	def __init__(self):
+		Grafico.__init__(self)
+		self.type = 'line'
 
 		
 class GraficoBarra(GraficoLinha):
