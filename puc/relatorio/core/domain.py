@@ -146,7 +146,11 @@ class RelatorioGraficoLinha(Relatorio):
 		"""retorna o html do relatorio apenas se nao ocorrer nenhum erro nas assertivas"""
 		self.test()
 		html_grafico = self._grafico.html()
-		html_relatorio = render_to_string(self.template_name, {'html_grafico' : html_grafico})
+		html_relatorio = render_to_string(self.template_name, {
+		'produto' : self.produto,
+		'alarme' : self.alarme,
+		'monitor' : self.monitor,
+		'html_grafico' : html_grafico})
 		
 		return html_relatorio
 
@@ -162,7 +166,15 @@ class RelatorioGraficoBarra(RelatorioGraficoLinha):
 
 	def get_html(self):
 		"""retorna o html do relatorio apenas se nao ocorrer nenhum erro nas assertivas"""
-		return self._grafico.html()
+		self.test()
+		html_grafico = self._grafico.html()
+		html_relatorio = render_to_string(self.template_name, {
+		'produto' : self.produto,
+		'alarme' : self.alarme,
+		'monitor' : self.monitor,
+		'html_grafico' : html_grafico})
+
+		return html_relatorio
 				
 class Grafico(object):
 	"""interface para o grafico"""
@@ -175,14 +187,12 @@ class Grafico(object):
 		self.bgcolor = '#666666'
 		self.library_path = '/media/swf/charts_library'
 		self.src = "/media/swf/charts.swf"
-		#self.xml_source = '/media/xml/sample.xml'
 		self.scale = "noscale" 
 		self.align = "middle"
 		self.response_type = "application/x-shockwave-flash"
 		self.tabela = {} 
 		self.servidores = []
 		self.variaveis = []
-		#Ex.: pontos = {'variavel'= {'x' = [0,1,2],'y' = [1,2,3]}}
 		self._xml = None
 		self.xml_source = "/relatorio/xml"
 		
