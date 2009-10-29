@@ -88,11 +88,13 @@
 {% prepopulated_fields_js %}
 
 </div>
+{% if mostrar_escolha_modelos %}
 <!-- personalizacao comeca aqui -->
 
 <center><h1>Crie o seu modelo</h1></center>
 {% include "admin/modelo/modelo_01.html" %}
 
 <!-- fim do modelo-->
+{% endif %}
 </form></div>
 {% endblock %}

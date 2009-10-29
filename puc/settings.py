@@ -93,7 +93,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'puc.sme',
     'puc.sme2',
     'puc.cwa',
     'puc.modelo',
