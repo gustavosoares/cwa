@@ -45,7 +45,7 @@ class Relatorio(object):
 		langs.sort()
 
 		for language in langs:
-		        print language,"is the child of",author[language]
+				print language,"is the child of",author[language]
 		"""
 		self.test()
 		
@@ -169,7 +169,7 @@ class Grafico(object):
 	def __init__(self):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
 		self.width = '800'
-		self.height = '650'
+		self.height = '600'
 		self.name = 'grafico-relatorio'
 		self.type = None
 		self.bgcolor = '#666666'
@@ -210,16 +210,24 @@ class Grafico(object):
 
 	def get_xml(self):
 		"""retorna o xml para o grafico"""
-		assert len(self.servidores) > 0, 'nenhum servidor para geracao do grafico está vazia'
-		assert len(self.variaveis) > 0, 'nenhuma variavel para geracao do grafico está vazia'
+		assert 0, 'o metodo para obtencao do xml precisa ser implementado'
+	
+	xml = property(get_xml)
+	
+	def get_xml_header(self):
+		"""retorna o cabeçalho do xml"""
 		
-		if self._xml:
-			return self._xml
-		else:
-			header = '''
+		xml_header = '''
 <chart>
 	<license>%s</license>
-	<axis_category size='12' 
+	
+	<legend transition='dissolve'
+		delay='0'
+		bullet='circle'
+		size='12'
+		/>
+	<axis_category skip='1'
+		size='12' 
 		alpha='85' 
 		shadow='medium' 
 		orientation='diagonal_up'/>
@@ -238,25 +246,81 @@ class Grafico(object):
 		steps='6' 
 		show_min='false' />
 	<chart_type>%s</chart_type>
-	<chart_data>\n
-			''' % (self.license, self.type)
+	
+	<chart_guide horizontal='true'
+		vertical='true'
+		thickness='1' 
+		color='ff4400' 
+		alpha='75' 
+		type='dashed' 
 
-			body = []
+		radius='8'
+		fill_alpha='0'
+		line_color='ff4400'
+		line_alpha='75'
+		line_thickness='4'
+
+		size='10'
+		text_color='ffffff'
+		background_color='ff4400'
+		text_h_alpha='90'
+		text_v_alpha='90' 
+		/>
+		<chart_label position='cursor' />
+
+	<chart_rect
+		   y='100'
+		/>
+
+	<chart_data>\n
+		''' % (self.license, self.type)
+		
+		return xml_header
+	
+	def html(self):
+		"""retorna a tag html embed do grafico"""
+		
+		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s%%3F%s" 
+		quality="high" bgcolor="%s" width="%s" height="%s" NAME="%s" id="%s "allowScriptAccess="sameDomain" 
+		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"	TYPE="%s" allowFullScreen="true" 
+		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml_source, self.xml_http_get(),
+		self.bgcolor, self.width, self.height, self.name, self.name, 
+		self.scale, self.response_type)
+		
+		return html
+
+class GraficoLinha(Grafico):
+	"""grafico de linha"""
+	def __init__(self):
+		Grafico.__init__(self)
+		self.type = 'line'
+
+	def get_xml(self):
+		"""retorna o xml para o grafico"""
+		assert len(self.servidores) > 0, 'nenhum servidor para geracao do grafico está vazia'
+		assert len(self.variaveis) > 0, 'nenhuma variavel para geracao do grafico está vazia'
+
+		if self._xml:
+			return self._xml
+		else:
+			header = self.get_xml_header()
 			
+			body = []
+
 			#primeira linha da tabela
 			body.append('<row>\n')
 			body.append('\t\t<null/>\n')
-			
+
 			horas = self.tabela.keys()
 			horas.sort()
-			
+
 			for data_hora in horas:
 				body.append('\t\t<string>%s</string>\n' % data_hora)
 
 			body.append('</row>\n')
-			
+
 			#demais linhas
-			
+
 			for servidor in self.servidores:
 				for variavel in self.variaveis:
 					chart_label = '%s - %s' % (servidor, variavel)
@@ -277,26 +341,8 @@ class Grafico(object):
 
 			self._xml = header + body + footer
 			return self._xml
-	
-	xml = property(get_xml)
-	
-	def html(self):
-		"""retorna a tag html embed do grafico"""
-		
-		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s%%3F%s" 
-		quality="high" bgcolor="%s" width="%s" height="%s" NAME="%s" id="%s "allowScriptAccess="sameDomain" 
-		swLiveConnect="true" loop="false" scale="%s" salign="TL" align="middle" wmode="opaque"  TYPE="%s" allowFullScreen="true" 
-		PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"/>""" % (self.src, self.library_path, self.xml_source, self.xml_http_get(),
-		self.bgcolor, self.width, self.height, self.name, self.name, 
-		self.scale, self.response_type)
-		
-		return html
 
-class GraficoLinha(Grafico):
-	"""grafico de linha"""
-	def __init__(self):
-		Grafico.__init__(self)
-		self.type = 'line'
+	xml = property(get_xml)
 
 		
 class GraficoBarra(GraficoLinha):
