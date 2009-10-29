@@ -36,9 +36,6 @@ class Relatorio(object):
 				if metadado['tipo'] == 'N':
 					descricao = metadado['descricao']
 					valor = metadado['valor']
-					#crio variaveis no xml (cria apenas se nao existe)
-					#print '[Relatorio] servidor: %s ' % servidor
-					#print '[Relatorio] descricao: %s' % descricao.encode('utf-8')
 					variavel = '%s - %s' % (servidor, descricao)
 					variavel = variavel.encode('utf-8')
 					#print '[Relatorio] variavel: %s' % variavel
@@ -56,7 +53,6 @@ class Relatorio(object):
 		assert self.alarme != None, 'alarme nao foi definido'
 		assert self.monitor != None, 'monitor nao foi definido'
 		assert self.eventos != None, 'eventos nao foi definido'
-		#assert len(self.eventos) > 0, 'não há eventos para processar'
 		assert self.descricao_colunas != None, 'descricao da colunas nao foi definido'
 		assert self.template_name != None, 'nome do template nao foi definido'
 
@@ -72,6 +68,7 @@ class RelatorioTabular(Relatorio):
 		self.template_name = 'relatorio/formato/tabela.html'
 	
 	def get_html(self):
+		"""retorna o html do relatorio apenas se nao ocorrer nenhum erro nas assertivas"""
 		self.test()
 		html_relatorio = render_to_string(self.template_name, {
 		'produto' : self.produto,
@@ -84,7 +81,7 @@ class RelatorioTabular(Relatorio):
 		return html_relatorio
 
 class RelatorioGraficoLinha(Relatorio):
-	"""relatorio grafico de linha"""
+	"""construtor do relatorio grafico de linha"""
 	def __init__(self):
 		"""docstring for __init__"""
 		from puc.relatorio.core import factory
@@ -94,7 +91,7 @@ class RelatorioGraficoLinha(Relatorio):
 		self._grafico = factory.GraficoFactory.get_grafico('linha')
 
 	def get_html(self):
-		"""retorna o html do relatorio"""
+		"""retorna o html do relatorio apenas se nao ocorrer nenhum erro nas assertivas"""
 		self.test()
 		html_grafico = self._grafico.html()
 		html_relatorio = render_to_string(self.template_name, {'html_grafico' : html_grafico})
@@ -102,7 +99,7 @@ class RelatorioGraficoLinha(Relatorio):
 		return html_relatorio
 
 class RelatorioGraficoBarra(RelatorioGraficoLinha):
-	"""relatorio grafico de barra"""
+	"""construtor do relatorio grafico de barra"""
 	def __init__(self):
 		"""docstring for __init__"""
 		from puc.relatorio.core import factory
@@ -112,7 +109,7 @@ class RelatorioGraficoBarra(RelatorioGraficoLinha):
 		self._grafico = factory.GraficoFactory.get_grafico('barra')
 
 	def get_html(self):
-		"""retorna o html do relatorio"""
+		"""retorna o html do relatorio apenas se nao ocorrer nenhum erro nas assertivas"""
 		return self._grafico.html()
 				
 class Grafico(object):

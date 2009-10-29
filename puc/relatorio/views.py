@@ -88,20 +88,6 @@ def index(request):
 			relatorio.eventos = eventos
 			relatorio.descricao_colunas = colunas_desc
 
-			relatorio_linha = factory.RelatorioFactory().get_relatorio('grafico-linha')
-			relatorio_linha.produto = produto
-			relatorio_linha.alarme = alarme
-			relatorio_linha.monitor = monitor
-			relatorio_linha.eventos = eventos
-			
-			relatorio_linha.descricao_colunas = colunas_desc
-			assert relatorio_linha != None, 'tipo de relatorio desconhecido'
-			grafico = relatorio_linha.grafico
-			print 'grafico: %s(%s)' % (grafico, type(grafico))
-			xml = relatorio_linha.get_xml()
-			
-			#print '####xml do relatorio: \n%s' % xml
-
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, {
 		'produtos_alarmes' : produtos_alarmes,
 		'alarmes_monitores' : alarmes_monitores,
@@ -179,8 +165,6 @@ def index_grafico(request):
 			grafico.monitor_id = monitor_id
 			grafico.data_inicio = data_inicio_str
 			grafico.data_fim = data_fim_str
-			
-			print 'relatorio: %s(%s)' % (relatorio, type(relatorio))
 
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX_GRAFICO, {
 		'produtos_alarmes' : produtos_alarmes,
@@ -219,7 +203,6 @@ def get_xml(request):
 			colunas_desc = eventos[0].descricao_colunas
 		else:
 			colunas_desc = []
-		
 		
 		#obtenho o xml do tipo de relatorio configurado
 		relatorio = factory.RelatorioFactory().get_relatorio('grafico-linha')

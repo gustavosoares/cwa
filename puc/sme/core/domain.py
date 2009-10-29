@@ -28,8 +28,11 @@ class Evento(object):
 
 
 	def get_data_hora_formatada(self):
-		"""retorna data e hora formata em string"""
-		return self.data_hora.strftime('%d/%m/%Y %H:%M:%S')
+		"""
+		retorna data e hora do evento formata em string
+		Formato: %%d/%%m/%%Y %%H:%%M:
+		"""
+		return self.data_hora.strftime('%d/%m/%Y %H:%M')
 	
 #	def get_dados(self):
 #		return self.dados
