@@ -1,39 +1,52 @@
 <chart>
-<license>FT421-71A.E2AT5D8RJ4.B-4ZRMDVL</license>
-        <axis_category size='16' alpha='85' shadow='medium' />
-        <axis_ticks value_ticks='false' category_ticks='true' major_thickness='2' minor_thickness='1' minor_count='1' minor_color='222222' position='inside' />
-        <axis_value shadow='medium' min='-40' size='10' color='ffffff' alpha='65' steps='6' show_min='false' />
-        <chart_type>line</chart_type>
+	<license>FT421-71A.E2AT5D8RJ4.B-4ZRMDVL</license>
+	<axis_category size='12' 
+		alpha='85' 
+		shadow='medium' 
+		orientation='diagonal_up'/>
+	<axis_ticks value_ticks='false' 
+		category_ticks='true' 
+		major_thickness='2' 
+		minor_thickness='1' 
+		minor_count='1' 
+		minor_color='222222' 
+		position='inside' />
+	<axis_value shadow='medium' 
+		min='-40' 
+		size='10' 
+		color='ffffff' 
+		alpha='65' 
+		steps='6' 
+		show_min='false' />
+	<chart_type>line</chart_type>
+	<chart_data>
 
-	   <chart_data>
-	      <row>
-	         <null/>
-	         <string>2005</string>
-	         <string>2006</string>
-	         <string>2007</string>
-	         <string>2008</string>
-	      </row>
-	      <row>
-	         <string>Region A</string>
-	         <number tooltip="5">5</number>
-	         <number tooltip="10">10</number>
-	         <number tooltip="30">30</number>
-	         <number tooltip="63">63</number>
-	      </row>
-	      <row>
-	         <string>Region B</string>   
-	         <number>100</number>
-	         <number>20</number>
-	         <number>65</number>
-	         <number>55</number>
-	      </row>
-	      <row>
-	         <string>Region C</string>
-	         <number>56</number>
-	         <number>21</number>
-	         <number>5</number>
-	         <number>90</number>
-	      </row>
-	   </chart_data>
+			<row>
+		<null/>
+		<string>20/09/2009 21:00:54</string>
+		<string>20/09/2009 21:57:06</string>
+		<string>20/09/2009 20:31:18</string>
+		<string>20/09/2009 20:46:44</string>
+		<string>20/09/2009 16:19:44</string>
 
+		<string>20/09/2009 15:32:08</string>
+		<string>20/09/2009 15:16:38</string>
+		<string>20/09/2009 15:46:17</string>
+		<string>20/09/2009 15:02:27</string>
+	</row>
+	<row>
+		<string>riolf239 - Total</string>
+
+		<number tooltip="4">4</number>
+		<number tooltip="76">76</number>
+		<number tooltip="4">4</number>
+		<number tooltip="4">4</number>
+		<number tooltip="72">72</number>
+		<number tooltip="72">72</number>
+
+		<number tooltip="72">72</number>
+		<number tooltip="72">72</number>
+		<number tooltip="64">64</number>
+	</row>
+	</chart_data>
 </chart>
