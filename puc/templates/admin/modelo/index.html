@@ -24,9 +24,9 @@
             {% else %}
                 <th scope="row">{{ model.name }}</th>
             {% endif %}
-
             {% if model.perms.add %}
-                <td><a href="{{ model.admin_url }}add/" class="addlink">{% trans 'Add' %}</a></td>
+            	 <!-- {{ model.name }} -->
+                <td>{% ifnotequal model.name 'Visao relatorios' %}<a href="{{ model.admin_url }}add/" class="addlink">{% trans 'Add' %}{% endifnotequal %}</a></td>
             {% else %}
                 <td>&nbsp;</td>
             {% endif %}

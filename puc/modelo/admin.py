@@ -42,7 +42,6 @@ class VisaoRelatorioAdmin(admin.ModelAdmin):
 	poderá criar os modelos"""
 
 	list_display = ('formato',)
-
 	
 	def add_view(self, request, form_url='', extra_context=None):
 		"""The 'add' admin view for this model."""
@@ -60,3 +59,5 @@ class VisaoRelatorioAdmin(admin.ModelAdmin):
 
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(VisaoRelatorio, VisaoRelatorioAdmin)
+
+admin.site.index_template = 'admin/modelo/index.html'

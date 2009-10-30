@@ -28,5 +28,6 @@ class VisaoRelatorio(models.Model):
 
 	class Meta:
 		ordering = ['formato']
+
 		
 	
