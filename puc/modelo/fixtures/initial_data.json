@@ -3,7 +3,7 @@
     "model": "modelo.visaorelatorio",
     "pk": 1,
     "fields": {
-      "name": "django"
+      "formato": "tabular"
     }
   },{
   	"pk": 1, 
