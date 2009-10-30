@@ -28,11 +28,11 @@
 		<string>20/09/2009 20:31:18</string>
 		<string>20/09/2009 20:46:44</string>
 		<string>20/09/2009 16:19:44</string>
-
 		<string>20/09/2009 15:32:08</string>
 		<string>20/09/2009 15:16:38</string>
 		<string>20/09/2009 15:46:17</string>
 		<string>20/09/2009 15:02:27</string>
+		<string>20/09/2009 15:10:27</string>
 	</row>
 	<row>
 		<string>riolf239 - Total</string>
@@ -41,14 +41,27 @@
 		<number tooltip="76">76</number>
 		<number tooltip="4">4</number>
 		<number tooltip="4">4</number>
+		<!--number tooltip="72">72</number-->
+		<null/>
 		<number tooltip="72">72</number>
-		<number tooltip="72">72</number>
-
 		<number tooltip="72">72</number>
 		<number tooltip="72">72</number>
 		<number tooltip="64">64</number>
+		<null/>
+	</row>
+	<row>
+		<string>riolf238 - Total</string>
+
+		<number tooltip="4">10</number>
+		<number tooltip="76">70</number>
+		<number tooltip="4">5</number>
+		<number tooltip="4">5</number>
+		<number tooltip="72">72</number>
+		<null/>
+		<number tooltip="72">80</number>
+		<number tooltip="72">80</number>
+		<number tooltip="64">70</number>
+		<number tooltip="64">90</number>
 	</row>
 	</chart_data>
-
 </chart>
-

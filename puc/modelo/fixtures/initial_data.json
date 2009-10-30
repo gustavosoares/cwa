@@ -1,0 +1,18 @@
+[
+  {
+    "model": "modelo.visaorelatorio",
+    "pk": 1,
+    "fields": {
+      "name": "django"
+    }
+  },{
+  	"pk": 1, 
+  	"model": "modelo.modelo", 
+  	"fields": {
+  		"metadado": "portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio", 
+  		"descricao": "primeira versao do modelo", 
+  		"nome": "modelo-01"
+  	}
+  }
+]
+
