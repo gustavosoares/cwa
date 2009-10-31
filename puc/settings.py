@@ -92,4 +92,5 @@ INSTALLED_APPS = (
     'puc.sme2',
     'puc.cwa',
     'puc.modelo',
+    'puc.hiperbolica',
 )

@@ -12,6 +12,9 @@ TEMPLATE_VER_EVENTO = 'sme2/ver_evento.html'
 TEMPLATE_RELATORIO_INDEX = 'relatorio/index.html'
 TEMPLATE_RELATORIO_INDEX_GRAFICO = 'relatorio/index-grafico.html'
 
+#VISAO HIERARQUICA
+TEMPLATE_HIPERBOLICA_INDEX = 'hiperbolica/index.html'
+
 #CWA
 TEMPLATE_CWA_INDEX = 'cwa/index.html'
 TEMPLATE_CWA_ADMIN_CRIAR_MODELO = 'modelo/criar_modelo.html'

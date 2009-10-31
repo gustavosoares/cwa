@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Visao hierarquica{% endblock %}
+
+{% block stylesheet %}
+
+<style type="text/css">
+
+#conteudo-visao-hierarquica {
+	margin: 0px auto;
+	padding: 1px;
+	/*position: relative;*/
+	width:100%;
+	border: 1px solid;
+	background: Beige;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+	text-align: center;
+}
+
+#infoVis {
+	margin: 0px auto;
+	padding: 1px;
+	/*position: relative;*/
+	width:99%;
+	border: 1px solid;
+	background: black;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+	text-align: center;
+}
+#infoVis-relations {
+	margin: 0px auto;
+	padding: 1px;
+	/*position: relative;*/
+	width:99%;
+	border: 1px solid;
+	background: Beige;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+	text-align: center;
+}
+</style>
+
+{% endblock %}
+	
+{% block javascript %}
+<script src="/media/js/jit.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+{% if arvore_json %}
+	var json = {{ arvore_json|safe }}
+
+{% endif %}	
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+<center>
+<div id="conteudo-visao-hierarquica">
+<h1>hiperbolica</h1><br>
+<div id="infoVis">
+<h2>InfoVis</h2><br>
+</div>
+<div id='infoVis-relations'>
+<h2>Relations<h2><br>
+</div>
+</div>
+</center>
+{% endblock %}
+
