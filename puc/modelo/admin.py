@@ -42,21 +42,38 @@ class VisaoRelatorioAdmin(admin.ModelAdmin):
 	poderá criar os modelos"""
 
 	list_display = ('formato',)
+	save_on_top = True
+	actions_on_top = False
+	actions_on_bottom = False
 	
 	def add_view(self, request, form_url='', extra_context=None):
 		"""The 'add' admin view for this model."""
-		print '##add view personalizada'
+		print '##[VisaoRelatorio] add view personalizada'
 		my_context = { 'mostrar_escolha_modelos' : False }
 		
 		return super(VisaoRelatorioAdmin, self).add_view(request, form_url, extra_context=my_context)
 
 	def change_view(self, request, object_id, extra_context=None):
-		"The 'change' admin view for this model."
-		print '###change view personalizado'
+		"""change view especializda para o modelo"""
+		
+		print '###[VisaoRelatorio] change view especialiazada'
 		my_context = { 'mostrar_escolha_modelos' : False }
 
 		return super(VisaoRelatorioAdmin, self).change_view(request, object_id, extra_context=my_context)
 
+	def changelist_view(self, request, extra_context=None):
+		"""
+		changelist view especializada para suprimir algumas ações desnecessárias
+		Não é permitido adicionar nem remover, apenas editar o modelo existente.
+		"""
+		print '###[VisaoRelatorio] changelist_view personalizada'
+		#my_context = { 'apenas_editar' : True, 'actions_on_top' : False, 'actions_on_bottom' : False }
+		my_context = { 'apenas_editar' : True }
+		
+		
+		return super(VisaoRelatorioAdmin, self).changelist_view(request, extra_context=my_context)
+		
+		
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(VisaoRelatorio, VisaoRelatorioAdmin)
 
