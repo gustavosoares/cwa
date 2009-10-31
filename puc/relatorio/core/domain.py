@@ -20,7 +20,6 @@ class Relatorio(object):
 		#raise NotImplementedError
 	
 	def get_grafico(self):
-		assert self._grafico != None, 'o objeto grafico é nulo!'
 		return self._grafico
 	
 	def set_grafico(self, value):

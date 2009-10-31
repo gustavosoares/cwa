@@ -14,6 +14,7 @@ from puc.sme.models import Produto, Alarme, Monitor
 from puc.sme.core.repository.produto_repository import ProdutoRepository
 from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
+from puc.relatorio.core import repository
 from puc.relatorio.core import domain
 from puc.relatorio.core import factory
 from puc.core import json
@@ -24,6 +25,7 @@ from puc.sme2.core import util
 produto_repository = ProdutoRepository()
 alarme_repository = AlarmeRepository()
 monitor_repository = MonitorRepository()
+visao_repository = repository.VisaoRepository()
 
 def index(request):
 	"""Pagina principal da aplicacao por gerar relatorio"""
@@ -80,13 +82,23 @@ def index(request):
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela
-			print '## Tipo de relatorio configurado: %s' % settings.TIPO_RELATORIO
-			relatorio = factory.RelatorioFactory().get_relatorio(settings.TIPO_RELATORIO)
+			tipo_relatorio = settings.TIPO_RELATORIO
+			print '## Tipo de relatorio configurado: %s' % tipo_relatorio
+			relatorio = factory.RelatorioFactory().get_relatorio(tipo_relatorio)
 			relatorio.produto = produto
 			relatorio.alarme = alarme
 			relatorio.monitor = monitor
 			relatorio.eventos = eventos
 			relatorio.descricao_colunas = colunas_desc
+			
+			grafico = relatorio.grafico
+			if grafico: #relatorio tabular nao tem grafico
+				grafico.produto_id = produto_id
+				grafico.alarme_id = alarme_id
+				grafico.monitor_id = monitor_id
+				grafico.data_inicio = data_inicio_str
+				grafico.data_fim = data_fim_str
+
 			
 	return render_to_response(templates.TEMPLATE_RELATORIO_INDEX, {
 		'produtos_alarmes' : produtos_alarmes,

@@ -86,7 +86,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'puc.urls'
 
-
+#TODO voltar o puc.sme
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

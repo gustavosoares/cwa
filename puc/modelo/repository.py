@@ -1,7 +1,7 @@
 # coding=utf-8
 from puc.core.singleton import Singleton
 from django.conf import settings
-from puc.modelo.models import Modelo
+from puc.modelo.models import Modelo, VisaoRelatorio
 from puc.core import json
 
 class ModeloRepository(Singleton):
@@ -33,3 +33,12 @@ class ModeloRepository(Singleton):
 		modelo_settings_json = json.encode_json(modelo_settings)
 
 		return modelo_settings_json
+		
+class VisaoRepository(Singleton):
+	
+	def get_visao_relatorio(self):
+		"""
+		retorna o objeto com as definicoes da visao relatorio, incluindo o tipo de relatorio
+		administrativa. O id do objeto com o tipo sempre sera 1.
+		"""
+		return VisaoRelatorio.objeto.get(id=1)
