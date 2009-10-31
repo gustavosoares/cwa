@@ -336,6 +336,7 @@ function init(){
     };
     //end
     var infovis = document.getElementById('infovis');
+	console.log(infovis)
     var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 50;
     
     //init canvas
