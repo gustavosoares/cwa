@@ -283,10 +283,12 @@ class Grafico(object):
 		/>
 	
 	<chart_rect
-		   y='100'
-		/>
+		width='%s'
+		y='100'
+		x='60'
+	/>
 
-   <scroll x='50'
+   <scroll x='60'
 		y='%s'
 		width='%s'
 		height='20'
@@ -301,16 +303,17 @@ class Grafico(object):
 		url_slider_handle_2='default'
 		slider_handle_length='10'
 		start='0'
-		span='33'
+		span='25'
 		drag='true'
-		scroll_detail='100'
+		scroll_detail='60'
 		stop_detail='300'
 		/>
 				
 		<chart_label position='cursor' />
 
 	<chart_data>\n
-		''' % (self.license, (self.valor_maximo * 1.05), self.type, (int(self.height) * 0.9), self.width)
+		''' % (self.license, (self.valor_maximo * 1.05), self.type, 
+		self.width, (int(self.height) * 1.05), self.width)
 		
 		return xml_header
 
