@@ -41,4 +41,4 @@ class VisaoRepository(Singleton):
 		retorna o objeto com as definicoes da visao relatorio, incluindo o tipo de relatorio
 		administrativa. O id do objeto com o tipo sempre sera 1.
 		"""
-		return VisaoRelatorio.objeto.get(id=1)
+		return VisaoRelatorio.objects.get(id=1)

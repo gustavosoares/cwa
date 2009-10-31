@@ -14,7 +14,7 @@ from puc.sme.models import Produto, Alarme, Monitor
 from puc.sme.core.repository.produto_repository import ProdutoRepository
 from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
-from puc.relatorio.core import repository
+from puc.modelo import repository
 from puc.relatorio.core import domain
 from puc.relatorio.core import factory
 from puc.core import json
@@ -82,7 +82,8 @@ def index(request):
 
 			#valida o tipo de relatorio a ser gerado
 			#relatorio tabela
-			tipo_relatorio = settings.TIPO_RELATORIO
+			visao_relatorio = visao_repository.get_visao_relatorio()
+			tipo_relatorio = visao_relatorio.formato 
 			print '## Tipo de relatorio configurado: %s' % tipo_relatorio
 			relatorio = factory.RelatorioFactory().get_relatorio(tipo_relatorio)
 			relatorio.produto = produto

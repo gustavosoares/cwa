@@ -1,4 +1,4 @@
-# coding=utf-8
+#-*- coding:utf-8 -*-
 from django.db import models
 
 # Create your models here.
@@ -16,9 +16,9 @@ class Modelo(models.Model):
 class VisaoRelatorio(models.Model):
 	
 	RELATORIO_CHOICES = (
-		('tabular', 'tabular'),
-		('grafico-linha', 'grafico-linha'),
-		('grafico-barra', 'grafico-barra'),
+		('tabular', 'Relatório tabular'),
+		('grafico-linha', 'Relatório com gráfico de linha'),
+		('grafico-barra', 'Relatório com gráfico de barras'),
 	)
 	
 	formato = models.CharField(max_length=500, blank=True, null=True, choices=RELATORIO_CHOICES)
