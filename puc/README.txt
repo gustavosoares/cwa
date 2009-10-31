@@ -12,3 +12,9 @@ GRANT ALL ON monitor.* TO monitor@localhost IDENTIFIED BY 'monitor';
 ##########################################
 
 python manage.py dumpdata --indent 2 --exclude=sites --exclude=admin
+
+##############################################
+3. Carregar dados iniciais para a aplicacao
+##############################################
+
+python manage.py loaddata fixtures/initial_data_json
