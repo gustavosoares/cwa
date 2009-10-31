@@ -26,3 +26,8 @@ def index(request):
 	"""pagina principal da visualizacao hiperbolica"""
 	
 	return render_to_response(templates.TEMPLATE_HIPERBOLICA_INDEX, {})
+
+def teste(request):
+	"""pagina de teste da visualizacao hiperbolica"""
+
+	return render_to_response("hiperbolica/teste.html", {})
