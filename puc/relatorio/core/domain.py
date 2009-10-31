@@ -235,7 +235,7 @@ class Grafico(object):
 		bullet='circle'
 		size='12'
 		/>
-	<axis_category skip='1'
+	<axis_category skip='2'
 		size='12' 
 		alpha='85' 
 		shadow='medium' 
@@ -243,7 +243,7 @@ class Grafico(object):
 		
 	<axis_value shadow='medium'
 	    max='%s'
-		min='-40' 
+		min='0' 
 		size='10' 
 		color='ffffff' 
 		alpha='65' 
