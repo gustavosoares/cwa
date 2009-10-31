@@ -11,8 +11,25 @@ class ModeloAdmin(admin.ModelAdmin):
 	os metodos add_view e o change_view, para que fosse possivel adicionar a area onde o pesquisador
 	poderá criar os modelos"""
 	
-	list_display = ('nome', 'descricao', 'metadado',)
+	list_display = ('nome', 'descricao', 'metadado', 'estado')
 	form = MyModeloAdminForm
+	
+	def save_model(self, request, obj, form, change):
+		"""metodo save_model reescrito para permitir apenas um modelo com estado de ativo"""
+		
+		print '### salvando o modelo'
+		if obj.estado:
+			modelos_ativados = Modelo.objects.filter(estado=1)
+			if modelos_ativados:
+				print '[ModeloAdmin] modelos ativados: %s' % modelos_ativados
+				for modelo in modelos_ativados:
+					if modelo.id != obj.id:
+						Modelo.objects.filter(id=modelo.id).update(estado=0)
+						print '##### modelo %s desativado' % modelo
+			else:
+				print '[ModeloAdmin] nao existe nenhum modelo ativado'
+			
+		obj.save()
 	
 	def add_view(self, request, form_url='', extra_context=None):
 		"""The 'add' admin view for this model."""

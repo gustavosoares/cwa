@@ -6,16 +6,24 @@ from puc.core import json
 
 class ModeloRepository(Singleton):
 
+	def get_modelo_ativo(self):
+		"""retorna o modelo ativado no sistema"""
+		
+		return Modelo.objects.get(estado=1)
+		
 	def get_modelo_por_nome(self, nome_modelo):
 		"""retorna o modelo por nome"""
+		
 		return Modelo.objects.get(nome=nome_modelo)
 
 	def get_modelo_por_id(self, id_modelo):
 		"""retorna o modelo por id"""
+		
 		return Modelo.objects.get(id=id_modelo)
 		
 	def get_modelo_settings(self, nome_modelo):
 		"""retorna um json das configuracoes do modelo"""
+		
 		modelo = self.get_modelo_por_nome(nome_modelo)
 		assert modelo != None, 'Modelo configurado nao existe no sistema!'
 		metadado = modelo.metadado

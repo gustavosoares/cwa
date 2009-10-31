@@ -6,6 +6,7 @@ class Modelo(models.Model):
 	nome = models.CharField(max_length=100)
 	descricao = models.CharField(max_length=500, blank=True, null=True)
 	metadado = models.CharField(max_length=800,)
+	estado = models.BooleanField(verbose_name='Ativo?')
 	
 	def __unicode__(self):
 		return u'%s' % self.nome
