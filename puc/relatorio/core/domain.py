@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 from django.template.loader import render_to_string
 from puc.sme2.core import util
+import datetime
 
 class Relatorio(object):
 	"""Interface dos tipos de relatorios possiveis"""
@@ -181,6 +182,8 @@ class Grafico(object):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
 		self.width = '800'
 		self.height = '600'
+		self.chart_rect_width = int(self.width) * 0.9
+		self.chart_rect_height = int(self.height) * 0.8
 		self.name = 'grafico-relatorio'
 		self.type = None
 		self.bgcolor = '#666666'
@@ -242,7 +245,7 @@ class Grafico(object):
 		orientation='diagonal_up'/>
 		
 	<axis_value shadow='medium'
-	    max='%s'
+		max='%s'
 		min='0' 
 		size='10' 
 		color='ffffff' 
@@ -278,14 +281,36 @@ class Grafico(object):
 		text_h_alpha='90'
 		text_v_alpha='90' 
 		/>
-		<chart_label position='cursor' />
-
+	
 	<chart_rect
 		   y='100'
 		/>
 
+   <scroll x='50'
+		y='%s'
+		width='%s'
+		height='20'
+		url_button_1_idle='default'
+		url_button_2_idle='default'
+		url_button_1_over='default'
+		url_button_1_press='default'
+		url_button_2_over='default'
+		url_button_2_press='default' 
+		url_slider_body='default'
+		url_slider_handle_1='default'
+		url_slider_handle_2='default'
+		slider_handle_length='10'
+		start='0'
+		span='33'
+		drag='true'
+		scroll_detail='100'
+		stop_detail='300'
+		/>
+				
+		<chart_label position='cursor' />
+
 	<chart_data>\n
-		''' % (self.license, (self.valor_maximo * 1.05), self.type)
+		''' % (self.license, (self.valor_maximo * 1.05), self.type, (int(self.height) * 0.9), self.width)
 		
 		return xml_header
 
@@ -299,6 +324,8 @@ class Grafico(object):
 	
 	def html(self):
 		"""retorna a tag html embed do grafico"""
+		agora_sao = datetime.datetime.now()
+		agora_sao = agora_sao.strftime("%Y%m%dT%H%M%S")
 		
 		html = """<EMBED src="%s" FlashVars="library_path=%s&xml_source=%s%%3F%s" 
 		quality="high" bgcolor="%s" width="%s" height="%s" NAME="%s" id="%s "allowScriptAccess="sameDomain" 

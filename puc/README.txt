@@ -18,3 +18,9 @@ python manage.py dumpdata --indent 2 --exclude=sites --exclude=admin --exclude=s
 ##############################################
 
 python manage.py loaddata fixtures/initial_data_json
+
+##############################################
+4. Gerar o xml
+##############################################
+
+http://localhost:8000/relatorio/xml?produto=35&alarme=125&monitor=396&data_inicio=2009-07-01&data_fim=2009-10-31
