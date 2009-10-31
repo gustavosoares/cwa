@@ -194,7 +194,7 @@ class Grafico(object):
 		self.variaveis = []
 		self._xml = None
 		self.xml_source = "/relatorio/xml"
-		
+		self.valor_maximo = 0
 		#atributos usados para montar a url para dar get
 		self.produto_id = None
 		self.alarme_id = None
@@ -240,6 +240,16 @@ class Grafico(object):
 		alpha='85' 
 		shadow='medium' 
 		orientation='diagonal_up'/>
+		
+	<axis_value shadow='medium'
+	    max='%s'
+		min='-40' 
+		size='10' 
+		color='ffffff' 
+		alpha='65' 
+		steps='6' 
+		show_min='false' />
+			
 	<axis_ticks value_ticks='false' 
 		category_ticks='true' 
 		major_thickness='2' 
@@ -247,13 +257,6 @@ class Grafico(object):
 		minor_count='1' 
 		minor_color='222222' 
 		position='inside' />
-	<axis_value shadow='medium' 
-		min='-40' 
-		size='10' 
-		color='ffffff' 
-		alpha='65' 
-		steps='6' 
-		show_min='false' />
 	<chart_type>%s</chart_type>
 	
 	<chart_guide horizontal='true'
@@ -282,9 +285,17 @@ class Grafico(object):
 		/>
 
 	<chart_data>\n
-		''' % (self.license, self.type)
+		''' % (self.license, (self.valor_maximo * 1.05), self.type)
 		
 		return xml_header
+
+	def get_xml_footer(self):
+		"""retorna o rodapé do xml"""
+		xml_footer = '''
+	</chart_data>
+</chart>
+		'''
+		return xml_footer
 	
 	def html(self):
 		"""retorna a tag html embed do grafico"""
@@ -312,7 +323,6 @@ class GraficoLinha(Grafico):
 		if self._xml:
 			return self._xml
 		else:
-			header = self.get_xml_header()
 			
 			body = []
 
@@ -339,6 +349,8 @@ class GraficoLinha(Grafico):
 					for data_hora in horas:
 						y = self.tabela[data_hora][servidor][variavel]
 						if y:
+							if y > self.valor_maximo:
+								self.valor_maximo = y
 							body.append('\t\t<number tooltip="%s">%s</number>\n' % (y, y))
 						else:
 							body.append('\t\t<null/>\n')
@@ -346,7 +358,8 @@ class GraficoLinha(Grafico):
 
 			body = ''.join(body)
 			#fim
-			footer = '\t</chart_data>\n</chart>\n'
+			header = self.get_xml_header()
+			footer = self.get_xml_footer()
 
 			self._xml = header + body + footer
 			return self._xml
@@ -355,7 +368,7 @@ class GraficoLinha(Grafico):
 
 		
 class GraficoBarra(GraficoLinha):
-	"""grafico de linha"""
+	"""grafico de barra"""
 	def __init__(self):
 		GraficoLinha.__init__(self)
-		self.type = 'bar'
+		self.type = 'column'
