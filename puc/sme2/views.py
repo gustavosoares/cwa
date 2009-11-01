@@ -34,13 +34,13 @@ def listar_produto(request):
 
 def listar_produto_alarme(request):
 	"""controller: listagem dos produtos e os alarmes"""
-	produtos = produto_repository.get_produtos_alarmando()
+	#produtos = produto_repository.get_produtos_alarmando()
 	#print produtos
 	#print '-' * 50
 	produtos_alarmes = produto_repository.get_produtos_e_seus_alarmes()
 	#print produtos_alarmes
 	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME, 
-					{ 'produtos' : produtos,
+					{ 'produtos' : None,
 					'produtos_alarmes' : produtos_alarmes,
 	 				'colors' : util.colors})
 

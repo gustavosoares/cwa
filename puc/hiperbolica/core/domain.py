@@ -20,7 +20,6 @@ class NoHiperbolico(object):
 		metodo para adicionar um nó filho
 		recebe como parametro um objeto NoHiperbolico
 		"""
-		print 'filho: %s' % str(no)
 		self.children.append(str(no))
 		
 	def add_data(self, key, value):
@@ -53,5 +52,7 @@ class NoHiperbolico(object):
 		s = s.replace('\\"','"')
 		s = s.replace('["{"','[{"')
 		s = s.replace('"}"]','"}]')
+		s = s.replace('"{"','{"')
+		s = s.replace('}",','},')
 		return s
 		
