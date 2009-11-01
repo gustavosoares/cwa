@@ -26,14 +26,20 @@ visao_repository = repository.VisaoRepository()
 def index(request):
 	"""pagina principal da visualizacao hiperbolica"""
 	
-	h = domain.NoHiperbolico()
+	raiz = domain.NoHiperbolico()
 	
-	h.id = 1
-	h.name = 'produto'
+	raiz.id = 0
+	raiz.name = 'produto'
 	
-	print 'nó: %s' % h
+	h1 = domain.NoHiperbolico()
+	h1.id = 1
+	h1.name = 'gustavo'
+	h1.dim = 7
+	raiz.add_children(h1)
+	
+	print 'arvore: %s' % raiz
 
-	arvore_json = h
+	arvore_json = raiz
 	
 	return render_to_response(templates.TEMPLATE_HIPERBOLICA_INDEX, {'arvore_json' : arvore_json})
 

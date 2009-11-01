@@ -20,7 +20,8 @@ class NoHiperbolico(object):
 		metodo para adicionar um nó filho
 		recebe como parametro um objeto NoHiperbolico
 		"""
-		self.children.append(no)
+		print 'filho: %s' % str(no)
+		self.children.append(str(no))
 		
 	def add_data(self, key, value):
 		"""
@@ -28,6 +29,9 @@ class NoHiperbolico(object):
 		"""
 		self.data[key] = value
 	
+	#def __repr__(self):
+		#return self.__str__()
+		
 	def __str__(self):
 		"""
 		método __str__ sobreescrito para retornar um objeto json (string) da
@@ -44,5 +48,10 @@ class NoHiperbolico(object):
 		dict['data'] = self.data
 		dict['children'] = self.children
 		
-		return json.encode_json(dict)
+		s = json.encode_json(dict)
+		#replaces de lixos no json
+		s = s.replace('\\"','"')
+		s = s.replace('["{"','[{"')
+		s = s.replace('"}"]','"}]')
+		return s
 		
