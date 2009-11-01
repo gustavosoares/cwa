@@ -1,0 +1,48 @@
+#-*- coding:utf-8 -*-
+from django.template.loader import render_to_string
+import datetime
+from puc.core import json
+
+class NoHiperbolico(object):
+	
+	def __init__(self):
+		"""construtor"""
+		self.id = 0
+		self.name = ''
+		self.data = {}
+		self.children = []
+		self.type = 'circle'
+		self.color = '#f00'
+		self.dim = 9
+	
+	def add_children(self, no):
+		"""
+		metodo para adicionar um nó filho
+		recebe como parametro um objeto NoHiperbolico
+		"""
+		self.children.append(no)
+		
+	def add_data(self, key, value):
+		"""
+		permite adicionar um metadado ao nó
+		"""
+		self.data[key] = value
+	
+	def __str__(self):
+		"""
+		método __str__ sobreescrito para retornar um objeto json (string) da
+		representacao do objeto
+		"""
+		
+		dict = {}
+		
+		self.add_data('$color', self.color)
+		self.add_data('$dim', self.dim)
+		
+		dict['id'] = self.id
+		dict['name'] = self.name
+		dict['data'] = self.data
+		dict['children'] = self.children
+		
+		return json.encode_json(dict)
+		

@@ -16,6 +16,7 @@ from puc.sme.core.repository.monitor_repository import MonitorRepository
 from puc.sme.core.repository.alarme_repository import AlarmeRepository
 from puc.modelo import repository
 
+from puc.hiperbolica.core import domain
 #inicializacao dos repositorios
 produto_repository = ProdutoRepository()
 alarme_repository = AlarmeRepository()
@@ -25,7 +26,16 @@ visao_repository = repository.VisaoRepository()
 def index(request):
 	"""pagina principal da visualizacao hiperbolica"""
 	
-	return render_to_response(templates.TEMPLATE_HIPERBOLICA_INDEX, {})
+	h = domain.NoHiperbolico()
+	
+	h.id = 1
+	h.name = 'produto'
+	
+	print 'nó: %s' % h
+
+	arvore_json = h
+	
+	return render_to_response(templates.TEMPLATE_HIPERBOLICA_INDEX, {'arvore_json' : arvore_json})
 
 def teste(request):
 	"""pagina de teste da visualizacao hiperbolica"""
