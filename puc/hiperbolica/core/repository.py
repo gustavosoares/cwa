@@ -25,6 +25,7 @@ class ArvoreHiperbolicaRepository(Singleton):
 
 		raiz.id = 0
 		raiz.name = 'produto'
+		raiz.dim = 10
 		
 		contador = 1
 		#pega os produtos alarmando
@@ -35,22 +36,22 @@ class ArvoreHiperbolicaRepository(Singleton):
 			no_produto = domain.NoHiperbolico()
 			no_produto.id = contador
 			no_produto.name = produto_alarmes['produto'].prd_nome.encode('utf-8')
-			no_produto.dim = 7
+			no_produto.dim = 9
 			if produto_alarmes['produto'].prd_status == 'W':
-				no_produto.color = '#F90'
+				no_produto.color = util.colors['warning']
 			elif produto_alarmes['produto'].prd_status == 'A':
-				no_produto.color = "#f00"
+				no_produto.color = util.colors['alarm']
 			
 			for alarme in produto_alarmes['alarmes']:
 				contador = contador + 1
 				no_alarme = domain.NoHiperbolico()
 				no_alarme.id = contador
 				no_alarme.name = alarme.alm_nome.encode('utf-8')
-				no_alarme.dim = 6
+				no_alarme.dim = 8
 				if alarme.alm_status == 'W':
-					no_alarme.color = '#F90'
+					no_alarme.color = util.colors['warning']
 				elif alarme.alm_status == 'A':
-					no_alarme.color = "#f00"
+					no_alarme.color = util.colors['alarm']
 				
 				#pego os monitores do alarme
 				monitores = monitor_repository.get_monitor_alarmando_por_alarme_id(alarme.alm_id)
@@ -59,11 +60,11 @@ class ArvoreHiperbolicaRepository(Singleton):
 					no_monitor = domain.NoHiperbolico()
 					no_monitor.id = contador
 					no_monitor.name = monitor.mon_nome.encode('utf-8')
-					no_monitor.dim = 5
+					no_monitor.dim = 8
 					if monitor.mon_status == 'W':
-						no_monitor.color = '#F90'
+						no_monitor.color = util.colors['warning']
 					elif monitor.mon_status == 'A':
-						no_monitor.color = "#f00"
+						no_monitor.color = util.colors['alarm']
 					
 					#adiciono filho(monitor no alarme)
 					no_alarme.add_children(copy.deepcopy(no_monitor))

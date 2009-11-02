@@ -36,7 +36,8 @@ function init(){
         //color, width and dimensions.
         Node: {
             dim: 9,
-            color: "#f00"
+            color: "#f00",
+            overridable: true,
         },
         
         Edge: {

@@ -13,7 +13,7 @@ class NoHiperbolico(object):
 		self.children = []
 		self.type = 'circle'
 		self.color = '#f00'
-		self.dim = 9
+		self.dim = 10
 	
 	def add_children(self, no):
 		"""
