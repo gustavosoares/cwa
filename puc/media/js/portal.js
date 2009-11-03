@@ -74,12 +74,26 @@ Portal.prototype = {
         var toggle = Element.childrenWithClassName(
           block, this.options.toggle, true
         );
+
+        var delete_ = Element.childrenWithClassName(
+          block, 'block-delete', true
+        );
+
         Event.observe(
           toggle, 'click', 
           function (e) { Effect.toggle(content, 'Slide'); },
           false
         );
         
+        Event.observe(
+          delete_, 'click', 
+          function (e) {  
+            //alert('delete clicked');
+            $('portal-column-block-list').appendChild($(block));
+          },
+          false
+        );
+
       }.bind(this)
     );
     

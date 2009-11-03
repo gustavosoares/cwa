@@ -48,7 +48,7 @@
   z-index: 10;
   background-color: #FFEAB1;
 }
-	
+
 .portal-column {
 	margin: 1px auto;
 	font-style: italic;
@@ -69,7 +69,7 @@
   font-size: 14px;
   text-align: center;
   color: #fff;
-  background-color: red;
+  background-color: Navy;
 }
 
 #portal .block .content {
@@ -77,11 +77,23 @@
 }
 
 #portal .block .block-toggle {
+  padding: 5px;
   background-image: url(/media/images/block-slide.png);
   display: block;
   float: right;
   width: 7px;
   height: 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+#portal .block .block-delete {
+  background-image: url(/media/images/delete.png);
+  display: block;
+  float: right;
+  width: 12px;
+  height: 12px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -104,6 +116,10 @@
 }
 
 #portal #portal-column-block-list .block .block-toggle {
+  display: none;
+}
+
+#portal #portal-column-block-list .block .block-delete {
   display: none;
 }
 
