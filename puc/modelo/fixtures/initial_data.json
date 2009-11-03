@@ -10,7 +10,8 @@
   	"model": "modelo.modelo", 
   	"fields": {
   		"metadado": "portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio", 
-  		"descricao": "primeira versao do modelo", 
+  		"descricao": "primeira versao do modelo",
+		"estado": 1,
   		"nome": "modelo-01"
   	}
   },

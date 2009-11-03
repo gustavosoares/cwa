@@ -14,6 +14,7 @@ TEMPLATE_RELATORIO_INDEX_GRAFICO = 'relatorio/index-grafico.html'
 
 #VISAO HIERARQUICA
 TEMPLATE_HIPERBOLICA_INDEX = 'hiperbolica/index.html'
+TEMPLATE_HIPERBOLICA_MOSTRAR_ARVORE = 'hiperbolica/mostrar_arvore.html'
 
 #CWA
 TEMPLATE_CWA_INDEX = 'cwa/index.html'

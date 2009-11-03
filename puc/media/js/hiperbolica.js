@@ -64,12 +64,12 @@ function init(){
             style.display = '';
             style.cursor = 'pointer';
             if (node._depth <= 1) {
-                style.fontSize = "0.8em";
+                style.fontSize = "0.9em";
                 style.color = "#ddd";
 
             } else if(node._depth == 2){
-                style.fontSize = "0.7em";
-                style.color = "#555";
+                style.fontSize = "0.8em";
+                style.color = "#ddd";
 
             } else {
                 style.display = 'none';

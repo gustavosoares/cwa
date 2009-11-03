@@ -28,26 +28,19 @@ arvore_repository = arvore_repository.ArvoreHiperbolicaRepository()
 def index(request):
 	"""pagina principal da visualizacao hiperbolica"""
 	
-	"""
-	raiz = domain.NoHiperbolico()
-	
-	raiz.id = 0
-	raiz.name = 'produto'
-	
-	h1 = domain.NoHiperbolico()
-	h1.id = 1
-	h1.name = 'gustavo'
-	h1.dim = 7
-	raiz.add_children(h1)
-	"""
-	
-	arvore_json = arvore_repository.get_arvore()
-	
-	print 'arvore: %s' % arvore_json
-		
-	return render_to_response(templates.TEMPLATE_HIPERBOLICA_INDEX, {'arvore_json' : arvore_json})
+	return mostrar_arvore(request)
+
 
 def teste(request):
 	"""pagina de teste da visualizacao hiperbolica"""
 
 	return render_to_response("hiperbolica/teste.html", {})
+	
+def mostrar_arvore(request):
+	"""carrega e mostra a arvore"""
+	
+	arvore_json = arvore_repository.get_arvore()
+	
+	print 'arvore json: %s' % arvore_json
+		
+	return render_to_response(templates.TEMPLATE_HIPERBOLICA_MOSTRAR_ARVORE, {'arvore_json' : arvore_json})
