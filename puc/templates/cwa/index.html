@@ -91,6 +91,7 @@
 
 /*
 	nao precisa na interface para o usuario
+*/
 	#portal .block .block-toggle {
 	  background-image: url(/media/images/block-slide.png);
 	  display: block;
@@ -101,7 +102,7 @@
 	  background-position: center;
 	  cursor: pointer;
 	}
-*/
+
 	/* Fim das visoes */
 
 	/* inicio */
@@ -139,9 +140,44 @@
 
 <script type="text/javascript">
 	var settings = {{ settings|safe }}
-	
+	var portal;
 	function init() {
 		//console.log("body loaded")
+		
+		this.options = {
+	      portal: 'portal',
+	      column: 'portal-column',
+	      block: 'block',
+	      content: 'content',
+	      handle: 'handle',
+	      hoverclass: 'block-hover',
+	      toggle: 'block-toggle',
+	      blocklist: 'portal-column-block-list',
+	      blocklistlink: 'portal-block-list-link',
+	      blocklisthandle: 'block-list-handle',
+	    }
+	
+	    var blocks = document.getElementsByClassName(
+	      this.options.block, this.options.portal
+	    );
+	    blocks.each(
+	      function (block) {
+	        var content = Element.childrenWithClassName(
+	          block, this.options.content, true
+	        );
+
+	        var toggle = Element.childrenWithClassName(
+	          block, this.options.toggle, true
+	        );
+	        Event.observe(
+	          toggle, 'click', 
+	          function (e) { Effect.toggle(content, 'Slide'); },
+	          false
+	        );
+
+	      }.bind(this)
+	    );
+		
 		for (var container in settings) {
 	      settings[container].each(function (block) {
 	        $(container).appendChild($(block));
@@ -191,7 +227,7 @@
 			
 			<!-- Visao hierarquica-->
 			<div class="block" id="block-hierarquica">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a>Visão hierárquica</h3>
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a></h3>
 				<div class="content">
 					<CENTER>
 					<iframe name="iframe_hierarquica" src="/hiperbolica/" frameborder="0" width="98%" height="600"></iframe>
