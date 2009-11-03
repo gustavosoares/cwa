@@ -6,6 +6,12 @@
       "formato": "tabular"
     }
   },{
+    "model": "modelo.visaohierarquica",
+    "pk": 1,
+    "fields": {
+      "frequencia_atualizacao": 30
+    }
+  },{
   	"pk": 1, 
   	"model": "modelo.modelo", 
   	"fields": {
@@ -32,8 +38,7 @@
       "email": "gustavosoares@gmail.com", 
       "date_joined": "2009-09-25 19:06:19"
     }
-  }, 
-  {
+  }, {
     "pk": 2, 
     "model": "auth.user", 
     "fields": {
@@ -43,7 +48,7 @@
       "is_active": 1, 
       "is_superuser": 0, 
       "is_staff": 1, 
-      "last_login": "2009-10-31 14:11:02", 
+      "last_login": "2009-11-03 19:05:01", 
       "groups": [], 
       "user_permissions": [
         22, 
@@ -54,6 +59,7 @@
         15, 
         47, 
         48, 
+        54, 
         51, 
         49, 
         16, 
@@ -86,5 +92,7 @@
       "date_joined": "2009-10-31 14:07:54"
     }
   }
+  
+
 ]
 

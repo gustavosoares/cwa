@@ -1,7 +1,7 @@
 # coding=utf-8
 from puc.core.singleton import Singleton
 from django.conf import settings
-from puc.modelo.models import Modelo, VisaoRelatorio
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica
 from puc.core import json
 
 class ModeloRepository(Singleton):
@@ -50,3 +50,9 @@ class VisaoRepository(Singleton):
 		administrativa. O id do objeto com o tipo sempre sera 1.
 		"""
 		return VisaoRelatorio.objects.get(id=1)
+		
+	def get_visao_hierarquica(self):
+		"""
+		retorna o objeto com as definicoes da visao hierarquica. O id do objeto será sempre 1.
+		"""
+		return VisaoHierarquica.objects.get(id=1)

@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.contrib import admin
-from puc.modelo.models import Modelo, VisaoRelatorio
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica
 from puc.modelo.forms import MyModeloAdminForm
 from puc.modelo.repository import ModeloRepository
 from puc.core import json
@@ -90,8 +90,48 @@ class VisaoRelatorioAdmin(admin.ModelAdmin):
 		
 		return super(VisaoRelatorioAdmin, self).changelist_view(request, extra_context=my_context)
 		
-		
+
+class VisaoHierarquicaAdmin(admin.ModelAdmin):
+	"""
+	configuracao da visao hierarquica. permite ao pesquisador configurar o tempo de atualizacao
+	da arvore hiperbolica
+	"""
+
+	list_display = ('frequencia_atualizacao',)
+	save_on_top = True
+	actions_on_top = False
+	actions_on_bottom = False
+
+	def add_view(self, request, form_url='', extra_context=None):
+		"""The 'add' admin view for this model."""
+		print '##[VisaoHierarquicaAdmin] add view personalizada'
+		my_context = { 'mostrar_escolha_modelos' : False }
+
+		return super(VisaoHierarquicaAdmin, self).add_view(request, form_url, extra_context=my_context)
+
+	def change_view(self, request, object_id, extra_context=None):
+		"""change view especializda para o modelo"""
+
+		print '###[VisaoHierarquicaAdmin] change view especialiazada'
+		my_context = { 'mostrar_escolha_modelos' : False }
+
+		return super(VisaoHierarquicaAdmin, self).change_view(request, object_id, extra_context=my_context)
+
+	def changelist_view(self, request, extra_context=None):
+		"""
+		changelist view especializada para suprimir algumas ações desnecessárias
+		Não é permitido adicionar nem remover, apenas editar o modelo existente.
+		"""
+		print '###[VisaoRelatorio] changelist_view personalizada'
+		#my_context = { 'apenas_editar' : True, 'actions_on_top' : False, 'actions_on_bottom' : False }
+		my_context = { 'apenas_editar' : True }
+
+
+		return super(VisaoHierarquicaAdmin, self).changelist_view(request, extra_context=my_context)
+
+
 admin.site.register(Modelo, ModeloAdmin)
+admin.site.register(VisaoHierarquica, VisaoHierarquicaAdmin)
 admin.site.register(VisaoRelatorio, VisaoRelatorioAdmin)
 
 admin.site.index_template = 'admin/modelo/index.html'
