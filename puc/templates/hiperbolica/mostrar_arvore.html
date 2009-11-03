@@ -4,6 +4,10 @@
 
 {% block stylesheet %}
 
+{% if refresh_timeout %}
+<meta http-equiv="refresh" content="{{ refresh_timeout }}">
+{% endif %}
+
 <style type="text/css">
 
 #conteudo-visao-hierarquica {

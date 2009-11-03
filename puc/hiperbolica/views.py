@@ -40,7 +40,8 @@ def mostrar_arvore(request):
 	"""carrega e mostra a arvore"""
 	
 	arvore_json = arvore_repository.get_arvore()
-	
+	refresh_timeout = 30
 	print 'arvore json: %s' % arvore_json
 		
-	return render_to_response(templates.TEMPLATE_HIPERBOLICA_MOSTRAR_ARVORE, {'arvore_json' : arvore_json})
+	return render_to_response(templates.TEMPLATE_HIPERBOLICA_MOSTRAR_ARVORE, {'arvore_json' : arvore_json,
+								'refresh_timeout' : refresh_timeout })
