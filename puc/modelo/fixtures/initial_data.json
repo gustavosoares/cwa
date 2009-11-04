@@ -50,7 +50,13 @@
       "is_staff": 1, 
       "last_login": "2009-11-03 19:05:01", 
       "groups": [], 
-      "user_permissions": [], 
+      "user_permissions": [
+        46, 
+        47, 
+        71, 
+        50, 
+        48
+      ],
       "password": "sha1$f60e2$a4511effee5956b897a67a6f1a5a1cd47858c955", 
       "email": "", 
       "date_joined": "2009-10-31 14:07:54"

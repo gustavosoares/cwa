@@ -11,13 +11,13 @@ GRANT ALL ON monitor.* TO monitor@localhost IDENTIFIED BY 'monitor';
 2. Dump dos dados em json
 ##########################################
 
-python manage.py dumpdata --indent 2 --exclude=sites --exclude=admin --exclude=sessions --exclude=contenttypes --exclude=sme
+python2.5 manage.py dumpdata --indent 2 --exclude=sites --exclude=admin --exclude=sessions --exclude=contenttypes --exclude=sme
 
 ##############################################
 3. Carregar dados iniciais para a aplicacao
 ##############################################
 
-python manage.py loaddata fixtures/initial_data_json
+python2.5 manage.py loaddata modelo/fixtures/initial_data.json
 
 ##############################################
 4. Gerar o xml
