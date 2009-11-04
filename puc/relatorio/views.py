@@ -81,11 +81,7 @@ def index(request):
 				colunas_desc = []
 
 			#valida o tipo de relatorio a ser gerado
-			#relatorio tabela
-			visao_relatorio = visao_repository.get_visao_relatorio()
-			tipo_relatorio = visao_relatorio.formato
-			print '## Tipo de relatorio configurado: %s' % tipo_relatorio
-			relatorio = factory.RelatorioFactory().get_relatorio(tipo_relatorio)
+			relatorio = factory.RelatorioFactory().get_relatorio_automaticamente()
 			print '###relatorio: %s' % (type(relatorio))
 			relatorio.produto = produto
 			relatorio.alarme = alarme
@@ -140,12 +136,8 @@ def get_xml(request):
 			colunas_desc = eventos[0].descricao_colunas
 		else:
 			colunas_desc = []
-		
-		#obtenho o xml do tipo de relatorio configurado
-		visao_relatorio = visao_repository.get_visao_relatorio()
-		tipo_relatorio = visao_relatorio.formato
-		print '## Tipo de relatorio configurado: %s' % tipo_relatorio
-		relatorio = factory.RelatorioFactory().get_relatorio(tipo_relatorio)
+
+		relatorio = factory.RelatorioFactory().get_relatorio_automaticamente()
 		print '###relatorio: %s' % (type(relatorio))
 		relatorio.produto = produto
 		relatorio.alarme = alarme
