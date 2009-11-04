@@ -13,8 +13,10 @@ class SimpleTest(TestCase):
 		response = self.client.get('/relatorio/')
 		self.failUnlessEqual(response.status_code, 200)
 
-	def test_relatorio_xml(self):
+	def test_relatorio_xml_response(self):
 		response = self.client.get('/relatorio/xml?produto=35&alarme=125&monitor=396&data_inicio=2009-09-01&data_fim=2009-11-03')
 		self.failUnlessEqual(response.status_code, 200)
-		self.assertContains(response, '</chart_data>')
-		self.assertContains(response, '</chart>')
+
+	def test_relatorio_xml_content_type(self):
+		response = self.client.get('/relatorio/xml?produto=35&alarme=125&monitor=396&data_inicio=2009-09-01&data_fim=2009-11-03')
+		self.failUnlessEqual(response.headers['Content-Type'], 'application/xml')
