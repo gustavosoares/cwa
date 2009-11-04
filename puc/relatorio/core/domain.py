@@ -180,7 +180,7 @@ class Grafico(object):
 	"""interface para o grafico"""
 	def __init__(self):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
-		self.width = '800'
+		self.width = '640'
 		self.height = '600'
 		self.chart_rect_width = int(self.width) * 0.9
 		self.chart_rect_height = int(self.height) * 0.8
@@ -233,7 +233,9 @@ class Grafico(object):
 <chart>
 	<license>%s</license>
 	
-	<legend transition='dissolve'
+	<legend 
+		y='5'
+		transition='dissolve'
 		delay='0'
 		bullet='circle'
 		size='12'
@@ -261,6 +263,8 @@ class Grafico(object):
 		minor_color='222222' 
 		position='inside' />
 	<chart_type>%s</chart_type>
+	
+	<chart_grid_h thickness='2' color='FF0000' alpha='15' type='dashed' />
 	
 	<chart_guide horizontal='true'
 		vertical='true'
@@ -313,7 +317,7 @@ class Grafico(object):
 
 	<chart_data>\n
 		''' % (self.license, (self.valor_maximo * 1.05), self.type, 
-		self.width, (int(self.height) * 1.05), self.width)
+		 self.chart_rect_width, (int(self.height) * 0.96), self.chart_rect_width)
 		
 		return xml_header
 
