@@ -3,29 +3,7 @@
 {% block title %}Monitores do alarme {{ alarme.alm_nome }}{% endblock %}
 
 {% block stylesheet %}
-<style type="text/css">
 
-	#content { 
-	  float:left;
-	  width: 100%;
-	  position: relative;
-	  border: 2px solid;
-	  background: WhiteSmoke;
-	}
-	
-	#monitores { 
-	  float:left;
-	  width: 28%;  
-	  background: WhiteSmoke;
-	}
-
-	#eventos {
-	  float:left;
-	  /*width: 70%;*/
-	  background: WhiteSmoke;
-	}   
-
-</style>
 {% endblock %}
 	
 {% block javascript %}
@@ -34,8 +12,6 @@
 
 {% block content %}
 <center>
-<div id="content">
-<div id="monitores">
 <table border="2">
 	<tr>
 		<td>
@@ -54,9 +30,6 @@
 		</tr>
 	{% endfor %}
 </table>
-</div>
-<div id="eventos"></div>
-</div>
 </center>
 
 {% endblock %}

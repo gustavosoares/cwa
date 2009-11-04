@@ -14,30 +14,31 @@
 
 <center>
 <table border="2">
-	<tr>
-		<td><center><h2>Produto</h2></center></td>
-		<td><center><h2>Alarmes</h2></center></td>
-	</tr>
 	{% for produto_alarmes in produtos_alarmes %}
 		<tr>
 			{% ifequal produto_alarmes.produto.prd_status 'W' %}
-				<th class='sme2-produto' rowspan='{{ produto_alarmes.alarmes.count|add:"1" }}' bgcolor='{{ colors.warning }}'><center>{{ produto_alarmes.produto.prd_nome }}</center></th>
-				<td bgcolor='{{ colors.warning }}'></td>
+				<th colspan='2' class='sme2-produto' bgcolor='{{ colors.warning }}'><center>{{ produto_alarmes.produto.prd_nome }}</center></th>
 			{% endifequal %}
 			{% ifequal produto_alarmes.produto.prd_status 'A' %}
-				<th class='sme2-produto' rowspan='{{ produto_alarmes.alarmes.count|add:"1" }}' bgcolor='{{ colors.alarm }}'><center>{{ produto_alarmes.produto.prd_nome }}</center></th>
-				<td bgcolor='{{ colors.alarm }}'></td>
+				<th colspan='2' class='sme2-produto' bgcolor='{{ colors.alarm }}'><center>{{ produto_alarmes.produto.prd_nome }}</center></th>
 			{% endifequal %}
+		</tr>
+		<tr>
+			<td><center><h3>Alarme</h3></center></td>
+			<td><center><h3>Monitores</h3></center></td>
+		</tr>	
 				<!-- Lista de alarmes por produtos -->
 				{% for alarme in produto_alarmes.alarmes %}
+						<tr>
 					{% ifequal alarme.alm_status 'W' %}
-						<tr><td class='sme2-alarme' bgcolor='{{ colors.warning }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td></tr>
+						<td class='sme2-alarme' bgcolor='{{ colors.warning }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td>
 					{% endifequal %}
 					{% ifequal alarme.alm_status 'A' %}
-						<tr><td class='sme2-alarme' bgcolor='{{ colors.alarm }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td></tr>
-					{% endifequal %}					
+						<td class='sme2-alarme' bgcolor='{{ colors.alarm }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td>
+					{% endifequal %}
+						<td>monitor</td>
+						</tr>
 				{% endfor %}
-
 
 		</tr>
 	{% endfor %}

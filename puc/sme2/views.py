@@ -1,6 +1,7 @@
 # coding=utf-8
 from traceback import *
 import sys
+import copy
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseServerError
@@ -26,7 +27,8 @@ monitor_repository = MonitorRepository()
 #print 'id monitor_repository: %s' % id(monitor_repository)
 
 def index(request):
-	return listar_produto_alarme(request)
+	#return listar_produto_alarme(request)
+	return listar_produto_alarme_monitor(request)
 	
 def listar_produto(request):
 	"""retorna a listagem dos produtos no sme2"""
@@ -42,6 +44,26 @@ def listar_produto_alarme(request):
 	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME, 
 					{ 'produtos' : None,
 					'produtos_alarmes' : produtos_alarmes,
+	 				'colors' : util.colors})
+
+
+def listar_produto_alarme_monitor(request):
+	"""controller: listagem dos produtos, alarme e monitores"""
+	produtos_alarmes = produto_repository.get_produtos_e_seus_alarmes()
+	alarmes_monitores = {}
+	#para cada produto pego os monitores
+	print produtos_alarmes
+	print 'pegando os monitores para cada alarme'
+	for produto_alarmes in produtos_alarmes:
+		for alarme in produto_alarmes['alarmes']:
+			#print 'alarme: %s' % alarme
+			monitores = monitor_repository.get_monitor_alarmando_por_alarme_id(alarme.alm_id)
+			alarmes_monitores[alarme.alm_id] = copy.deepcopy(monitores)
+			print alarmes_monitores
+	return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME_MONITOR, 
+					{ 'produtos' : None,
+					'produtos_alarmes' : produtos_alarmes,
+					'alarmes_monitores' : alarmes_monitores,
 	 				'colors' : util.colors})
 
 def listar_monitor_do_alarme(request, alm_id=None):
