@@ -8,16 +8,13 @@ Replace these with more appropriate tests for your application.
 from django.test import TestCase
 
 class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
+	
+	def test_relatorio_index(self):
+		response = self.client.get('/relatorio/')
+		self.failUnlessEqual(response.status_code, 200)
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
-
->>> 1 + 1 == 2
-True
-"""}
-
+	def test_relatorio_xml(self):
+		response = self.client.get('/relatorio/xml?produto=35&alarme=125&monitor=396&data_inicio=2009-09-01&data_fim=2009-11-03')
+		self.failUnlessEqual(response.status_code, 200)
+		self.assertContains(response, '</chart_data>')
+		self.assertContains(response, '</chart>')

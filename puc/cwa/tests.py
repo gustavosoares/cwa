@@ -8,16 +8,12 @@ Replace these with more appropriate tests for your application.
 from django.test import TestCase
 
 class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
+	
+	def test_cwa_index(self):
+		response = self.client.get('/cwa/')
+		self.failUnlessEqual(response.status_code, 200)
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
-
->>> 1 + 1 == 2
-True
-"""}
+	def test_cwa_modelo(self):
+		response = self.client.get('/cwa/')
+		self.assertContains(response, '{"portal-column-1": ["block-tabular"], "portal-column-bottom": ["block-relatorio"]}')
 

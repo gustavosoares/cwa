@@ -1,6 +1,6 @@
 from django.contrib import admin
 #from django.contrib.auth.models import User
-from puc.sme.models import Monitor, Coluna, Alarme, Produto, Sme
+from puc.sme.models import Monitor, Coluna, Alarme, Produto
 
 class MonitorAdmin(admin.ModelAdmin):
 	list_display = ('mon_id', 'mon_nome', 'mon_tabela', 'mon_status', 'alm_id', 'mon_alarmar')

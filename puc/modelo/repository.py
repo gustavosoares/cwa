@@ -35,7 +35,7 @@ class ModeloRepository(Singleton):
 			if len(visoes) > 1:
 				container = visoes[0]
 				visoes_aux = visoes[1:]
-				print '%s ->> %s' % (container, visoes_aux)
+				print '[ModeloRepository] %s ->> %s' % (container, visoes_aux)
 				modelo_settings[container] = visoes_aux
 
 		modelo_settings_json = json.encode_json(modelo_settings)

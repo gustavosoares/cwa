@@ -42,6 +42,21 @@ class Alarmehistorico(models.Model):
 	class Meta:
 		db_table = u'alarmehistorico'
 
+class Coluna(models.Model):
+	col_cabecalho = models.CharField(max_length=150)
+	col_nomefisico = models.CharField(max_length=150, blank=True)
+	col_tipo = models.CharField(max_length=3, blank=True)
+	col_ordem = models.IntegerField()
+	mon_id = models.IntegerField(null=True, blank=True)
+	col_exibir = models.CharField(max_length=3, blank=True)
+	col_id = models.IntegerField(primary_key=True)
+	col_valoralarme = models.CharField(max_length=150, blank=True)
+	col_valorwarning = models.CharField(max_length=150, blank=True)
+	col_tamanho = models.IntegerField(null=True, blank=True)
+	col_ativaemail = models.CharField(max_length=3)
+	class Meta:
+		db_table = u'coluna'
+
 class Produto(models.Model):
 	prd_nome = models.CharField(max_length=150)
 	prd_sigla = models.CharField(max_length=9)
