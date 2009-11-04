@@ -347,8 +347,8 @@ class GraficoLinha(Grafico):
 
 	def get_xml(self):
 		"""retorna o xml para o grafico"""
-		assert len(self.servidores) > 0, 'nenhum servidor para geracao do grafico está vazia'
-		assert len(self.variaveis) > 0, 'nenhuma variavel para geracao do grafico está vazia'
+		#assert len(self.servidores) > 0, 'a lista de servidores para geracao do grafico está vazia'
+		#assert len(self.variaveis) > 0, 'a lista de variaveis para geracao do grafico está vazia'
 
 		if self._xml:
 			return self._xml
