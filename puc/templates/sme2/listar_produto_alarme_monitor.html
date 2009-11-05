@@ -22,22 +22,30 @@
 			{% ifequal produto_alarmes.produto.prd_status 'A' %}
 				<th colspan='2' class='sme2-produto' bgcolor='{{ colors.alarm }}'><center>{{ produto_alarmes.produto.prd_nome }}</center></th>
 			{% endifequal %}
-		</tr>
-		<tr>
-			<td><center><h3>Alarme</h3></center></td>
-			<td><center><h3>Monitores</h3></center></td>
 		</tr>	
 				<!-- Lista de alarmes por produtos -->
 				{% for alarme in produto_alarmes.alarmes %}
+					{% with alarme.get_monitores_alarmando as monitores %}
 						<tr>
 					{% ifequal alarme.alm_status 'W' %}
-						<td class='sme2-alarme' bgcolor='{{ colors.warning }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td>
+						<td rowspan='{{ monitores.count|add:"1" }}' class='sme2-alarme' bgcolor='{{ colors.warning }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td>
+						<td bgcolor='{{ colors.warning }}'></td>
 					{% endifequal %}
 					{% ifequal alarme.alm_status 'A' %}
-						<td class='sme2-alarme' bgcolor='{{ colors.alarm }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td>
+						<td rowspan='{{ monitores.count|add:"1" }}' class='sme2-alarme' bgcolor='{{ colors.alarm }}'><a href='/sme2/monitor/alarme/{{alarme.alm_id}}'>{{ alarme.alm_nome }}</a></td>
+						<td bgcolor='{{ colors.alarm }}'></td>
 					{% endifequal %}
-						<td>monitor</td>
+						<!--td>monitor</td-->
+						{% for monitor in monitores %}
+							{% ifequal monitor.mon_status 'W' %}
+								<tr><td class='sme2-monitor' bgcolor='{{ colors.warning }}'><a href='/sme2/evento/monitor/{{ monitor.mon_id }}'>{{ monitor.mon_nome }}</a></td></tr>
+							{% endifequal %}
+							{% ifequal monitor.mon_status 'A' %}
+								<tr><td class='sme2-monitor' bgcolor='{{ colors.alarm }}'><a href='/sme2/evento/monitor/{{ monitor.mon_id }}'>{{ monitor.mon_nome }}</a></td></tr>
+							{% endifequal %}
+						{% endfor %}
 						</tr>
+					{% endwith %}
 				{% endfor %}
 
 		</tr>
