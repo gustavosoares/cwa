@@ -26,7 +26,7 @@ class ProdutoRepository(Singleton):
 			produtos_alarmes.append({'produto' : produto, 'alarmes' : alarmes})
 		return produtos_alarmes
 
-	def limpa_produto_por_id(self):
+	def limpa_produto_por_id(self,id):
 		"""marca o produto com prd_status = X"""
 		Produto.objects.filter(prd_id=id).update(prd_status='X')
 
