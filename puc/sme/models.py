@@ -25,7 +25,7 @@ class Alarme(models.Model):
 		
 	def get_monitores_alarmando(self):
 		from puc.sme.core.repository.monitor_repository import MonitorRepository
-		return MonitorRepository().get_monitor_alarmando_por_alarme_id(self.alm_id)
+		return MonitorRepository().get_monitores_alarmando_por_alarme_id(self.alm_id)
 
 class Alarmehelp(models.Model):
 	mem_id = models.IntegerField(primary_key=True)

@@ -11,11 +11,11 @@ class MonitorRepository(Singleton):
 		"""retorna todos os monitores"""
 		return Monitor.objects.all()
 
-	def get_monitor_alarmando_por_alarme_id(self,id):
+	def get_monitores_alarmando_por_alarme_id(self,id):
 		"""busca um monitor alarmando por alarme id"""
 		return Monitor.objects.exclude(mon_status='X').filter(alm_id=id)
 
-	def get_monitor_por_alarme_id(self,id):
+	def get_monitores_por_alarme_id(self,id):
 		"""busca um monitores por alarme id"""
 		return Monitor.objects.filter(alm_id=id)
 
@@ -173,7 +173,7 @@ class MonitorRepository(Singleton):
 			self.limpa_monitor_por_id(monitor.mon_id)
 
 		#algum alm_id alarmando na tabela monitor?
-		if (len(self.get_monitor_alarmando_por_alarme_id(alarme.alm_id)) == 0):
+		if (len(self.get_monitores_alarmando_por_alarme_id(alarme.alm_id)) == 0):
 			print '###limpando alarme...'
 			#atualizo alm_status na tabela do monitor
 			AlarmeRepository().limpa_alarme_por_id(alarme.alm_id)
