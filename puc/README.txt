@@ -24,3 +24,14 @@ python2.5 manage.py loaddata modelo/fixtures/initial_data.json
 ##############################################
 
 http://localhost:8000/relatorio/xml?produto=35&alarme=125&monitor=396&data_inicio=2009-07-01&data_fim=2009-10-31
+
+
+TIPS
+
+Install Django Command Extensions (http://code.google.com/p/django-command-extensions) 
+and pygraphviz (http://networkx.lanl.gov/pygraphviz/) and then issue the following command to get a really nice looking Django model visualization:
+
+./manage.py graph_models -a -g -o my_project.png
+
+Here's an example output from the Django Command Extensions page.
+
