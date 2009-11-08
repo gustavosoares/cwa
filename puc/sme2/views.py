@@ -6,7 +6,6 @@ def index(request):
 	sme2_controller = Sme2Controller(request)
 	return sme2_controller.index()
 
-
 def listar_produto(request):
 	"""retorna a listagem dos produtos no sme2"""
 	sme2_controller = Sme2Controller(request)
