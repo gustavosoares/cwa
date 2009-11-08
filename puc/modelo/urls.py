@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    (r'^criar/?$', views.criar_modelo),
-    (r'^/?$', views.index),
+    #(r'^criar/?$', views.criar_modelo),
+    #(r'^/?$', views.index),
 )
 
 import os
