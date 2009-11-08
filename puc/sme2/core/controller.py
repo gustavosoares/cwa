@@ -24,6 +24,10 @@ produto_repository = ProdutoRepository()
 alarme_repository = AlarmeRepository()
 monitor_repository = MonitorRepository()
 
+#print 'id produto_repository: %s' % id(produto_repository)
+#print 'id alarme_repository: %s' % id(alarme_repository)
+#print 'id monitor_repository: %s' % id(monitor_repository)
+
 class Sme2Controller(Controller):
 	
 	def index(self):

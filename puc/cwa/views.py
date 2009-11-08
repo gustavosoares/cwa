@@ -1,43 +1,34 @@
 # coding=utf-8
-import datetime
-import os
-
-# Create your views here.
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.conf import settings
-from django.shortcuts import render_to_response
-from django.template.loader import render_to_string
-
-from puc import templates
-from puc.modelo.repository import ModeloRepository
-from puc.core import json
-
-modelo_repository = ModeloRepository()
+from puc.cwa.core.controller import CwaController
 
 def index(request):
-	"""Pagina princiap da aplicacao cwa"""
+	"""Pagina principal da aplicacao cwa"""
 	
-	modelo = modelo_repository.get_modelo_ativo()
-	print '[CWA INDEX] modelo ativo: %s' % modelo
-	
-	modelo_settings_json = modelo_repository.get_modelo_settings(modelo.nome)
-	print '[CWA INDEX] modelo settings: %s' % modelo_settings_json
-	#pego as informacoes do modelo configurado
-	return render_to_response(templates.TEMPLATE_CWA_INDEX, { 'settings' : modelo_settings_json})
-
+	cwa_controller = CwaController(request)
+	return cwa_controller.index()
 	
 def widget(request):
-	return render_to_response('cwa/_teste/teste_widget.html')
+	
+	cwa_controller = CwaController(request)
+	return cwa_controller.widget()
 
 def chart(request):
-	return render_to_response('cwa/_teste/teste_chart.html')
+	
+	cwa_controller = CwaController(request)
+	return cwa_controller.chart()
 
 def chart2(request):
-	return render_to_response('cwa/_teste/teste_chart2.html')	
+	
+	cwa_controller = CwaController(request)
+	return cwa_controller.chart2()
 
 def resize(request):
-	return render_to_response('cwa/_teste/teste_resize.html')
+	
+	cwa_controller = CwaController(request)
+	return cwa_controller.resize()
 	
 def chart_scroll(request):
-	return render_to_response('cwa/_teste/teste_chart_scroll.html')
+	
+	cwa_controller = CwaController(request)
+	return cwa_controller.chart_scroll()
+	

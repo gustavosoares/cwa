@@ -54,7 +54,7 @@ class ArvoreHiperbolicaRepository(Singleton):
 					no_alarme.color = util.colors['alarm']
 				
 				#pego os monitores do alarme
-				monitores = monitor_repository.get_monitor_alarmando_por_alarme_id(alarme.alm_id)
+				monitores = monitor_repository.get_monitores_alarmando_por_alarme_id(alarme.alm_id)
 				for monitor in monitores:
 					contador = contador + 1
 					no_monitor = domain.NoHiperbolico()
