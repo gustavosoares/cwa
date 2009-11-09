@@ -1,4 +1,46 @@
 var Portal = Class.create();
+
+function obter_estado() {
+	
+	var colunas = $('portal').getElementsByClassName('portal-column');
+	//console.log(colunas)
+	var i=0;
+	var colunasLen=colunas.length;
+	//armazena o estado dos containers
+	var postBody = "";
+	for (i=0;i <= colunasLen;i++) {
+		aux = colunas[i];
+		if (aux != undefined) {
+			aux_id = aux.id;
+			if (aux_id != 'portal-column-block-list') {
+				if (postBody == "") {
+					postBody = aux_id
+				} else{
+					postBody = postBody + '&' + aux_id;
+				}
+				/*console.log("------")
+				console.log(aux)
+				console.log('id: ' + aux_id)*/
+				var children = $(aux_id).getElementsByClassName('block');
+				if (children.length > 0) {
+					var j=0;
+					//console.log(children)
+					for (j=0; j <= children.length; j++) {
+						if (children[j] != undefined) {
+							children_id = children[j].id
+							postBody = postBody + ':' + children_id
+							//console.log(children_id)
+						}
+					}
+				}
+			}
+		}
+
+	}
+	//console.log('postBody: '+ postBody)
+	$('id_metadado').value = postBody;
+	
+}
 Portal.prototype = {
   initialize: function (options) {
     this.setOptions(options);
@@ -16,48 +58,8 @@ Portal.prototype = {
         hoverclass: this.options.hoverclass,
         onUpdate: function (container) {
 
-			var colunas = $('portal').getElementsByClassName('portal-column');
-			//console.log(colunas)
-			var i=0;
-			var colunasLen=colunas.length;
-			//armazena o estado dos containers
-			var postBody = "";
-			for (i=0;i <= colunasLen;i++) {
-				aux = colunas[i];
-				if (aux != undefined) {
-					aux_id = aux.id;
-					if (aux_id != 'portal-column-block-list') {
-						if (postBody == "") {
-							postBody = aux_id
-						} else{
-							postBody = postBody + '&' + aux_id;
-						}
-						/*console.log("------")
-						console.log(aux)
-						console.log('id: ' + aux_id)*/
-						var children = $(aux_id).getElementsByClassName('block');
-						if (children.length > 0) {
-							var j=0;
-							//console.log(children)
-							for (j=0; j <= children.length; j++) {
-								if (children[j] != undefined) {
-									children_id = children[j].id
-									postBody = postBody + ':' + children_id
-									//console.log(children_id)
-								}
-							}
-						}
-					}
-				}
+		obter_estado();
 
-			}
-			//console.log('postBody: '+ postBody)
-          $('id_metadado').value = postBody;
-          /*new Ajax.Request(url, {
-              method: 'post',
-              postBody: postBody
-            }
-          );*/
         }.bind(this)
       });
     }.bind(this));
@@ -90,6 +92,7 @@ Portal.prototype = {
           function (e) {  
             //alert('delete clicked');
             $('portal-column-block-list').appendChild($(block));
+            obter_estado();
           },
           false
         );
