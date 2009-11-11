@@ -180,7 +180,8 @@ class Grafico(object):
 	"""interface para o grafico"""
 	def __init__(self):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
-		self.width = '640'
+		#self.width = '640'
+		self.width = '800'
 		self.height = '600'
 		self.chart_rect_width = int(self.width) * 0.9
 		self.chart_rect_height = int(self.height) * 0.8
@@ -316,7 +317,7 @@ class Grafico(object):
 		<chart_label position='cursor' />
 
 	<chart_data>\n
-		''' % (self.license, (self.valor_maximo * 1.05), self.type, 
+		''' % (self.license, (self.valor_maximo * 1.04), self.type, 
 		 self.chart_rect_width, (int(self.height) * 0.96), self.chart_rect_width)
 		
 		return xml_header
