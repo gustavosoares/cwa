@@ -141,6 +141,7 @@
 <script type="text/javascript">
 	var settings = {{ settings|safe }}
 	var portal;
+	/*Funcao para adicionar o efeito do slide nos boxes*/
 	function init() {
 		//console.log("body loaded")
 		
@@ -219,7 +220,7 @@
 				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="monitoracao">Visão tabular</a></h3>
 				<div class="content">
 					<CENTER>
-					<iframe name="iframe_sm2" src="/sme2/" frameborder="0" width="98%" height="400"></iframe>
+					<iframe id="id_frame_sme2" name="iframe_sme2" src="/sme2/" frameborder="0" scrolling="auto" width="98%" height="800"></iframe>
 					</CENTER>
 				</div>
 			</div>
@@ -230,7 +231,7 @@
 				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a></h3>
 				<div class="content">
 					<CENTER>
-					<iframe name="iframe_hierarquica" src="/hiperbolica/" frameborder="0" width="98%" height="600"></iframe>
+					<iframe id="id_frame_hierarquica" name="iframe_hierarquica" src="/hiperbolica/" frameborder="0"  scrolling="auto" width="98%" height="600"></iframe>
 					</CENTER>
 				</div>
 			</div>
@@ -241,7 +242,7 @@
 				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">Visão relatório</a></h3>
 				<div class="content">
 					<CENTER>
-					<iframe name="iframe_relatorio" src="/relatorio/" frameborder="0" width="98%" height="400"></iframe>
+					<iframe id="id_frame_relatorio" name="iframe_relatorio" src="/relatorio/" frameborder="0" scrolling="auto" width="98%" height="1000"></iframe>
 					</CENTER>
 				</div>
 			</div>
