@@ -37,6 +37,8 @@ class ModeloRepository(Singleton):
 				visoes_aux = visoes[1:]
 				print '[ModeloRepository] %s ->> %s' % (container, visoes_aux)
 				modelo_settings[container] = visoes_aux
+			else:
+				modelo_settings[coluna] = []
 
 		modelo_settings_json = json.encode_json(modelo_settings)
 

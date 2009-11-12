@@ -180,14 +180,21 @@
 	    );
 		
 		for (var container in settings) {
-	      settings[container].each(function (block) {
-	        $(container).appendChild($(block));
-	      });
+		  visoes = settings[container]
+		  len_visoes = visoes.length
+		  if (len_visoes > 0) {
+				visoes.each(function (block) {
+					$(container).appendChild($(block));
+				});
+		  } else {
+				$('portal').removeChild($(container))
+		  }
 	    }
+	    
 		//portal = new Portal();
 		//portal.applySettings(settings);
 	}
-  Event.observe(window, 'load', init, false);
+	Event.observe(window, 'load', init, false);
 </script>
 
 

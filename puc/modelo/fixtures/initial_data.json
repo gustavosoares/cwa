@@ -9,7 +9,7 @@
     "model": "modelo.visaohierarquica",
     "pk": 1,
     "fields": {
-      "frequencia_atualizacao": 30
+      "frequencia_atualizacao": 120
     }
   },{
   	"pk": 1, 
