@@ -22,6 +22,7 @@
 		$('ordem-modelo').value = ""
 		portal = new Portal();
 		portal.applySettings(settings);
+		new Draggable('portal-column-block-list', { scroll: window });
 	}
 	
 	Event.observe(window, 'load', init, false);
@@ -97,4 +98,5 @@
 <!-- fim do modelo-->
 {% endif %}
 </form></div>
+
 {% endblock %}

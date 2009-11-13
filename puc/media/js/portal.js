@@ -1,5 +1,6 @@
 var Portal = Class.create();
 
+/* obtem o posicionamento das visoes */
 function obter_estado() {
 	
 	var colunas = $('portal').getElementsByClassName('portal-column');
@@ -47,6 +48,7 @@ Portal.prototype = {
     var sortables = document.getElementsByClassName(
       this.options.column, this.options.portal
     );
+    //console.log(sortables)
     sortables.each(function (sortable) {
       Sortable.create(sortable, { 
         containment: sortables,
@@ -57,9 +59,7 @@ Portal.prototype = {
         handle: this.options.handle,
         hoverclass: this.options.hoverclass,
         onUpdate: function (container) {
-
-		obter_estado();
-
+			obter_estado();
         }.bind(this)
       });
     }.bind(this));
@@ -89,8 +89,7 @@ Portal.prototype = {
         
         Event.observe(
           delete_, 'click', 
-          function (e) {  
-            //alert('delete clicked');
+          function (e) {
             $('portal-column-block-list').appendChild($(block));
             obter_estado();
           },
@@ -107,8 +106,8 @@ Portal.prototype = {
     );
 
     new Draggable(this.options.blocklist, {
+        scroll: window,
         handle: this.options.blocklisthandle,
-        scroll: true
       }
     );
     
