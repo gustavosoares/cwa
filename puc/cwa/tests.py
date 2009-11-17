@@ -15,5 +15,5 @@ class SimpleTest(TestCase):
 
 	def test_cwa_modelo(self):
 		response = self.client.get('/cwa/')
-		self.assertContains(response, '{"portal-column-1": ["block-tabular"], "portal-column-bottom": ["block-relatorio"]}')
+		self.assertContains(response, '{"portal-column-1": ["block-tabular"], "portal-column-0": [], "portal-column-bottom": ["block-relatorio"]}')
 
