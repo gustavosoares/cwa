@@ -33,35 +33,55 @@ function init() {
       blocklisthandle: 'block-list-handle',
     }
 
-    var blocks = document.getElementsByClassName(
-      this.options.block, this.options.portal
-    );
-    
-	/*
+
 	for (var container in settings) {
 	  visoes = settings[container]
 	  len_visoes = visoes.length
 	  if (len_visoes > 0) {
 			visoes.each(function (block) {
-				//c = document.getElementById(container)
-				//conteudo = container_conteudo[container];
-				//conteudo = conteudo + '<div class="block" id="' + block + '">\n';
-				//conteudo = conteudo + $(block).innerHTML;
-				//conteudo = conteudo + '</div>'
+				c = document.getElementById(container)
+				conteudo = container_conteudo[container];
+				conteudo = conteudo + '<div class="block" id="' + block + '">\n';
+				conteudo = conteudo + $(block).innerHTML;
+				conteudo = conteudo + '</div>'
 				//console.log(conteudo)
-				//c.innerHTML = conteudo;
-				//console.log(container+' -> '+block)
-				$(container).appendChild($(block));     
+				c.innerHTML = conteudo;
+				//console.log(container+' -> '+block)     
 				visoes_estado[block] = true;
 				container_conteudo[container] = conteudo;
+        
+            var blocks = document.getElementsByClassName(
+		      this.options.block, this.options.portal
+		    );
+
+		    blocks.each(
+		      function (block) {
+		        var content = Element.childrenWithClassName(
+		          block, this.options.content, true
+		        );
+
+		        var toggle = Element.childrenWithClassName(
+		          block, this.options.toggle, true
+		        );
+		        
+		        Event.observe(
+		          toggle, 'click', 
+		          function (e) { Effect.toggle(content, 'Slide'); },
+		          false
+		        );
+
+		      }.bind(this)
+		    );
+
         
 			});
 	  } else {
 			$(this.options.portal).removeChild($(container));
 	  }
     }
-    */
+
     
+    /*
     for (var container in settings) {
 	  visoes = settings[container]
 	  len_visoes = visoes.length
@@ -73,7 +93,7 @@ function init() {
 	  } else {
 			$(this.options.portal).removeChild($(container));
 	  }
-    }
+    }*/
 
 /* remove os blocks que nao foram definidos */
 
@@ -89,6 +109,9 @@ function init() {
 		}
 	}
 
+    var blocks = document.getElementsByClassName(
+      this.options.block, this.options.portal
+    );
 
     blocks.each(
       function (block) {
