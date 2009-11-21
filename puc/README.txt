@@ -35,3 +35,12 @@ and pygraphviz (http://networkx.lanl.gov/pygraphviz/) and then issue the followi
 
 Here's an example output from the Django Command Extensions page.
 
+########################################
+5. Gerando a entidade relacional
+########################################
+
+python modelviz.py sme > sme.dot
+/opt/local/bin/dot sme.dot -Tpng -o sme.png
+
+python modelviz.py modelo > modelo.dot
+/opt/local/bin/dot modelo.dot -Tpng -o modelo.png
