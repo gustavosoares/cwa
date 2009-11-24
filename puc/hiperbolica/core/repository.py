@@ -37,6 +37,7 @@ class ArvoreHiperbolicaRepository(Singleton):
 			no_produto.id = contador
 			no_produto.name = produto_alarmes['produto'].prd_nome.encode('utf-8')
 			no_produto.dim = 9
+			no_produto.type = 'square'
 			if produto_alarmes['produto'].prd_status == 'W':
 				no_produto.color = util.colors['warning']
 			elif produto_alarmes['produto'].prd_status == 'A':
@@ -47,8 +48,8 @@ class ArvoreHiperbolicaRepository(Singleton):
 				no_alarme = domain.NoHiperbolico()
 				no_alarme.id = contador
 				no_alarme.name = alarme.alm_nome.encode('utf-8')
-				no_alarme.dim = 8
-				no_alarme.type = 'square'
+				no_alarme.dim = 12
+				no_alarme.type = 'triangle'
 				if alarme.alm_status == 'W':
 					no_alarme.color = util.colors['warning']
 				elif alarme.alm_status == 'A':
