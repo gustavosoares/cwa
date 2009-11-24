@@ -48,6 +48,7 @@ class ArvoreHiperbolicaRepository(Singleton):
 				no_alarme.id = contador
 				no_alarme.name = alarme.alm_nome.encode('utf-8')
 				no_alarme.dim = 8
+				no_alarme.type = 'square'
 				if alarme.alm_status == 'W':
 					no_alarme.color = util.colors['warning']
 				elif alarme.alm_status == 'A':

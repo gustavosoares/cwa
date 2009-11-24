@@ -41,6 +41,7 @@ class NoHiperbolico(object):
 		
 		self.add_data('$color', self.color)
 		self.add_data('$dim', self.dim)
+		self.add_data('$type', self.type)
 		
 		dict['id'] = self.id
 		dict['name'] = self.name
