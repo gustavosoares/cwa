@@ -38,6 +38,7 @@ function init(){
             dim: 9,
             color: "#f00",
             overridable: true,
+            transform: true,
         },
         
         Edge: {
@@ -71,9 +72,9 @@ function init(){
                 style.fontSize = "0.8em";
                 style.color = "#ddd";
 
-            } else {
+            } /*else {
                 style.display = 'none';
-            }
+            }*/
 
             var left = parseInt(style.left);
             var w = domElement.offsetWidth;
