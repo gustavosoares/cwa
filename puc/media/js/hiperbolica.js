@@ -57,6 +57,12 @@ function init(){
             addEvent(domElement, 'click', function () {
                 ht.onClick(node.id);
             });
+            addEvent(domElement, 'mouseover', function () {
+                Log.write(node.name)
+            });
+            addEvent(domElement, 'mouseout', function () {
+                Log.write("")
+            });
         },
         //Change node styles when labels are placed
         //or moved.
@@ -72,7 +78,14 @@ function init(){
                 style.fontSize = "0.8em";
                 style.color = "#ddd";
 
-            } /*else {
+            } else if (node._depth == 3) {
+            	node.type = 'circle';
+            	node.dim = 5;
+            	style.fontSize = "0.7em";
+            	style.color = "#ddd";
+            }
+            
+            /*else {
                 style.display = 'none';
             }*/
 
