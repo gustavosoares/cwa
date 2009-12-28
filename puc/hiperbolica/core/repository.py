@@ -25,7 +25,7 @@ class ArvoreHiperbolicaRepository(Singleton):
 
 		raiz.id = 0
 		raiz.name = 'produto'
-		raiz.dim = 10
+		raiz.dim = 9
 		
 		contador = 1
 		#pega os produtos alarmando
@@ -36,8 +36,8 @@ class ArvoreHiperbolicaRepository(Singleton):
 			no_produto = domain.NoHiperbolico()
 			no_produto.id = contador
 			no_produto.name = produto_alarmes['produto'].prd_nome.encode('utf-8')
-			no_produto.dim = 9
-			no_produto.type = 'square'
+			no_produto.dim = 7
+			no_produto.type = 'circle'
 			if produto_alarmes['produto'].prd_status == 'W':
 				no_produto.color = util.colors['warning']
 			elif produto_alarmes['produto'].prd_status == 'A':
@@ -48,8 +48,8 @@ class ArvoreHiperbolicaRepository(Singleton):
 				no_alarme = domain.NoHiperbolico()
 				no_alarme.id = contador
 				no_alarme.name = alarme.alm_nome.encode('utf-8')
-				no_alarme.dim = 12
-				no_alarme.type = 'triangle'
+				no_alarme.dim = 7
+				no_alarme.type = 'circle'
 				if alarme.alm_status == 'W':
 					no_alarme.color = util.colors['warning']
 				elif alarme.alm_status == 'A':
@@ -62,7 +62,7 @@ class ArvoreHiperbolicaRepository(Singleton):
 					no_monitor = domain.NoHiperbolico()
 					no_monitor.id = contador
 					no_monitor.name = monitor.mon_nome.encode('utf-8')
-					no_monitor.dim = 8
+					no_monitor.dim = 7
 					if monitor.mon_status == 'W':
 						no_monitor.color = util.colors['warning']
 					elif monitor.mon_status == 'A':
@@ -77,9 +77,5 @@ class ArvoreHiperbolicaRepository(Singleton):
 			#adiciono filho
 			raiz.add_children(copy.deepcopy(no_produto))
 			contador = contador + 1
-			
-			#descomentar se precisar debugar para limitar o tamanho da arvore
-			#if len(raiz.children) > 2:
-				#break
 		
 		return raiz

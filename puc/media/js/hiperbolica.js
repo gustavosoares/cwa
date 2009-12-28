@@ -38,7 +38,7 @@ function init(){
             dim: 9,
             color: "#f00",
             overridable: true,
-            transform: true,
+            transform: false,
         },
         
         Edge: {
