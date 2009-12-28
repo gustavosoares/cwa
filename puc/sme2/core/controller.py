@@ -120,5 +120,15 @@ class Sme2Controller(Controller):
 		monitor = monitor_repository.get_monitor_por_id(mon_id)
 		alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
 		produto = produto_repository.get_produto_por_id(alarme.prd_id)
-		monitor_repository.fechar_todos_eventos(monitor, alarme, produto)
-		return HttpResponseRedirect('/sme2/evento/monitor/%s' % mon_id)
+		try:
+			msg = '''fechando TODOS os eventos do monitor %s''' % (mon_id)
+			print msg
+			monitor_repository.fechar_todos_eventos(monitor, alarme, produto)
+			#eventos = monitor_repository.get_eventos_por_monitor_id(mon_id)
+			return HttpResponseRedirect('/sme2/')
+		except Exception, e:
+			print_exc(file=sys.stdout)
+			msg = 'Erro ao fechar TODOS os eventos do monitor %s: %s' % (mon_id, e)
+			print msg
+			html = '<h1>erro 500!!!</h1></br></br><h2>Erro ao fechar todos os eventos do monitor %s(%s)</h2>' % (monitor.mon_nome, monitor.mon_id)
+			return HttpResponseServerError(html)

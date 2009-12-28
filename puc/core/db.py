@@ -20,7 +20,7 @@ class Database():
 	#executes a sql
 	def execute(self, sql):
 		"""executes a sql"""
-		#print 'Database sql:\n%s' % sql
+		print 'Database sql:\n%s' % sql
 		if not self.cursor:
 			self.cursor = self.get_connection()
 		self.rows_afetadas = self.cursor.execute(sql)

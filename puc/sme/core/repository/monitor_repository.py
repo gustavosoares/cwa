@@ -106,7 +106,7 @@ class MonitorRepository(Singleton):
 			where mon_id = %s
 			AND pad_verificado  = 'N'
 			AND pad_tipoalarme <> 'X'
-			ORDER BY pad_datahoraalarme DESC LIMIT 2000
+			ORDER BY pad_datahoraalarme DESC LIMIT 5000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		db = Database()
 		db.execute(sql)
@@ -185,6 +185,10 @@ class MonitorRepository(Singleton):
 
 	def fechar_todos_eventos(self, monitor, alarme, produto):
 		"""docstring for fechar_todos_eventos"""
-		pass
+		#pego os eventos do monitor
+		eventos = self.get_eventos_por_monitor_id(monitor.mon_id)
+		for evento in eventos:
+			print 'fechando evento %s' % evento.id
+			self.fechar_evento(evento.id, monitor, alarme, produto)
 
 
