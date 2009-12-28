@@ -32,13 +32,13 @@ class HiperbolicaController(Controller):
 	
 	def index(self):
 		"""pagina principal da visualizacao hiperbolica"""
-
+		
 		return self.mostrar_arvore()
 
 
 	def teste(self):
 		"""pagina de teste da visualizacao hiperbolica"""
-
+		
 		return render_to_response("hiperbolica/teste.html", {})
 
 	def mostrar_arvore(self):
