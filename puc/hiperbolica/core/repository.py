@@ -53,6 +53,9 @@ class ArvoreHiperbolicaRepository(Singleton):
 		
 		for produto_alarmes in produtos_alarmes:
 			#checo estado do produto
+			
+			dim_maximo_alarme = 0.0
+			
 			no_produto = domain.NoHiperbolico()
 			no_produto.id = contador
 			no_produto.name = produto_alarmes['produto'].prd_nome.encode('utf-8')
@@ -119,7 +122,12 @@ class ArvoreHiperbolicaRepository(Singleton):
 					
 					#adiciono filho(monitor no alarme)
 					no_alarme.add_children(copy.deepcopy(no_monitor))
-					
+				
+				if no_alarme.dim > dim_maximo_alarme:
+					dim_maximo_alarme = no_alarme.dim
+				
+				no_produto.dim = dim_maximo_alarme
+				
 				#adiciono filho(alarme no produto)
 				no_produto.add_children(copy.deepcopy(no_alarme))
 				
