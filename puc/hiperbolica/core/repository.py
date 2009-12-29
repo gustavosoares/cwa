@@ -64,6 +64,9 @@ class ArvoreHiperbolicaRepository(Singleton):
 				no_produto.color = util.colors['alarm']
 			
 			for alarme in produto_alarmes['alarmes']:
+				
+				dim_maximo_monitor = 0.0
+				
 				contador = contador + 1
 				no_alarme = domain.NoHiperbolico()
 				no_alarme.id = contador
@@ -108,6 +111,11 @@ class ArvoreHiperbolicaRepository(Singleton):
 						no_monitor.color = util.colors['warning']
 					elif monitor.mon_status == 'A':
 						no_monitor.color = util.colors['alarm']
+					
+					if no_monitor.dim > dim_maximo_monitor:
+						dim_maximo_monitor = no_monitor.dim
+					
+					no_alarme.dim = dim_maximo_monitor
 					
 					#adiciono filho(monitor no alarme)
 					no_alarme.add_children(copy.deepcopy(no_monitor))
