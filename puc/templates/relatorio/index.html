@@ -9,13 +9,24 @@
 
 <style type="text/css">
 
+#portal {
+	padding: 1px;
+	position: left;
+	width:100%;
+	border: 1px solid;
+	background: black;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
+}
+
+
 #conteudo {
 	margin: 0px auto;
 	padding: 1px;
 	/*position: relative;*/
 	width:100%;
 	border: 0px solid;
-	background: PowderBlue;
+	background: black;
 	font-family: verdana, arial, sans-serif;
 	font-size: 10px;
 }
@@ -30,7 +41,7 @@
 	margin: 1px auto;
 	border: 0px solid;
 	text-align: center;
-	background: WhiteSmoke;
+	background: black;
 }
 
 	/* Definicoes dos boxes das visoes */
@@ -215,11 +226,11 @@
 			<div id="colunas"></div>
 		</div>
 	</div>
-				<div id="relatorio">
-					{% if relatorio %}
-						{{ relatorio.get_html|safe }}
-					{% endif %}
-				</div>
+	<div id="relatorio">
+		{% if relatorio %}
+			{{ relatorio.get_html|safe }}
+		{% endif %}
+	</div>
 
 </div>
 

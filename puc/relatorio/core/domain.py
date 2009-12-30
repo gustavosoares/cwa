@@ -181,9 +181,9 @@ class Grafico(object):
 	def __init__(self):
 		self.license = "FT421-71A.E2AT5D8RJ4.B-4ZRMDVL"
 		#self.width = '640'
-		self.width = '800'
-		self.height = '600'
-		self.chart_rect_width = int(self.width) * 0.9
+		self.width = '1000'
+		self.height = '700'
+		self.chart_rect_width = int(self.width) * 0.7
 		self.chart_rect_height = int(self.height) * 0.8
 		self.name = 'grafico-relatorio'
 		self.type = None
@@ -289,7 +289,7 @@ class Grafico(object):
 	
 	<chart_rect
 		width='%s'
-		y='100'
+		y='85'
 		x='60'
 	/>
 
@@ -318,7 +318,7 @@ class Grafico(object):
 
 	<chart_data>\n
 		''' % (self.license, (self.valor_maximo * 1.04), self.type, 
-		 self.chart_rect_width, (int(self.height) * 0.96), self.chart_rect_width)
+		 self.chart_rect_width, (int(self.height) * 0.76), self.chart_rect_width)
 		
 		return xml_header
 
