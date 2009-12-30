@@ -61,7 +61,7 @@
 	  z-index: 10;
 	  background-color: #FFEAB1;
 	}
-		
+	
 	.portal-column {
 		margin: 1px auto;
 		font-style: italic;
@@ -103,6 +103,11 @@
 	  cursor: pointer;
 	}
 
+	#portal .block-info {
+		position: absolute;
+		right:30px;
+	}
+	
 	/* Fim das visoes */
 
 	/* inicio */
@@ -164,8 +169,8 @@
       <!--div class="portal-column" id="portal-column-2">
 		<h2>Coluna 2</h2>
 	  </div-->
-      <div class="portal-column" id="portal-column-bottom">
-	  </div>
+      <div class="portal-column" id="portal-column-bottom"></div>
+
 		<!--div class="portal-column" id="portal-column-block-list" style="display: none;"-->
 		<div class="portal-column" id="portal-column-block-list" style="display: none;">
 			<h2 class="block-list-handle">Visões</h2>
@@ -184,7 +189,7 @@
 			
 			<!-- Visao hierarquica-->
 			<div class="block" id="block-hierarquica">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a></h3>
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a><a class="block-info" href='#' onclick="window.open('/hiperbolica/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=no, resizable=yes, menubar=no, height=300, width=600')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
 				<div class="content">
 					<CENTER>
 					<iframe id="id_frame_hierarquica" name="iframe_hierarquica" src="/hiperbolica/" frameborder="0"  scrolling="auto" width="98%" height="600"></iframe>

@@ -6,6 +6,10 @@ def index(request):
 	h_controller = HiperbolicaController(request)
 	return h_controller.index()
 
+def info(request):
+	"""pagina principal da visualizacao hiperbolica"""
+	h_controller = HiperbolicaController(request)
+	return h_controller.info()
 
 def teste(request):
 	"""pagina de teste da visualizacao hiperbolica"""

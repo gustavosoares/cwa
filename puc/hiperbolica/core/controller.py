@@ -35,7 +35,11 @@ class HiperbolicaController(Controller):
 		
 		return self.mostrar_arvore()
 
+	def info(self):
+		"""pagina de ajuda da visao hierarquica"""
 
+		return render_to_response(templates.TEMPLATE_HIPERBOLICA_INFO, {})
+		
 	def teste(self):
 		"""pagina de teste da visualizacao hiperbolica"""
 		
