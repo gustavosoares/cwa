@@ -4,6 +4,19 @@
 
 {% block stylesheet %}
 
+<style type="text/css">
+
+body { 
+  margin:10px; 
+  padding:0; 
+  font-size:12px; 
+  font-family:"Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif; 
+  color:gray; 
+  background:black; 
+}
+
+</style>
+
 {% endblock %}
 	
 {% block javascript %}
@@ -15,9 +28,12 @@
 
 <div id='tooltip'><h2>Ajuda da Visão hierárquica</h2><br>
 	<ol>
-		<li>Clique em algum elemento para alterar o foco da árvore.</li>
+		<li>Para alterar o foco da árvore basta clicar no elemento do seu interesse (figura 1).</li>
 		<li>O diâmetro dos círculos refletem a quantidade eventos.</li>
 	</ol>
+	
+	<img width=400 height=362 src=/media/images/arvore_hiperbolica.jpg border=0><br>
+	Figura 1 - Alterando o foco e contexto
 </div>
 </center>
 {% endblock %}
