@@ -10,7 +10,7 @@
 <!-- Calendario JS -->
 <link rel="stylesheet" type="text/css" href="/media/css/jscal2.css" />
 <link rel="stylesheet" type="text/css" href="/media/css/border-radius.css" />
-<link rel="stylesheet" type="text/css" href="/media/css/steel/steel.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/win2k/win2k.css" />
 
 <style type="text/css">
 
@@ -119,13 +119,18 @@
 <script src="/media/js/jscal2.js"></script>
 <script src="/media/js/pt.js"></script>
 
+
 <script type="text/javascript">//<![CDATA[
 
-  var cal = Calendar.setup({
-      onSelect: function(cal) { cal.hide() }
-  });
-  cal.manageFields("id_btn_data_inicio_2", "id_data_inicio_2", "%Y-%m-%d");
-  cal.manageFields("id_btn_data_fim", "id_data_fim", "%Y-%m-%d");
+  function calendario() {
+	  var cal = Calendar.setup({
+	      onSelect: function(cal) { cal.hide() }
+	  });
+	  
+	  cal.manageFields("id_btn_data_inicio", "id_data_inicio", "%Y-%m-%d");
+	  cal.manageFields("id_btn_data_fim", "id_data_fim", "%Y-%m-%d");
+  }
+
 
 //]]></script>
 
@@ -137,6 +142,8 @@
 	/*Funcao para adicionar o efeito do slide nos boxes*/
 	function init() {
 		//console.log("body loaded")
+		
+		calendario();
 		
 		this.options = {
 	      portal: 'portal',
@@ -232,15 +239,11 @@
 				<table>
 				<tr>
 					<th>Início:</th>
-					<td><input id="id_data_inicio" type="text" class="vDateField" name="data_inicio" size="10" value="{{request.POST.data_inicio}}"/></td>
+					<td><input id="id_data_inicio" type="text" name="data_inicio" size="10" value="{{request.POST.data_inicio}}"/><a id="id_btn_data_inicio" href='#' onclick="calendario();"><img src='/media/images/icon_calendar.gif'></a></td>
 				</tr>
 				<tr>
-					<th>Término:q</th>
-					<td><input id="id_data_fim" type="text" class="vDateField" name="data_fim" size="10" value="{{request.POST.data_fim}}"/></td>
-				</tr>
-				<tr>
-					<th>Início 2:</th>
-					<td><input id="id_data_inicio_2" type="text" name="data_inicio_2" size="10" value="{{request.POST.data_inicio_2}}"/><a href='#' onclick="alert('clicckk');"><img src='/media/images/icon_calendar.gif'></a></td>
+					<th>Término:</th>
+					<td><input id="id_data_fim" type="text" name="data_fim" size="10" value="{{request.POST.data_fim}}"/><a id="id_btn_data_fim" href='#' onclick="calendario();"><img src='/media/images/icon_calendar.gif'></a></td>
 				</tr>
 				</table>
 				<center><input type="submit" value="gerar relatório"></center>
