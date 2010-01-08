@@ -61,7 +61,7 @@ class MonitorRepository(Singleton):
 
 		return colunas
 
-	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None):
+	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None,todos=None):
 		"""obtem lista eventos por monitor id"""
 		monitor = self.get_monitor_por_id(id)
 		from puc.sme.core.repository.alarme_repository import AlarmeRepository
@@ -90,7 +90,7 @@ class MonitorRepository(Singleton):
 		#alterado em 28/10/2009
 		#de pad_datahora para pad_datahoraalarme
 		sql = ""
-		if data_inicio_str and data_fim_str:
+		if data_inicio_str and data_fim_str and not todos:
 			sql = """
 			select pad_id, pad_tipoalarme, %s
 			from %s
@@ -99,6 +99,15 @@ class MonitorRepository(Singleton):
 			AND pad_datahoraalarme <= '%s 23:59:59'
 			ORDER BY pad_datahora DESC LIMIT 2000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id, data_inicio_str, data_fim_str)
+		elif todos:
+			sql = """
+			select pad_id, pad_tipoalarme, %s
+			from %s
+			where mon_id = %s
+			AND pad_verificado  = 'N'
+			AND pad_tipoalarme <> 'X'
+			ORDER BY pad_datahoraalarme
+			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		else:
 			sql = """
 			select pad_id, pad_tipoalarme, %s
@@ -186,7 +195,7 @@ class MonitorRepository(Singleton):
 	def fechar_todos_eventos(self, monitor, alarme, produto):
 		"""docstring for fechar_todos_eventos"""
 		#pego os eventos do monitor
-		eventos = self.get_eventos_por_monitor_id(monitor.mon_id)
+		eventos = self.get_eventos_por_monitor_id(monitor.mon_id, todos=True)
 		for evento in eventos:
 			print 'fechando evento %s' % evento.id
 			self.fechar_evento(evento.id, monitor, alarme, produto)
