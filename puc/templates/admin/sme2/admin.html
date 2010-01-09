@@ -104,8 +104,8 @@
 				<span>Escolha a ação que deseja executar: </span><br>
 				<select name=acao_id onChange=''>
 					<option value="0">[Selecione uma ação]</option>
-					<option id="id_acao_1" value="10" {% ifequal request.POST.acao_id|safe '10' %} selected{% endifequal %}>Fechar todos monitores</option>
-					<option id="id_acao_2" value="20" {% ifequal request.POST.acao_id|safe '20' %} selected{% endifequal %}>Fechar um monitor</option>
+					<option id="id_acao_1" value="1" {% ifequal request.POST.acao_id|safe '1' %} selected{% endifequal %}>Desligar todos eventos de um monitor</option>
+					<option id="id_acao_2" value="2" {% ifequal request.POST.acao_id|safe '2' %} selected{% endifequal %}>Ligar um evento de um monitor</option>
 				</select><br><br>
 				<span>Produto/Alarme/Monitor: </span><br>
 				<!-- produto -->

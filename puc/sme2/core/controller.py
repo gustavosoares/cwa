@@ -78,9 +78,14 @@ class Sme2Controller(Controller):
 				self.request.GET = self.request.POST
 
 				#obtenho os eventos para o monitor em questao no intervalo definido
-				monitor = monitor_repository.get_monitor_por_id(monitor_id)
-				alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
-				produto = produto_repository.get_produto_por_id(alarme.prd_id)
+				#monitor = monitor_repository.get_monitor_por_id(monitor_id)
+				#alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
+				#produto = produto_repository.get_produto_por_id(alarme.prd_id)
+				if acao_id == '1': #fechar todos
+					return self.fechar_todos_eventos(monitor_id)
+					
+				elif acao_id == '2': #ligar um alarme
+					print 'fechar um'
 
 
 		return render_to_response(templates.TEMPLATE_SME2_ADMIN, {
