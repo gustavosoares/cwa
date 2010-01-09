@@ -12,6 +12,7 @@ from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
 from puc import templates
+from puc.core import json
 from puc.sme.models import Produto, Alarme, Monitor
 from puc.sme.core.repository.produto_repository import ProdutoRepository
 from puc.sme.core.repository.monitor_repository import MonitorRepository
@@ -35,7 +36,60 @@ class Sme2Controller(Controller):
 
 	def admin(self):
 		"""retorna o admin no sme2"""
-		return HttpResponse("<h1>Admin SME2</h1>")
+		
+		produtos = produto_repository.get_produtos()
+		clicked = None
+		alarmes = None
+		monitores = None
+		relatorio = None
+
+		produtos_alarmes = produto_repository.get_produto_alarme_xref()
+		alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
+		#gero objeto json para ser usado no carregamento da lista
+		produtos_alarmes = json.encode_json(produtos_alarmes)
+		alarmes_monitores = json.encode_json(alarmes_monitores)
+
+		#pego atributos do POST
+		produto_id = self.request.POST.get('produto',None)
+		alarme_id = self.request.POST.get('alarme',None)
+		monitor_id = self.request.POST.get('monitor',None)
+
+		print '[SME2 ADMIN] POST: %s' % self.request.POST
+
+		erro = True
+		#request GET
+		if self.request.method == 'GET':
+			erro = False
+
+		#request POST
+		if self.request.method == 'POST' :
+			if (produto_id):
+				alarmes = alarme_repository.get_alarmes_por_produto_id(produto_id)
+			if (alarme_id):
+				monitores = monitor_repository.get_monitores_por_alarme_id(alarme_id)
+
+			#se todos os campos preenchidos gero o relatorio
+			if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0 and len(data_inicio_str) > 0 and len(data_fim_str) > 0):
+				erro = False
+
+				#adiciono os parametros do post no get
+				self.request.GET = self.request.POST
+
+				#obtenho os eventos para o monitor em questao no intervalo definido
+				monitor = monitor_repository.get_monitor_por_id(monitor_id)
+				alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
+				produto = produto_repository.get_produto_por_id(alarme.prd_id)
+
+
+		return render_to_response(templates.TEMPLATE_SME2_ADMIN, {
+			'produtos_alarmes' : produtos_alarmes,
+			'alarmes_monitores' : alarmes_monitores,
+			'produtos': produtos,
+			'alarmes' : alarmes,
+			'monitores' : monitores,
+			'erro' : erro,
+			'clicked' : clicked,
+			'request' : self.request})
 
 	def listar_produto(self):
 		"""retorna a listagem dos produtos no sme2"""

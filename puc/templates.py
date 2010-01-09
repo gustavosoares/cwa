@@ -8,6 +8,7 @@ TEMPLATE_LISTAR_PRODUTO_ALARME = 'sme2/listar_produto_alarme.html'
 TEMPLATE_LISTAR_PRODUTO_ALARME_MONITOR = 'sme2/listar_produto_alarme_monitor.html'
 TEMPLATE_LISTAR_MONITOR_DO_ALARME = 'sme2/listar_monitor_do_alarme.html'
 TEMPLATE_VER_EVENTO = 'sme2/ver_evento.html'
+TEMPLATE_SME2_ADMIN = 'admin/sme2/admin.html'
 
 #VISAO RELATORIO
 TEMPLATE_RELATORIO_INDEX = 'relatorio/index.html'
