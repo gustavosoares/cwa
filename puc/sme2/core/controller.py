@@ -53,8 +53,10 @@ class Sme2Controller(Controller):
 		produto_id = self.request.POST.get('produto',None)
 		alarme_id = self.request.POST.get('alarme',None)
 		monitor_id = self.request.POST.get('monitor',None)
-
+		acao_id = self.request.POST.get('acao_id',0)
+		
 		print '[SME2 ADMIN] POST: %s' % self.request.POST
+		print '[SME2 ADMIN] GET: %s' % self.request.GET
 
 		erro = True
 		#request GET
@@ -69,7 +71,7 @@ class Sme2Controller(Controller):
 				monitores = monitor_repository.get_monitores_por_alarme_id(alarme_id)
 
 			#se todos os campos preenchidos gero o relatorio
-			if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0 and len(data_inicio_str) > 0 and len(data_fim_str) > 0):
+			if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0 and int(acao_id) > 0):
 				erro = False
 
 				#adiciono os parametros do post no get
@@ -87,6 +89,7 @@ class Sme2Controller(Controller):
 			'produtos': produtos,
 			'alarmes' : alarmes,
 			'monitores' : monitores,
+			'acao_id' : acao_id,
 			'erro' : erro,
 			'clicked' : clicked,
 			'request' : self.request})

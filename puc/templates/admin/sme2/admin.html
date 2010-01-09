@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}SME2 - Admin{% endblock %}
 
 {% block stylesheet %}
@@ -93,6 +92,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div id="portal">
 	<div class="block" id="block-sme2-admin">
 		<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">SME2 - Admin</a></h3>
@@ -101,6 +101,12 @@
 			<center><h2><font color=red>Por favor, preenche todos os campos</font></h2></center>
 			{% endif %}
 			<form name='frm' method=POST action=''>
+				<span>Escolha a ação que deseja executar: </span><br>
+				<select name=acao_id onChange=''>
+					<option value="0">[Selecione uma ação]</option>
+					<option id="id_acao_1" value="10" {% ifequal request.POST.acao_id|safe '10' %} selected{% endifequal %}>Fechar todos monitores</option>
+					<option id="id_acao_2" value="20" {% ifequal request.POST.acao_id|safe '20' %} selected{% endifequal %}>Fechar um monitor</option>
+				</select><br><br>
 				<span>Produto/Alarme/Monitor: </span><br>
 				<!-- produto -->
 				<select name=produto onChange='adicionaAlarmes(this.options[this.selectedIndex].value);'>
@@ -150,4 +156,3 @@
 
 
 {% endblock %}
-
