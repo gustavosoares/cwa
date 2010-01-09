@@ -46,6 +46,11 @@ def fechar_todos_eventos(request, mon_id=None):
 	
 	sme2_controller = Sme2Controller(request)
 	return sme2_controller.fechar_todos_eventos(mon_id)
-	
+
+def admin(request):
+	"""admin para ligar um alarme individualmente ou fechar todos"""
+
+	sme2_controller = Sme2Controller(request)
+	return sme2_controller.admin()
 
 

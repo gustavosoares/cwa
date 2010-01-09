@@ -33,6 +33,10 @@ class Sme2Controller(Controller):
 	def index(self):
 		return self.listar_produto_alarme_monitor()
 
+	def admin(self):
+		"""retorna o admin no sme2"""
+		return HttpResponse("<h1>Admin SME2</h1>")
+
 	def listar_produto(self):
 		"""retorna a listagem dos produtos no sme2"""
 		return HttpResponse("<h1>página velha</h1>")
