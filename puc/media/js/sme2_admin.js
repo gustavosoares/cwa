@@ -48,6 +48,14 @@ function removeAlarmes(){
 	if (f.alarme.options.length>0) f.alarme.options.length=0;
 }
 
+function trataAcao(id_acao){
+	if (id_acao != 0) {
+		var f = document.frm;
+		f.submit();
+	}
+}
+
+
 function adicionaMonitores(idalar){ //idProduto
 	if (idalar != 0) {
 		removeMonitores();

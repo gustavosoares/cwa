@@ -10,6 +10,7 @@ from django.http import HttpResponseServerError
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from puc import templates
 from puc.core import json
@@ -38,7 +39,6 @@ class Sme2Controller(Controller):
 		"""retorna o admin no sme2"""
 		
 		produtos = produto_repository.get_produtos()
-		clicked = None
 		alarmes = None
 		monitores = None
 		relatorio = None
@@ -55,14 +55,18 @@ class Sme2Controller(Controller):
 		monitor_id = self.request.POST.get('monitor',None)
 		acao_id = self.request.POST.get('acao_id',0)
 		
-		print '[SME2 ADMIN] POST: %s' % self.request.POST
-		print '[SME2 ADMIN] GET: %s' % self.request.GET
+		pagina = self.request.GET.get('pagina',None)
 
 		erro = True
 		#request GET
 		if self.request.method == 'GET':
 			erro = False
 
+		if pagina != None:
+			print '### acessado com paginacao...'
+			#igualo o post com o get
+			self.request.POST = self.request.GET
+			
 		#request POST
 		if self.request.method == 'POST' :
 			if (produto_id):
@@ -78,15 +82,13 @@ class Sme2Controller(Controller):
 				self.request.GET = self.request.POST
 
 				#obtenho os eventos para o monitor em questao no intervalo definido
-				#monitor = monitor_repository.get_monitor_por_id(monitor_id)
-				#alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
-				#produto = produto_repository.get_produto_por_id(alarme.prd_id)
+				monitor = monitor_repository.get_monitor_por_id(monitor_id)
+				alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
+				produto = produto_repository.get_produto_por_id(alarme.prd_id)
+				
 				if acao_id == '1': #fechar todos
-					monitor = monitor_repository.get_monitor_por_id(monitor_id)
-					alarme = alarme_repository.get_alarme_por_id(monitor.alm_id)
-					produto = produto_repository.get_produto_por_id(alarme.prd_id)
 					try:
-						msg = '''fechando TODOS os eventos do monitor %s''' % (monitor.mon_id)
+						msg = '''#### fechando TODOS os eventos do monitor %s''' % (monitor.mon_id)
 						print msg
 						monitor_repository.fechar_todos_eventos(monitor, alarme, produto)
 					except Exception, e:
@@ -97,8 +99,24 @@ class Sme2Controller(Controller):
 						return HttpResponseServerError(html)
 					
 				elif acao_id == '2': #ligar um alarme
-					print 'fechar um'
+					print '## ligar um evento de um monitor'
+					
+					#pego os eventos do monitor id
+					eventos = monitor_repository.get_eventos_por_monitor_id(monitor.mon_id)
+					eventos_paginados = None
+					paginator = Paginator(eventos, 25)
+					try:
+						pagina = int(self.request.GET.get('pagina', '1'))
+					except ValueError:
+						pagina = 1
+					
+					try:
+						eventos_paginados = paginator.page(pagina)
+					except (EmptyPage, InvalidPage):
+						eventos_paginados = paginator.page(paginator.num_pages)
 
+		print '[SME2 ADMIN] POST: %s' % self.request.POST
+		print '[SME2 ADMIN] GET: %s' % self.request.GET
 
 		return render_to_response(templates.TEMPLATE_SME2_ADMIN, {
 			'produtos_alarmes' : produtos_alarmes,
@@ -107,8 +125,8 @@ class Sme2Controller(Controller):
 			'alarmes' : alarmes,
 			'monitores' : monitores,
 			'acao_id' : acao_id,
+			'pagina' : pagina,
 			'erro' : erro,
-			'clicked' : clicked,
 			'request' : self.request})
 
 	def listar_produto(self):
@@ -123,7 +141,7 @@ class Sme2Controller(Controller):
 		return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME, 
 						{ 'produtos' : None,
 						'produtos_alarmes' : produtos_alarmes,
-		 				'colors' : util.colors})
+						'colors' : util.colors})
 
 
 	def listar_produto_alarme_monitor(self):
@@ -134,7 +152,7 @@ class Sme2Controller(Controller):
 		return render_to_response(templates.TEMPLATE_LISTAR_PRODUTO_ALARME_MONITOR, 
 						{ 'produtos' : None,
 						'produtos_alarmes' : produtos_alarmes,
-		 				'colors' : util.colors})
+						'colors' : util.colors})
 
 	def listar_monitor_do_alarme(self, alm_id=None):
 		"""lista monitores alarmando do alarme id"""
@@ -146,7 +164,7 @@ class Sme2Controller(Controller):
 						{ 'monitores' : monitores,
 						'alarme' : alarme,
 						'produto' : produto,
-		 				'colors' : util.colors})
+						'colors' : util.colors})
 
 	def ver_evento(self, mon_id=None):
 		"""visualiza os eventos do monitor passado como parametro"""
@@ -169,7 +187,7 @@ class Sme2Controller(Controller):
 
 			return render_to_response(templates.TEMPLATE_VER_EVENTO, 
 							{ 'relatorio' : rel,
-			 				'colors' : util.colors})
+							'colors' : util.colors})
 		else:
 			#retorno para a pagina do alarme, pois nao tem mais nenhum evento
 			#return HttpResponseRedirect('/sme2/monitor/alarme/%s' % alarme.alm_id)
