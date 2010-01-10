@@ -51,7 +51,12 @@ function removeAlarmes(){
 function trataAcao(id_acao){
 	if (id_acao != 0) {
 		var f = document.frm;
-		f.submit();
+		if ( f.produto.value != 0 && f.alarme.value != 0 && f.monitor.value != 0) {
+			f.submit();
+		} else {
+			alert('Por favor preencher todos os campos\n antes de selecionar a ação.');
+			f.acao_id.value = 0;
+		}
 	}
 }
 
