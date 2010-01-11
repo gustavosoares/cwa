@@ -62,7 +62,8 @@ function removeAcoes(){
 }
 
 function trataAcao(id_acao){
-	if (id_acao != 0) {
+
+	if (id_acao == 2) {
 		var f = document.frm;
 		if ( f.produto.value != 0 && f.alarme.value != 0 && f.monitor.value != 0) {
 			f.action = "?pagina=1";
@@ -71,6 +72,10 @@ function trataAcao(id_acao){
 			alert('Por favor preencher todos os campos\n antes de selecionar a ação.');
 			f.acao_id.value = 0;
 		}
+	} else if ( id_acao == 1) {
+		limpaEventos();
+	} else {
+		limpaEventos();
 	}
 }
 
@@ -78,6 +83,11 @@ function trataPaginacao(uri) {
 	var f = document.frm;
 	f.action = uri;
 	f.submit();
+}
+
+function limpaEventos() {
+	c = document.getElementById('id-eventos');
+	c.innerHTML = "";
 }
 
 function trataCancelar() {
