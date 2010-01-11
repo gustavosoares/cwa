@@ -40,6 +40,9 @@ function adicionaAlarmes(idprod){ //idProduto
 				f.alarme.options[novo].value = array[i].alm_id; 
 				//if (array[i][3] =="SELECTED") f.alarme.options[novo].selected = true;
 		}
+		removeMonitores();
+		f.monitor.options[0] = new Option("[Selecione um monitor]");
+		f.monitor.options[0].value = "0";
 	}
 }
 
@@ -52,6 +55,7 @@ function trataAcao(id_acao){
 	if (id_acao != 0) {
 		var f = document.frm;
 		if ( f.produto.value != 0 && f.alarme.value != 0 && f.monitor.value != 0) {
+			f.action = "?pagina=1";
 			f.submit();
 		} else {
 			alert('Por favor preencher todos os campos\n antes de selecionar a ação.');

@@ -33,7 +33,7 @@
 		{% endifequal %}
 		{% ifequal evento.tipo 'X' %}
 			<tr bgcolor='{{ colors.normal }}'>
-		{% endifequal %}		
+		{% endifequal %}
 			<td bgcolor='white'><a href='/sme2/evento/fechar/{{evento.monitor.mon_id}}/{{evento.id}}'><img src=/media/images/icon-yes.gif border=0></a></td>
 			<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
 			<td class="sme2-evento">{{evento.servidor}}</td>

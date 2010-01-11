@@ -42,6 +42,7 @@ class Sme2Controller(Controller):
 		alarmes = None
 		monitores = None
 		relatorio = None
+		eventos_paginados = None
 
 		produtos_alarmes = produto_repository.get_produto_alarme_xref()
 		alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
@@ -65,7 +66,7 @@ class Sme2Controller(Controller):
 		if pagina != None:
 			print '### acessado com paginacao...'
 			#igualo o post com o get
-			self.request.POST = self.request.GET
+			#self.request.POST = self.request.GET
 			
 		#request POST
 		if self.request.method == 'POST' :
@@ -103,8 +104,9 @@ class Sme2Controller(Controller):
 					
 					#pego os eventos do monitor id
 					eventos = monitor_repository.get_eventos_por_monitor_id(monitor.mon_id)
-					eventos_paginados = None
-					paginator = Paginator(eventos, 25)
+					paginator = Paginator(eventos, templates.SME2_ITEMS_POR_PAGINA)
+					print '### paginator.count: %s' % paginator.count
+					print '### paginator.num_pages: %s' % paginator.num_pages
 					try:
 						pagina = int(self.request.GET.get('pagina', '1'))
 					except ValueError:
@@ -126,8 +128,10 @@ class Sme2Controller(Controller):
 			'monitores' : monitores,
 			'acao_id' : acao_id,
 			'pagina' : pagina,
+			'eventos_paginados' : eventos_paginados,
 			'erro' : erro,
-			'request' : self.request})
+			'colors' : util.colors,
+			'request' : self.request,})
 
 	def listar_produto(self):
 		"""retorna a listagem dos produtos no sme2"""

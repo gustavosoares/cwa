@@ -141,7 +141,46 @@
 				</select><br><br>
 				{% if pagina %}
 					<div id="eventos">
-					
+						<center>
+						<table border="2">
+							<tr>
+								<th><center>!</center></th>
+								<th><center>id</center></th>
+								<th><center>data/hora</center></th>
+								<th><center>servidor</center></th>
+							</tr>
+							{% for evento in eventos_paginados.object_list %}
+								{% ifequal evento.tipo 'W' %}
+									<tr bgcolor='{{ colors.warning }}'>
+								{% endifequal %}
+								{% ifequal evento.tipo 'A' %}
+									<tr bgcolor='{{ colors.alarm }}'>
+								{% endifequal %}
+								{% ifequal evento.tipo 'X' %}
+									<tr bgcolor='{{ colors.normal }}'>
+								{% endifequal %}
+									<td class="sme2-evento">checkbox</td>
+									<td class="sme2-evento">{{evento.id}}</td>
+									<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
+									<td class="sme2-evento">{{evento.servidor}}</td>
+								</tr>
+							{% endfor %}
+						</table>
+						<div class="pagination">
+						    <span class="sme2-admin-paginacao">
+						        {% if eventos_paginados.has_previous %}
+						            <a href="?page={{ eventos_paginados.previous_page_number }}">anterior</a>
+						        {% endif %}
+						        <span class="current">
+						            Página {{ eventos_paginados.number }} de {{ eventos_paginados.paginator.num_pages }}
+						        </span>
+						        {% if eventos_paginados.has_next %}
+						            <a href="?pagina={{ eventos_paginados.next_page_number }}">próxima</a>
+						        {% endif %}
+						    </span>
+						</div>
+						<!-- fim da paginacao -->
+						</center><br><br>
 					</div>
 				{% endif %}
 				<center><input type="submit" value="executar ação"></center>

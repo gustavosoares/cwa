@@ -54,6 +54,10 @@ function adicionaAlarmes(idprod){ //idProduto
 				f.alarme.options[novo].value = array[i].alm_id; 
 				//if (array[i][3] =="SELECTED") f.alarme.options[novo].selected = true;
 		}
+		
+		removeMonitores();
+		f.monitor.options[0] = new Option("[Selecione um monitor]");
+		f.monitor.options[0].value = "0";
 	}
 }
 
