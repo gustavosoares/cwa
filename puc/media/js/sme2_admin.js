@@ -51,6 +51,16 @@ function removeAlarmes(){
 	if (f.alarme.options.length>0) f.alarme.options.length=0;
 }
 
+function removeProdutos(){
+	var f = document.frm;
+	if (f.produto.options.length>0) f.produto.options.length=0;
+}
+
+function removeAcoes(){
+	var f = document.frm;
+	if (f.acao_id.options.length>0) f.acao_id.options.length=0;
+}
+
 function trataAcao(id_acao){
 	if (id_acao != 0) {
 		var f = document.frm;
@@ -62,6 +72,23 @@ function trataAcao(id_acao){
 			f.acao_id.value = 0;
 		}
 	}
+}
+
+function trataPaginacao(uri) {
+	var f = document.frm;
+	f.action = uri;
+	f.submit();
+}
+
+function trataCancelar() {
+	var f = document.frm;
+	f.action = "";
+	f.method = "GET";
+	removeAcoes();
+	removeProdutos();
+	removeAlarmes();
+	removeMonitores();
+	f.submit();
 }
 
 

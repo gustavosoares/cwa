@@ -169,13 +169,13 @@
 						<div class="pagination">
 						    <span class="sme2-admin-paginacao">
 						        {% if eventos_paginados.has_previous %}
-						            <a href="?page={{ eventos_paginados.previous_page_number }}">anterior</a>
+						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.previous_page_number }}');">anterior</a>
 						        {% endif %}
 						        <span class="current">
 						            Página {{ eventos_paginados.number }} de {{ eventos_paginados.paginator.num_pages }}
 						        </span>
 						        {% if eventos_paginados.has_next %}
-						            <a href="?pagina={{ eventos_paginados.next_page_number }}">próxima</a>
+						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.next_page_number }}');">próxima</a>
 						        {% endif %}
 						    </span>
 						</div>
@@ -183,7 +183,10 @@
 						</center><br><br>
 					</div>
 				{% endif %}
-				<center><input type="submit" value="executar ação"></center>
+				<center>
+					<input type="submit" value="executar ação">
+					<input type="button" name="cancelar" value="cancelar" onclick="trataCancelar();"/>
+				</center>
 			</form>
 			<br>
 		</div>

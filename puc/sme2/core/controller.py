@@ -64,7 +64,7 @@ class Sme2Controller(Controller):
 			erro = False
 
 		if pagina != None:
-			print '### acessado com paginacao...'
+			print '### Pagina %s requisitada...' % pagina
 			#igualo o post com o get
 			#self.request.POST = self.request.GET
 			
@@ -107,8 +107,9 @@ class Sme2Controller(Controller):
 					paginator = Paginator(eventos, templates.SME2_ITEMS_POR_PAGINA)
 					print '### paginator.count: %s' % paginator.count
 					print '### paginator.num_pages: %s' % paginator.num_pages
+					print '#### pegando a pagina %s' % pagina
 					try:
-						pagina = int(self.request.GET.get('pagina', '1'))
+						pagina = int(pagina)
 					except ValueError:
 						pagina = 1
 					
