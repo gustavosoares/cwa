@@ -159,7 +159,7 @@
 								{% ifequal evento.tipo 'X' %}
 									<tr bgcolor='{{ colors.normal }}'>
 								{% endifequal %}
-									<td class="sme2-evento">checkbox</td>
+									<td class="sme2-evento"><input type="checkbox" name="evento_id" value="{{ evento.id }}"/></td>
 									<td class="sme2-evento">{{evento.id}}</td>
 									<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
 									<td class="sme2-evento">{{evento.servidor}}</td>
