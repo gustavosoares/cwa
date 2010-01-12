@@ -97,12 +97,16 @@
 	<div class="block" id="block-sme2-admin">
 		<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">SME2 - Admin</a></h3>
 		<div class="content">
+			<div id="id-erro">
 			{% if erro %}
 			<center><h2><font color=red>Por favor, preenche todos os campos</font></h2></center>
 			{% endif %}
+			</div>
+			<div id="id-feedback">
 			{% if feedback %}
-			<center><h2><font color=green>{{ feedback }}</font></h2></center>
+				<center><h2><font color=green>{{ feedback }}</font></h2></center>
 			{% endif %}
+			</div>
 			<form name='frm' method=POST action=''>
 				<span>Produto/Alarme/Monitor: </span><br>
 				<!-- produto -->
@@ -142,19 +146,19 @@
 					<option id="id_acao_1" value="1" {% ifequal request.POST.acao_id|safe '1' %} selected{% endifequal %}>Desligar todos eventos de um monitor</option>
 					<option id="id_acao_2" value="2" {% ifequal request.POST.acao_id|safe '2' %} selected{% endifequal %}>Ligar um evento de um monitor</option>
 				</select><br><br>
-				{% if pagina %}
+				{% if eventos_paginados %}
 					<div id="id-eventos">
 						<center>
 						<div class="pagination">
 						    <span class="sme2-admin-paginacao">
-						        {% if eventos_paginados.has_previous %}
-						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.previous_page_number }}');">anterior</a>
+						        {% if paginacao.tem_pagina_anterior %}
+						            <a href="#" onclick="trataPaginacao('?pagina={{ paginacao.pagina_anterior }}');">anterior</a>
 						        {% endif %}
 						        <span class="current">
-						            Página {{ eventos_paginados.number }} de {{ eventos_paginados.paginator.num_pages }}
+						            Página {{ pagina }} de {{ paginacao.total_paginas }}
 						        </span>
-						        {% if eventos_paginados.has_next %}
-						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.next_page_number }}');">próxima</a>
+						        {% if paginacao.tem_pagina_seguinte %}
+						            <a href="#" onclick="trataPaginacao('?pagina={{ paginacao.pagina_seguinte }}');">próxima</a>
 						        {% endif %}
 						    </span>
 						</div>
@@ -165,7 +169,7 @@
 								<th><center>data/hora</center></th>
 								<th><center>servidor</center></th>
 							</tr>
-							{% for evento in eventos_paginados.object_list %}
+							{% for evento in eventos_paginados %}
 								{% ifequal evento.tipo 'W' %}
 									<tr bgcolor='{{ colors.warning }}'>
 								{% endifequal %}
@@ -184,14 +188,14 @@
 						</table>
 						<div class="pagination">
 						    <span class="sme2-admin-paginacao">
-						        {% if eventos_paginados.has_previous %}
-						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.previous_page_number }}');">anterior</a>
+						        {% if paginacao.tem_pagina_anterior %}
+						            <a href="#" onclick="trataPaginacao('?pagina={{ paginacao.pagina_anterior }}');">anterior</a>
 						        {% endif %}
 						        <span class="current">
-						            Página {{ eventos_paginados.number }} de {{ eventos_paginados.paginator.num_pages }}
+						            Página {{ pagina }} de {{ paginacao.total_paginas }}
 						        </span>
-						        {% if eventos_paginados.has_next %}
-						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.next_page_number }}');">próxima</a>
+						        {% if paginacao.tem_pagina_seguinte %}
+						            <a href="#" onclick="trataPaginacao('?pagina={{ paginacao.pagina_seguinte }}');">próxima</a>
 						        {% endif %}
 						    </span>
 						</div>
@@ -201,7 +205,7 @@
 				{% endif %}
 				<center>
 					<input type="submit" value="executar ação">
-					<input type="button" name="cancelar" value="cancelar" onclick="trataCancelar();"/>
+					<input type="button" name="btn_limpar" value="limpar" onclick="trataLimpar();"/>
 				</center>
 			</form>
 			<br>

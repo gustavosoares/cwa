@@ -69,7 +69,59 @@ class MonitorRepository(Singleton):
 
 		return colunas
 
-	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None,todos=None,todos_ligados=None):
+	def total_eventos_por_monitor_id(self, id):
+		"""retorna o total de eventos por monitor sem gerar o objeto evento"""
+		
+		inicio = util.start_counter()
+		monitor = self.get_monitor_por_id(id)
+		from puc.sme.core.repository.alarme_repository import AlarmeRepository
+		alarme = AlarmeRepository().get_alarme_por_id(monitor.alm_id)
+		#colunas_desc: descricao do nome da coluna
+		#colunas_nome: nome fisico da coluna no banco de dados
+		#colunas_desc, colunas_nome = self.get_colunas_por_monitor_id(id)
+		colunas = self.get_colunas_por_monitor_id(id)
+		#print '[MonRepository] colunas: %s' % colunas
+		colunas_nome = []
+		for nome,metadado in colunas.items():
+			colunas_nome.append(nome)
+		#monto a string para ser usado no select
+		aux = ''
+		aux_size = len(colunas_nome)
+		count = 1
+		clausula_select = [] #array com as colunas do campo do select
+		for coluna in colunas_nome:
+			clausula_select.append(coluna)
+			if (count == aux_size):
+				aux = aux + coluna
+			else:
+				aux = aux + coluna + ', '
+			count = count + 1
+		
+		#alterado em 28/10/2009
+		#de pad_datahora para pad_datahoraalarme
+		sql = ""
+
+		sql = """
+		select pad_id, pad_tipoalarme, %s
+		from %s
+		where mon_id = %s
+		AND pad_verificado	= 'S'
+		AND pad_tipoalarme <> 'X'
+		ORDER BY pad_datahoraalarme
+		""" % (aux, monitor.mon_tabela, monitor.mon_id)
+
+		db = Database()
+		db.execute(sql)
+		rows = db.rows_fetchall()
+		util.elapsed(inicio,'get total de eventos')
+		return db.rows_count()
+	
+	def get_eventos_paginados_por_monitor(self, monitor, pagina_inicio, items_por_pagina):
+		"""retorna os eventos paginados"""
+		eventos = self.get_eventos_por_monitor_id(monitor.mon_id, inicio=pagina_inicio, limite=items_por_pagina)
+		return eventos
+		
+	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None,todos=None,todos_ligados=None,inicio=None,limite=None):
 		"""obtem lista eventos por monitor id"""
 		monitor = self.get_monitor_por_id(id)
 		from puc.sme.core.repository.alarme_repository import AlarmeRepository
@@ -125,6 +177,15 @@ class MonitorRepository(Singleton):
 			AND pad_tipoalarme <> 'X'
 			ORDER BY pad_datahoraalarme
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
+		elif inicio != None and limite != None:
+			sql = """
+			select pad_id, pad_tipoalarme, %s
+			from %s
+			where mon_id = %s
+			AND pad_verificado	= 'S'
+			AND pad_tipoalarme <> 'X'
+			ORDER BY pad_datahoraalarme LIMIT %s,%s
+			""" % (aux, monitor.mon_tabela, monitor.mon_id, inicio, limite)
 		else:
 			sql = """
 			select pad_id, pad_tipoalarme, %s

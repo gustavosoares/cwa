@@ -63,6 +63,9 @@ function removeAcoes(){
 
 function trataAcao(id_acao){
 
+	limpaFeedback();
+	limpaErro();
+	
 	if (id_acao == 2) {
 		var f = document.frm;
 		if ( f.produto.value != 0 && f.alarme.value != 0 && f.monitor.value != 0) {
@@ -74,6 +77,7 @@ function trataAcao(id_acao){
 		}
 	} else if ( id_acao == 1) {
 		limpaEventos();
+
 	} else {
 		limpaEventos();
 	}
@@ -90,7 +94,17 @@ function limpaEventos() {
 	c.innerHTML = "";
 }
 
-function trataCancelar() {
+function limpaFeedback() {
+	c = document.getElementById('id-feedback');
+	c.innerHTML = "";
+}
+
+function limpaErro() {
+	c = document.getElementById('id-erro');
+	c.innerHTML = "";
+}
+
+function trataLimpar() {
 	var f = document.frm;
 	f.action = "";
 	f.method = "GET";

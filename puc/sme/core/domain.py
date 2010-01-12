@@ -1,5 +1,33 @@
 from time import gmtime, strftime
 
+class Paginacao(object):
+	"""classe para representar paginacao"""
+	def __init__(self, pagina, items_por_pagina, total_paginas):
+		self.pagina = pagina
+		self.items_por_pagina = items_por_pagina
+		self.total_paginas = total_paginas
+		
+		pagina_aux = pagina - 1
+		self.pagina_inicio_sql = pagina_aux * self.items_por_pagina
+		self.pagina_anterior = 0
+		
+		if pagina > 1:
+			self.pagina_anterior = pagina - 1
+			
+		self.pagina_seguinte = self.pagina + 1
+		
+	def tem_pagina_anterior(self):
+		if self.pagina_anterior == 0:
+			return False
+		else:
+			return True
+	
+	def tem_pagina_seguinte(self):
+		if self.pagina < self.total_paginas:
+			return True
+		else:
+			return False
+		
 class Evento(object):
 	"""Classe que representa um evento no sme"""
 	def __init__(self, monitor, alarme, metadados):

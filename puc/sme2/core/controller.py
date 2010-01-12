@@ -45,6 +45,7 @@ class Sme2Controller(Controller):
 		eventos_paginados = None
 		eventos_id = None
 		feedback = None
+		paginacao = None
 
 		produtos_alarmes = produto_repository.get_produto_alarme_xref()
 		alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
@@ -107,27 +108,24 @@ class Sme2Controller(Controller):
 					print '## ligar um evento de um monitor'
 					
 					#pego os eventos do monitor id
-					eventos = monitor_repository.get_todos_eventos(monitor)
-					inicio = util.start_counter()
-					paginator = Paginator(eventos, templates.SME2_ITEMS_POR_PAGINA)
-					print '### paginator.count: %s' % paginator.count
-					print '### paginator.num_pages: %s' % paginator.num_pages
-					print '#### pegando a pagina %s' % pagina
+					eventos_count = monitor_repository.total_eventos_por_monitor_id(monitor.mon_id)
+					print '### total de eventos: %s' % eventos_count
+					
+					inicio_contador = util.start_counter()
+
 					try:
 						pagina = int(pagina)
 					except ValueError:
 						pagina = 1
 					
-					util.elapsed(inicio,'paginacao')
-					inicio = util.start_counter()
+					util.elapsed(inicio_contador,'paginacao')
+					items_por_pagina = templates.SME2_ITEMS_POR_PAGINA
+					paginas_total = eventos_count / items_por_pagina
 					
-					try:
-						eventos_paginados = paginator.page(pagina)
-					except (EmptyPage, InvalidPage):
-						eventos_paginados = paginator.page(paginator.num_pages)
-					
-					util.elapsed(inicio,'eventos paginados')
-					
+					paginacao = domain.Paginacao(pagina, items_por_pagina, paginas_total)
+					eventos_paginados = monitor_repository.get_eventos_paginados_por_monitor(monitor, paginacao.pagina_inicio_sql, items_por_pagina)
+					if len(eventos_paginados) == 0:
+						feedback = "Não existe nenhum evento para o monitor selecionado."
 					if eventos_id:
 						for evento_id in eventos_id:
 							print '## ligando o evento %s' % evento_id
@@ -150,6 +148,7 @@ class Sme2Controller(Controller):
 			'acao_id' : acao_id,
 			'pagina' : pagina,
 			'eventos_paginados' : eventos_paginados,
+			'paginacao' : paginacao,
 			'erro' : erro,
 			'feedback' : feedback,
 			'colors' : util.colors,
