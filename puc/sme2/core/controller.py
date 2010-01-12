@@ -127,6 +127,10 @@ class Sme2Controller(Controller):
 							print '## ligando o evento %s' % evento_id
 							monitor_repository.ligar_evento(evento_id, monitor, alarme, produto)
 						feedback = 'Eventos selecionados ligados com sucesso!!!'
+						acao_id = 0
+						eventos_id = 0
+						pagina = 0
+						eventos_paginados = None
 
 		print '[SME2 ADMIN] POST: %s' % self.request.POST
 		print '[SME2 ADMIN] GET: %s' % self.request.GET
