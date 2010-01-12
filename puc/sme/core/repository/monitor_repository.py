@@ -5,6 +5,7 @@ from django.conf import settings
 from puc.core.db import Database
 from puc.sme.models import Monitor
 from puc.sme.core import domain
+from puc.sme2.core import util
 
 class MonitorRepository(Singleton):
 	def get_monitores(self):
@@ -119,7 +120,7 @@ class MonitorRepository(Singleton):
 			where mon_id = %s
 			AND pad_verificado	= 'S'
 			AND pad_tipoalarme <> 'X'
-			ORDER BY pad_datahoraalarme LIMIT 30000
+			ORDER BY pad_datahoraalarme
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		else:
 			sql = """
@@ -132,8 +133,11 @@ class MonitorRepository(Singleton):
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		db = Database()
 		db.execute(sql)
+		inicio = util.start_counter()
 		rows = db.rows_fetchall()
+		util.elapsed(inicio,'fetch all events')
 		
+		inicio = util.start_counter()
 		eventos = []
 		"""
 		O dicionario controla_duplicados armazena o nome do host e a hora do evento.
@@ -160,7 +164,8 @@ class MonitorRepository(Singleton):
 			evento = domain.Evento(monitor, alarme, metadados)
 			
 			eventos.append(copy.deepcopy(evento))
-			
+		
+		util.elapsed(inicio,'construção lista eventos')
 		return eventos
 		
 	def get_eventos_por_periodo_por_monitor_id(self,id,data_inicio_str,data_fim_str):

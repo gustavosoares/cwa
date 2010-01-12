@@ -108,6 +108,7 @@ class Sme2Controller(Controller):
 					
 					#pego os eventos do monitor id
 					eventos = monitor_repository.get_todos_eventos(monitor)
+					inicio = util.start_counter()
 					paginator = Paginator(eventos, templates.SME2_ITEMS_POR_PAGINA)
 					print '### paginator.count: %s' % paginator.count
 					print '### paginator.num_pages: %s' % paginator.num_pages
@@ -117,11 +118,16 @@ class Sme2Controller(Controller):
 					except ValueError:
 						pagina = 1
 					
+					util.elapsed(inicio,'paginacao')
+					inicio = util.start_counter()
+					
 					try:
 						eventos_paginados = paginator.page(pagina)
 					except (EmptyPage, InvalidPage):
 						eventos_paginados = paginator.page(paginator.num_pages)
-						
+					
+					util.elapsed(inicio,'eventos paginados')
+					
 					if eventos_id:
 						for evento_id in eventos_id:
 							print '## ligando o evento %s' % evento_id

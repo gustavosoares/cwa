@@ -27,7 +27,7 @@ class Database():
 			self.cursor = self.get_connection()
 		self.rows_afetadas = self.cursor.execute(sql)
 		
-		elapsed = util.elapsed(inicio)
+		elapsed = util.elapsed(inicio, 'SQL')
 	
 	#get rows
 	def rows_fetchall(self):
