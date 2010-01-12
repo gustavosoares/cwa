@@ -23,6 +23,9 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
+#7 days cache
+CACHE_BACKEND = "memcached://localhost:11211/?timeout=604800"
+
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -96,4 +99,5 @@ INSTALLED_APPS = (
     'puc.cwa',
     'puc.modelo',
     'puc.hiperbolica',
+    'puc.memcache_status',
 )

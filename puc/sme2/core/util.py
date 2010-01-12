@@ -12,11 +12,12 @@ colors = {
 def start_counter():
 	return time.time()
 
-def elapsed(inicio, comando=''):
+def elapsed(inicio, comando='', debug=True):
 	fim = time.time()
 	#elapsed = (fim - inicio) / 60
 	elapsed = (fim - inicio)
-	print '##### Tempo de execução [%s]: %f seg' % (comando, elapsed)
+	if debug:
+		print '##### Tempo de execução [%s]: %f seg' % (comando, elapsed)
 	#logging.debug('duracao: %.2f min' % elapsed)
 	return elapsed
 	

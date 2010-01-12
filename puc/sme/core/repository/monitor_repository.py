@@ -6,6 +6,9 @@ from puc.core.db import Database
 from puc.sme.models import Monitor
 from puc.sme.core import domain
 from puc.sme2.core import util
+from django.core.cache import cache
+
+CACHE_TIMEOUT = 86400 * 15 #48horas
 
 class MonitorRepository(Singleton):
 	def get_monitores(self):
@@ -146,6 +149,7 @@ class MonitorRepository(Singleton):
 		"""
 		controla_duplicados = {}
 		#finalizo a construcao do metadado do evento
+		tempo_objeto = 0.0
 		for row in rows:
 			new_row = row[2:]
 			i = 0
@@ -160,11 +164,27 @@ class MonitorRepository(Singleton):
 				var['severidade'] = row[1]
 				metadados[ordem] = var
 				i = i + 1
-				
-			evento = domain.Evento(monitor, alarme, metadados)
 			
-			eventos.append(copy.deepcopy(evento))
+			inicio2 = util.start_counter()
+			
+			id_to_check = metadados[1]['id']
+			key_cache = 'evento_%s' % id_to_check
+			evento_cached = cache.get(key_cache)
+			evento_copy = None
+			if evento_cached:
+				evento_copy = evento_cached
+				#print '%s obtido do cache!' % id_to_check
+			else:
+				evento = domain.Evento(monitor, alarme, metadados)
+				evento_copy = copy.deepcopy(evento)
+				cache.set(key_cache, evento_copy, CACHE_TIMEOUT)
+			
+			elapsed2 = util.elapsed(inicio2, 'objeto evento', False)
+			tempo_objeto = tempo_objeto + elapsed2
+			
+			eventos.append(evento_copy)
 		
+		print '### tempo dos objetos somados: %f' % tempo_objeto
 		util.elapsed(inicio,'construção lista eventos')
 		return eventos
 		
