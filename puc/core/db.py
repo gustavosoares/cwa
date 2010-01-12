@@ -1,4 +1,5 @@
 import MySQLdb
+from puc.sme2.core import util
 from django.db import connection
 
 #wrapper de acesso ao banco de dados
@@ -20,10 +21,13 @@ class Database():
 	#executes a sql
 	def execute(self, sql):
 		"""executes a sql"""
+		inicio = util.start_counter()
 		#print 'Database sql:\n%s' % sql
 		if not self.cursor:
 			self.cursor = self.get_connection()
 		self.rows_afetadas = self.cursor.execute(sql)
+		
+		elapsed = util.elapsed(inicio)
 	
 	#get rows
 	def rows_fetchall(self):
@@ -37,4 +41,4 @@ class Database():
 			return len(self.rows)
 		else:
 			return 0
-		
+	

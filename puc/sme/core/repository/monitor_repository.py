@@ -119,7 +119,7 @@ class MonitorRepository(Singleton):
 			where mon_id = %s
 			AND pad_verificado	= 'S'
 			AND pad_tipoalarme <> 'X'
-			ORDER BY pad_datahoraalarme LIMIT 20000
+			ORDER BY pad_datahoraalarme LIMIT 30000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		else:
 			sql = """
