@@ -30,6 +30,10 @@ class ProdutoRepository(Singleton):
 		"""marca o produto com prd_status = X"""
 		Produto.objects.filter(prd_id=id).update(prd_status='X')
 
+	def liga_produto_por_id(self, id, tipo_alarme):
+		"""liga o produto"""
+		Produto.objects.filter(prd_id=id).update(prd_status=tipo_alarme)
+
 	def get_produto_alarme_xref(self):
 		produtos = self.get_produtos()
 		alarmes = AlarmeRepository().get_alarmes()

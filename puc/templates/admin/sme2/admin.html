@@ -100,6 +100,9 @@
 			{% if erro %}
 			<center><h2><font color=red>Por favor, preenche todos os campos</font></h2></center>
 			{% endif %}
+			{% if feedback %}
+			<center><h2><font color=green>{{ feedback }}</font></h2></center>
+			{% endif %}
 			<form name='frm' method=POST action=''>
 				<span>Produto/Alarme/Monitor: </span><br>
 				<!-- produto -->
@@ -142,6 +145,19 @@
 				{% if pagina %}
 					<div id="id-eventos">
 						<center>
+						<div class="pagination">
+						    <span class="sme2-admin-paginacao">
+						        {% if eventos_paginados.has_previous %}
+						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.previous_page_number }}');">anterior</a>
+						        {% endif %}
+						        <span class="current">
+						            Página {{ eventos_paginados.number }} de {{ eventos_paginados.paginator.num_pages }}
+						        </span>
+						        {% if eventos_paginados.has_next %}
+						            <a href="#" onclick="trataPaginacao('?pagina={{ eventos_paginados.next_page_number }}');">próxima</a>
+						        {% endif %}
+						    </span>
+						</div>
 						<table border="2">
 							<tr>
 								<th><center>!</center></th>
@@ -159,7 +175,7 @@
 								{% ifequal evento.tipo 'X' %}
 									<tr bgcolor='{{ colors.normal }}'>
 								{% endifequal %}
-									<td class="sme2-evento"><input type="checkbox" name="evento_id" value="{{ evento.id }}"/></td>
+									<td class="sme2-evento"><input type="checkbox" name="eventos_id" value="{{ evento.id }}"/></td>
 									<td class="sme2-evento">{{evento.id}}</td>
 									<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
 									<td class="sme2-evento">{{evento.servidor}}</td>

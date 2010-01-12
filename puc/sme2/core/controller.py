@@ -43,6 +43,8 @@ class Sme2Controller(Controller):
 		monitores = None
 		relatorio = None
 		eventos_paginados = None
+		eventos_id = None
+		feedback = None
 
 		produtos_alarmes = produto_repository.get_produto_alarme_xref()
 		alarmes_monitores = alarme_repository.get_alarme_monitor_xref()
@@ -55,8 +57,11 @@ class Sme2Controller(Controller):
 		alarme_id = self.request.POST.get('alarme',None)
 		monitor_id = self.request.POST.get('monitor',None)
 		acao_id = self.request.POST.get('acao_id',0)
-		
 		pagina = self.request.GET.get('pagina',None)
+		try:
+			eventos_id = self.request.POST.getlist('eventos_id')
+		except Exception, e:
+			eventos_id = None
 
 		erro = True
 		#request GET
@@ -65,17 +70,16 @@ class Sme2Controller(Controller):
 
 		if pagina != None:
 			print '### Pagina %s requisitada...' % pagina
-			#igualo o post com o get
-			#self.request.POST = self.request.GET
 			
 		#request POST
 		if self.request.method == 'POST' :
+			
 			if (produto_id):
 				alarmes = alarme_repository.get_alarmes_por_produto_id(produto_id)
 			if (alarme_id):
 				monitores = monitor_repository.get_monitores_por_alarme_id(alarme_id)
 
-			#se todos os campos preenchidos gero o relatorio
+			#se todos os campos preenchidos
 			if (int(produto_id) > 0 and int(alarme_id) > 0 and int(monitor_id) > 0 and int(acao_id) > 0):
 				erro = False
 
@@ -103,7 +107,7 @@ class Sme2Controller(Controller):
 					print '## ligar um evento de um monitor'
 					
 					#pego os eventos do monitor id
-					eventos = monitor_repository.get_eventos_por_monitor_id(monitor.mon_id)
+					eventos = monitor_repository.get_todos_eventos(monitor)
 					paginator = Paginator(eventos, templates.SME2_ITEMS_POR_PAGINA)
 					print '### paginator.count: %s' % paginator.count
 					print '### paginator.num_pages: %s' % paginator.num_pages
@@ -117,6 +121,12 @@ class Sme2Controller(Controller):
 						eventos_paginados = paginator.page(pagina)
 					except (EmptyPage, InvalidPage):
 						eventos_paginados = paginator.page(paginator.num_pages)
+						
+					if eventos_id:
+						for evento_id in eventos_id:
+							print '## ligando o evento %s' % evento_id
+							monitor_repository.ligar_evento(evento_id, monitor, alarme, produto)
+						feedback = 'Eventos selecionados ligados com sucesso!!!'
 
 		print '[SME2 ADMIN] POST: %s' % self.request.POST
 		print '[SME2 ADMIN] GET: %s' % self.request.GET
@@ -131,6 +141,7 @@ class Sme2Controller(Controller):
 			'pagina' : pagina,
 			'eventos_paginados' : eventos_paginados,
 			'erro' : erro,
+			'feedback' : feedback,
 			'colors' : util.colors,
 			'request' : self.request,})
 

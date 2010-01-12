@@ -26,6 +26,10 @@ class MonitorRepository(Singleton):
 	def limpa_monitor_por_id(self,id):
 		"""marca o monitor com nenhum alarme"""
 		Monitor.objects.filter(mon_id=id).update(mon_status='X')
+		
+	def liga_monitor_por_id(self, id, tipo_alarme):
+		"""marca o monitor com alarme"""
+		Monitor.objects.filter(mon_id=id).update(mon_status=tipo_alarme)
 
 	def get_colunas_por_monitor_id(self,id):
 		"""
@@ -61,7 +65,7 @@ class MonitorRepository(Singleton):
 
 		return colunas
 
-	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None,todos=None):
+	def get_eventos_por_monitor_id(self,id,data_inicio_str=None,data_fim_str=None,todos=None,todos_ligados=None):
 		"""obtem lista eventos por monitor id"""
 		monitor = self.get_monitor_por_id(id)
 		from puc.sme.core.repository.alarme_repository import AlarmeRepository
@@ -95,7 +99,7 @@ class MonitorRepository(Singleton):
 			select pad_id, pad_tipoalarme, %s
 			from %s
 			where mon_id = %s
-			AND pad_datahoraalarme  >= '%s 00:00:00'
+			AND pad_datahoraalarme	>= '%s 00:00:00'
 			AND pad_datahoraalarme <= '%s 23:59:59'
 			ORDER BY pad_datahora DESC LIMIT 2000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id, data_inicio_str, data_fim_str)
@@ -104,16 +108,25 @@ class MonitorRepository(Singleton):
 			select pad_id, pad_tipoalarme, %s
 			from %s
 			where mon_id = %s
-			AND pad_verificado  = 'N'
+			AND pad_verificado	= 'N'
 			AND pad_tipoalarme <> 'X'
 			ORDER BY pad_datahoraalarme
+			""" % (aux, monitor.mon_tabela, monitor.mon_id)
+		elif todos_ligados:
+			sql = """
+			select pad_id, pad_tipoalarme, %s
+			from %s
+			where mon_id = %s
+			AND pad_verificado	= 'S'
+			AND pad_tipoalarme <> 'X'
+			ORDER BY pad_datahoraalarme LIMIT 20000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
 		else:
 			sql = """
 			select pad_id, pad_tipoalarme, %s
 			from %s
 			where mon_id = %s
-			AND pad_verificado  = 'N'
+			AND pad_verificado	= 'N'
 			AND pad_tipoalarme <> 'X'
 			ORDER BY pad_datahoraalarme DESC LIMIT 5000
 			""" % (aux, monitor.mon_tabela, monitor.mon_id)
@@ -192,6 +205,11 @@ class MonitorRepository(Singleton):
 			print '###limpando produto...'
 			ProdutoRepository().limpa_produto_por_id(produto.prd_id)
 
+	def get_todos_eventos(self, monitor):
+		"""retorna os primeitos 30000 eventos"""
+		eventos = self.get_eventos_por_monitor_id(monitor.mon_id, todos_ligados=True)
+		return eventos
+		
 	def fechar_todos_eventos(self, monitor, alarme, produto):
 		"""docstring for fechar_todos_eventos"""
 		#pego os eventos do monitor
@@ -199,5 +217,52 @@ class MonitorRepository(Singleton):
 		for evento in eventos:
 			print 'fechando evento %s' % evento.id
 			self.fechar_evento(evento.id, monitor, alarme, produto)
+
+	def ligar_evento(self, id, monitor, alarme, produto):
+		"""liga um evento"""
+		sql = """
+		UPDATE %s
+		SET pad_verificado = 'N', pad_datahoraverificado = SYSDATE()
+		WHERE pad_id = %s
+		""" % (monitor.mon_tabela, id)
+		db = None
+
+		db = Database()
+		db.execute(sql)
+		db.close_connection()
+		#algum mon_id alarmando na tabela do monitor?
+		sql = """
+		SELECT pad_id, pad_tipoalarme FROM %s
+		WHERE mon_id = %s AND pad_tipoalarme <> 'X' AND pad_verificado = 'S' LIMIT 2000
+		""" % (monitor.mon_tabela, monitor.mon_id)
+		db.execute(sql)
+		rows = db.rows_fetchall()
+		#Imports necessarios das classes
+		from puc.sme.core.repository.alarme_repository import AlarmeRepository
+		from puc.sme.core.repository.produto_repository import ProdutoRepository
+		
+		tipo_alarme = 'W'
+		
+		if (db.rows_count() != 0):
+			#atualizo mon_status na tabela do monitor
+			print '###ligando monitor...'
+			for row in rows:
+				if row[1] == 'A':
+					tipo_alarme = 'A'
+					break
+			self.liga_monitor_por_id(monitor.mon_id, tipo_alarme)
+		
+		rows = None
+		
+		#algum alm_id alarmando na tabela monitor?
+		if (len(self.get_monitores_alarmando_por_alarme_id(alarme.alm_id)) != 0):
+			print '###ligando alarme...'
+			#atualizo alm_status na tabela do monitor
+			AlarmeRepository().liga_alarme_por_id(alarme.alm_id, tipo_alarme)
+
+		#algum prd_id alarmando na tabela alarme?
+		if (len(AlarmeRepository().get_alarmes_alarmando_por_produto_id(produto.prd_id)) != 0):
+			print '###ligando produto...'
+			ProdutoRepository().liga_produto_por_id(produto.prd_id, tipo_alarme)
 
 

@@ -25,6 +25,10 @@ class AlarmeRepository(Singleton):
 		"""marca o alarme com alm_status = X"""
 		Alarme.objects.filter(alm_id=id).update(alm_status='X')
 
+	def liga_alarme_por_id(self, id, tipo_alarme):
+		"""liga o alarme"""
+		Alarme.objects.filter(alm_id=id).update(alm_status=tipo_alarme)
+		
 	def get_alarme_monitor_xref(self):
 		alarmes = self.get_alarmes()
 		monitores = MonitorRepository().get_monitores()
