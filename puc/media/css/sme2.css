@@ -64,7 +64,7 @@ td.sme2-evento a:visited {color: white;text-decoration: none}
 td.sme2-evento a:active {color: white;text-decoration: none}
 td.sme2-evento a:hover {text-decoration: underline; color: white;}
 
-td { color: white; text-align:center; font-size:11px; line-height:13px; border-bottom:1px solid #eee; vertical-align:top; padding:5px; font-family:"Lucida Grande", Verdana, Arial, sans-serif; }
+td { color: white; text-align:center; font-size:11px; line-height:13px; border-bottom:0px solid #eee; vertical-align:top; padding:5px; font-family:"Lucida Grande", Verdana, Arial, sans-serif; }
 th { color: white; text-align:left; font-size:12px; font-weight:bold; line-height:13px; border-bottom:1px solid #eee; vertical-align:top; padding:5px; font-family:"Lucida Grande", Verdana, Arial, sans-serif; }
 
 thead th, 

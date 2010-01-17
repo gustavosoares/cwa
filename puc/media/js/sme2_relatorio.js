@@ -66,6 +66,14 @@ function removeAlarmes(){
 	if (f.alarme.options.length>0) f.alarme.options.length=0;
 }
 
+function destacaTooltip(){
+	new Effect.Highlight('id-relatorio-tooltip', { 
+		startcolor: '#ffff99',
+		endcolor: '#6495ED',
+		restorecolor: '#6495ED'
+		});
+}
+
 function adicionaMonitores(idalar){ //idProduto
 	if (idalar != 0) {
 		removeMonitores();

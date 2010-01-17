@@ -72,6 +72,7 @@
 	    var blocks = document.getElementsByClassName(
 	      this.options.block, this.options.portal
 	    );
+	
 	    blocks.each(
 	      function (block) {
 	        var content = Element.childrenWithClassName(
@@ -90,15 +91,20 @@
 	      }.bind(this)
 	    );
 		
+		/*
 		for (var container in settings) {
 	      settings[container].each(function (block) {
 	        $(container).appendChild($(block));
 	      });
 	    }
-
+		*/
+		
+		destacaTooltip();
+		Event.observe('id-relatorio-tooltip', 'mouseover', destacaTooltip, false);
+			
 	}
 	Event.observe(window, 'load', init, false);
-
+    
 </script>
 
 
