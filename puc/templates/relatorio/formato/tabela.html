@@ -21,7 +21,7 @@
 		{% ifequal evento.tipo 'X' %}
 			<tr bgcolor='{{ colors.normal }}'>
 		{% endifequal %}		
-			<td bgcolor='white'>{{evento.id}}</td>
+			<td class="sme2-evento">{{evento.id}}</td>
 			<td class="sme2-evento">{{evento.get_data_hora_formatada}}</td>
 			<td class="sme2-evento">{{evento.servidor}}</td>
 			{% for ordem, metadado in evento.metadados.items %}

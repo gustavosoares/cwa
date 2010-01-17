@@ -1,12 +1,21 @@
-#menu {
-	background: white;
-	text-align: left;
+
+span { 
+	color: white; 
+	text-align:center; 
+	font-size: 12px; 
+	font-weight: bold;
+}
+
+.step span {background: url(/media/images/bg-steps.png) 0 -25px no-repeat;}
+
+.step-current span {
+	background: url(/media/images/bg-steps.png);
+	width: 24px;
+	height: 29px;
 }
 
 #portal {
-	/*margin: 1px auto;*/
 	padding: 1px;
-	/*position: relative;*/
 	position: left;
 	width:100%;
 	border: 1px solid;
@@ -15,50 +24,29 @@
 	font-size: 10px;
 }
 
-#portal h2 {
-  text-align: center;
+
+#conteudo {
+	margin: 0px auto;
+	padding: 1px;
+	/*position: relative;*/
+	width:100%;
+	border: 0px solid;
+	background: black;
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 }
 
-#portal-column-0 { 
-  float:left;
-  width: 41%;  
-  background: WhiteSmoke;
-}
-
-#portal-column-1 {
-  float:left;
-  width: 58%;
-  background: WhiteSmoke;
-}   
-
-#portal-column-2 { 
-  float:left;
-  width: 21%;  
-  background: WhiteSmoke;
-}
-
-#portal-column-bottom { 
-  width: 99%;
-  background: WhiteSmoke;
-  clear: both;
-}
-
-   /*lista das visoes */
-#portal-column-block-list { 
-  position: absolute;
-  width: 200px;
-  right: 5px;
-  left: 5px;
-  z-index: 10;
-  background-color: #FFEAB1;
-}
-
-.portal-column {
+#colunas {
 	margin: 1px auto;
-	font-style: italic;
-	background-color: WhiteSmoke;
-	border: 1px solid;
-	color: black;
+	border: 0px solid;
+	text-align: center;
+}
+
+#relatorio {
+	margin: 1px auto;
+	border: 0px solid;
+	text-align: center;
+	background: black;
 }
 
 /* Definicoes dos boxes das visoes */
@@ -77,7 +65,7 @@
 }
 
 #portal .block .content {
-  padding: 2px;
+  padding: 5px;
 }
 
 /*
@@ -94,11 +82,6 @@ nao precisa na interface para o usuario
   cursor: pointer;
 }
 
-#portal .block-info {
-	position: absolute;
-	right:30px;
-}
-
 /* Fim das visoes */
 
 /* inicio */
@@ -111,12 +94,6 @@ nao precisa na interface para o usuario
   border: 1px dashed #f00;
 }
 
-/*
-nao precisa na interface para o usuario
-#portal .block-list-handle, #portal .handle {
-  cursor: move;
-}
-*/
 #portal #portal-column-block-list .block .block-toggle {
   display: none;
 }

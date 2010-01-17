@@ -31,6 +31,11 @@ visao_repository = repository.VisaoRepository()
 
 class RelatorioController(Controller):
 
+	def info(self):
+		"""pagina de ajuda da visao hierarquica"""
+
+		return render_to_response(templates.TEMPLATE_RELATORIO_INFO, {})
+		
 	def index(self):
 		"""Pagina principal da aplicacao por gerar relatorio"""
 		#declaracao de variaveis passadas para o template

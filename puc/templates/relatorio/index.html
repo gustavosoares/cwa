@@ -4,105 +4,14 @@
 
 {% block stylesheet %}
 
-<link rel="stylesheet" type="text/css" href="/media/css/forms.css" />
-<link rel="stylesheet" type="text/css" href="/media/css/widgets.css" />
+<!--link rel="stylesheet" type="text/css" href="/media/css/forms.css" /-->
+<!--link rel="stylesheet" type="text/css" href="/media/css/widgets.css" /-->
+<link rel="stylesheet" type="text/css" href="/media/css/relatorio.css" />
 
 <!-- Calendario JS -->
 <link rel="stylesheet" type="text/css" href="/media/css/jscal2.css" />
 <link rel="stylesheet" type="text/css" href="/media/css/border-radius.css" />
 <link rel="stylesheet" type="text/css" href="/media/css/win2k/win2k.css" />
-
-<style type="text/css">
-
-#portal {
-	padding: 1px;
-	position: left;
-	width:100%;
-	border: 1px solid;
-	background: black;
-	font-family: verdana, arial, sans-serif;
-	font-size: 10px;
-}
-
-
-#conteudo {
-	margin: 0px auto;
-	padding: 1px;
-	/*position: relative;*/
-	width:100%;
-	border: 0px solid;
-	background: black;
-	font-family: verdana, arial, sans-serif;
-	font-size: 10px;
-}
-
-#colunas {
-	margin: 1px auto;
-	border: 0px solid;
-	text-align: center;
-}
-
-#relatorio {
-	margin: 1px auto;
-	border: 0px solid;
-	text-align: center;
-	background: black;
-}
-
-	/* Definicoes dos boxes das visoes */
-	#portal .block {
-	  margin: 1px;
-	  padding: 2px;
-	  border: 0px solid #0F3974;
-	}
-	#portal .block h3 {
-	  margin: 0;
-	  padding: 5px;
-	  font-size: 14px;
-	  text-align: center;
-	  color: #fff;
-	  background-color: CornflowerBlue;
-	}
-
-	#portal .block .content {
-	  padding: 5px;
-	}
-
-/*
-	nao precisa na interface para o usuario
-*/
-	#portal .block .block-toggle {
-	  background-image: url(/media/images/block-slide.png);
-	  display: block;
-	  float: right;
-	  width: 7px;
-	  height: 7px;
-	  background-repeat: no-repeat;
-	  background-position: center;
-	  cursor: pointer;
-	}
-
-	/* Fim das visoes */
-
-	/* inicio */
-
-	#portal .block .block-toggle span {
-	  display: none;
-	}
-
-	#portal .block-hover {
-	  border: 1px dashed #f00;
-	}
-
-	#portal #portal-column-block-list .block .block-toggle {
-	  display: none;
-	}
-
-	/*escondo conteudo dos box das visoes no container com a lista de visoes disponiveis */
-	#portal #portal-column-block-list .block .content {
-	  display: none;
-	}
-</style>
 
 {% endblock %}
 	
@@ -206,6 +115,7 @@
 			<form name='frm' method=POST action=''>
 				<span>Produto/Alarme/Monitor: </span><br>
 				<!-- produto -->
+				
 				<select name=produto onChange='adicionaAlarmes(this.options[this.selectedIndex].value);'>
 					<option value="0">[Selecione um produto]</option>
 					{% for produto in produtos %}

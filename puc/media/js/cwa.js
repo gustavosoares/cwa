@@ -33,8 +33,10 @@ function init() {
       blocklisthandle: 'block-list-handle',
     }
 
-
-	for (var container in settings) {
+    /*
+    var settings = {"portal-column-1": ["block-tabular"], "portal-column-0": [], "portal-column-bottom": ["block-relatorio"]
+    */
+	for (var container in settings) { /* for nas chaves do settings */
 	  visoes = settings[container]
 	  len_visoes = visoes.length
 	  if (len_visoes > 0) {

@@ -1,0 +1,55 @@
+{% extends "base_info.html" %}
+
+{% block title %}Ajuda - Visao Relatorio{% endblock %}
+
+{% block stylesheet %}
+
+{% endblock %}
+	
+{% block javascript %}
+
+{% endblock %}
+
+{% block content %}
+<center>
+<div id='tooltip'><h2>Ajuda - Visão Relatório</h2></div><br>
+</center>
+<h3 class="info">Para que serve?</h3><br>
+
+A visão relatório permite a visualização do comportamento<br>
+de um determinado evento no tempo. Para isso, basta você definir<br>
+um produto, um alarme, um monitor, a data inicial e data final no<br>
+formulário de pesquisa da aplicação e clicar no botão <img src=/media/images/info_botao_relatorio.png border=0>.<br><br>
+
+<h3 class="info">Quais os formatos dos relatórios?</h3><br>
+
+O formato do relatório gerado pode ser de 3 tipos diferentes, dependendo<br>
+do que está configurado na aplicação:
+<ol>
+	<li>Relatório Tabular</li>
+	<li>Relatório com Gráfico de Linhas</li>
+	<li>Relatório com Gráfico de Barras</li>
+</ol>
+<br>
+<h3 class="info">Relátorio Tabular</h3><br>
+	
+É a forma mais simples de apresentação dos dados através de tabelas<br>
+sem qualquer tipo de interação.<br>
+<br>
+<h3 class="info">Relatório com Gráfico de Linhas</h3><br>
+
+Neste tipo de relatório os dados são apresentados em um gráfico de linha<br>
+com um certo grau de interação com o usuário. Pode-se posicionar o ponteiro<br>
+do mouser sobre um ponto no gráfico para visualizar os valores no eixo X e Y.<br>
+Além disso, o usuário pode usar a barra de rolagem (figura 1) localizada no rodapé do<br>
+gráfico para poder expandir ou reduzir a quantidade de informação visualizada.<br>
+<br>
+<center>
+<img width=600 src=/media/images/info_relatorio_slide.png border=0><br>
+Figura 1 - Barra de rolagem para ajustar o gráfico
+</center>
+<br>
+
+
+{% endblock %}
+

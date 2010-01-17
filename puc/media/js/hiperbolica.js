@@ -16,9 +16,8 @@ function addEvent(obj, type, fn) {
 
 function init(){
 
-
     var infovis = document.getElementById('infovis');
-    var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 50;
+    var w = infovis.offsetWidth - 40, h = infovis.offsetHeight - 40;
     
     //init canvas
     //Create a new canvas instance.
@@ -54,6 +53,11 @@ function init(){
         //creation
         onCreateLabel: function(domElement, node){
             domElement.innerHTML = node.name;
+			/* Adiciono eventos em cada no */
+			//dblclick
+			addEvent(domElement, 'dblclick', function () {
+                Log.write("duplo click detectado")
+            });
             addEvent(domElement, 'click', function () {
                 ht.onClick(node.id);
             });

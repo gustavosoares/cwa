@@ -3,139 +3,8 @@
 {% block title %}CWA{% endblock %}
 
 {% block stylesheet %}
-<style type="text/css">
 
-	#menu {
-		background: white;
-		text-align: left;
-		/*position: fixed;*/
-	}
-	
-	#portal {
-		/*margin: 1px auto;*/
-		padding: 1px;
-		/*position: relative;*/
-		position: left;
-		width:100%;
-		border: 1px solid;
-		background: black;
-		font-family: verdana, arial, sans-serif;
-		font-size: 10px;
-	}
-
-	#portal h2 {
-	  /*color: black;*/
-	  text-align: center;
-	}
-	
-	#portal-column-0 { 
-	  float:left;
-	  width: 41%;  
-	  background: WhiteSmoke;
-	}
-
-	#portal-column-1 {
-	  float:left;
-	  width: 58%;
-	  background: WhiteSmoke;
-	}   
-
-	#portal-column-2 { 
-	  float:left;
-	  width: 21%;  
-	  background: WhiteSmoke;
-	}
-
-	#portal-column-bottom { 
-	  width: 99%;
-	  background: WhiteSmoke;
-	  clear: both;
-	}
-
-    /*lista das visoes */
-	#portal-column-block-list { 
-	  position: absolute;
-	  width: 200px;
-	  right: 5px;
-	  left: 5px;
-	  z-index: 10;
-	  background-color: #FFEAB1;
-	}
-	
-	.portal-column {
-		margin: 1px auto;
-		font-style: italic;
-		background-color: WhiteSmoke;
-		border: 1px solid;
-		color: black;
-	}
-
-	/* Definicoes dos boxes das visoes */
-	#portal .block {
-	  margin: 1px;
-	  padding: 2px;
-	  border: 0px solid #0F3974;
-	}
-	#portal .block h3 {
-	  margin: 0;
-	  padding: 5px;
-	  font-size: 14px;
-	  text-align: center;
-	  color: #fff;
-	  background-color: CornflowerBlue;
-	}
-
-	#portal .block .content {
-	  padding: 5px;
-	}
-
-/*
-	nao precisa na interface para o usuario
-*/
-	#portal .block .block-toggle {
-	  background-image: url(/media/images/block-slide.png);
-	  display: block;
-	  float: right;
-	  width: 7px;
-	  height: 7px;
-	  background-repeat: no-repeat;
-	  background-position: center;
-	  cursor: pointer;
-	}
-
-	#portal .block-info {
-		position: absolute;
-		right:30px;
-	}
-	
-	/* Fim das visoes */
-
-	/* inicio */
-
-	#portal .block .block-toggle span {
-	  display: none;
-	}
-
-	#portal .block-hover {
-	  border: 1px dashed #f00;
-	}
-
-/*
-	nao precisa na interface para o usuario
-	#portal .block-list-handle, #portal .handle {
-	  cursor: move;
-	}
-*/
-	#portal #portal-column-block-list .block .block-toggle {
-	  display: none;
-	}
-
-	/*escondo conteudo dos box das visoes no container com a lista de visoes disponiveis */
-	#portal #portal-column-block-list .block .content {
-	  display: none;
-	}
-
-</style>
+<link rel="stylesheet" type="text/css" href="/media/css/cwa.css" />
 
 {% endblock %}
 	
@@ -189,7 +58,7 @@
 			
 			<!-- Visao hierarquica-->
 			<div class="block" id="block-hierarquica">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a><a class="block-info" href='#' onclick="window.open('/hiperbolica/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=no, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a><a class="block-info" href='#' onclick="window.open('/hiperbolica/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
 				<div class="content">
 					<CENTER>
 					<iframe id="id_frame_hierarquica" name="iframe_hierarquica" src="/hiperbolica/" frameborder="0"  scrolling="auto" width="98%" height="800"></iframe>
@@ -200,7 +69,7 @@
 			
 			<!-- Visao relatorio-->
 			<div class="block" id="block-relatorio">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">Visão relatório</a><a class="block-info" href='#' onclick="window.open('/relatorio/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=no, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">Visão relatório</a><a class="block-info" href='#' onclick="window.open('/relatorio/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
 				<div class="content">
 					<CENTER>
 					<iframe id="id_frame_relatorio" name="iframe_relatorio" src="/relatorio/" frameborder="0" scrolling="auto" width="98%" height="1000"></iframe>

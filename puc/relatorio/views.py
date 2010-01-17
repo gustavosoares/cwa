@@ -6,6 +6,11 @@ def index(request):
 	relatorio_controller = RelatorioController(request)
 	return relatorio_controller.index()
 
+def info(request):
+	"""Pagina de ajuda do relatorio"""
+	relatorio_controller = RelatorioController(request)
+	return relatorio_controller.info()
+		
 def get_xml(request):
 	"""
 	retorna o xml para ser gerado pelo framework em flash de geracao de graficos
