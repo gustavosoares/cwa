@@ -13,6 +13,9 @@ function addEvent(obj, type, fn) {
     else obj.attachEvent('on' + type, fn);
 };
 
+function doubleClick() {
+	alert('double click!!!');
+}
 
 function init(){
 
@@ -56,8 +59,9 @@ function init(){
 			/* Adiciono eventos em cada no */
 			//dblclick
 			addEvent(domElement, 'dblclick', function () {
-                Log.write("duplo click detectado")
+                alert('duplo clique!!');
             });
+
             addEvent(domElement, 'click', function () {
                 ht.onClick(node.id);
             });
@@ -67,6 +71,7 @@ function init(){
             addEvent(domElement, 'mouseout', function () {
                 Log.write("")
             });
+
         },
         //Change node styles when labels are placed
         //or moved.

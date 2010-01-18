@@ -74,6 +74,10 @@ function destacaTooltip(){
 		});
 }
 
+function doubleClick() {
+	alert('double click!!!');
+}
+
 function adicionaMonitores(idalar){ //idProduto
 	if (idalar != 0) {
 		removeMonitores();
