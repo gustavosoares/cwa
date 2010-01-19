@@ -68,14 +68,14 @@ function removeAlarmes(){
 
 function destacaTooltip(){
 	new Effect.Highlight('id-relatorio-tooltip', { 
-		startcolor: '#ffff99',
+		startcolor: '#000000',
 		endcolor: '#6495ED',
 		restorecolor: '#6495ED'
 		});
 }
 
-function doubleClick() {
-	alert('double click!!!');
+function clickTooltip() {
+	alert('click tooltip!!!');
 }
 
 function adicionaMonitores(idalar){ //idProduto
