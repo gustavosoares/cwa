@@ -6,6 +6,7 @@ class Widget(models.Model):
 	nome = models.CharField(max_length=100)
 	descricao = models.CharField(max_length=200)
 	url = models.CharField(max_length=100)
+	url_ajuda = models.CharField(verbose_name='Url de ajuda', max_length=100, blank=True, null=True,)
 	width = models.CharField(max_length=4)
 	height = models.CharField(max_length=4)
 	

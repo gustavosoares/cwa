@@ -1,26 +1,571 @@
 [
   {
-    "model": "modelo.visaorelatorio",
-    "pk": 1,
+    "pk": 22, 
+    "model": "auth.permission", 
     "fields": {
-      "formato": "tabular"
+      "codename": "add_logentry", 
+      "name": "Can add log entry", 
+      "content_type": 8
     }
-  },{
-    "model": "modelo.visaohierarquica",
-    "pk": 1,
+  }, 
+  {
+    "pk": 23, 
+    "model": "auth.permission", 
     "fields": {
-      "frequencia_atualizacao": 120
+      "codename": "change_logentry", 
+      "name": "Can change log entry", 
+      "content_type": 8
     }
-  },{
-  	"pk": 1, 
-  	"model": "modelo.modelo", 
-  	"fields": {
-  		"metadado": "portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio", 
-  		"descricao": "primeira versao do modelo",
-		"estado": 1,
-  		"nome": "modelo-01"
-  	}
-  },
+  }, 
+  {
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_logentry", 
+      "name": "Can delete log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_group", 
+      "name": "Can add group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_message", 
+      "name": "Can add message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_permission", 
+      "name": "Can add permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_user", 
+      "name": "Can add user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_group", 
+      "name": "Can change group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_message", 
+      "name": "Can change message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_permission", 
+      "name": "Can change permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_user", 
+      "name": "Can change user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_group", 
+      "name": "Can delete group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_message", 
+      "name": "Can delete message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_permission", 
+      "name": "Can delete permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_user", 
+      "name": "Can delete user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_contenttype", 
+      "name": "Can add content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_contenttype", 
+      "name": "Can change content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_contenttype", 
+      "name": "Can delete content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_modelo", 
+      "name": "Can add modelo", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_visaohierarquica", 
+      "name": "Can add visao hierarquica", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_visaorelatorio", 
+      "name": "Can add visao relatorio", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_widget", 
+      "name": "Can add widget", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_modelo", 
+      "name": "Can change modelo", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_visaohierarquica", 
+      "name": "Can change visao hierarquica", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_visaorelatorio", 
+      "name": "Can change visao relatorio", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_widget", 
+      "name": "Can change widget", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_modelo", 
+      "name": "Can delete modelo", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_visaohierarquica", 
+      "name": "Can delete visao hierarquica", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_visaorelatorio", 
+      "name": "Can delete visao relatorio", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_widget", 
+      "name": "Can delete widget", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_session", 
+      "name": "Can add session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_session", 
+      "name": "Can change session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_session", 
+      "name": "Can delete session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_site", 
+      "name": "Can add site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_site", 
+      "name": "Can change site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_site", 
+      "name": "Can delete site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_alarme", 
+      "name": "Can add alarme", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_alarmehelp", 
+      "name": "Can add alarmehelp", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_alarmehistorico", 
+      "name": "Can add alarmehistorico", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_coluna", 
+      "name": "Can add coluna", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_monitor", 
+      "name": "Can add monitor", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_monitoremail", 
+      "name": "Can add monitoremail", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_monitorhelp", 
+      "name": "Can add monitorhelp", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_produto", 
+      "name": "Can add produto", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_produtohelp", 
+      "name": "Can add produtohelp", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_alarme", 
+      "name": "Can change alarme", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_alarmehelp", 
+      "name": "Can change alarmehelp", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_alarmehistorico", 
+      "name": "Can change alarmehistorico", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_coluna", 
+      "name": "Can change coluna", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_monitor", 
+      "name": "Can change monitor", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_monitoremail", 
+      "name": "Can change monitoremail", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_monitorhelp", 
+      "name": "Can change monitorhelp", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_produto", 
+      "name": "Can change produto", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_produtohelp", 
+      "name": "Can change produtohelp", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_alarme", 
+      "name": "Can delete alarme", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_alarmehelp", 
+      "name": "Can delete alarmehelp", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_alarmehistorico", 
+      "name": "Can delete alarmehistorico", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_coluna", 
+      "name": "Can delete coluna", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_monitor", 
+      "name": "Can delete monitor", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_monitoremail", 
+      "name": "Can delete monitoremail", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_monitorhelp", 
+      "name": "Can delete monitorhelp", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_produto", 
+      "name": "Can delete produto", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_produtohelp", 
+      "name": "Can delete produtohelp", 
+      "content_type": 22
+    }
+  }, 
   {
     "pk": 1, 
     "model": "auth.user", 
@@ -31,14 +576,15 @@
       "is_active": 1, 
       "is_superuser": 1, 
       "is_staff": 1, 
-      "last_login": "2009-10-29 19:35:03", 
+      "last_login": "2010-01-19 16:52:29", 
       "groups": [], 
       "user_permissions": [], 
       "password": "sha1$f943c$e95580fd2ff9cca90d383681a6949694fd4dec92", 
       "email": "gustavosoares@gmail.com", 
       "date_joined": "2009-09-25 19:06:19"
     }
-  }, {
+  }, 
+  {
     "pk": 2, 
     "model": "auth.user", 
     "fields": {
@@ -48,21 +594,101 @@
       "is_active": 1, 
       "is_superuser": 0, 
       "is_staff": 1, 
-      "last_login": "2009-11-03 19:05:01", 
-      "groups": [],
+      "last_login": "2010-01-19 16:53:24", 
+      "groups": [], 
       "user_permissions": [
-        52, 
-        53, 
-        59, 
-        56, 
-        54
-      ],
+        46, 
+        73, 
+        47, 
+        71, 
+        50, 
+        74, 
+        48, 
+        75
+      ], 
       "password": "sha1$f60e2$a4511effee5956b897a67a6f1a5a1cd47858c955", 
       "email": "", 
       "date_joined": "2009-10-31 14:07:54"
     }
+  }, 
+  {
+    "pk": 3, 
+    "model": "modelo.widget", 
+    "fields": {
+      "nome": "hiperbolica", 
+      "url": "/hiperpoblica/", 
+      "height": "400", 
+      "url_ajuda": "/hiperbolica/info/", 
+      "width": "98%", 
+      "descricao": "Vis\u00e3o Hier\u00e1rquica"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "modelo.widget", 
+    "fields": {
+      "nome": "relatorio", 
+      "url": "/relatorio/", 
+      "height": "400", 
+      "url_ajuda": "/relatorio/info/", 
+      "width": "98%", 
+      "descricao": "Visao Relatorio"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "modelo.widget", 
+    "fields": {
+      "nome": "tabular", 
+      "url": "/sme2/", 
+      "height": "400", 
+      "url_ajuda": "", 
+      "width": "98%", 
+      "descricao": "Vis\u00e3o Tabular"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "modelo.modelo", 
+    "fields": {
+      "metadado": "portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio", 
+      "estado": 1, 
+      "descricao": "primeira versao do modelo", 
+      "nome": "modelo-01"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "modelo.modelo", 
+    "fields": {
+      "metadado": "portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio:block-hierarquica", 
+      "estado": 0, 
+      "descricao": "modelo com visao tabular e relatorio", 
+      "nome": "modelo-02"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "modelo.modelo", 
+    "fields": {
+      "metadado": "portal-column-0&portal-column-1:block-tabular&portal-column-bottom:block-relatorio:block-hierarquica", 
+      "estado": 0, 
+      "descricao": "teste", 
+      "nome": "modelo-03"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "modelo.visaorelatorio", 
+    "fields": {
+      "formato": "tabular"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "modelo.visaohierarquica", 
+    "fields": {
+      "frequencia_atualizacao": 120
+    }
   }
-  
-
 ]
-
