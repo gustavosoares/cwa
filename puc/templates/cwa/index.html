@@ -45,38 +45,25 @@
 			<h2 class="block-list-handle">Visões</h2>
 			<p>Selecione uma visão e arraste para uma das áreas disponíveis</p>
 			<!-- Visoes vao aqui-->
-			<!-- Visao tabular-->
-			<div class="block" id="block-tabular">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="monitoracao">Visão tabular</a></h3>
-				<div class="content">
-					<CENTER>
-					<iframe id="id_frame_sme2" name="iframe_sme2" src="/sme2/" frameborder="0" scrolling="auto" width="98%" height="800"></iframe>
-					</CENTER>
-				</div>
-			</div>
-			<!-- fim visao tabular-->
 			
-			<!-- Visao hierarquica-->
-			<div class="block" id="block-hierarquica">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="hierarquica">Visão hierárquica</a><a class="block-info" href='#' onclick="window.open('/hiperbolica/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
+			{% for widget in my_widgets %}
+			<!-- Visao {{ widget.nome }} -->
+			<div class="block" id="block-{{ widget.nome }}">
+				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="{{ widget.nome }}">{{ widget.descricao }}</a>
+				{% if widget.url_ajuda %}
+				<a class="block-info" href='#' onclick="window.open('{{ widget.url_ajuda }}', 'info', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a>
+				{% endif %}
+				</h3>
 				<div class="content">
 					<CENTER>
-					<iframe id="id_frame_hierarquica" name="iframe_hierarquica" src="/hiperbolica/" frameborder="0"  scrolling="auto" width="98%" height="800"></iframe>
+					<iframe id="id_frame_{{ widget.nome }}" name="iframe_{{ widget.nome }}" src="{{ widget.url }}" frameborder="0" scrolling="auto" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>
 					</CENTER>
 				</div>
 			</div>
-			<!-- fim visao hierarquica-->
-			
-			<!-- Visao relatorio-->
-			<div class="block" id="block-relatorio">
-				<h3 class="handle"><a class="block-toggle"><span>toogle</span></a><a name="relatorio">Visão relatório</a><a class="block-info" href='#' onclick="window.open('/relatorio/info/', 'info', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no, height=520, width=630')"><img height=20 width=20 src=/media/images/info.gif border=0></a></h3>
-				<div class="content">
-					<CENTER>
-					<iframe id="id_frame_relatorio" name="iframe_relatorio" src="/relatorio/" frameborder="0" scrolling="auto" width="98%" height="1000"></iframe>
-					</CENTER>
-				</div>
-			</div>
-			<!-- fim visao relatorio-->
+			<!-- fim visao {{ widget.nome }}-->
+			{% endfor %}
+				
+			<!-- fim das visoes -->
 		</div>
 
 </div> <!-- fim do div portal -->
