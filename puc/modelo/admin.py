@@ -1,8 +1,8 @@
 # coding=utf-8
 from django.contrib import admin
-from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget
 from puc.modelo.forms import MyModeloAdminForm
-from puc.modelo.repository import ModeloRepository
+from puc.modelo.repository import ModeloRepository, WidgetRepository
 from puc.core import json
 
 
@@ -45,10 +45,14 @@ class ModeloAdmin(admin.ModelAdmin):
 		"The 'change' admin view for this model."
 		print '###change view personalizado'
 		modelo_repository = ModeloRepository()
+		widget_repository = WidgetRepository()
 		modelo = modelo_repository.get_modelo_por_id(object_id)
+		widgets = widget_repository.get_todos()
+		print 'widgets: %s' % widgets
 		modelo_settings_json = modelo_repository.get_modelo_settings(modelo.nome)
 		
-		my_context = { 'modelo_settings_json' : modelo_settings_json,
+		my_context = { 'modelo_settings_json' : modelo_settings_json, 
+		 'my_widgets' : widgets,
 		 'mostrar_escolha_modelos' : True }
 		
 		return super(ModeloAdmin, self).change_view(request, object_id, extra_context=my_context)
@@ -129,8 +133,16 @@ class VisaoHierarquicaAdmin(admin.ModelAdmin):
 
 		return super(VisaoHierarquicaAdmin, self).changelist_view(request, extra_context=my_context)
 
+class WidgetAdmin(admin.ModelAdmin):
+	"""Widget com as visoes"""
+
+	list_display = ('nome', 'descricao', 'url', 'width', 'height',)
+	save_on_top = True
+	actions_on_top = False
+	actions_on_bottom = False
 
 admin.site.register(Modelo, ModeloAdmin)
+admin.site.register(Widget, WidgetAdmin)
 admin.site.register(VisaoHierarquica, VisaoHierarquicaAdmin)
 admin.site.register(VisaoRelatorio, VisaoRelatorioAdmin)
 

@@ -1,8 +1,14 @@
 # coding=utf-8
 from puc.core.singleton import Singleton
 from django.conf import settings
-from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget
 from puc.core import json
+
+class WidgetRepository(Singleton):
+
+	def get_todos(self):
+		"""retorna os widgets"""
+		return Widget.objects.all()
 
 class ModeloRepository(Singleton):
 

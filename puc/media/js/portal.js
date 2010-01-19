@@ -48,6 +48,7 @@ Portal.prototype = {
     var sortables = document.getElementsByClassName(
       this.options.column, this.options.portal
     );
+
     //console.log(sortables)
     sortables.each(function (sortable) {
       Sortable.create(sortable, { 

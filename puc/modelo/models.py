@@ -1,6 +1,20 @@
 #-*- coding:utf-8 -*-
 from django.db import models
 
+class Widget(models.Model):
+	
+	nome = models.CharField(max_length=100)
+	descricao = models.CharField(max_length=200)
+	url = models.CharField(max_length=100)
+	width = models.CharField(max_length=4)
+	height = models.CharField(max_length=4)
+	
+	def __unicode__(self):
+		return u'%s' % self.nome
+		
+	class Meta:
+		ordering = ['nome']
+		
 # Create your models here.
 class Modelo(models.Model):
 	nome = models.CharField(max_length=100)

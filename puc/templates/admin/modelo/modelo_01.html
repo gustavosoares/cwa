@@ -19,41 +19,23 @@
 			<div class="portal-column" id="portal-column-block-list" style="display: none;">
 				<h2 class="block-list-handle">Visões</h2>
 				<p>Selecione uma visão e arraste para uma das áreas disponíveis</p>
+				
 				<!-- Visoes vao aqui-->
-				<!-- Visao tabular-->
-				<div class="block" id="block-tabular">
-					<h3 class="handle"><a class="block-delete"></a><a class="block-toggle"><span>toogle</span></a>Visão tabular</h3>
+				{% for widget in my_widgets %}
+				<!-- Visao {{ widget.nome }} -->
+				<div class="block" id="block-{{ widget.nome }}">
+					<h3 class="handle"><a class="block-delete"></a><a class="block-toggle"><span>toogle</span></a>{{ widget.descricao }}</h3>
 					<div class="content">
 						<CENTER>
-						<iframe name="iframe_sm2" src="/sme2/" frameborder="0" width="98%" height="400"></iframe>
+						<iframe name="iframe_{{ widget.nome }}" src="{{ widget.url }}" frameborder="0" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>
 						</CENTER>
 					</div>
 				</div>
-				<!-- fim visao tabular-->
-				
-				<!-- Visao hierarquica-->
-				<div class="block" id="block-hierarquica">
-					<h3 class="handle"><a class="block-delete"></a><a class="block-toggle"><span>toogle</span></a>Visão hierárquica</h3>
-					<div class="content">
-						<CENTER>
-						<iframe name="iframe_hierarquica" src="/hiperbolica/" frameborder="0" width="98%" height="600"></iframe>
-						</CENTER>
-					</div>
-				</div>
-				<!-- fim visao hierarquica-->
-				
-				<!-- Visao relatorio-->
-				<div class="block" id="block-relatorio">
-					<h3 class="handle"><a class="block-delete"></a><a class="block-toggle"><span>toogle</span></a>Visão relatório</h3>
-					<div class="content">
-						<CENTER>
-						<iframe name="iframe_relatorio" src="/relatorio/" frameborder="0" width="98%" height="400"></iframe>
-						</CENTER>
-					</div>
-				</div>
-				<!-- fim visao relatorio-->
+				<!-- fim visao {{ widget.nome }}-->
+				{% endfor %}
+
 			</div>
 	
 	<!--/div--> 
 	<!-- fim do div portal -->
-	<input type=hidden id="ordem-modelo" name="ordem" value="">
+	<!--input type=hidden id="ordem-modelo" name="ordem" value=""-->

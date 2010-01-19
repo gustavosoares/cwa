@@ -12,7 +12,7 @@ colors = {
 def start_counter():
 	return time.time()
 
-def elapsed(inicio, comando='', debug=True):
+def elapsed(inicio, comando='', debug=False):
 	fim = time.time()
 	#elapsed = (fim - inicio) / 60
 	elapsed = (fim - inicio)
