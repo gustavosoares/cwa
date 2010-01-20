@@ -69,7 +69,7 @@
     "model": "modelo.widget", 
     "fields": {
       "nome": "hiperbolica", 
-      "url": "/hiperpoblica/", 
+      "url": "/hiperbolica/", 
       "height": "850", 
       "url_ajuda": "/hiperbolica/info/", 
       "width": "98%", 

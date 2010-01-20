@@ -245,7 +245,7 @@ class MonitorRepository(Singleton):
 			
 			eventos.append(evento_copy)
 		
-		print '### tempo dos objetos somados: %f' % tempo_objeto
+		#print '### tempo dos objetos somados: %f' % tempo_objeto
 		util.elapsed(inicio,'construção lista eventos')
 		return eventos
 		

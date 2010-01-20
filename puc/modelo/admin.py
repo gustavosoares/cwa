@@ -136,7 +136,7 @@ class VisaoHierarquicaAdmin(admin.ModelAdmin):
 class WidgetAdmin(admin.ModelAdmin):
 	"""Widget com as visoes"""
 
-	list_display = ('nome', 'descricao', 'url', 'width', 'height',)
+	list_display = ('nome', 'descricao', 'url', 'url_ajuda', 'width', 'height',)
 	save_on_top = True
 	actions_on_top = False
 	actions_on_bottom = False

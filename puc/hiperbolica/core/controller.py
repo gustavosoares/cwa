@@ -53,7 +53,7 @@ class HiperbolicaController(Controller):
 
 		refresh_timeout = visao_hierarquica.frequencia_atualizacao
 
-		print 'arvore json: %s' % arvore_json
+		#print 'arvore json: %s' % arvore_json
 
 		return render_to_response(templates.TEMPLATE_HIPERBOLICA_MOSTRAR_ARVORE, {'arvore_json' : arvore_json,
 									'refresh_timeout' : refresh_timeout })
