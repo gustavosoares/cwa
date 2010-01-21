@@ -96,9 +96,9 @@ nao precisa na interface para o usuario
   cursor: pointer;
 }
 
-#portal .block-info {
+#portal .block .block-info {
 	position: absolute;
-	right:30px;
+	right: 30px;
 }
 
 /* Fim das visoes */
