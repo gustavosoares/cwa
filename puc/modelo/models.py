@@ -19,7 +19,7 @@ class Widget(models.Model):
 class VisaoTemplate(models.Model):
 	
 	nome = models.CharField(max_length=100)
-	nome_arquivo_css = models.CharField(verbose_name='Nome do arquivo css')
+	nome_arquivo_css = models.CharField(verbose_name='Nome do arquivo css', max_length=100)
 	
 	def __unicode__(self):
 		return u'%s' % self.nome
