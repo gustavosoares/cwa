@@ -16,6 +16,17 @@ class Widget(models.Model):
 	class Meta:
 		ordering = ['nome']
 		
+class VisaoTemplate(models.Model):
+	
+	nome = models.CharField(max_length=100)
+	nome_arquivo_css = models.CharField(verbose_name='Nome do arquivo css')
+	
+	def __unicode__(self):
+		return u'%s' % self.nome
+		
+	class Meta:
+		ordering = ['nome']
+		
 # Create your models here.
 class Modelo(models.Model):
 	nome = models.CharField(max_length=100)

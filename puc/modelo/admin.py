@@ -1,8 +1,8 @@
 # coding=utf-8
 from django.contrib import admin
-from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget, VisaoTemplate
 from puc.modelo.forms import MyModeloAdminForm
-from puc.modelo.repository import ModeloRepository, WidgetRepository
+from puc.modelo.repository import ModeloRepository, WidgetRepository, VisaoTemplateRepository
 from puc.core import json
 
 
@@ -141,8 +141,17 @@ class WidgetAdmin(admin.ModelAdmin):
 	actions_on_top = False
 	actions_on_bottom = False
 
+class VisaoTemplateAdmin(admin.ModelAdmin):
+	"""Widget com as visoes"""
+
+	list_display = ('nome', 'nome_arquivo_css', )
+	save_on_top = True
+	actions_on_top = False
+	actions_on_bottom = False
+	
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Widget, WidgetAdmin)
+admin.site.register(VisaoTemplate, VisaoTemplateAdmin)
 admin.site.register(VisaoHierarquica, VisaoHierarquicaAdmin)
 admin.site.register(VisaoRelatorio, VisaoRelatorioAdmin)
 
