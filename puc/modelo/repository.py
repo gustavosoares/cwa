@@ -1,19 +1,19 @@
 # coding=utf-8
 from puc.core.singleton import Singleton
 from django.conf import settings
-from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget, VisaoTemplate
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget, TemplateModelo
 from puc.core import json
 
 
-class VisaoTemplateRepository(Singleton):
+class TemplateModeloRepository(Singleton):
 
 	def get_todos(self):
 		"""retorna os templates"""
-		return VisaoTemplate.objects.all()
+		return TemplateModelo.objects.all()
 	
 	def get_template_por_id(self,id_template):
 		"""retorna template por id"""
-		return VisaoTemplate.objects.get(id=id_template)
+		return TemplateModelo.objects.get(id=id_template)
 	
 
 class WidgetRepository(Singleton):

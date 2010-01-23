@@ -1,8 +1,8 @@
 # coding=utf-8
 from django.contrib import admin
-from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget, VisaoTemplate
+from puc.modelo.models import Modelo, VisaoRelatorio, VisaoHierarquica, Widget, TemplateModelo
 from puc.modelo.forms import MyModeloAdminForm
-from puc.modelo.repository import ModeloRepository, WidgetRepository, VisaoTemplateRepository
+from puc.modelo.repository import ModeloRepository, WidgetRepository, TemplateModeloRepository
 from puc.core import json
 
 
@@ -34,10 +34,15 @@ class ModeloAdmin(admin.ModelAdmin):
 	def add_view(self, request, form_url='', extra_context=None):
 		"""The 'add' admin view for this model."""
 		print '##add view personalizada'
+		
+		widget_repository = WidgetRepository()
+		widgets = widget_repository.get_todos()
+		print 'widgets: %s' % widgets
+		
 		if request.method == 'POST':
 			print '##POST: %s' % request.POST
 		
-		my_context = { 'mostrar_escolha_modelos' : True }
+		my_context = { 'mostrar_escolha_modelos' : True, 'my_widgets' : widgets, }
 		return super(ModeloAdmin, self).add_view(request, form_url, extra_context=my_context)
 
 
@@ -45,8 +50,9 @@ class ModeloAdmin(admin.ModelAdmin):
 		"The 'change' admin view for this model."
 		print '###change view personalizado'
 		modelo_repository = ModeloRepository()
-		widget_repository = WidgetRepository()
 		modelo = modelo_repository.get_modelo_por_id(object_id)
+		
+		widget_repository = WidgetRepository()
 		widgets = widget_repository.get_todos()
 		print 'widgets: %s' % widgets
 		modelo_settings_json = modelo_repository.get_modelo_settings(modelo.nome)
@@ -141,17 +147,17 @@ class WidgetAdmin(admin.ModelAdmin):
 	actions_on_top = False
 	actions_on_bottom = False
 
-class VisaoTemplateAdmin(admin.ModelAdmin):
-	"""Widget com as visoes"""
+class TemplateModeloAdmin(admin.ModelAdmin):
+	"""template dos modelos"""
 
-	list_display = ('nome', 'nome_arquivo_css', )
+	list_display = ('nome', 'nome_arquivo_css', 'nome_arquivo_html')
 	save_on_top = True
 	actions_on_top = False
 	actions_on_bottom = False
 	
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Widget, WidgetAdmin)
-admin.site.register(VisaoTemplate, VisaoTemplateAdmin)
+admin.site.register(TemplateModelo, TemplateModeloAdmin)
 admin.site.register(VisaoHierarquica, VisaoHierarquicaAdmin)
 admin.site.register(VisaoRelatorio, VisaoRelatorioAdmin)
 

@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     #(r'^criar/?$', views.criar_modelo),
-    #(r'^/?$', views.index),
+    (r'^template/(?P<template_id>\d+)/?$', views.ver_template),
 )
 
 import os

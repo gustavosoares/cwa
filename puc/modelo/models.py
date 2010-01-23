@@ -16,10 +16,11 @@ class Widget(models.Model):
 	class Meta:
 		ordering = ['nome']
 		
-class VisaoTemplate(models.Model):
+class TemplateModelo(models.Model):
 	
 	nome = models.CharField(max_length=100)
 	nome_arquivo_css = models.CharField(verbose_name='Nome do arquivo css', max_length=100)
+	nome_arquivo_html = models.CharField(verbose_name='Nome do arquivo html', max_length=100)
 	
 	def __unicode__(self):
 		return u'%s' % self.nome
@@ -32,6 +33,7 @@ class Modelo(models.Model):
 	nome = models.CharField(max_length=100)
 	descricao = models.CharField(max_length=500, blank=True, null=True)
 	metadado = models.CharField(max_length=800,)
+	template = models.ForeignKey(TemplateModelo)
 	estado = models.BooleanField(verbose_name='Ativo?')
 	
 	def __unicode__(self):
