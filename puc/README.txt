@@ -44,3 +44,17 @@ python modelviz.py sme > sme.dot
 
 python modelviz.py modelo > modelo.dot
 /opt/local/bin/dot modelo.dot -Tpng -o modelo.png
+
+########################################
+6. Alterando a tabela
+########################################
+
+ alter table modelo_widget add column url_ajuda varchar(100);
+
+NOT NULL
+
+BEGIN;
+ALTER TABLE modelo_modelo ADD COLUMN template_id integer;
+UPDATE modelo_modelo SET template_id=0;
+ALTER TABLE modelo_modelo ALTER COLUMN template_id SET NOT NULL;
+COMMIT;
