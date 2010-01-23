@@ -1,0 +1,35 @@
+.portal-column {
+	margin: 1px auto;
+	font-style: italic;
+	background-color: WhiteSmoke;
+	border: 1px solid;
+	color: black;
+}
+
+#portal h2 {
+  /*color: black;*/
+  text-align: center;
+}
+
+/* Definicao */
+
+#portal-column-0 { 
+  float:left;
+  width: 41%;  
+  background: WhiteSmoke;
+}
+
+#portal-column-1 {
+  float:left;
+  width: 58%;
+  background: WhiteSmoke;
+}   
+
+#portal-column-bottom { 
+  width: 99%;
+  background: WhiteSmoke;
+  clear: both;
+}
+
+
+

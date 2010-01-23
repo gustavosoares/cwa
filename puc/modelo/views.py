@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 from puc.modelo.controller import ModeloController
 
 def ver_template(request, template_id=None):

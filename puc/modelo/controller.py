@@ -19,9 +19,25 @@ from puc.modelo.repository import ModeloRepository, WidgetRepository, TemplateMo
 
 modelo_repository = ModeloRepository()
 template_repository = TemplateModeloRepository()
-
+MODELO_TEMPLATE_PATH = 'modelo/template'
 
 class ModeloController(Controller):
 	
-	def ver_template(template_id):
-		return HttpResponse("ver template");
+	def ver_template(self, template_id):
+		
+		template = template_repository.get_template_por_id(template_id)
+		if template: 
+			template_html = MODELO_TEMPLATE_PATH + '/' + template.nome_arquivo_html
+		
+			print '### template(%s): %s' %(template_id, template)
+			print '### template html(%s): %s' %(template_id, template_html)
+		
+			return render_to_response(template_html, { 'template' : template })
+		else:
+			output_html = """
+			<center>
+				<h2>Erro 500!</h2>
+				<h3>Template id %s nao encontrado</h3><br>
+			</center>
+			""" % template_id
+			return HttpResponseServerError(output_html)

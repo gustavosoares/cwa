@@ -13,7 +13,14 @@ class TemplateModeloRepository(Singleton):
 	
 	def get_template_por_id(self,id_template):
 		"""retorna template por id"""
-		return TemplateModelo.objects.get(id=id_template)
+		
+		template = None
+		try:
+			template = TemplateModelo.objects.get(id=id_template)
+		except Exception, e:
+			pass
+			
+		return template
 	
 
 class WidgetRepository(Singleton):
