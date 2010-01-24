@@ -42,14 +42,16 @@ function obter_estado() {
 	$('id_metadado').value = postBody;
 	
 }
+
 Portal.prototype = {
   initialize: function (options) {
     this.setOptions(options);
+
     var sortables = document.getElementsByClassName(
       this.options.column, this.options.portal
     );
 
-    //console.log(sortables)
+    //console.log(sortables);
     sortables.each(function (sortable) {
       Sortable.create(sortable, { 
         containment: sortables,
@@ -91,6 +93,7 @@ Portal.prototype = {
         Event.observe(
           delete_, 'click', 
           function (e) {
+            console.log($(block));
             $('portal-column-block-list').appendChild($(block));
             obter_estado();
           },

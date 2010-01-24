@@ -4,28 +4,78 @@
 
 {% block extrahead %}{{ block.super }}
 <link rel="stylesheet" type="text/css" href="/media/css/modelo_admin.css" />
-<script type="text/javascript" src="../../../jsi18n/"></script>
 
+<script type="text/javascript" src="../../../jsi18n/"></script>
 <script type="text/javascript" src="/media/js/prototype.js"></script>
 <script type="text/javascript" src="/media/js/scriptaculous.js?load=effects,dragdrop"></script>
 <script type="text/javascript" src="/media/js/portal.js"></script>
+
 <script type="text/javascript">
 
   var settings = {};
   var portal;
 
-{% if modelo_settings_json %}
-		settings = {{ modelo_settings_json|safe }}
-{% endif %}
+	{% if modelo_settings_json %}
+			settings = {{ modelo_settings_json|safe }}
+	{% endif %}
+
+	Ajax.Responders.register({ 
+		onCreate : displayLoading, 
+		onComplete : hideLoading
+	});
+	function displayLoading(){
+		Element.show("loading");
+	}
+
+	function hideLoading (){
+		Element.hide("loading");
+	}
+
+	/*Atualiza o id do div passado como parametro*/
+	function update_div(div_name, url) {
+		new Ajax.Updater(div_name,url, {asynchronous:true, 
+			method : 'get', 
+			parameters:{},
+			insertion: Insertion.Bottom,
+			onComplete: function(transport) {
+				portal = new Portal();
+				portal.applySettings(settings);
+				new Draggable('portal-column-block-list', { scroll: window });
+				obter_estado();
+			}
+		}); return false;
+	}
 
 	function init() {
-		portal = new Portal();
-		portal.applySettings(settings);
-		new Draggable('portal-column-block-list', { scroll: window });
+		//template_id_selecionado = $F(id_template);
+		var form = $('modelo_form')
+		var template_id_selecionado = form.template.value;
+		obtemTemplate(template_id_selecionado);
+		
+
+		Event.observe('id_template', 'change', trataTemplate, false);
+	}
+	
+	function trataTemplate() {
+		var template_id_selecionado = $(id_template).value;
+		if (template_id_selecionado == "") {
+			template_id_selecionado = 0;
+			/* funcao para remover os widgets e adicionar na listagem */
+			
+			$('id-template-ajax').innerHTML = "";
+		}else{
+			obtemTemplate(template_id_selecionado);
+		}
+	}
+	
+	/* obtem o template passado como parametro */
+	function obtemTemplate(template_id) {
+		update_div('id-template-ajax','/modelo/template/' + template_id);
 	}
 	
 	Event.observe(window, 'load', init, false);
-
+	
+	
 </script>
 
 {{ media }}
@@ -47,6 +97,7 @@
 {% endif %}{% endblock %}
 
 {% block content %}
+<div id="loading" align="right" style="display:none"><img src="/media/images/spinner.gif"/></div>
 <div id="content-main">
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
@@ -88,14 +139,61 @@
 {% prepopulated_fields_js %}
 
 </div>
-{% if mostrar_escolha_modelos %}
+
 <!-- personalizacao comeca aqui -->
+{% if mostrar_escolha_modelos %}
 
 <center><h1>Crie o seu modelo</h1></center>
-{% include "admin/modelo/modelo_01.html" %}
 
+<!-- ############# -->
+<center>| <a href="#" id="portal-block-list-link">Adicionar visão</a> | </center><br />
+
+<div id="id-template-ajax">
+</div>
+<br><br>
+<!--
+	      <div class="portal-column" id="portal-column-0">
+			<h2>Coluna 0</h2>
+		  </div>
+	      <div class="portal-column" id="portal-column-1">
+			<h2>Coluna 1</h2>
+		  </div>
+	      <div class="portal-column" id="portal-column-bottom">
+			<h2>Rodapé</h2>
+		  </div>
+-->
+			<!--div class="portal-column" id="portal-column-block-list" style="display: none;"-->
+			<div class="portal-column" id="portal-column-block-list" style="display: none;">
+				<h2 class="block-list-handle">Visões</h2>
+				<p>Selecione uma visão e arraste para uma das áreas disponíveis</p>
+				
+				<!-- Visoes vao aqui-->
+				{% for widget in my_widgets %}
+				<!-- Visao {{ widget.nome }} -->
+				<div class="block" id="block-{{ widget.nome }}">
+					<h3 class="handle"><a class="block-delete"></a><a class="block-toggle"><span>toogle</span></a>{{ widget.descricao }}</h3>
+					<div class="content">
+						<CENTER>
+						<iframe name="iframe_{{ widget.nome }}" src="{{ widget.url }}" frameborder="0" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>
+						</CENTER>
+					</div>
+				</div>
+				<!-- fim visao {{ widget.nome }}-->
+				{% endfor %}
+
+			</div>
+<!-- ############# -->
 <!-- fim do modelo-->
 {% endif %}
-</form></div>
+
+<!-- template ajax -->
+<br>
+<center>
+
+</center>
+<!-- fim template ajax -->
+</form>
+</div>
+<!-- fim div content-main -->
 
 {% endblock %}
