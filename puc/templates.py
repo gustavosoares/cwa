@@ -24,3 +24,6 @@ TEMPLATE_HIPERBOLICA_INFO = 'hiperbolica/info.html'
 #CWA
 TEMPLATE_CWA_INDEX = 'cwa/index.html'
 TEMPLATE_CWA_ADMIN_CRIAR_MODELO = 'modelo/criar_modelo.html'
+
+#MODELO
+MODELO_TEMPLATE_PATH = 'modelo/template'

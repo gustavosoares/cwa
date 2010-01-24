@@ -19,7 +19,6 @@ from puc.modelo.repository import ModeloRepository, WidgetRepository, TemplateMo
 
 modelo_repository = ModeloRepository()
 template_repository = TemplateModeloRepository()
-MODELO_TEMPLATE_PATH = 'modelo/template'
 
 class ModeloController(Controller):
 	
@@ -27,7 +26,7 @@ class ModeloController(Controller):
 		
 		template = template_repository.get_template_por_id(template_id)
 		if template: 
-			template_html = MODELO_TEMPLATE_PATH + '/' + template.nome_arquivo_html
+			template_html = templates.MODELO_TEMPLATE_PATH + '/' + template.nome_arquivo_html
 		
 			print '### template(%s): %s' %(template_id, template)
 			print '### template html(%s): %s' %(template_id, template_html)
