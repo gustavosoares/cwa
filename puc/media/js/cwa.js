@@ -2,23 +2,41 @@
 function init() {
 	//console.log("body loaded")
 	
+	var widgets = document.getElementsByClassName('block', 'portal');
+	var visoes_estado = {};
+	widgets.each(
+      function (widget) {
+			widget_id = widget.id;
+			visoes_estado[widget_id] = false;
+      }.bind(this)
+    );
+
+/*
 	var visoes_estado = {
 		"block-tabular" : false, 
 		"block-hierarquica" : false,
 		"block-relatorio" : false
 	};
-
+*/
+	var container_conteudo = {}
+	var containers = document.getElementsByClassName('portal-column');
+	containers.each(
+	  function (container) {
+			container_id = container.id;
+			if (container_id != 'portal-column-block-list') {
+				container_conteudo[container_id] = '';
+			}
+	  }.bind(this)
+	);
+	
+	/*
 	var container_conteudo = {
 		"portal-column-0" : '', 
 		"portal-column-1" : '',
 		"portal-column-bottom" : ''
 	};
-	
-	/*
-	for (var c in visoes_estado) {
-		console.log(c + '->' + visoes_estado[c])
-	}
 	*/
+
 		
 	this.options = {
       portal: 'portal',
@@ -34,6 +52,7 @@ function init() {
     }
 
     /*
+    Ex.:
     var settings = {"portal-column-1": ["block-tabular"], "portal-column-0": [], "portal-column-bottom": ["block-relatorio"]
     */
 	for (var container in settings) { /* for nas chaves do settings */
@@ -101,13 +120,7 @@ function init() {
 
 	for (var container in visoes_estado) {
 		if (! visoes_estado[container]) {
-			//get the element node
-			//element = document.getElementById(container);
-			//console.log(element)
-			//remove the element from the document
-			//document.removeChild(element);
 			$(this.options.blocklist).removeChild($(container));
-
 		}
 	}
 
@@ -134,7 +147,4 @@ function init() {
       }.bind(this)
     );
 
-
-	//portal = new Portal();
-	//portal.applySettings(settings);
 }

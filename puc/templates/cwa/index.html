@@ -5,6 +5,7 @@
 {% block stylesheet %}
 
 <link rel="stylesheet" type="text/css" href="/media/css/cwa.css" />
+<!--link rel="stylesheet" type="text/css" href="/media/css/modelo/{{ template.nome_arquivo_css }}"/-->
 
 {% endblock %}
 	
@@ -27,15 +28,15 @@
 <!--center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br /-->
 
 <div id="portal">
+	<!--
       <div class="portal-column" id="portal-column-0">
 	  </div>
       <div class="portal-column" id="portal-column-1">
 	  </div>
-      <!--div class="portal-column" id="portal-column-2">
-		<h2>Coluna 2</h2>
-	  </div-->
       <div class="portal-column" id="portal-column-bottom"></div>
-
+	-->
+	{% include template_nome %}
+	
 		<div class="portal-column" id="portal-column-block-list" style="display: none;">
 			<h2 class="block-list-handle">Visões</h2>
 			<p>Selecione uma visão e arraste para uma das áreas disponíveis</p>

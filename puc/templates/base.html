@@ -26,9 +26,17 @@
 			Element.hide("loading");
 		}
 		
-		/*Atualiza o div passado como parametro*/
+		/*Atualiza o div passado como parametro*/	
 		function update_div(div_name, url) {
-			new Ajax.Updater(div_name,url, {asynchronous:true, method : 'get', parameters:{}}); return false;
+			new Ajax.Request(url, {
+				asynchronous:true, 
+				method : 'get', 
+				parameters:{},
+				insertion: Insertion.Bottom,
+				onComplete: function(transport) {
+					$(div_name).innerHTML = transport.responseText;
+				}
+			}); return false;
 		}
 
 		/*Metodo eficiente para concatenar strings*/

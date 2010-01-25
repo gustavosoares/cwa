@@ -18,20 +18,25 @@
 	{% if modelo_settings_json %}
 			settings = {{ modelo_settings_json|safe }}
 	{% endif %}
-
-	Ajax.Responders.register({ 
-		onCreate : displayLoading, 
-		onComplete : hideLoading
-	});
-	function displayLoading(){
-		Element.show("loading");
-	}
-
-	function hideLoading (){
-		Element.hide("loading");
-	}
-
+	
 	/*Atualiza o id do div passado como parametro*/
+	function update_div(div_name, url) {
+		new Ajax.Request(url, {
+			asynchronous:true, 
+			method : 'get', 
+			parameters:{},
+			insertion: Insertion.Bottom,
+			onComplete: function(transport) {
+				$(div_name).innerHTML = transport.responseText;
+				portal = new Portal();
+				portal.applySettings(settings);
+				new Draggable('portal-column-block-list', { scroll: window });
+				obter_estado();
+			}
+		}); return false;
+	}
+
+/*
 	function update_div(div_name, url) {
 		new Ajax.Updater(div_name,url, {asynchronous:true, 
 			method : 'get', 
@@ -45,27 +50,62 @@
 			}
 		}); return false;
 	}
-
+*/
+	
 	function init() {
 		//template_id_selecionado = $F(id_template);
 		var form = $('modelo_form')
 		var template_id_selecionado = form.template.value;
 		obtemTemplate(template_id_selecionado);
-		
-
 		Event.observe('id_template', 'change', trataTemplate, false);
 	}
 	
 	function trataTemplate() {
-		var template_id_selecionado = $(id_template).value;
+		var form = $('modelo_form')
+		var template_id_selecionado = form.template.value;
 		if (template_id_selecionado == "") {
 			template_id_selecionado = 0;
-			/* funcao para remover os widgets e adicionar na listagem */
 			
+			/* funcao para remover os widgets e adicionar na listagem */
+			limpaWidgets();
 			$('id-template-ajax').innerHTML = "";
 		}else{
 			obtemTemplate(template_id_selecionado);
 		}
+	}
+	
+	/* funcao para remover os widgets e adicionar na listagem */
+	function limpaWidgets() {
+		//console.log('limpa widgets chamado');
+		var widgets = document.getElementsByClassName('block', 'template-ajax');
+		widgets.each(
+	      function (widget) {
+				//console.log('removendo widget -> ' + widget);
+				$('portal-column-block-list').appendChild($(widget));
+	      }.bind(this)
+	    );
+		obter_estado();
+		//Limpar settings
+		limpaSettings();
+
+		
+	}
+	
+	function limpaSettings() {
+		//console.log('limpa settings chamado');
+		settings = {};
+		//console.log('settings ->' + settings);
+		var containers = document.getElementsByClassName('portal-column');
+		containers.each(
+	      function (container) {
+				container_id = container.id;
+				if (container_id != 'portal-column-block-list') {
+					//console.log(container_id);
+					settings[container_id] = [];
+				}
+	      }.bind(this)
+	    );
+		//console.log('settings ->' + settings);
 	}
 	
 	/* obtem o template passado como parametro */
@@ -148,7 +188,7 @@
 <!-- ############# -->
 <center>| <a href="#" id="portal-block-list-link">Adicionar visão</a> | </center><br />
 
-<div id="id-template-ajax">
+<div class="template-ajax" id="id-template-ajax">
 </div>
 <br><br>
 <!--
@@ -174,7 +214,7 @@
 					<h3 class="handle"><a class="block-delete"></a><a class="block-toggle"><span>toogle</span></a>{{ widget.descricao }}</h3>
 					<div class="content">
 						<CENTER>
-						<iframe name="iframe_{{ widget.nome }}" src="{{ widget.url }}" frameborder="0" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>
+						<iframe name="iframe_{{ widget.nome }}" src="/media/images/preview/{{ widget.nome}}.jpg" frameborder="0" width="{{ widget.width }}" height="{{ widget.height }}"></iframe>
 						</CENTER>
 					</div>
 				</div>

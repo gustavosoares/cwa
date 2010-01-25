@@ -3,6 +3,7 @@ var Portal = Class.create();
 /* obtem o posicionamento das visoes */
 function obter_estado() {
 	
+	//var colunas = document.getElementById('portal').getElementsByClassName('portal-column');  
 	var colunas = $('portal').getElementsByClassName('portal-column');
 	//console.log(colunas)
 	var i=0;
@@ -93,7 +94,6 @@ Portal.prototype = {
         Event.observe(
           delete_, 'click', 
           function (e) {
-            console.log($(block));
             $('portal-column-block-list').appendChild($(block));
             obter_estado();
           },
@@ -111,9 +111,7 @@ Portal.prototype = {
 
     new Draggable(this.options.blocklist, {
         scroll: window,
-        handle: this.options.blocklisthandle,
-      }
-    );
+        handle: this.options.blocklisthandle});
     
   },
 

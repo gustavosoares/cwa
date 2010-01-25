@@ -27,11 +27,17 @@ class CwaController(Controller):
 		print '[CWA INDEX] modelo ativo: %s' % modelo
 		
 		widgets = widget_repository.get_todos()
-		
+		template = modelo.template;
+		template_nome = "modelo/template/" + template.nome_arquivo_html
 		modelo_settings_json = modelo_repository.get_modelo_settings(modelo.nome)
 		print '[CWA INDEX] modelo settings: %s' % modelo_settings_json
+		print '[CWA INDEX] template: %s' % template
 		#pego as informacoes do modelo configurado
-		return render_to_response(templates.TEMPLATE_CWA_INDEX, { 'settings' : modelo_settings_json, 'my_widgets' : widgets})
+		return render_to_response(templates.TEMPLATE_CWA_INDEX, { 'settings' : modelo_settings_json, 
+			'my_widgets' : widgets,
+			'template' : template,
+			'template_nome' : template_nome,
+			})
 
 	def widget(self):
 		return render_to_response('cwa/_teste/teste_widget.html')

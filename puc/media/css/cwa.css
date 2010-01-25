@@ -19,6 +19,7 @@
   text-align: center;
 }
 
+/*
 #portal-column-0 { 
   float:left;
   width: 41%;  
@@ -31,19 +32,12 @@
   background: WhiteSmoke;
 }   
 
-/* nao esta em uso
-#portal-column-2 { 
-  float:left;
-  width: 21%;  
-  background: WhiteSmoke;
-}
-*/
-
 #portal-column-bottom { 
   width: 99%;
   background: WhiteSmoke;
   clear: both;
 }
+*/
 
    /*lista das visoes */
 #portal-column-block-list { 
