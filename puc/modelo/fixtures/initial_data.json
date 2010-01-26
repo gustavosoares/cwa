@@ -65,7 +65,16 @@
     "fields": {
       "nome_arquivo_css": "template_2_1.css", 
       "nome_arquivo_html": "template_2_1.html", 
-      "nome": "2 x 1"
+      "nome": "2x1"
+    }
+  },
+  {
+    "pk": 2, 
+    "model": "modelo.templatemodelo", 
+    "fields": {
+      "nome_arquivo_css": "template_1_1_1.css", 
+      "nome_arquivo_html": "template_1_1_1.html", 
+      "nome": "1x1x1"
     }
   },
   {
