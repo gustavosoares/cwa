@@ -53,7 +53,7 @@ class ModeloController(Controller):
 			file_conteudo_css_template = open(template_css, 'r')
 			conteudo_css = file_conteudo_css_base.read() + '\n' + file_conteudo_css_template.read()
 			
-			print conteudo_css
+			#print conteudo_css
 			print '### template(%s): %s' %(template_id, template)
 			print '### template css base(%s): %s' %(template_id, TEMPLATE_CSS_BASE)
 			
