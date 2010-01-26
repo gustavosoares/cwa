@@ -4,18 +4,15 @@
 #portal-column-0 { 
   float:left;
   width: 41%;  
-  background: WhiteSmoke;
 }
 
 #portal-column-1 {
   float:left;
   width: 58%;
-  background: WhiteSmoke;
 }   
 
 #portal-column-bottom { 
   width: 99%;
-  background: WhiteSmoke;
   clear: both;
 }
 

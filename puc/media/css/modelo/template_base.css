@@ -2,9 +2,9 @@
 .portal-column {
     margin: 1px auto;
     font-style: italic;
-    background-color: WhiteSmoke;
+    background-color: black;
     border: 1px dashed;
-    color: black;
+    color: white;
 }
 
 #portal h2 {
