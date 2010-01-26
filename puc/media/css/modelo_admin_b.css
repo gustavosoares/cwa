@@ -1,67 +1,27 @@
-#menu {
-	background: white;
-	text-align: left;
-}
 
-#portal {
-	/*margin: 1px auto;*/
-	padding: 1px;
-	/*position: relative;*/
-	position: left;
-	width:100%;
-	border: 0px solid;
-	background: black;
-	font-family: verdana, arial, sans-serif;
-	font-size: 10px;
-}
+
 
 #portal h2 {
   text-align: center;
 }
 
-/*
-#portal-column-0 { 
-  float:left;
-  width: 41%;  
-  background: WhiteSmoke;
-}
 
-#portal-column-1 {
-  float:left;
-  width: 58%;
-  background: WhiteSmoke;
-}   
 
-#portal-column-bottom { 
-  width: 99%;
-  background: WhiteSmoke;
-  clear: both;
-}
-*/
-
-   /*lista das visoes */
+/*lista das visoes */
 #portal-column-block-list { 
   position: absolute;
   width: 200px;
+  top: 120px;
   right: 5px;
-  left: 5px;
   z-index: 10;
   background-color: #FFEAB1;
 }
 
-.portal-column {
-	margin: 1px auto;
-	font-style: italic;
-	background-color: WhiteSmoke;
-	border: 1px solid;
-	color: black;
-}
-
 /* Definicoes dos boxes das visoes */
 #portal .block {
-  margin: 1px;
+  margin: 5px;
   padding: 2px;
-  border: 0px solid #0F3974;
+  border: 1px solid #0F3974;
 }
 #portal .block h3 {
   margin: 0;
@@ -69,17 +29,15 @@
   font-size: 14px;
   text-align: center;
   color: #fff;
-  background-color: CornflowerBlue;
+  background-color: Navy;
 }
 
 #portal .block .content {
-  padding: 2px;
+  padding: 5px;
 }
 
-/*
-nao precisa na interface para o usuario
-*/
 #portal .block .block-toggle {
+  padding: 5px;
   background-image: url(/media/images/block-slide.png);
   display: block;
   float: right;
@@ -90,9 +48,15 @@ nao precisa na interface para o usuario
   cursor: pointer;
 }
 
-#portal .block .block-info {
-	position: absolute;
-	right: 30px;
+#portal .block .block-delete {
+  background-image: url(/media/images/delete.png);
+  display: block;
+  float: right;
+  width: 12px;
+  height: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
 
 /* Fim das visoes */
@@ -107,13 +71,15 @@ nao precisa na interface para o usuario
   border: 1px dashed #f00;
 }
 
-/*
-nao precisa na interface para o usuario
 #portal .block-list-handle, #portal .handle {
   cursor: move;
 }
-*/
+
 #portal #portal-column-block-list .block .block-toggle {
+  display: none;
+}
+
+#portal #portal-column-block-list .block .block-delete {
   display: none;
 }
 

@@ -14,6 +14,7 @@ import os
 
 path = os.path.dirname(__file__)
 
+BASE_DIR = path
 TEMPLATE_DIRS = (os.path.abspath(path + '/templates'))
 
 DEBUG = True

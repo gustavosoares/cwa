@@ -3,7 +3,7 @@
 
 
 {% block extrahead %}{{ block.super }}
-<link rel="stylesheet" type="text/css" href="/media/css/modelo_admin.css" />
+<link rel="stylesheet" type="text/css" href="/media/css/modelo_admin_b.css" />
 
 <script type="text/javascript" src="../../../jsi18n/"></script>
 <script type="text/javascript" src="/media/js/prototype.js"></script>
@@ -36,40 +36,65 @@
 		}); return false;
 	}
 
-/*
-	function update_div(div_name, url) {
-		new Ajax.Updater(div_name,url, {asynchronous:true, 
+	function update_css(id_name, template_id_selecionado, url) {
+		new Ajax.Request(url, {
+			asynchronous:true, 
 			method : 'get', 
 			parameters:{},
 			insertion: Insertion.Bottom,
 			onComplete: function(transport) {
-				portal = new Portal();
-				portal.applySettings(settings);
-				new Draggable('portal-column-block-list', { scroll: window });
-				obter_estado();
+				var mycss= document.getElementById(id_name);
+				obtemTemplate(template_id_selecionado);
 			}
 		}); return false;
 	}
-*/
+
+	function loadjscssfile(filename, filetype){
+	 if (filetype=="js"){ //if filename is a external JavaScript file
+	  var fileref=document.createElement('script')
+	  fileref.setAttribute("type","text/javascript");
+	  fileref.setAttribute("src", filename);
+	 }
+	 else if (filetype=="css"){ //if filename is an external CSS file
+	  var fileref=document.createElement("link")
+	  fileref.setAttribute("rel", "stylesheet");
+	  fileref.setAttribute("type", "text/css");
+	  fileref.setAttribute("id", "id-css-template-selecionado");
+	  fileref.setAttribute("href", filename);
+	 }
+	 if (typeof fileref!="undefined")
+	  document.getElementsByTagName("head")[0].appendChild(fileref)
+	}
 	
 	function init() {
 		//template_id_selecionado = $F(id_template);
+		/*
 		var form = $('modelo_form')
 		var template_id_selecionado = form.template.value;
 		obtemTemplate(template_id_selecionado);
+		*/
+		trataTemplate();
 		Event.observe('id_template', 'change', trataTemplate, false);
 	}
 	
 	function trataTemplate() {
 		var form = $('modelo_form')
 		var template_id_selecionado = form.template.value;
+
 		if (template_id_selecionado == "") {
 			template_id_selecionado = 0;
-			
 			/* funcao para remover os widgets e adicionar na listagem */
 			limpaWidgets();
 			$('id-template-ajax').innerHTML = "";
+			$('id-css-template-selecionado').remove();
 		}else{
+			//obtemTemplateCss(template_id_selecionado);
+			mycss = document.getElementById('id-css-template-selecionado');
+			if (mycss) {
+				$('id-css-template-selecionado').remove();
+			}
+
+			loadjscssfile('/modelo/template/css/'+ template_id_selecionado, 'css');
 			obtemTemplate(template_id_selecionado);
 		}
 	}
@@ -111,6 +136,11 @@
 	/* obtem o template passado como parametro */
 	function obtemTemplate(template_id) {
 		update_div('id-template-ajax','/modelo/template/' + template_id);
+	}
+	
+	/* obtem o css do template passado como parametro */
+	function obtemTemplateCss(template_id) {
+		update_css('id-css-template-selecionado', template_id, '/modelo/template/css/' + template_id);
 	}
 	
 	Event.observe(window, 'load', init, false);

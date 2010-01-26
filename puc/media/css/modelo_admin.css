@@ -17,6 +17,15 @@
 }
 
 /*
+
+.portal-column {
+	margin: 1px auto;
+	font-style: italic;
+	background-color: WhiteSmoke;
+	border: 1px solid;
+	color: black;
+}
+
 #portal-column-0 { 
   float:left;
   width: 41%;  
@@ -51,14 +60,6 @@
   right: 5px;
   z-index: 10;
   background-color: #FFEAB1;
-}
-	
-.portal-column {
-	margin: 1px auto;
-	font-style: italic;
-	background-color: WhiteSmoke;
-	border: 1px solid;
-	color: black;
 }
 
 /* Definicoes dos boxes das visoes */
