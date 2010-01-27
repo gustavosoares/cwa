@@ -44,9 +44,9 @@ td.sme2-alarme, th.sme2-produto, th.sme2-monitor {
 	color: white;
 }
 
-.sme2-voltar a:link {color: red;text-decoration: none}
-.sme2-voltar a:visited {color: red;text-decoration: none}
-.sme2-voltar a:active {color: red;text-decoration: none}
+.sme2-voltar a:link {color: CornflowerBlue; text-decoration: none}
+.sme2-voltar a:visited {color: CornflowerBlue; text-decoration: none}
+.sme2-voltar a:active {color: CornflowerBlue; text-decoration: none}
 .sme2-voltar a:hover {text-decoration: underline; color: white;}
 
 td.sme2-alarme a:link {color: white;text-decoration: none}

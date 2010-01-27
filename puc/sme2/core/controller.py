@@ -200,8 +200,8 @@ class Sme2Controller(Controller):
 		produto = produto_repository.get_produto_por_id(alarme.prd_id)
 		if len(eventos) > 0:
 			colunas_desc = eventos[0].descricao_colunas
-			print '\n\nmetadados: %s\n' % eventos[0].metadados
-			print '\ncolunas desc: %s\n' % eventos[0].descricao_colunas
+			#print '\n\nmetadados: %s\n' % eventos[0].metadados
+			#print '\ncolunas desc: %s\n' % eventos[0].descricao_colunas
 
 			rel = relatorio_factory.RelatorioFactory().get_relatorio('tabular')
 			rel.produto = produto
