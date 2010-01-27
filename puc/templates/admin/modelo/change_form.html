@@ -82,6 +82,7 @@
 		var template_id_selecionado = form.template.value;
 
 		if (template_id_selecionado == "") {
+			$('portal-block-list-link').hide();
 			template_id_selecionado = 0;
 			/* funcao para remover os widgets e adicionar na listagem */
 			limpaWidgets();
@@ -93,7 +94,7 @@
 			if (mycss) {
 				$('id-css-template-selecionado').remove();
 			}
-
+			$('portal-block-list-link').show();
 			loadjscssfile('/modelo/template/css/'+ template_id_selecionado, 'css');
 			obtemTemplate(template_id_selecionado);
 		}
@@ -213,10 +214,11 @@
 <!-- personalizacao comeca aqui -->
 {% if mostrar_escolha_modelos %}
 
-<center><h1>Crie o seu modelo</h1></center>
-
 <!-- ############# -->
-<center>| <a href="#" id="portal-block-list-link">Adicionar visão</a> | </center><br />
+<center id="portal-block-list-link">
+	<h1>Crie o seu modelo</h1>
+	<div id="id-adicionar-visao">Adicionar visão</div>
+</center><br>
 
 <div class="template-ajax" id="id-template-ajax">
 </div>

@@ -1,11 +1,7 @@
 
-
-
 #portal h2 {
   text-align: center;
 }
-
-
 
 /*lista das visoes */
 #portal-column-block-list { 
@@ -14,8 +10,23 @@
   top: 120px;
   right: 5px;
   z-index: 10;
-  background-color: #FFEAB1;
+  border: 1px solid;
+  /*background-color: #FFEAB1;*/
+  background-color: black;
 }
+
+#id-adicionar-visao {
+	padding: 1px;
+	width:12%;
+	height:18px;
+	border: 1px solid;
+	font-family: verdana, arial, sans-serif;
+	border-color: black;
+	color: white;
+	font-size: 12px;
+	background-color: CornflowerBlue;
+}
+
 
 /* Definicoes dos boxes das visoes */
 #portal .block {
@@ -29,7 +40,8 @@
   font-size: 14px;
   text-align: center;
   color: #fff;
-  background-color: Navy;
+  /*background-color: Navy;*/
+  background-color: CornflowerBlue;
 }
 
 #portal .block .content {
