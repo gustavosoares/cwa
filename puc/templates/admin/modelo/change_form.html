@@ -73,11 +73,14 @@
 		var template_id_selecionado = form.template.value;
 		obtemTemplate(template_id_selecionado);
 		*/
-		trataTemplate();
+		//$('id_metadado').hide();
 		Event.observe('id_template', 'change', trataTemplate, false);
+		trataTemplate();
+		
 	}
 	
 	function trataTemplate() {
+		
 		var form = $('modelo_form')
 		var template_id_selecionado = form.template.value;
 
@@ -97,6 +100,7 @@
 			$('portal-block-list-link').show();
 			loadjscssfile('/modelo/template/css/'+ template_id_selecionado, 'css');
 			obtemTemplate(template_id_selecionado);
+			alert('Clique em "Adicionar visão" para criar o seu modelo');
 		}
 	}
 	
@@ -220,8 +224,10 @@
 	<div id="id-adicionar-visao">Adicionar visão</div>
 </center><br>
 
+<!-- div onde sera carregado o template selecionado -->
 <div class="template-ajax" id="id-template-ajax">
 </div>
+
 <br><br>
 <!--
 	      <div class="portal-column" id="portal-column-0">

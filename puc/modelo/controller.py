@@ -23,6 +23,11 @@ TEMPLATE_CSS_BASE = settings.BASE_DIR + '/media/css/modelo/template_base.css'
 
 class ModeloController(Controller):
 	
+	def ajuda(self):
+		
+		return render_to_response(templates.MODELO_TEMPLATE_AJUDA, {})
+		
+		
 	def ver_template(self, template_id):
 		"""retorna o template id"""
 		template = template_repository.get_template_por_id(template_id)

@@ -27,3 +27,4 @@ TEMPLATE_CWA_ADMIN_CRIAR_MODELO = 'modelo/criar_modelo.html'
 
 #MODELO
 MODELO_TEMPLATE_PATH = 'modelo/template'
+MODELO_TEMPLATE_AJUDA = 'modelo/template_ajuda.html'

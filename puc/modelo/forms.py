@@ -9,7 +9,7 @@ class MyModeloAdminForm(forms.ModelForm):
 	
 	window_open_str = "<a class=\"block-info\" href='#' onclick=\"window.open('/modelo/template/ajuda/', 'info', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no, height=520, width=630')\"><img height=20 width=20 src=/media/images/question_mark_icon_02_b.gif border=0></a>"
 	template = forms.ModelChoiceField(queryset=TemplateModelo.objects.all(), label=u'Template', 
-	help_text='Disposição dos containers disponíveis '+window_open_str)
+	help_text='O que é isso? '+window_open_str)
 	
 	class Meta:
 		model = Modelo
