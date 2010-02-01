@@ -74,6 +74,10 @@
 		obtemTemplate(template_id_selecionado);
 		*/
 		//$('id_metadado').hide();
+		//m = $('content-main').getElementsByClassName("form-row metadado  ");
+		m = document.getElementsByClassName("form-row metadado  ");
+		//console.log(m);
+		//m.hide();
 		Event.observe('id_template', 'change', trataTemplate, false);
 		trataTemplate();
 		
