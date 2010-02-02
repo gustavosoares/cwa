@@ -1,5 +1,6 @@
 *.pyc
 *.bak
 *.dot
+*.tiff
 *.DS_Store
 puppet/media/rrd

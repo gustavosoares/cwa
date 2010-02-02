@@ -6,6 +6,7 @@
 /*lista das visoes */
 #portal-column-block-list { 
   position: absolute;
+  padding: 2px;
   width: 200px;
   top: 120px;
   right: 5px;
@@ -40,18 +41,20 @@
   font-size: 14px;
   text-align: center;
   color: #fff;
-  /*background-color: Navy;*/
   background-color: CornflowerBlue;
 }
 
 #portal .block .content {
   padding: 5px;
+  /* adicionado para remover o conteudo da visao */
+  display: none;
 }
 
 #portal .block .block-toggle {
   padding: 5px;
   background-image: url(/media/images/block-slide.png);
-  display: block;
+  /*display: block;*/
+  display: none;
   float: right;
   width: 7px;
   height: 7px;
@@ -97,5 +100,9 @@
 
 /*escondo conteudo dos box das visoes no container com a lista de visoes disponiveis */
 #portal #portal-column-block-list .block .content {
+  display: none;
+}
+
+#portal .form-row.metadado {
   display: none;
 }
