@@ -52,8 +52,8 @@ Portal.prototype = {
       this.options.column, this.options.portal
     );
 
-    //console.log(sortables);
     sortables.each(function (sortable) {
+	  console.log(sortable);
       Sortable.create(sortable, { 
         containment: sortables,
         constraint: false,
@@ -61,6 +61,7 @@ Portal.prototype = {
         only: this.options.block,
         dropOnEmpty: true,
         handle: this.options.handle,
+        scroll: window,
         hoverclass: this.options.hoverclass,
         onUpdate: function (container) {
 			obter_estado();
@@ -71,6 +72,7 @@ Portal.prototype = {
     var blocks = document.getElementsByClassName(
       this.options.block, this.options.portal
     );
+
     blocks.each(
       function (block) {
         var content = Element.childrenWithClassName(
@@ -111,7 +113,8 @@ Portal.prototype = {
 
     new Draggable(this.options.blocklist, {
         scroll: window,
-        handle: this.options.blocklisthandle});
+        handle: this.options.blocklisthandle}
+    );
     
   },
 

@@ -1,6 +1,5 @@
 /*Funcao para adicionar o efeito do slide nos boxes*/
 function init() {
-	//console.log("body loaded")
 	
 	var widgets = document.getElementsByClassName('block', 'portal');
 	var visoes_estado = {};
@@ -11,13 +10,6 @@ function init() {
       }.bind(this)
     );
 
-/*
-	var visoes_estado = {
-		"block-tabular" : false, 
-		"block-hierarquica" : false,
-		"block-relatorio" : false
-	};
-*/
 	var container_conteudo = {}
 	var containers = document.getElementsByClassName('portal-column');
 	containers.each(
@@ -28,16 +20,7 @@ function init() {
 			}
 	  }.bind(this)
 	);
-	
-	/*
-	var container_conteudo = {
-		"portal-column-0" : '', 
-		"portal-column-1" : '',
-		"portal-column-bottom" : ''
-	};
-	*/
 
-		
 	this.options = {
       portal: 'portal',
       column: 'portal-column',
@@ -116,8 +99,7 @@ function init() {
 	  }
     }*/
 
-/* remove os blocks que nao foram definidos */
-
+    /* remove os blocks que nao foram definidos */
 	for (var container in visoes_estado) {
 		if (! visoes_estado[container]) {
 			$(this.options.blocklist).removeChild($(container));

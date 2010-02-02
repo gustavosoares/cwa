@@ -47,14 +47,14 @@
 #portal .block .content {
   padding: 5px;
   /* adicionado para remover o conteudo da visao */
-  display: none;
+  /*display: none;*/
 }
 
 #portal .block .block-toggle {
   padding: 5px;
   background-image: url(/media/images/block-slide.png);
-  /*display: block;*/
-  display: none;
+  display: block;
+  /*display: none;*/
   float: right;
   width: 7px;
   height: 7px;
