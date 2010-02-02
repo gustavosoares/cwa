@@ -9,6 +9,20 @@ body {
 
 }
 */
+
+#id-evento-nova-janela {
+	padding: 1px;
+	width:12%;
+	height:16px;
+	border: 1px solid;
+	font-family: verdana, arial, sans-serif;
+	border-color: white;
+	color: white;
+	font-size: 12px;
+	background-color: CornflowerBlue;
+	cursor: pointer;
+}
+
 /* LINKSSSSS */
 a:link, a:visited { color: white; text-decoration:none; }
 a:hover { color: white; }

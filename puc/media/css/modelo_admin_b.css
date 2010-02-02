@@ -19,13 +19,14 @@
 #id-adicionar-visao {
 	padding: 1px;
 	width:12%;
-	height:18px;
+	height:16px;
 	border: 1px solid;
 	font-family: verdana, arial, sans-serif;
 	border-color: black;
 	color: white;
 	font-size: 12px;
 	background-color: CornflowerBlue;
+	cursor: pointer;
 }
 
 

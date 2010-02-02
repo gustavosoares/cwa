@@ -8,6 +8,25 @@
 	
 {% block javascript %}
 
+<script type="text/javascript">
+
+	
+	function init() {
+
+		Event.observe('id-evento-nova-janela', 'click', novaJanela, false);
+		trataTemplate();
+		
+	}
+	
+	function novaJanela() {
+		window.open('#', 'evento', 'location=no, tollbars=no, status=no, scrollbars=yes, resizable=yes, menubar=no');
+	}
+
+	Event.observe(window, 'load', init, false);
+	
+	
+</script>
+
 {% endblock %}
 
 {% block content %}
@@ -15,8 +34,11 @@
 <table border="2">
 	<tr>
 		<td colspan="{{relatorio.descricao_colunas|length|add:'1'}}">
-			<center><h3>{{relatorio.produto.prd_nome}}>{{relatorio.alarme.alm_nome}}>{{relatorio.monitor.mon_nome}}</h3></br>
-			<h3 class="sme2-voltar"><a href='/sme2/'>Voltar</a></h3></center></td>
+	<div id="id-acoes">
+		<div id="id-evento-nova-janela">Nova Janela</div>
+	</div>
+	<h3>{{relatorio.produto.prd_nome}}>{{relatorio.alarme.alm_nome}}>{{relatorio.monitor.mon_nome}}</h3>
+			<h3 class="sme2-voltar"><a href='/sme2/'>Voltar</a></h3></td>
 	</tr>
 	<tr>
 		<th><center>!</center></th>
