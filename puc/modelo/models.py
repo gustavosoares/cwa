@@ -30,11 +30,11 @@ class TemplateModelo(models.Model):
 		
 # Create your models here.
 class Modelo(models.Model):
-	nome = models.CharField(max_length=100)
-	descricao = models.CharField(max_length=500, blank=True, null=True)
+	nome = models.CharField(max_length=100, help_text="Nome do modelo/painel criado.")
+	descricao = models.CharField(max_length=500, blank=True, null=True,help_text="Sucinta explicação do modelo. Campo opcional.")
 	metadado = models.CharField(max_length=800,)
 	template = models.ForeignKey(TemplateModelo)
-	estado = models.BooleanField(verbose_name='Ativo?')
+	estado = models.BooleanField(verbose_name='Ativo?',help_text='Habilta/Desabilita o modelo.')
 	
 	def __unicode__(self):
 		return u'%s' % self.nome
