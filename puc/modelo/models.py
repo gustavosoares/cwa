@@ -27,6 +27,8 @@ class TemplateModelo(models.Model):
 		
 	class Meta:
 		ordering = ['nome']
+		verbose_name_plural = u'Templates'
+		verbose_name = u'Template'
 		
 # Create your models here.
 class Modelo(models.Model):
@@ -57,6 +59,7 @@ class VisaoRelatorio(models.Model):
 
 	class Meta:
 		ordering = ['formato']
+		verbose_name_plural = u'Configurar Visão Relatório'
 
 class VisaoHierarquica(models.Model):
 
@@ -67,3 +70,4 @@ class VisaoHierarquica(models.Model):
 
 	class Meta:
 		ordering = ['frequencia_atualizacao']
+		verbose_name_plural = u'Configurar Visão Hierárquica'
