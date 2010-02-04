@@ -53,7 +53,7 @@ Portal.prototype = {
     );
 
     sortables.each(function (sortable) {
-	  console.log(sortable);
+
       Sortable.create(sortable, { 
         containment: sortables,
         constraint: false,
