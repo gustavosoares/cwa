@@ -25,7 +25,7 @@ ADMINS = (
 )
 
 #7 days cache
-CACHE_BACKEND = "memcached://localhost:11211/?timeout=604800"
+#CACHE_BACKEND = "memcached://localhost:11211/?timeout=604800"
 
 MANAGERS = ADMINS
 
@@ -89,7 +89,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'puc.urls'
 
-#TODO voltar o puc.sme
+#TODO voltar o puc.memcache_status
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,5 +101,4 @@ INSTALLED_APPS = (
     'puc.cwa',
     'puc.modelo',
     'puc.hiperbolica',
-    'puc.memcache_status',
 )
