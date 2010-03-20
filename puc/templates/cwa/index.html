@@ -26,6 +26,11 @@
 
 {% block content %}
 <!--center><a href="#" id="portal-block-list-link">Adicionar visão</a></center><br /-->
+<div id="id-menu">
+{% for widget in my_widgets %}
+<a id ="id-menu-block-{{ widget.nome }}" href='#{{ widget.nome }}'>{{ widget.descricao }}</a> |
+{% endfor %}
+</div>
 
 <div id="portal">
 	<!--

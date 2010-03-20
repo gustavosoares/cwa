@@ -103,6 +103,7 @@ function init() {
 	for (var container in visoes_estado) {
 		if (! visoes_estado[container]) {
 			$(this.options.blocklist).removeChild($(container));
+			$("id-menu").removeChild($("id-menu-"+container));
 		}
 	}
 
