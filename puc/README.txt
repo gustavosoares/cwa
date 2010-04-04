@@ -58,3 +58,31 @@ ALTER TABLE modelo_modelo ADD COLUMN template_id integer;
 UPDATE modelo_modelo SET template_id=0;
 ALTER TABLE modelo_modelo ALTER COLUMN template_id SET NOT NULL;
 COMMIT;
+
+########################################
+7. Configuração do Apache
+########################################
+
+<VirtualHost *:80>
+    DocumentRoot "/opt/local/apache2/htdocs"
+    ErrorLog "logs/error_log"
+    CustomLog "logs/access_log" combined
+
+    WSGIScriptReloading on
+    WSGIScriptAlias / /Users/gustavosoares/repos/git/github/cognitive_work_analysis/puc/django.wsgi
+    WSGIDaemonProcess localhost user=gustavosoares group=gustavosoares processes=2 threads=1 stack-size=524288
+    #WSGIProcessGroup localhost
+
+    <Directory "/Users/gustavosoares/repos/git/github/cognitive_work_analysis/puc">
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    Alias /media/ /Users/gustavosoares/repos/git/github/cognitive_work_analysis/puc/media/
+    Alias /admin_media/ /Users/gustavosoares/repos/git/github/cognitive_work_analysis/puc/admin/media/
+    <Directory /Users/gustavosoares/repos/git/github/cognitive_work_analysis/puc/admin/media>
+        Order allow,deny
+        Allow from all
+        Options FollowSymLinks
+    </Directory>
+</VirtualHost>
