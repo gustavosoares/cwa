@@ -88,11 +88,14 @@ span {
 nao precisa na interface para o usuario
 */
 #portal .block .block-toggle {
-  background-image: url(/media/images/block-slide.png);
+  /*background-image: url(/media/images/block-slide.png);*/
+  position: relative;
+  background-image: url(/media/images/minimize_icon_resized.png);
   display: block;
   float: right;
-  width: 7px;
-  height: 7px;
+  top: -6px;
+  width: 30px;
+  height: 30px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
