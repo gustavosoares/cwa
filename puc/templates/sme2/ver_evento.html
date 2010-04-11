@@ -8,6 +8,14 @@
 	
 {% block javascript %}
 
+<!-- 
+
+Ex.: http://datacenter.globoi.com/server.cgi?fg=00ff00&targets=riosf17
+
+<script type="text/javascript" src="http://shots.snap.com/ss/4875920ca1711aba7e6262f1532d5f19/snap_shots.js"></script> 
+	
+-->
+
 <script type="text/javascript">
 
 	
@@ -34,10 +42,12 @@
 <table border="2">
 	<tr>
 		<td colspan="{{relatorio.descricao_colunas|length|add:'1'}}">
-	<div id="id-acoes">
-		<div id="id-evento-nova-janela">Maximizar</div>
-	</div>
-	<h3>{{relatorio.produto.prd_nome}}>{{relatorio.alarme.alm_nome}}>{{relatorio.monitor.mon_nome}}</h3>
+			<div id="id-acoes">
+				<div class="sme2_evento_botao" id="id-evento-nova-janela">Maximizar</div>
+				<div class="sme2_evento_botao_espaco"></div>
+				<div class="sme2_evento_botao" id="id-evento-voltar"><a href='/sme2/'>Voltar</a></div>
+			</div>
+	<div class="sme2_breadcrumb"><br><h3>{{relatorio.produto.prd_nome}}>{{relatorio.alarme.alm_nome}}>{{relatorio.monitor.mon_nome}}</h3></div>
 			<h3 class="sme2-voltar"><a href='/sme2/'>Voltar</a></h3></td>
 	</tr>
 	<tr>

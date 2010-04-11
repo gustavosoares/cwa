@@ -10,17 +10,36 @@ body {
 }
 */
 
-#id-evento-nova-janela {
+.sme2_evento_botao {
 	padding: 1px;
-	width:62px;
+	width:64px;
 	height:16px;
 	border: 1px solid;
+	float: left;
 	font-family: verdana, arial, sans-serif;
 	border-color: white;
 	color: white;
 	font-size: 12px;
 	background-color: CornflowerBlue;
 	cursor: pointer;
+}
+
+.sme2_evento_botao_espaco {
+	padding: 1px;
+	width:5px;
+	height:16px;
+	border: 1px solid;
+	float: left;
+	font-family: verdana, arial, sans-serif;
+	border-color: black;
+	color: white;
+	font-size: 12px;
+	background-color: black;
+	cursor: pointer;
+}
+
+.sme2_breadcrumb {
+	clear: both;
 }
 
 /* LINKSSSSS */
