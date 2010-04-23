@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/(.*)', admin.site.root),
     (r'^cwa/?', include('puc.cwa.urls')),
+    (r'^monvis/?', include('puc.cwa.urls')),
     (r'^sme2/?', include('puc.sme2.urls')),
     (r'^relatorio/?', include('puc.relatorio.urls')),
     (r'^modelo/?', include('puc.modelo.urls')),
